@@ -4,10 +4,10 @@ import { NextResponse } from 'next/server';
 // MongoDB connection - loaded from .env.local
 const MONGODB_URI = process.env.MONGODB_URI;
 const DB_NAME = process.env.DB_NAME;
-const COLLECTION_DB = process.env.COLLECTION_DB;
+const COLLECTION_NAME = process.env.COLLECTION_NAME;
 
 // Validate environment variables
-if (!MONGODB_URI || !DB_NAME || !COLLECTION_DB) {
+if (!MONGODB_URI || !DB_NAME || !COLLECTION_NAME) {
   throw new Error('Missing required environment variables. Check .env.local file.');
 }
 
@@ -100,7 +100,7 @@ export async function POST(request) {
     };
 
     // Insert into database
-    const result = await db.collection(COLLECTION_DB).insertOne(contactData);
+    const result = await db.collection(COLLECTION_NAME).insertOne(contactData);
 
     if (result.acknowledged) {
       return NextResponse.json({
