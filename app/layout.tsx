@@ -2,25 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
-
-export const siteConfig = {
-  name: "Tanish Sanghvi's Portfolio",
-  description: "Engineering student passionate about creating innovative solutions.",
-  favicon: "/favicon.ico",
-  url: "https://tanish-portfolio.vercel.app",
-  creator: "Tanish Sanghvi",
-  keywords: [
-    "Engineering Student",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "AI",
-    "Portfolio"
-  ],
-  ogImage: "/og-image.png",
-};
-
-// ...rest of your existing data exports
+import siteConfig from "@/lib/siteConfig";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -38,7 +20,7 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.creator }],
   creator: siteConfig.creator,
   metadataBase: new URL(siteConfig.url),
-  
+
   openGraph: {
     type: "website",
     locale: "en_US",
@@ -48,27 +30,25 @@ export const metadata: Metadata = {
     siteName: siteConfig.name,
     images: [siteConfig.ogImage],
   },
-  
+
   twitter: {
     card: "summary_large_image",
     title: siteConfig.name,
     description: siteConfig.description,
     images: [siteConfig.ogImage],
   },
-  
+
   icons: {
     icon: siteConfig.favicon,
     shortcut: siteConfig.favicon,
     apple: siteConfig.favicon,
   },
-  
+
   robots: {
     index: true,
     follow: true,
   },
 };
-
-
 
 export default function RootLayout({
   children,
