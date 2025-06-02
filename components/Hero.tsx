@@ -53,8 +53,8 @@ const Hero = () => {
             fill="white"
           />
           <Spotlight
-            className="top-10 left-[60%] md:left-[70%] h-[80vh] w-[50vw]"
-            fill="purple"
+            className="top-10 left-[50%] md:left-[70%] h-[80vh] w-[50vw]"
+            fill="red"
           />
           <Spotlight className="top-28 left-[30%] md:left-[40%] h-[80vh] w-[50vw]" fill="blue" />
         </div>

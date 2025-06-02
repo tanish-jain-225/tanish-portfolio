@@ -62,7 +62,7 @@ const RecentProjects = () => {
                         {/* Action Buttons */}
                 <div className="flex items-center justify-between mt-6 pt-3 border-t border-white/10 gap-3">                  <button 
                     onClick={() => window.open(item.sourceLink, '_blank', 'noopener,noreferrer')}
-                    className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded text-xs text-white transition-all duration-200 hover:scale-105"
+                    className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded text-xs text-white transition-all duration-200 hover:scale-105 cursor-pointer"
                   >
                     <FaGithub className="w-3 h-3" />
                     <span>{uiText.projects.sourceCode}</span>
@@ -70,7 +70,7 @@ const RecentProjects = () => {
                   
                   <button
                     onClick={() => window.open(item.demoLink, '_blank', 'noopener,noreferrer')}
-                    className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-gradient-to-r from-purple-900/40 to-purple-800/40 hover:from-purple-900/60 hover:to-purple-800/60 border border-purple-500/30 hover:border-purple-500/50 rounded text-xs text-purple-300 hover:text-purple-200 transition-all duration-200 hover:scale-105"
+                    className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-gradient-to-r from-purple-900/40 to-purple-800/40 hover:from-purple-900/60 hover:to-purple-800/60 border border-purple-500/30 hover:border-purple-500/50 rounded text-xs text-purple-300 hover:text-purple-200 transition-all duration-200 hover:scale-105 cursor-pointer"
                   >
                     <span>{uiText.projects.liveProject}</span>
                     <FaLocationArrow className="w-3 h-3" />

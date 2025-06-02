@@ -128,7 +128,7 @@ const Contact = () => {
                 <button
                 type="submit"
                 disabled={isSubmitting}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed"
+                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-3 px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer"
               >
                 {isSubmitting ? uiText.contact.sending : contactInfo.form.submitButton}
               </button>
