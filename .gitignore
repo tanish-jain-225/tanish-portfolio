@@ -1,0 +1,7 @@
+# Node.js and JavaScript project .gitignore file
+
+# Logs
+/node_modules/
+/dist/
+/.next/
+/.nuxt/
