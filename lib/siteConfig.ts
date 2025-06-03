@@ -4,7 +4,7 @@ const siteConfig = {
   name: "Tanish Sanghvi's Portfolio",
   description: "Engineering student passionate about creating innovative solutions.",
   favicon: "/favicon.ico",
-  url: "https://tanish-portfolio.vercel.app",
+  url: "https://tanish-portfolio-web.vercel.app",
   creator: "Tanish Sanghvi",
   keywords: [
     "Engineering Student",
