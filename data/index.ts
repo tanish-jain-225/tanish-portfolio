@@ -27,7 +27,7 @@ export const sectionDescriptions = {
 export const uiText = {
   experience: {
     viewDetails: "View Details",
-    linkedInProfile: "https://www.linkedin.com/in/tanish-jain-tj02022005"
+    linkedInProfile: "https://linkedin.com/in/tanish-jain-tj02022005"
   },
   projects: {
     liveProject: "Live Demo",
@@ -336,7 +336,7 @@ export const socialMedia = [
     id: 2,
     img: "/link.svg",
     name: "LinkedIn",
-    url: "https://www.linkedin.com/in/tanish-jain-tj02022005",
+    url: "https://linkedin.com/in/tanish-jain-tj02022005",
     icon: "FaLinkedin"
   },
 ];
