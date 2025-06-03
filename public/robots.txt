@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://tanish-portfolio.vercel.app/sitemap.xml

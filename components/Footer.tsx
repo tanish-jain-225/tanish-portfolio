@@ -30,7 +30,7 @@ const Footer = () => {
   };
   
   return (
-    <footer className="p-8 border-t border-white/10 relative mx-auto w-[90vw]">
+    <footer className="p-8 border-t border-white/10 relative mx-auto w-[90vw]" role="contentinfo">
       {/* Blurred gradient bg */}
       <div className="absolute inset-0 w-full h-full">
         <div className="absolute top-0 left-1/4 w-96 h-96 rounded-full bg-purple-600/5 filter blur-3xl"></div>

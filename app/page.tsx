@@ -1,6 +1,6 @@
 "use client";
 
-import React from "react";
+import React, { Suspense } from "react";
 import Hero from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import { navItems } from "@/data";
@@ -11,12 +11,15 @@ import dynamic from "next/dynamic";
 import MyWorkExperience from "@/components/MyWorkExperience";
 
 // Dynamically import components that might cause hydration issues
-const DynamicGrid = dynamic(() => import("@/components/Grid"), { ssr: false });
-const DynamicContact = dynamic(() => import("@/components/Contact"), { ssr: false });
+const DynamicGrid = dynamic(() => import("@/components/Grid"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
+const DynamicContact = dynamic(() => import("@/components/Contact"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
 
 export default function Home() {
   return (
-    <main className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto" suppressHydrationWarning>
+    <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto" suppressHydrationWarning>
+      {/* Skip to content link */}
+      <a href="#main-content" className="skip-to-content">Skip to main content</a>
+      
       {/* Full-width hero section */}
       <section className="w-full">
         <FloatingNav
@@ -33,10 +36,14 @@ export default function Home() {
       
       {/* Content with max-width constraint */}
       <div className="w-full">
-        <DynamicGrid />
+        <Suspense fallback={<div className="content-loader h-96 w-full" />}>
+          <DynamicGrid />
+        </Suspense>
         <RecentProjects />
         <MyWorkExperience />
-        <DynamicContact />
+        <Suspense fallback={<div className="content-loader h-96 w-full" />}>
+          <DynamicContact />
+        </Suspense>
       </div>
       <Footer />
     </main>

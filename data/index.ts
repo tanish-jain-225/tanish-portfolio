@@ -10,24 +10,25 @@ export const navigationConfig = {
   resumeButton: {
     text: "Resume",
     link: "/resume.pdf", // You can update this to actual resume link
-    enabled: true
-  }
+    enabled: true,
+  },
 };
 
 export const sectionTitles = {
   experience: "My Work Experience",
   projects: "Recent Projects",
-  projectPortfolio: "Project Portfolio"
+  projectPortfolio: "Project Portfolio",
 };
 
 export const sectionDescriptions = {
-  projectPortfolio: "A comprehensive collection of academic and personal projects showcasing engineering skills and innovation"
+  projectPortfolio:
+    "A comprehensive collection of academic and personal projects showcasing engineering skills and innovation",
 };
 
 export const uiText = {
   experience: {
     viewDetails: "View Details",
-    linkedInProfile: "https://linkedin.com/in/tanish-jain-tj02022005"
+    linkedInProfile: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
   projects: {
     liveProject: "Live Demo",
@@ -50,16 +51,16 @@ export const uiText = {
     filterByCategory: "Filter by Category",
     filterByStatus: "Filter by Status",
     allCategories: "All Categories",
-    allStatus: "All Status"
+    allStatus: "All Status",
   },
   footer: {
     quickLinks: "Quick Links",
-    contact: "Contact"
+    contact: "Contact",
   },
   contact: {
     connectWithMe: "Connect with me",
-    sending: "Sending..."
-  }
+    sending: "Sending...",
+  },
 };
 
 export const heroData = {
@@ -70,8 +71,8 @@ export const heroData = {
     text: "View My Projects",
     link: "#projects",
     icon: "FaLocationArrow",
-    position: "right"
-  }
+    position: "right",
+  },
 };
 
 export const techStack = [
@@ -97,50 +98,8 @@ export const techStack = [
   "IoT",
   "MATLAB",
   "Git",
-  "Docker"
+  "Docker",
 ];
-
-export const projectCategories = [
-  {
-    name: "Educational Simulation",
-    count: 1,
-    color: "bg-blue-500/20 text-blue-400"
-  },
-  {
-    name: "Social Platform",
-    count: 1,
-    color: "bg-green-500/20 text-green-400"
-  },
-  {
-    name: "IoT & Sustainability",
-    count: 1,
-    color: "bg-emerald-500/20 text-emerald-400"
-  },
-  {
-    name: "Augmented Reality",
-    count: 1,
-    color: "bg-purple-500/20 text-purple-400"
-  },
-  {
-    name: "AI & Computer Vision",
-    count: 1,
-    color: "bg-orange-500/20 text-orange-400"
-  },
-  {
-    name: "Blockchain & Security",
-    count: 1,
-    color: "bg-yellow-500/20 text-yellow-400"
-  }
-];
-
-export const projectStats = {
-  totalProjects: 6,
-  completedProjects: 3,
-  inProgressProjects: 2,
-  featuredProjects: 1,
-  technologiesUsed: 25,
-  coursesIntegrated: 6
-};
 
 export const projects = [
   {
@@ -158,21 +117,27 @@ export const projects = [
       "Real-time orbital mechanics simulation",
       "Interactive planetary controls",
       "Educational tooltips and data",
-      "Responsive 3D visualization"
+      "Responsive 3D visualization",
     ],
     achievements: [
       "Featured in Physics Department showcase",
       "90+ accuracy in orbital calculations",
-      "Used by 200+ students"
+      "Used by 200+ students",
     ],
-    course: "Physics II - Mechanics"
+    course: "Physics II - Mechanics",
   },
   {
     id: 2,
     title: "Campus Connect - Student Hub",
     des: "A comprehensive platform for college students to share notes, coordinate study groups, find project partners, and manage academic schedules collaboratively.",
     img: "/p2.svg",
-    techStack: ["Next.js", "TypeScript", "Tailwind CSS", "MongoDB", "Socket.io"],
+    techStack: [
+      "Next.js",
+      "TypeScript",
+      "Tailwind CSS",
+      "MongoDB",
+      "Socket.io",
+    ],
     demoLink: "https://campus-connect-demo.vercel.app",
     sourceLink: "https://github.com/tanishjain/campus-connect",
     status: "in-progress",
@@ -182,14 +147,14 @@ export const projects = [
       "Real-time chat and study groups",
       "Note sharing with version control",
       "Project partner matching system",
-      "Academic calendar integration"
+      "Academic calendar integration",
     ],
     achievements: [
       "150+ active users in beta",
       "Reduced study group formation time by 60%",
-      "Integrated with university LMS"
+      "Integrated with university LMS",
     ],
-    course: "Web Development & Database Systems"
+    course: "Web Development & Database Systems",
   },
   {
     id: 3,
@@ -206,15 +171,15 @@ export const projects = [
       "Real-time bin level monitoring",
       "Route optimization algorithms",
       "Predictive analytics dashboard",
-      "Mobile alerts for collection teams"
+      "Mobile alerts for collection teams",
     ],
     achievements: [
       "40% reduction in collection costs",
       "Featured in Engineering Expo 2024",
       "Patent application filed",
-      "Implemented in campus pilot program"
+      "Implemented in campus pilot program",
     ],
-    course: "Engineering Design & IoT Systems"
+    course: "Engineering Design & IoT Systems",
   },
   {
     id: 4,
@@ -231,15 +196,15 @@ export const projects = [
       "3D equipment visualization",
       "Step-by-step safety procedures",
       "Interactive component identification",
-      "Multi-marker tracking system"
+      "Multi-marker tracking system",
     ],
     achievements: [
       "Reduced lab training time by 50%",
       "100% safety compliance improvement",
       "Adopted by 3 engineering departments",
-      "Winner of Innovation Challenge 2024"
+      "Winner of Innovation Challenge 2024",
     ],
-    course: "Computer Graphics & Human-Computer Interaction"
+    course: "Computer Graphics & Human-Computer Interaction",
   },
   {
     id: 5,
@@ -256,15 +221,15 @@ export const projects = [
       "Real-time vehicle detection",
       "Traffic density analysis",
       "Dynamic signal optimization",
-      "Congestion prediction models"
+      "Congestion prediction models",
     ],
     achievements: [
       "30% reduction in average wait time",
       "Best Final Year Project Award",
       "Presented at IEEE conference",
-      "City traffic department interest"
+      "City traffic department interest",
     ],
-    course: "Artificial Intelligence & Machine Learning"
+    course: "Artificial Intelligence & Machine Learning",
   },
   {
     id: 6,
@@ -281,16 +246,16 @@ export const projects = [
       "Immutable certificate storage",
       "Smart contract verification",
       "Decentralized identity management",
-      "QR code certificate validation"
+      "QR code certificate validation",
     ],
     achievements: [
       "Zero certificate fraud potential",
       "Hackathon finalist project",
       "University adoption proposal",
-      "Featured in blockchain conference"
+      "Featured in blockchain conference",
     ],
-    course: "Distributed Systems & Cryptography"
-  }, 
+    course: "Distributed Systems & Cryptography",
+  },
 ];
 
 export const workExperience = [
@@ -303,7 +268,7 @@ export const workExperience = [
   },
   {
     id: 2,
-    title: "Frontend Development Projects", 
+    title: "Frontend Development Projects",
     desc: "Developed multiple responsive web applications using React, Next.js, and modern CSS frameworks, focusing on user experience and performance optimization.",
     className: "md:col-span-2",
     thumbnail: "/exp2.svg",
@@ -312,7 +277,7 @@ export const workExperience = [
     id: 3,
     title: "Full Stack Development",
     desc: "Built complete web applications with MERN stack, including database design, API development, and deployment on various platforms.",
-    className: "md:col-span-2", 
+    className: "md:col-span-2",
     thumbnail: "/exp3.svg",
   },
   {
@@ -330,14 +295,14 @@ export const socialMedia = [
     img: "/git.svg",
     name: "GitHub",
     url: "https://github.com/tanish-jain-225",
-    icon: "FaGithub"
+    icon: "FaGithub",
   },
   {
     id: 2,
     img: "/link.svg",
     name: "LinkedIn",
     url: "https://linkedin.com/in/tanish-jain-tj02022005",
-    icon: "FaLinkedin"
+    icon: "FaLinkedin",
   },
 ];
 
@@ -353,13 +318,14 @@ export const personalInfo = {
   experience: "3+ years",
   projectsCompleted: "15+",
   technologiesUsed: "25+",
-  avatar: "/profile.svg"
+  avatar: "/profile.svg",
 };
 
 // Contact Information
 export const contactInfo = {
   title: "Let's Connect",
-  subtitle: "Ready to collaborate on exciting projects? Let's build something amazing together!",
+  subtitle:
+    "Ready to collaborate on exciting projects? Let's build something amazing together!",
   email: "tanishjain020205@gmail.com",
   phone: "+91 98765 43210",
   location: "Mumbai, India",
@@ -371,11 +337,16 @@ export const contactInfo = {
       { name: "name", label: "Your Name", type: "text", required: true },
       { name: "email", label: "Your Email", type: "email", required: true },
       { name: "subject", label: "Subject", type: "text", required: false },
-      { name: "message", label: "Your Message", type: "textarea", required: true }
+      {
+        name: "message",
+        label: "Your Message",
+        type: "textarea",
+        required: true,
+      },
     ],
     submitButton: "Send Message",
     successMessage: "Thanks for reaching out! I'll get back to you soon.",
-    errorMessage: "Something went wrong. Please try again."
+    errorMessage: "Something went wrong. Please try again.",
   },
   details: {
     title: "Contact Information",
@@ -383,33 +354,34 @@ export const contactInfo = {
       {
         icon: "FaEnvelope",
         label: "Email",
-        value: "tanishjain020205@gmail.com"
+        value: "tanishjain020205@gmail.com",
       },
       {
         icon: "FaPhone",
         label: "Phone",
-        value: "+91-7021341948"
+        value: "+91-7021341948",
       },
       {
         icon: "FaMapMarkerAlt",
         label: "Location",
-        value: "Mumbai, India"
-      }
-    ]
-  }
+        value: "Mumbai, India",
+      },
+    ],
+  },
 };
 
 // Footer Data
 export const footerData = {
   logo: {
     text: "Tanish Sanghvi",
-    accent: "purple"
+    accent: "purple",
   },
-  description: "Engineering student passionate about creating innovative solutions to real-world problems. Constantly learning and exploring new technologies.",
+  description:
+    "Engineering student passionate about creating innovative solutions to real-world problems. Constantly learning and exploring new technologies.",
   sections: [
     {
       title: "Quick Links",
-      items: navItems
+      items: navItems,
     },
     {
       title: "Projects",
@@ -417,15 +389,15 @@ export const footerData = {
         { name: "Solar System Simulation", link: "#projects" },
         { name: "Campus Connect", link: "#projects" },
         { name: "Smart Waste Management", link: "#projects" },
-        { name: "AR Lab Assistant", link: "#projects" }
-      ]
-    }
+        { name: "AR Lab Assistant", link: "#projects" },
+      ],
+    },
   ],
   copyright: {
     text: "Built by Tanish Sanghvi",
-    year: new Date().getFullYear()
+    year: new Date().getFullYear(),
   },
-  socialLinks: socialMedia
+  socialLinks: socialMedia,
 };
 
 // Bento Grid Data
@@ -434,7 +406,8 @@ export const bentoGridData = {
     {
       id: 1,
       title: "Academic Excellence & Leadership",
-      description: "Maintaining high academic standards while leading collaborative projects",
+      description:
+        "Maintaining high academic standards while leading collaborative projects",
       className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
       imgClassName: "w-full h-full",
       titleClassName: "justify-end",
@@ -445,14 +418,15 @@ export const bentoGridData = {
         text: "I excel in team projects and believe that clear communication is key to academic success.",
         stats: [
           { label: "GPA", value: "3.8" },
-          { label: "Course projects completed", value: "8+" }
-        ]
-      }
+          { label: "Course projects completed", value: "8+" },
+        ],
+      },
     },
     {
       id: 2,
       title: "Virtual Collaboration Ready",
-      description: "Available for cross-university collaborations and study groups",
+      description:
+        "Available for cross-university collaborations and study groups",
       className: "lg:col-span-2 md:col-span-3 md:row-span-2",
       imgClassName: "",
       titleClassName: "justify-start",
@@ -463,9 +437,9 @@ export const bentoGridData = {
         text: "Open to virtual study sessions and project collaborations with students from other universities.",
         availability: {
           status: "Available for study groups",
-          schedule: "After class hours"
-        }
-      }
+          schedule: "After class hours",
+        },
+      },
     },
     {
       id: 3,
@@ -479,8 +453,8 @@ export const bentoGridData = {
       content: {
         type: "techstack",
         text: "Preferred technologies:",
-        note: "Always learning new technologies"
-      }
+        note: "Always learning new technologies",
+      },
     },
     {
       id: 4,
@@ -497,15 +471,16 @@ export const bentoGridData = {
         interests: [
           { name: "Robotics", icon: "/three.svg", color: "purple" },
           { name: "IoT", icon: "/fm.svg", color: "blue" },
-          { name: "Web Dev", icon: "/ts.svg", color: "green" }
+          { name: "Web Dev", icon: "/ts.svg", color: "green" },
         ],
-        currentStudy: "Currently studying: Data Structures and Algorithms"
-      }
+        currentStudy: "Currently studying: Data Structures and Algorithms",
+      },
     },
     {
       id: 5,
       title: "IoT Traffic Management System",
-      description: "Current project: Smart traffic optimization using IoT sensors",
+      description:
+        "Current project: Smart traffic optimization using IoT sensors",
       className: "md:col-span-3 md:row-span-2",
       imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
       titleClassName: "justify-center md:justify-start lg:justify-center",
@@ -516,11 +491,11 @@ export const bentoGridData = {
         text: "Developing an IoT-based traffic management system that optimizes signal timing based on real-time traffic density.",
         technologies: [
           "Arduino Uno",
-          "IR Sensors", 
-          "Python for data processing"
+          "IR Sensors",
+          "Python for data processing",
         ],
-        repository: "Documentation on GitHub"
-      }
+        repository: "Documentation on GitHub",
+      },
     },
     {
       id: 6,
@@ -534,10 +509,10 @@ export const bentoGridData = {
       content: {
         type: "contact",
         text: "I'm looking to connect with other engineering students for hackathons and collaborative projects.",
-        email: "tanishjain020205@gmail.com"
-      }
-    }
-  ]
+        email: "tanishjain020205@gmail.com",
+      },
+    },
+  ],
 };
 
 // About Section Data
@@ -551,39 +526,39 @@ export const aboutData = {
     "🤖 IoT & AI Enthusiast",
     "🌟 Open Source Contributor",
     "🏆 Award-winning Projects",
-    "🎯 Problem Solver"
+    "🎯 Problem Solver",
   ],
   stats: [
     { label: "Projects Completed", value: "15+", icon: "FaProjectDiagram" },
     { label: "Technologies Used", value: "25+", icon: "FaCode" },
     { label: "Years Learning", value: "3+", icon: "FaGraduationCap" },
-    { label: "GitHub Repos", value: "50+", icon: "FaGithub" }
+    { label: "GitHub Repos", value: "50+", icon: "FaGithub" },
   ],
   skills: {
     title: "Skills & Technologies",
     categories: [
       {
         name: "Frontend",
-        skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Three.js"]
+        skills: ["React", "Next.js", "TypeScript", "Tailwind CSS", "Three.js"],
       },
       {
         name: "Backend",
-        skills: ["Node.js", "Python", "MongoDB", "PostgreSQL", "Firebase"]
+        skills: ["Node.js", "Python", "MongoDB", "PostgreSQL", "Firebase"],
       },
       {
         name: "Mobile & Desktop",
-        skills: ["React Native", "Flutter", "Electron"]
+        skills: ["React Native", "Flutter", "Electron"],
       },
       {
         name: "DevOps & Tools",
-        skills: ["Git", "Docker", "AWS", "Vercel", "Linux"]
+        skills: ["Git", "Docker", "AWS", "Vercel", "Linux"],
       },
       {
         name: "Other",
-        skills: ["Arduino", "IoT", "Blockchain", "AI/ML", "Unity"]
-      }
-    ]
-  }
+        skills: ["Arduino", "IoT", "Blockchain", "AI/ML", "Unity"],
+      },
+    ],
+  },
 };
 
 // Centralized Images Configuration
@@ -592,26 +567,69 @@ export const images = {
     projectsBackground: "/bg.png",
     footerGrid: "/footer-grid.svg",
     cloud: "/cloud.svg",
-    grid: "/grid.svg"
+    grid: "/grid.svg",
   },
   icons: {
     git: "/git.svg",
-    link: "/link.svg"
+    link: "/link.svg",
   },
   profile: "/profile.svg",
-  confetti: "/confetti.gif"
+  confetti: "/confetti.gif",
 };
 
 // Site Metadata
 export const siteMetadata = {
   title: "Tanish Sanghvi - Engineering Student & Developer",
-  description: "Computer Science Engineering student passionate about creating innovative solutions. Explore my projects in web development, IoT, AI, and more.",
-  keywords: ["Engineering Student", "Full Stack Developer", "React", "Next.js", "IoT", "AI", "Blockchain", "Mumbai University"],
+  description:
+    "Computer Science Engineering student passionate about creating innovative solutions. Explore my projects in web development, IoT, AI, and more.",
+  keywords: [
+    "Engineering Student",
+    "Full Stack Developer",
+    "React",
+    "Next.js",
+    "IoT",
+    "AI",
+    "Blockchain",
+    "Mumbai University",
+  ],
   author: "Tanish Sanghvi",
   siteUrl: "https://tanishsanghvi.vercel.app",
   image: "/profile.svg",
   twitterHandle: "@tanishjain",
-  locale: "en_US"
+  locale: "en_US",
+};
+
+export const metadata = {
+  ...siteMetadata,
+  alternates: {
+    canonical: siteMetadata.siteUrl,
+  },
+  openGraph: {
+    ...siteMetadata,
+    images: [
+      {
+        url: siteMetadata.image,
+        width: 1200,
+        height: 630,
+        alt: siteMetadata.title,
+        type: "image/svg+xml",
+      },
+    ],
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: siteMetadata.title,
+    description: siteMetadata.description,
+    images: [
+      {
+        url: siteMetadata.image,
+        alt: siteMetadata.title,
+        width: 1200,
+        height: 630,
+        type: "image/svg+xml",
+      },
+    ],
+  },
 };
 
 // Navigation Animation Settings
@@ -620,7 +638,7 @@ export const animationSettings = {
   fadeInDuration: 0.6,
   slideInDistance: 50,
   hoverScale: 1.05,
-  clickScale: 0.95
+  clickScale: 0.95,
 };
 
 // Theme Configuration
@@ -634,12 +652,12 @@ export const themeConfig = {
     text: {
       primary: "#FFFFFF",
       secondary: "#BEC1DD",
-      muted: "#6B7280"
-    }
+      muted: "#6B7280",
+    },
   },
   gradients: {
     primary: "from-purple-600 to-blue-600",
     secondary: "from-cyan-500 to-purple-500",
-    accent: "from-amber-500 to-orange-500"
-  }
+    accent: "from-amber-500 to-orange-500",
+  },
 };

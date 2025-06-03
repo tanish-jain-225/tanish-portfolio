@@ -3,7 +3,7 @@
 import NextError from "next/error";
 import { useEffect } from "react";
 
-export default function GlobalError({ error }: { error: Error & { digest?: string } }) {
+export default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {
   useEffect(() => {
     // Log error to console for debugging
     console.error('Global error caught:', error);
@@ -11,12 +11,15 @@ export default function GlobalError({ error }: { error: Error & { digest?: strin
 
   return (
     <html>
-      <body>
-        {/* `NextError` is the default Next.js error page component. Its type
-        definition requires a `statusCode` prop. However, since the App Router
-        does not expose status codes for errors, we simply pass 0 to render a
-        generic error message. */}
-        <NextError statusCode={0} />
+      <body className="min-h-screen flex flex-col items-center justify-center bg-black text-white p-8">
+        <h2 className="text-3xl font-bold mb-4">Something went wrong!</h2>
+        <p className="mb-6 text-lg text-gray-300">{error.message || "An unexpected error occurred."}</p>
+        <button
+          onClick={() => reset()}
+          className="px-6 py-3 bg-purple-600 rounded text-white font-semibold hover:bg-purple-700 transition"
+        >
+          Try Again
+        </button>
       </body>
     </html>
   );
