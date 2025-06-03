@@ -1,6 +1,5 @@
 "use client";
 
-import NextError from "next/error";
 import { useEffect } from "react";
 
 export default function GlobalError({ error, reset }: { error: Error; reset: () => void }) {

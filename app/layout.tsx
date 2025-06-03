@@ -93,15 +93,6 @@ export default function RootLayout({
         <link rel="apple-touch-icon" href="/profile.svg" />
         <meta name="theme-color" content="#8b5cf6" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-        <link
-          rel="preload"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-          as="style"
-        />
-        <link
-          rel="stylesheet"
-          href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap"
-        />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         {/* Structured Data for SEO */}
         <Script
