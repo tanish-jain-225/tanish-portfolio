@@ -51,11 +51,10 @@ const Grid = () => {
       </div>
         <div aria-label="Skills and interests grid">
         <BentoGrid>
-          {bentoGridData.items.map(({id, title, description, className, img, imgClassName, titleClassName, spareImg, content}) => (
+          {bentoGridData.items.map(({id, title, className, img, imgClassName, titleClassName, spareImg, content}) => (
             <BentoGridItem
               key={id}
               title={title}
-              description={description}
               className={`${className} bento-item section-transition opacity-0`}
               img={img}
               imgClassName={imgClassName}
