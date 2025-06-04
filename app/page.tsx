@@ -17,9 +17,6 @@ const DynamicContact = dynamic(() => import("@/components/Contact"), { ssr: fals
 export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto" suppressHydrationWarning>
-      {/* Skip to content link */}
-      <a href="#main-content" className="skip-to-content">Skip to main content</a>
-      
       {/* Full-width hero section */}
       <section className="w-full">
         <FloatingNav
