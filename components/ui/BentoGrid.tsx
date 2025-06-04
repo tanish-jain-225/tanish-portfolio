@@ -3,17 +3,11 @@
 import React from "react";
 import Image from "next/image";
 import { useState } from "react";
-import { IoCopyOutline } from "react-icons/io5";
-
-// Also install this npm i --save-dev @types/react-lottie
-import Lottie from "lottie-react";
 
 import { cn } from "@/lib/utils";
 import { techStack, personalInfo, images } from "@/data";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
-import animationData from "@/data/confetti.json";
-import MagicButton from "./MagicButton";
 
 export const BentoGrid = ({
   className,
@@ -38,7 +32,6 @@ interface BentoGridItemProps {
   className?: string;
   id: number;
   title?: string | React.ReactNode;
-  description?: string | React.ReactNode;
   img?: string;
   imgClassName?: string;
   titleClassName?: string;
@@ -61,7 +54,6 @@ export const BentoGridItem = ({
   className,
   id,
   title,
-  description,
   img,
   imgClassName,
   titleClassName,
@@ -69,17 +61,6 @@ export const BentoGridItem = ({
   content,
 }: BentoGridItemProps) => {
   const [copied, setCopied] = useState(false);
-
-  const handleCopy = () => {
-    const text = content?.email || personalInfo.email;
-    navigator.clipboard.writeText(text);
-    setCopied(true);
-
-    // Reset copied state after 3 seconds
-    setTimeout(() => {
-      setCopied(false);
-    }, 3000);
-  };
 
   const getColorClass = (color: string) => {
     const colorMap: { [key: string]: string } = {
@@ -283,10 +264,6 @@ export const BentoGridItem = ({
                 <div className="flex flex-col gap-6 w-full h-full justify-center items-center">
                   <div className="w-full flex flex-wrap justify-center gap-3 bg-[#10132E]/80 rounded-xl p-4 border border-white/10 my-2">
                     {techStack.map((item, i) => {
-                      const iconKey = item.toLowerCase();
-                      const iconSrc = (images.icons as Record<string, string>)[
-                        iconKey
-                      ];
                       return (
                         // Tech stack item with icon
                         <span
@@ -448,7 +425,9 @@ export const BentoGridItem = ({
                 <div className="flex flex-col items-center justify-center w-full h-full p-6">
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText("tanishjain020205@gmail.com");
+                      navigator.clipboard.writeText(
+                        "tanishjain020205@gmail.com"
+                      );
                       setCopied(true);
                       setTimeout(() => setCopied(false), 3000);
                     }}
