@@ -5,7 +5,6 @@ const nextConfig: NextConfig = {
   eslint: {
     ignoreDuringBuilds: true,
   },
-  swcMinify: true, // Enable SWC minification for faster builds
   output: 'standalone',
 };
 
