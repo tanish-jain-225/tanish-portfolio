@@ -2,7 +2,7 @@
 
 import React, { useEffect, useRef } from "react";
 import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
-import { bentoGridData, aboutData } from "@/data";
+import { bentoGridData } from "@/data";
 
 const Grid = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -43,10 +43,10 @@ const Grid = () => {
   return (
     <section id="about" className="py-16 md:py-24 w-[90vw] mx-auto scroll-mt-20" ref={sectionRef}>      <div className="mb-12 text-center section-transition opacity-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white tracking-tight">
-          {aboutData.title}
+          {bentoGridData.title}
         </h2>
         <p className="text-[#C1C2D3] max-w-xl mx-auto">
-          {aboutData.bio.split('.')[0]}.
+          {bentoGridData.subtitle}
         </p>
       </div>
         <div aria-label="Skills and interests grid">

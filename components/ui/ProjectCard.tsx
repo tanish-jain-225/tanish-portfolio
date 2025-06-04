@@ -69,12 +69,13 @@ const ProjectCard: React.FC<ProjectCardProps> = ({ project }) => {
       whileHover={{ y: -5 }}
       layout
     >      {/* Project Image */}
-      <div className="project-image relative h-48 overflow-hidden">
+      <div className="project-image relative h-48 overflow-hidden" style={{position: 'relative', height: '12rem'}}>
         <Image 
           src={project.img} 
           alt={project.title}
           className="w-full h-full object-cover"
           fill
+          sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
         />
         <div className="absolute inset-0 bg-gradient-to-t from-[#13162D] via-transparent to-transparent" />
         

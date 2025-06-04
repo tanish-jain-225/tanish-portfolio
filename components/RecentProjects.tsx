@@ -16,24 +16,28 @@ const RecentProjects = () => {
       <div className="flex flex-wrap items-center justify-center p-4 m-4 md:gap-10">
         {projects.map((item) => (
           <div
-            className="lg:min-h-[38rem] h-[32rem] flex items-center justify-center sm:w-96 w-[80vw]"
+            className="flex items-center justify-center sm:w-96 w-[80vw] cardContainer" // removed fixed height classes
+            style={{ minHeight: '32rem', height: '100%', maxHeight: '38rem' }} // dynamic, consistent height
             key={item.id}
-          >            <PinContainer
+          >            
+          <PinContainer
               title={item.title}
               href={item.demoLink}
               disableWrapper={true}
             >
-              <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden h-[20vh] lg:h-[25vh] mb-6">                <div
+              <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden" style={{ height: '22vh', minHeight: 160, maxHeight: 240, marginBottom: 24, position: 'relative' }}>
+                <div
                   className="relative w-full h-full overflow-hidden lg:rounded-3xl"
-                  style={{ backgroundColor: "#13162D" }}
+                  style={{ backgroundColor: "#13162D", position: 'relative', height: '100%' }}
                 >
-                  <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill />
+                  <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 </div>
                 <Image
                   src={item.img}
                   alt="cover"
-                  className="z-10 absolute bottom-0 w-full h-full object-contain"
+                  className="z-10 absolute bottom-0 w-full h-full object-cover object-top"
                   fill
+                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                 />
               </div>
 
@@ -53,14 +57,15 @@ const RecentProjects = () => {
 
                 {/* Description */}
                 <p
-                  className="lg:text-sm md:text-sm text-xs line-clamp-3 leading-relaxed"
+                  className="lg:text-sm md:text-sm text-xs leading-relaxed line-clamp-6"
                   style={{ color: "#BEC1DD" }}
                 >
                   {item.des}
                 </p>
 
-                        {/* Action Buttons */}
-                <div className="flex items-center justify-between mt-6 pt-3 border-t border-white/10 gap-3">                  <button 
+                {/* Action Buttons */}
+                <div className="flex items-center justify-between mt-6 pt-3 border-t border-white/10 gap-3">
+                  <button 
                     onClick={() => window.open(item.sourceLink, '_blank', 'noopener,noreferrer')}
                     className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded text-xs text-white transition-all duration-200 hover:scale-105 cursor-pointer"
                   >
