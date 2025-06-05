@@ -147,8 +147,8 @@ export const projects = [
     des: "Developed a web-based image processing app using Flask and PIL libraries, allowing users to apply various editing operations. It is a multi-technology project that seamlessly integrates JavaScript, CSS and HTML for the frontend with Python for the backend in a single application.",
     img: "/editor.png",
     techStack: ["Python", "Flask", "PIL", "JavaScript", "HTML", "CSS"],
-    demoLink: "https://teditor.vercel.app",
-    sourceLink: "https://github.com/tanish-jain-225/image-processing-app",
+    demoLink: "https://image-editor-teditor.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/image-editor-teditor",
     status: "completed",
     category: "Image Editing",
     duration: "1 month",
@@ -167,28 +167,24 @@ export const workExperience = [
     id: 1,
     title: "Engineering Student",
     desc: "Currently pursuing Bachelor of Engineering at Vivekanand Education Society's Institute of Technology, specializing in Automation and Robotics Branch and developing practical skills through various projects.",
-    className: "md:col-span-2",
     thumbnail: "/exp1.svg",
   },
   {
     id: 2,
     title: "Frontend Development Internship",
     desc: "Completed remote internship in Plasmid, located at Banglore. Implemented frontend skills like HTML, CSS, JS and Bootstrap in building responsive and modern web design across websites.",
-    className: "md:col-span-2",
     thumbnail: "/exp2.svg",
   },
   {
     id: 3,
     title: "Full Stack Development Internship",
     desc: "Completed remote internship in BWS, located at New Delhi. Worked upon skills such as Python, Flask and Bootstrap in building web applications across front-end and back-end. Created dynamic Single Page Applications.",
-    className: "md:col-span-2",
     thumbnail: "/exp3.svg",
   },
   {
     id: 4,
     title: "Dynamic Learning & Active Project Building",
     desc: "Worked upon various projects in the field of Web development, continuously learning evolving technologies like MongoDB, Express, React, NodeJS, Tailwind, NextJS and Vercel to enhance skills and knowledge.",
-    className: "md:col-span-2",
     thumbnail: "/exp4.svg",
   },
 ];
@@ -315,9 +311,6 @@ export const bentoGridData = {
       title: "Academics & Innovation",
       description:
         "Merging theoretical concepts with real-world applications",
-      className: "lg:col-span-3 md:col-span-6 md:row-span-4 lg:min-h-[60vh]",
-      imgClassName: "w-full h-full",
-      titleClassName: "justify-end",
       img: "/b1.svg",
       spareImg: "",
       content: {
@@ -333,9 +326,6 @@ export const bentoGridData = {
       id: 2,
       title: "Cross-Functional Teamwork",
       description: "Proven experience in team projects and remote coordination",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-      imgClassName: "",
-      titleClassName: "justify-start",
       img: "",
       spareImg: "",
       content: {
@@ -351,9 +341,6 @@ export const bentoGridData = {
       id: 3,
       title: "Tech Stack & Tools",
       description: "My core tech skills for development and prototyping",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-2",
-      imgClassName: "",
-      titleClassName: "justify-start",
       img: "",
       spareImg: "",
       content: {
@@ -366,9 +353,6 @@ export const bentoGridData = {
       id: 4,
       title: "Safe Load Indicator System",
       description: "Real-time safety system for crane operators",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-      imgClassName: "",
-      titleClassName: "justify-start",
       img: "/b4.svg",
       spareImg: "",
       content: {
@@ -383,9 +367,6 @@ export const bentoGridData = {
       title: "DineEase – Hotel Menu App",
       description:
         "Digital ordering system with admin panel and order tracking",
-      className: "md:col-span-3 md:row-span-2",
-      imgClassName: "absolute right-0 bottom-0 md:w-96 w-60",
-      titleClassName: "justify-center md:justify-start lg:justify-center",
       img: "/b5.svg",
       spareImg: "/grid.svg",
       content: {
@@ -397,11 +378,8 @@ export const bentoGridData = {
     },
     {
       id: 6,
-      title: "",
+      title: "Let's Connect",
       description: "Open to collaboration, hackathons, and freelance gigs",
-      className: "lg:col-span-2 md:col-span-3 md:row-span-1",
-      imgClassName: "",
-      titleClassName: "justify-center md:max-w-full max-w-60 text-center",
       img: "",
       spareImg: "",
       content: {
@@ -428,87 +406,3 @@ export const images = {
   confetti: "/confetti.gif",
 };
 
-// Site Metadata
-export const siteMetadata = {
-  title: "Tanish Sanghvi - Engineering Student & Developer",
-  description:
-    "Computer Science Engineering student passionate about creating innovative solutions. Explore my projects in web development, IoT, AI, and more.",
-  keywords: [
-    "Engineering Student",
-    "Full Stack Developer",
-    "React",
-    "Next.js",
-    "IoT",
-    "AI",
-    "Blockchain",
-    "Vivekanand Education Society's Institute of Technology",
-  ],
-  author: "Tanish Sanghvi",
-  siteUrl: "https://tanishsanghvi.vercel.app",
-  image: "/profile.svg",
-  twitterHandle: "@tanishjain",
-  locale: "en_US",
-};
-
-export const metadata = {
-  ...siteMetadata,
-  alternates: {
-    canonical: siteMetadata.siteUrl,
-  },
-  openGraph: {
-    ...siteMetadata,
-    images: [
-      {
-        url: siteMetadata.image,
-        width: 1200,
-        height: 630,
-        alt: siteMetadata.title,
-        type: "image/svg+xml",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: siteMetadata.title,
-    description: siteMetadata.description,
-    images: [
-      {
-        url: siteMetadata.image,
-        alt: siteMetadata.title,
-        width: 1200,
-        height: 630,
-        type: "image/svg+xml",
-      },
-    ],
-  },
-};
-
-// Navigation Animation Settings
-export const animationSettings = {
-  staggerDelay: 0.1,
-  fadeInDuration: 0.6,
-  slideInDistance: 50,
-  hoverScale: 1.05,
-  clickScale: 0.95,
-};
-
-// Theme Configuration
-export const themeConfig = {
-  colors: {
-    primary: "#8B5CF6", // purple-500
-    secondary: "#06B6D4", // cyan-500
-    accent: "#F59E0B", // amber-500
-    background: "#0A0A0F",
-    surface: "#13162D",
-    text: {
-      primary: "#FFFFFF",
-      secondary: "#BEC1DD",
-      muted: "#6B7280",
-    },
-  },
-  gradients: {
-    primary: "from-purple-600 to-blue-600",
-    secondary: "from-cyan-500 to-purple-500",
-    accent: "from-amber-500 to-orange-500",
-  },
-};

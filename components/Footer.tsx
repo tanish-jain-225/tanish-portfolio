@@ -46,20 +46,21 @@ const Footer = () => {
       </div>
       
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 relative z-10">
-        <div className="grid grid-cols-1 md:grid-cols-4 gap-10">          {/* Logo and description */}
-          <div className="col-span-1 md:col-span-2">
+        <div className="flex flex-col md:flex-row flex-wrap gap-10 md:gap-8 items-start w-full">
+          {/* Logo and description */}
+          <div className="flex-1 min-w-[250px] flex flex-col justify-center md:justify-start mb-8 md:mb-0">
             <h2 className="text-xl font-bold text-white flex items-center">
               <span className="text-3xl mr-2">{footerData.logo.text}</span>
               <div className={`w-2 h-8 bg-${footerData.logo.accent}-500 rounded-full`}></div>
             </h2>
-            
             <p className="mt-4 text-[#BEC1DD] text-sm leading-relaxed max-w-md">
               {footerData.description}
             </p>
           </div>
-            {/* Navigation */}
-          <div>
-            <h3 className="text-white font-semibold mb-4">{uiText.footer.quickLinks}</h3>            <ul className="space-y-3">
+          {/* Navigation */}
+          <div className="flex-1 min-w-[200px] mb-8 md:mb-0">
+            <h3 className="text-white font-semibold mb-4">{uiText.footer.quickLinks}</h3>
+            <ul className="space-y-3">
               {navItems.map((item, index) => {
                 const IconComponent = FaIcons[item.icon as keyof typeof FaIcons];
                 return (
@@ -67,26 +68,28 @@ const Footer = () => {
                     <a 
                       href={item.link} 
                       onClick={(e) => handleSmoothScroll(e, item.link)}
-                      className="text-[#BEC1DD] hover:text-white transition-colors hover:underline flex items-center gap-2 text-sm cursor-pointer"
+                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors hover:underline text-base cursor-pointer px-2 py-1 rounded-md"
                     >
-                      <IconComponent size={12} />
-                      {item.name}
+                      <IconComponent size={18} />
+                      <span>{item.name}</span>
                     </a>
                   </li>
                 );
               })}
             </ul>
-          </div>            {/* Contact Info */}
-          <div>
+          </div>
+          {/* Contact Info */}
+          <div className="flex-1 min-w-[200px] mb-8 md:mb-0">
             <h3 className="text-white font-semibold mb-4">{uiText.footer.contact}</h3>
-            <ul className="space-y-3">
+            <ul className="space-y-3 min-h-[64px]">
               <li>
                 <a 
                   href={`mailto:${personalInfo.email}`} 
-                  className="text-[#BEC1DD] hover:text-white transition-colors flex items-center gap-2 text-sm"
+                  className="flex items-center gap-3 text-[#BEC1DD] hover:text-white transition-colors text-base min-h-[40px] px-2 py-1"
+                  style={{lineHeight: '1.5', fontSize: '1rem'}}
                 >
-                  <FaIcons.FaEnvelope size={12} />
-                  {personalInfo.email}
+                  <FaIcons.FaEnvelope size={20} className="min-w-[20px] min-h-[20px]" />
+                  <span className="truncate">{personalInfo.email}</span>
                 </a>
               </li>
               {socialMedia.slice(0, 2).map((social) => {
@@ -95,12 +98,13 @@ const Footer = () => {
                   <li key={social.id}>
                     <a 
                       href={social.url} 
-                      className="text-[#BEC1DD] hover:text-white transition-colors flex items-center gap-2 text-sm"
+                      className="flex items-center gap-3 text-[#BEC1DD] hover:text-white transition-colors text-base min-h-[40px] px-2 py-1 rounded-md"
                       target="_blank"
                       rel="noopener noreferrer"
+                      style={{lineHeight: '1.5', fontSize: '1rem'}}
                     >
-                      <IconComponent size={12} />
-                      {social.url.replace('https://', '')}
+                      <IconComponent size={20} className="min-w-[20px] min-h-[20px]" />
+                      <span className="truncate">{social.url.replace('https://', '')}</span>
                     </a>
                   </li>
                 );
@@ -108,8 +112,8 @@ const Footer = () => {
             </ul>
           </div>
         </div>
-          <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center">
-          <p className="text-[#BEC1DD] text-sm">
+        <div className="mt-12 pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-4 md:gap-0 w-full">
+          <p className="text-[#BEC1DD] text-sm text-center md:text-left w-full md:w-auto">
             &copy; {footerData.copyright.year} {footerData.copyright.text}
           </p>
         </div>

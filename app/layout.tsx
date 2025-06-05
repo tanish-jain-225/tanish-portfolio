@@ -4,7 +4,6 @@ import "./globals.css";
 import "./utilities.css";
 import siteConfig from "@/lib/siteConfig";
 import Script from "next/script";
-import { projects } from "@/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -94,61 +93,7 @@ export default function RootLayout({
         <meta name="theme-color" content="#8b5cf6" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        {/* Structured Data for SEO */}
-        <Script
-          id="ld-json-person"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "Person",
-            name: siteConfig.name,
-            url: siteConfig.url,
-            sameAs: [
-              "https://github.com/tanish-jain-225",
-              "https://linkedin.com/in/tanish-jain-tj02022005",
-            ],
-            jobTitle: "Engineering Student",
-            description: siteConfig.description,
-            image: siteConfig.ogImage,
-          })}
-        </Script>
-        <Script
-          id="ld-json-website"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "WebSite",
-            url: siteConfig.url,
-            name: siteConfig.name,
-            description: siteConfig.description,
-            publisher: {
-              "@type": "Person",
-              name: siteConfig.creator,
-            },
-          })}
-        </Script>
-        <Script
-          id="ld-json-projects"
-          type="application/ld+json"
-          strategy="afterInteractive"
-        >
-          {JSON.stringify({
-            "@context": "https://schema.org",
-            "@type": "ItemList",
-            itemListElement: projects.map((project, idx) => ({
-              "@type": "CreativeWork",
-              position: idx + 1,
-              name: project.title,
-              description: project.des,
-              url: project.demoLink,
-              image: project.img,
-            })),
-          })}
-        </Script>
+        
         {children}
       </body>
     </html>

@@ -1,7 +1,7 @@
 "use client";
 
 import React, { useEffect, useRef } from "react";
-import { BentoGrid, BentoGridItem } from "./ui/BentoGrid";
+import { BentoGrid } from "./ui/BentoGrid";
 import { bentoGridData } from "@/data";
 
 const Grid = () => {
@@ -49,22 +49,8 @@ const Grid = () => {
           {bentoGridData.subtitle}
         </p>
       </div>
-        <div aria-label="Skills and interests grid">
-        <BentoGrid>
-          {bentoGridData.items.map(({id, title, className, img, imgClassName, titleClassName, spareImg, content}) => (
-            <BentoGridItem
-              key={id}
-              title={title}
-              className={`${className} bento-item section-transition opacity-0`}
-              img={img}
-              imgClassName={imgClassName}
-              titleClassName={titleClassName}
-              spareImg={spareImg}
-              content={content}
-              id={id}
-            />
-          ))}
-        </BentoGrid>
+      <div aria-label="Skills and interests flex" className="w-full">
+        <BentoGrid />
       </div>
     </section>
   );

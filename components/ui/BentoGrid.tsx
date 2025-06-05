@@ -5,63 +5,79 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { techStack, personalInfo, images } from "@/data";
+import { techStack, personalInfo, images, bentoGridData } from "@/data";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
 
-export const BentoGrid = ({
-  className,
-  children,
-}: {
-  className?: string;
-  children?: React.ReactNode;
-}) => {
-  return (
-    <div
-      className={cn(
-        "grid grid-cols-1 md:grid-cols-6 lg:grid-cols-5 gap-6 lg:gap-8 mx-auto w-full py-10",
-        className
-      )}
-    >
-      {children}
-    </div>
-  );
+export const BentoGrid = ({ className }: { className?: string }) => (
+  <div
+    className={cn(
+      // Responsive grid: 1 col xs, 2 cols sm, 3 cols md+, tight gap
+      "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mx-auto w-full py-6 sm:py-8 md:py-10",
+      className
+    )}
+  >
+    {bentoGridData.items.map((item) => (
+      <BentoGridItem key={item.id} id={item.id} />
+    ))}
+  </div>
+);
+
+type EngineeringContent = {
+  type: "engineering";
+  text: string;
+  stats?: Array<{ label: string; value: string }>;
+
+  interests?: Array<{ name: string; icon: string; color: string }>;
+  currentStudy?: string;
 };
+type CollaborationContent = {
+  type: "collaboration";
+  text: string;
+  availability?: { status: string; schedule: string };
+};
+type TechstackContent = {
+  type: "techstack";
+  text: string;
+  note?: string;
+};
+type ProjectContent = {
+  type: "project";
+  text: string;
+  technologies?: string[];
+  repository?: string;
+};
+type ContactContent = {
+  type: "contact";
+  email: string;
+};
+type AcademicContent = {
+  type: "academic";
+  text: string;
+  stats?: Array<{ label: string; value: string }>;
+};
+type BentoContent =
+  | EngineeringContent
+  | CollaborationContent
+  | TechstackContent
+  | ProjectContent
+  | ContactContent
+  | AcademicContent;
 
 interface BentoGridItemProps {
-  className?: string;
   id: number;
-  title?: string | React.ReactNode;
-  img?: string;
-  imgClassName?: string;
-  titleClassName?: string;
-  spareImg?: string;
-  content?: {
-    type: string;
-    text?: string;
-    stats?: Array<{ label: string; value: string }>;
-    availability?: { status: string; schedule: string };
-    note?: string;
-    interests?: Array<{ name: string; icon: string; color: string }>;
-    currentStudy?: string;
-    technologies?: string[];
-    repository?: string;
-    email?: string;
-  };
 }
 
-export const BentoGridItem = ({
-  className,
-  id,
-  title,
-  img,
-  imgClassName,
-  titleClassName,
-  spareImg,
-  content,
-}: BentoGridItemProps) => {
+export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   const [copied, setCopied] = useState(false);
-
+  const item = bentoGridData.items.find((item) => item.id === id);
+  if (!item) return null;
+  const { title, img, spareImg, content } = item as {
+    title?: string;
+    img?: string;
+    spareImg?: string;
+    content: BentoContent;
+  };
   const getColorClass = (color: string) => {
     const colorMap: { [key: string]: string } = {
       purple: "border-purple-500/20",
@@ -73,12 +89,7 @@ export const BentoGridItem = ({
 
   return (
     <div
-      className={cn(
-        // Consistent sizing, spacing, and alignment for all boxes
-        "row-span-1 relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01]",
-        // Remove space-y-4 to control spacing via padding/margin inside
-        className
-      )}
+      className="relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] min-h-[260px]"
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
@@ -90,7 +101,7 @@ export const BentoGridItem = ({
           id === 6 ? "justify-center items-center" : ""
         )}
       >
-        {/* add img divs */}
+        {/* Images and overlays */}
         {id === 1 && img && (
           <div
             className="w-full h-full absolute"
@@ -99,14 +110,14 @@ export const BentoGridItem = ({
             <Image
               src={img}
               alt={title?.toString() || `Grid item ${id}`}
-              className={cn("object-cover object-center", imgClassName)}
+              className="object-cover object-center"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
             <div className="absolute inset-0 bg-black/40 z-10" />
           </div>
         )}
-        {img && (
+        {img && id !== 1 && (
           <div
             className="w-full h-full absolute"
             style={{ position: "relative", height: "100%" }}
@@ -114,46 +125,51 @@ export const BentoGridItem = ({
             <Image
               src={img}
               alt={title?.toString() || `Grid item ${id}`}
-              className={cn("object-cover object-center", imgClassName)}
+              className="object-cover object-center"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
             />
-            {/* Overlay for better text visibility over img */}
             <div className="absolute inset-0 bg-black/40 z-10" />
           </div>
         )}
-        {spareImg && id === 5 && (
-          <div
-            className="absolute right-0 -bottom-5 w-full opacity-80"
-            style={{ position: "relative", minHeight: 120 }}
-          >
+        {id === 4 && img && (
+          <div className="absolute inset-0 w-full h-full z-0">
             <Image
-              src={spareImg}
-              alt={title?.toString() || `Grid item ${id} secondary`}
-              className="object-cover object-center w-full h-full"
+              src={img}
+              alt={title?.toString() || `Grid item ${id}`}
+              className="object-cover object-center"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
             />
-            {/* Overlay for better text visibility over spareImg */}
             <div className="absolute inset-0 bg-black/40 z-10" />
           </div>
         )}
-
+        {id === 5 && img && (
+          <div className="absolute inset-0 w-full h-full z-0">
+            <Image
+              src={img}
+              alt={title?.toString() || `Grid item ${id}`}
+              className="object-cover object-center"
+              fill
+              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+              priority
+            />
+            <div className="absolute inset-0 bg-black/40 z-10" />
+          </div>
+        )}
         {id === 6 && (
           <BackgroundGradientAnimation>
-            {/* Overlay for gradient bg */}
             <div className="absolute inset-0 z-10" />
             <div className="absolute z-20 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none opacity-30"></div>
           </BackgroundGradientAnimation>
         )}
-
-        {/* Overlay for better text visibility over backgrounds */}
+        {/* Overlay for backgrounds */}
         {id !== 1 &&
           id !== 6 &&
-          (content?.type === "academic" ||
-            content?.type === "engineering" ||
-            content?.type === "techstack" ||
-            content?.type === "contact") && (
+          ["academic", "engineering", "techstack", "contact"].includes(
+            content?.type || ""
+          ) && (
             <div
               className="absolute inset-0 z-10 pointer-events-none"
               style={{
@@ -162,24 +178,18 @@ export const BentoGridItem = ({
               }}
             ></div>
           )}
-
+        {/* Content */}
         <div
-          className={cn(
-            // Consistent padding and alignment for content
-            "group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-5 md:p-6 lg:p-8 xl:p-10 z-20 w-full h-full",
-            titleClassName
-          )}
+          className="group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 z-20 w-full h-full"
         >
           {title && (
-            <div className="font-sans text-lg md:text-2xl lg:text-3xl max-w-96 font-bold z-10 text-white tracking-tight ">
+            <div className="font-sans text-base sm:text-lg md:text-2xl lg:text-3xl max-w-full sm:max-w-96 font-bold z-10 text-white tracking-tight ">
               {title}
             </div>
           )}
-
-          {/* Render content based on type */}
           {content && (
             <>
-              {/* Academic content */}
+              {/* Academic */}
               {content.type === "academic" && (
                 <>
                   <div
@@ -194,25 +204,24 @@ export const BentoGridItem = ({
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      {/* Overlay for better text visibility */}
                       <div className="absolute inset-0 bg-black/40 z-10" />
                     </div>
                   </div>
-                  <div className="mt-4 flex flex-col gap-5 relative z-10">
-                    <p className="text-[#C1C2D3] text-xs md:text-sm lg:text-base max-w-100 leading-relaxed">
+                  <div className="mt-4 flex flex-col gap-3 sm:gap-5 relative z-10">
+                    <p className="text-[#C1C2D3] text-xs sm:text-sm md:text-base max-w-full sm:max-w-100 leading-relaxed">
                       {content.text}
                     </p>
                     {content.stats && (
-                      <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="flex flex-wrap gap-2 mt-4">
                         {content.stats.map((stat, index) => (
                           <div
                             key={index}
-                            className="p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm"
+                            className="flex-1 min-w-[100px] p-2 sm:p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm flex flex-col items-center"
                           >
-                            <div className="text-lg lg:text-2xl font-bold text-white">
+                            <div className="text-base sm:text-lg lg:text-2xl font-bold text-white">
                               {stat.value}
                             </div>
-                            <div className="text-xs text-[#C1C2D3]">
+                            <div className="text-xs sm:text-sm text-[#C1C2D3]">
                               {stat.label}
                             </div>
                           </div>
@@ -222,65 +231,58 @@ export const BentoGridItem = ({
                   </div>
                 </>
               )}
-
-              {/* Collaboration content */}
+              {/* Collaboration */}
               {content.type === "collaboration" && (
                 <>
-                  <div
-                    className="absolute -bottom-5 -right-5 w-40 h-40 opacity-30 transform rotate-12"
-                    style={{ position: "relative", minHeight: 80 }}
-                  >
+                  <div className="flex items-center justify-center">
                     <Image
                       src={images.backgrounds.cloud}
                       alt="World time zones"
                       className="object-contain"
-                      width={160}
-                      height={160}
-                      style={{ width: "auto", height: "100%" }}
+                      width={150}
+                      height={150}
                     />
                   </div>
-                  <div className="mt-4 text-xs lg:text-base text-[#C1C2D3] max-w-72 leading-relaxed relative z-10">
-                    {content.text}
-                  </div>
-                  <div className="mt-6 flex items-center gap-3">
-                    <div className="flex items-center gap-2">
-                      <div className="h-2 w-2 rounded-full bg-green-400 animate-pulse"></div>
-                      <span className="text-green-400 text-xs font-medium">
-                        {content.availability?.status}
-                      </span>
+                  <div className="mt-4 flex flex-col items-center justify-center text-center gap-3 sm:gap-4 relative z-10">
+                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-white flex items-center gap-2">
+                      Teamwork & Collaboration
                     </div>
-                    <div className="h-3 w-[1px] bg-white/20"></div>
-                    <div className="flex items-center gap-2">
-                      <span className="text-[#C1C2D3] text-xs">
-                        {content.availability?.schedule}
-                      </span>
+                    <div className="text-xs sm:text-sm lg:text-base text-[#C1C2D3] max-w-full sm:max-w-72 leading-relaxed">
+                      {content.text}
+                    </div>
+                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mt-2">
+                      <div className="flex items-center gap-2 bg-green-900/20 px-3 py-1 rounded-full">
+                        <span className="text-green-400 text-xs font-medium">
+                          {content.availability?.status}
+                        </span>
+                      </div>
+                      <div className="hidden sm:block h-3 w-[1px] bg-white/20"></div>
+                      <div className="flex items-center gap-2 bg-blue-900/20 px-3 py-1 rounded-full">
+                        <span className="text-[#C1C2D3] text-xs">
+                          {content.availability?.schedule}
+                        </span>
+                      </div>
                     </div>
                   </div>
                 </>
               )}
-
-              {/* Tech stack content */}
+              {/* Tech stack */}
               {content.type === "techstack" && id === 3 && (
-                <div className="flex flex-col gap-6 w-full h-full justify-center items-center">
-                  <div className="w-full flex flex-wrap justify-center gap-3 bg-[#10132E]/80 rounded-xl p-4 border border-white/10 my-2">
-                    {techStack.map((item, i) => {
-                      return (
-                        // Tech stack item with icon
-                        <span
-                          key={i}
-                          className="py-2 px-3 text-xs md:text-sm rounded-full text-center bg-[#161A31] transition-all duration-300 shadow-lg text-white flex items-center gap-2 border border-white/5"
-                        >
-                          <div className="w-2 h-2 rounded-full bg-[rgb(198,179,255)]"></div>
-
-                          {item}
-                        </span>
-                      );
-                    })}
+                <div className="flex flex-col gap-4 sm:gap-6 w-full h-full justify-center items-center">
+                  <div className="w-full flex flex-wrap justify-center gap-2 sm:gap-3 bg-[#10132E]/80 rounded-xl p-2 sm:p-4 border border-white/10 my-2">
+                    {techStack.map((item, i) => (
+                      <span
+                        key={i}
+                        className="py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-full text-center bg-[#161A31] transition-all duration-300 shadow-lg text-white flex items-center gap-1 sm:gap-2 border border-white/5"
+                      >
+                        <div className="w-2 h-2 rounded-full bg-[rgb(198,179,255)]"></div>
+                        {item}
+                      </span>
+                    ))}
                   </div>
                 </div>
               )}
-
-              {/* Engineering content */}
+              {/* Engineering */}
               {content.type === "engineering" && (
                 <>
                   <div
@@ -295,25 +297,24 @@ export const BentoGridItem = ({
                         fill
                         sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
                       />
-                      {/* Overlay for better text visibility */}
                       <div className="absolute inset-0 bg-black/40 z-10" />
                     </div>
                   </div>
-                  <div className="mt-4 relative z-10 flex flex-col gap-3">
-                    <p className="text-[#C1C2D3] text-xs md:text-sm leading-relaxed">
+                  <div className="mt-4 relative z-10 flex flex-col gap-2 sm:gap-3">
+                    <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed">
                       {content.text}
                     </p>
                     {content.stats && (
-                      <div className="grid grid-cols-2 gap-4 mt-4">
+                      <div className="flex flex-wrap gap-2 mt-4">
                         {content.stats.map((stat, index) => (
                           <div
                             key={index}
-                            className="p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm"
+                            className="flex-1 min-w-[100px] p-2 sm:p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm flex flex-col items-center"
                           >
-                            <div className="text-lg lg:text-2xl font-bold text-white">
+                            <div className="text-base sm:text-lg lg:text-2xl font-bold text-white">
                               {stat.value}
                             </div>
-                            <div className="text-xs text-[#C1C2D3]">
+                            <div className="text-xs sm:text-sm text-[#C1C2D3]">
                               {stat.label}
                             </div>
                           </div>
@@ -321,11 +322,11 @@ export const BentoGridItem = ({
                       </div>
                     )}
                     {content.interests && (
-                      <div className="mt-3 flex flex-wrap gap-2">
+                      <div className="mt-2 sm:mt-3 flex flex-wrap gap-1 sm:gap-2">
                         {content.interests.map((interest, index) => (
                           <div
                             key={index}
-                            className={`inline-flex items-center px-2 py-1 rounded-md bg-[#161A31] border ${getColorClass(
+                            className={`inline-flex items-center px-1 sm:px-2 py-1 rounded-md bg-[#161A31] border ${getColorClass(
                               interest.color
                             )}`}
                           >
@@ -357,26 +358,22 @@ export const BentoGridItem = ({
                   </div>
                 </>
               )}
-
-              {/* Project content */}
+              {/* Project */}
               {content.type === "project" && (
                 <>
                   <div className="mt-4 relative z-10">
-                    <p className="text-[#C1C2D3] text-xs md:text-sm leading-relaxed max-w-72 mb-3">
+                    <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed max-w-full sm:max-w-72 mb-2 sm:mb-3">
                       {content.text}
                     </p>
                     {content.technologies && (
-                      <div className="mt-4 grid grid-cols-1 gap-3">
-                        <div className="bg-[#10132E]/80 rounded-lg p-3 border border-white/5">
+                      <div className="mt-2 sm:mt-4 flex flex-col gap-2 sm:gap-3">
+                        <div className="bg-[#10132E]/80 rounded-lg p-2 sm:p-3 border border-white/5">
                           <div className="text-xs font-semibold text-white mb-1">
                             Technologies Used
                           </div>
-                          <ul className="text-[10px] text-[#C1C2D3] space-y-1">
+                          <ul className="text-[10px] sm:text-xs text-[#C1C2D3] space-y-1">
                             {content.technologies.map((tech, index) => (
-                              <li
-                                key={index}
-                                className="flex items-center gap-1"
-                              >
+                              <li key={index} className="flex items-center gap-1">
                                 <div className="w-1 h-1 rounded-full bg-green-400"></div>
                                 {tech}
                               </li>
@@ -386,7 +383,7 @@ export const BentoGridItem = ({
                       </div>
                     )}
                     {content.repository && (
-                      <div className="mt-4 p-2 rounded-md bg-[#161A31] border border-white/5 flex items-center">
+                      <div className="mt-2 sm:mt-4 p-2 rounded-md bg-[#161A31] border border-white/5 flex items-center">
                         <div className="flex items-center">
                           <Image
                             src={images.icons.git}
@@ -419,19 +416,16 @@ export const BentoGridItem = ({
                   </div>
                 </>
               )}
-
-              {/* Contact content */}
+              {/* Contact */}
               {content.type === "contact" && (
-                <div className="flex flex-col items-center justify-center w-full h-full p-6">
+                <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6">
                   <button
                     onClick={() => {
-                      navigator.clipboard.writeText(
-                        "tanishjain020205@gmail.com"
-                      );
+                      navigator.clipboard.writeText("tanishjain020205@gmail.com");
                       setCopied(true);
                       setTimeout(() => setCopied(false), 3000);
                     }}
-                    className="px-6 py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-lg md:text-xl"
+                    className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-base sm:text-lg md:text-xl"
                   >
                     {copied ? "Copied!" : "Copy Email"}
                   </button>
