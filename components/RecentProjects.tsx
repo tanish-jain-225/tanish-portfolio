@@ -9,9 +9,8 @@ import { PinContainer } from "./ui/Pin";
 const RecentProjects = () => {
   return (
     <div id="projects" className="py-10 scroll-mt-20">
-      <h1 className="heading text-white">
-        {sectionTitles.projects.split(' ')[0]} {sectionTitles.projects.split(' ')[1]}{" "}
-        <span className="text-purple-600">{sectionTitles.projects.split(' ').slice(2).join(' ')}</span>
+      <h1 className="heading text-white p-2">
+        {sectionTitles.projects} 
       </h1>
       <div className="flex flex-wrap items-center justify-center p-4 m-4 md:gap-10">
         {projects.map((item) => (

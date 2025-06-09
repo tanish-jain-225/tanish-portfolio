@@ -122,7 +122,7 @@ export const projects = [
     demoLink: "https://hotel-management-system-web.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/hotel-management-system",
     status: "completed",
-    category: "Food & Beverage",
+    category: "Food and Beverage",
     duration: "1 month",
     features: [
       "Real-time order tracking",

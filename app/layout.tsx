@@ -2,14 +2,29 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
-import siteConfig from "@/lib/siteConfig";
-import Script from "next/script";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
+
+const siteConfig = {
+  name: "Tanish Sanghvi's Portfolio",
+  description: "Engineering student passionate about creating innovative solutions.",
+  favicon: "/favicon.ico",
+  url: "https://tanish-portfolio-web.vercel.app",
+  creator: "Tanish Sanghvi",
+  keywords: [
+    "Engineering Student",
+    "Full Stack Developer",
+    "React",
+    "Next.js",
+    "AI",
+    "Portfolio"
+  ],
+  ogImage: "/og-image.png",
+};
 
 export const metadata: Metadata = {
   title: {

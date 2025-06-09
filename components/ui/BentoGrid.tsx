@@ -400,7 +400,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               )}
               {/* Contact card */}
               {content.type === "contact" && (
-                <div className="flex flex-col items-center justify-center w-full h-full p-4 sm:p-6">
+                <div className="flex flex-col items-center justify-center w-full h-full p-4 m-2">
                   <button
                     onClick={async () => {
                       if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
@@ -417,10 +417,16 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                         alert('Copy to clipboard is not supported in this browser.');
                       }
                     }}
-                    className="px-4 sm:px-6 py-2 sm:py-3 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-base sm:text-lg md:text-xl"
-                    aria-label={copied ? 'Email copied to clipboard' : `Copy email address: ${content.email}`}
+                    className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-xs sm:text-sm md:text-base m-2 flex items-center max-w-full min-w-0"
+                    style={{
+                      wordBreak: 'break-all',
+                      whiteSpace: 'pre-line',
+                      minWidth: 0,
+                    }}
                   >
-                    {copied ? 'Copied!' : `Copy Email: ${content.email}`}
+                    <span className="truncate block max-w-[60vw] sm:max-w-[40vw] md:max-w-[22vw] lg:max-w-[300px] text-ellipsis overflow-hidden text-left">
+                      {copied ? 'Copied!' : `Copy Email: ${content.email}`}
+                    </span>
                   </button>
                 </div>
               )}
