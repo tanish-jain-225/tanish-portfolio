@@ -13,14 +13,17 @@ import {
 import { socialMedia, contactInfo, uiText } from "@/data";
 
 const Contact = () => {
+  // All fields required and initialized
   const [formData, setFormData] = useState({
     name: "",
     email: "",
+    subject: "",
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitSuccess, setSubmitSuccess] = useState(false);
 
+  // Handle input changes for all fields
   const handleChange = (
     e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
@@ -29,9 +32,18 @@ const Contact = () => {
       [e.target.name]: e.target.value,
     });
   };
+
+  // Submit handler: all fields are required and sent as JSON
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+
+    // Client-side required check (defensive, backend also checks)
+    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+      alert("All fields are required.");
+      setIsSubmitting(false);
+      return;
+    }
 
     try {
       const response = await fetch("/api/contact-form", {
@@ -46,10 +58,8 @@ const Contact = () => {
 
       if (data.success) {
         // Reset form and show success message
-        setFormData({ name: "", email: "", message: "" });
+        setFormData({ name: "", email: "", subject: "", message: "" });
         setSubmitSuccess(true);
-
-        // Hide success message after 5 seconds
         setTimeout(() => setSubmitSuccess(false), 5000);
       } else {
         // Handle validation errors or other issues
@@ -127,11 +137,9 @@ const Contact = () => {
                     <textarea
                       id={field.name}
                       name={field.name}
-                      value={
-                        formData[field.name as keyof typeof formData] || ""
-                      }
+                      value={formData[field.name as keyof typeof formData] || ""}
                       onChange={handleChange}
-                      required={field.required}
+                      required
                       rows={4}
                       className="w-full bg-[#1e2142] border border-white/10 rounded-md p-3 text-white focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-vertical"
                     />
@@ -140,11 +148,9 @@ const Contact = () => {
                       type={field.type}
                       id={field.name}
                       name={field.name}
-                      value={
-                        formData[field.name as keyof typeof formData] || ""
-                      }
+                      value={formData[field.name as keyof typeof formData] || ""}
                       onChange={handleChange}
-                      required={field.required}
+                      required
                       className="w-full bg-[#1e2142] border border-white/10 rounded-md p-3 text-white focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
                     />
                   )}
