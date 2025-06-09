@@ -19,19 +19,6 @@ export const sectionTitles = {
   projects: "Highlighted Projects",
 };
 
-export const sectionDescriptions = {
-  projectPortfolio:
-    "A comprehensive collection of academic and personal projects showcasing engineering skills and innovation.",
-  experience:
-    "Roles and internships demonstrating hands-on experience in software engineering, web development, and research.",
-  education:
-    "Academic background including degree programs and relevant coursework.",
-  skills:
-    "Programming languages, frameworks, tools, and technologies mastered.",
-  achievements:
-    "Awards, honors, and certifications earned throughout academic and professional journey.",
-};
-
 export const uiText = {
   experience: {
     viewDetails: "View Details",
@@ -67,6 +54,10 @@ export const uiText = {
   contact: {
     connectWithMe: "Connect with me",
     sending: "Sending...",
+    copy: "Copy Email",
+    copied: "Copied!",
+    copyError: "Copy to clipboard failed.",
+    copyNotSupported: "Copy to clipboard is not supported in this browser.",
   },
 };
 
@@ -283,15 +274,6 @@ export const footerData = {
       title: "Quick Links",
       items: navItems,
     },
-    {
-      title: "Projects",
-      items: [
-        { name: "Solar System Simulation", link: "#projects" },
-        { name: "Campus Connect", link: "#projects" },
-        { name: "Smart Waste Management", link: "#projects" },
-        { name: "AR Lab Assistant", link: "#projects" },
-      ],
-    },
   ],
   copyright: {
     text: "Built by Tanish Sanghvi",
@@ -309,8 +291,7 @@ export const bentoGridData = {
     {
       id: 1,
       title: "Academics & Innovation",
-      description:
-        "Merging theoretical concepts with real-world applications",
+      description: "Merging theoretical concepts with real-world applications",
       img: "/b1.svg",
       spareImg: "",
       content: {
@@ -318,7 +299,7 @@ export const bentoGridData = {
         text: "Built and applied microcontroller-based systems using N76E003 for real-time applications. Also worked on Web development projects using MERN stack. Balanced academic and personal projects to enhance practical skills.",
         stats: [
           { label: "GPA", value: "7.5" },
-          { label: "Projects Completed", value: "6+" }
+          { label: "Projects Completed", value: "6+" },
         ],
       },
     },
@@ -405,4 +386,3 @@ export const images = {
   profile: "/profile.svg",
   confetti: "/confetti.gif",
 };
-
