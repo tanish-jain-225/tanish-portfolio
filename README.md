@@ -277,4 +277,4 @@ export const projects = [
 - Portfolio: [tanish-portfolio-web.vercel.app](https://tanish-portfolio-web.vercel.app)
 - GitHub: [@tanish-jain-225](https://github.com/tanish-jain-225)
 - LinkedIn: [Tanish Jain](https://linkedin.com/in/tanish-jain-tj02022005)
-- Email: tanishjain02022005@gmail.com
+- Email: tanishjain020205@gmail.com
