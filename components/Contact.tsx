@@ -21,7 +21,7 @@ const Contact = () => {
     message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
-  const [submitSuccess, setSubmitSuccess] = useState(false);
+  const [justSent, setJustSent] = useState(false);
 
   // Handle input changes for all fields
   const handleChange = (
@@ -57,10 +57,10 @@ const Contact = () => {
       const data = await response.json();
 
       if (data.success) {
-        // Reset form and show success message
+        // Reset form and show sent state temporarily
         setFormData({ name: "", email: "", subject: "", message: "" });
-        setSubmitSuccess(true);
-        setTimeout(() => setSubmitSuccess(false), 5000);
+        setJustSent(true);
+        setTimeout(() => setJustSent(false), 2000);
       } else {
         // Handle validation errors or other issues
         console.error("Form submission failed:", data.message);
@@ -119,54 +119,54 @@ const Contact = () => {
           <h2 className="text-lg sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left">
             {contactInfo.form.title}
           </h2>
-          {submitSuccess ? (
-            <div className="bg-purple-900/20 border border-purple-500/30 rounded-lg p-3 sm:p-4 text-center">
-              <p className="text-white text-sm sm:text-base">{contactInfo.form.successMessage}</p>
-            </div>
-          ) : (
-            <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-              {contactInfo.form.fields.map((field) => (
-                <div key={field.name} className="flex flex-col">
-                  <label
-                    htmlFor={field.name}
-                    className="block text-xs sm:text-sm text-[#BEC1DD] mb-1"
-                  >
-                    {field.label}
-                  </label>
-                  {field.type === "textarea" ? (
-                    <textarea
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData] || ""}
-                      onChange={handleChange}
-                      required
-                      rows={3}
-                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-vertical"
-                    />
-                  ) : (
-                    <input
-                      type={field.type}
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData] || ""}
-                      onChange={handleChange}
-                      required
-                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
-                    />
-                  )}
-                </div>
-              ))}
-              <button
-                type="submit"
-                disabled={isSubmitting}
-                className="w-full bg-purple-600 hover:bg-purple-700 text-white font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base"
-              >
-                {isSubmitting
-                  ? uiText.contact.sending
-                  : contactInfo.form.submitButton}
-              </button>
-            </form>
-          )}
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
+            {contactInfo.form.fields.map((field) => (
+              <div key={field.name} className="flex flex-col">
+                <label
+                  htmlFor={field.name}
+                  className="block text-xs sm:text-sm text-[#BEC1DD] mb-1"
+                >
+                  {field.label}
+                </label>
+                {field.type === "textarea" ? (
+                  <textarea
+                    id={field.name}
+                    name={field.name}
+                    value={formData[field.name as keyof typeof formData] || ""}
+                    onChange={handleChange}
+                    required
+                    rows={3}
+                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-vertical"
+                  />
+                ) : (
+                  <input
+                    type={field.type}
+                    id={field.name}
+                    name={field.name}
+                    value={formData[field.name as keyof typeof formData] || ""}
+                    onChange={handleChange}
+                    required
+                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+                  />
+                )}
+              </div>
+            ))}
+            <button
+              type="submit"
+              disabled={isSubmitting}
+              className={`w-full font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base ${
+                justSent 
+                  ? 'bg-green-600 hover:bg-green-700 text-white' 
+                  : 'bg-purple-600 hover:bg-purple-700 text-white'
+              }`}
+            >
+              {isSubmitting
+                ? uiText.contact.sending
+                : justSent
+                ? "Message Sent!"
+                : contactInfo.form.submitButton}
+            </button>
+          </form>
         </motion.div>
         {/* Contact Info & Socials */}
         <motion.div
