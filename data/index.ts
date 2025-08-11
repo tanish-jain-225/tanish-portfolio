@@ -151,6 +151,42 @@ export const projects = [
     ],
     course: "Image Processing & Web Apps",
   },
+  {
+  id: 5,
+  title: "SilverCare-AI – Voice-First Accessible AI Assistant",
+  des: "A full-stack, voice-first AI assistant designed for senior citizens, featuring step-by-step onboarding, voice-enabled chat, smart reminders, emergency alerts, and a mobile-first accessible UI. Built with React, Tailwind CSS, and Flask, it integrates AI, speech recognition, and real-time databases to empower independent living.",
+  img: "/SilverCareAI.png",
+  techStack: [
+    "React 18",
+    "Vite",
+    "Tailwind CSS",
+    "Framer Motion",
+    "React Router DOM",
+    "Firebase Auth",
+    "Web Speech API",
+    "Python",
+    "Flask",
+    "MongoDB",
+    "Firebase Firestore",
+    "Together AI",
+    "TextBlob"
+  ],
+  demoLink: "https://silvercare-ai.vercel.app",
+  sourceLink: "https://github.com/tanish-jain-225/SilverCare-AI",
+  status: "completed",
+  category: "AI Assistant",
+  duration: "2 months",
+  features: [
+    "Voice-first chat interface with text-to-speech",
+    "Emergency detection and WhatsApp alerts with GPS",
+    "Smart reminders with natural language processing",
+    "Mobile-first, senior-friendly accessible design",
+    "Curated news and health tips for seniors",
+    "Secure authentication and profile management"
+  ],
+  course: "Full Stack AI Development"
+}
+
 ];
 
 export const workExperience = [
