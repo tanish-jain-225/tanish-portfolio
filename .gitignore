@@ -5,3 +5,6 @@
 /dist/
 /.next/
 /.nuxt/
+
+.env.local
+.env
