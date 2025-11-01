@@ -9,7 +9,7 @@ export const navItems = [
 export const navigationConfig = {
   resumeButton: {
     text: "Resume",
-    link: "/resume.pdf", // You can update this to actual resume link
+    link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing", // You can update this to actual resume link
     enabled: true,
   },
 };
