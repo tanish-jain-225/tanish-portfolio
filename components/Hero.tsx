@@ -75,7 +75,7 @@ const Hero = () => {
       </div>
 
       {/* Content layer with proper z-index */}
-      <div className="relative z-10 flex flex-col items-center justify-center py-10 sm:py-16 md:py-20 w-full px-4 sm:px-8">
+      <div className="relative z-10 flex flex-col items-center justify-center py-20 w-full px-4 sm:px-8">
         <div className="max-w-[95vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center justify-center">
           <h2 className="uppercase tracking-widest text-xs sm:text-sm text-center text-blue-100 max-w-64 sm:max-w-80 hero-animate opacity-0 pt-4 sm:pt-8 md:pt-10">
             {heroData.subtitle}
