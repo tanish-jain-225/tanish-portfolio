@@ -11,18 +11,27 @@ const inter = Inter({
 });
 
 const siteConfig = {
-  name: "Tanish Sanghvi's Portfolio",
-  description: "Engineering student passionate about creating innovative solutions.",
+  name: "Tanish Sanghvi | Full Stack Developer & Engineering Student",
+  description:
+    "Portfolio of Tanish Sanghvi — Full Stack Developer & Engineering student at VESIT, Mumbai. Explore projects built with React, Next.js, Node.js, Python, and MongoDB. Open to collaborations and freelance opportunities.",
   favicon: "/favicon.ico",
   url: "https://tanish-portfolio-web.vercel.app",
   creator: "Tanish Sanghvi",
   keywords: [
-    "Engineering Student",
+    "Tanish Sanghvi",
     "Full Stack Developer",
-    "React",
-    "Next.js",
-    "AI",
-    "Portfolio"
+    "Engineering Student",
+    "VESIT Mumbai",
+    "React Developer",
+    "Next.js Portfolio",
+    "MERN Stack Developer",
+    "Node.js",
+    "Python Developer",
+    "Web Developer Mumbai",
+    "AI Projects",
+    "Software Engineer Portfolio",
+    "Frontend Developer",
+    "Backend Developer",
   ],
   ogImage: "/og-image.png",
 };
@@ -99,9 +108,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en">
-      <body className={inter.className}>
-        {/* SEO: Canonical and manifest for PWA */}
+    <html lang="en" suppressHydrationWarning>
+      <head>
         <link rel="manifest" href="/manifest.json" />
         <link rel="canonical" href={siteConfig.url} />
         <link rel="icon" href="/favicon.ico" />
@@ -109,7 +117,28 @@ export default function RootLayout({
         <meta name="theme-color" content="#8b5cf6" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
-        
+        <script
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify({
+              "@context": "https://schema.org",
+              "@type": "Person",
+              name: siteConfig.creator,
+              url: siteConfig.url,
+              jobTitle: "Engineering Student & Full Stack Developer",
+              knowsAbout: ["React", "Next.js", "Node.js", "Python", "MongoDB", "TypeScript"],
+              sameAs: [
+                "https://github.com/tanish-jain-225",
+                "https://linkedin.com/in/tanish-jain-tj02022005",
+              ],
+            }),
+          }}
+        />
+      </head>
+      <body className={inter.className}>
+        <a href="#main-content" className="skip-to-content">
+          Skip to main content
+        </a>
         {children}
         <SpeedInsights />
       </body>

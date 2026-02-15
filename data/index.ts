@@ -62,10 +62,10 @@ export const uiText = {
 };
 
 export const heroData = {
-  subtitle: "Engineering Student",
+  subtitle: "Full Stack Developer & Engineering Student",
   title: "Building Tomorrow's Technology Today And Learning Along The Way",
   description:
-    "Hi, I'm Tanish, Engineering Student at Vivekanand Education Society's Institute of Technology.",
+    "Hi, I'm Tanish — a Full Stack Developer and Engineering student at VESIT, Mumbai. I craft performant web apps and AI-powered solutions.",
   ctaButton: {
     text: "View My Projects",
     link: "#projects",
@@ -82,15 +82,19 @@ export const techStack = [
   "React",
   "Next.js",
   "Node.js",
+  "Express.js",
   "MongoDB",
   "SQL",
-  "OpenCV",
-  "Git",
   "Flask",
+  "OpenCV",
+  "Git/GitHub",
   "Tailwind CSS",
   "Bootstrap",
-  "Express.js",
+  "Framer Motion",
+  "Firebase",
   "Vercel",
+  "REST APIs",
+  "Three.js",
 ];
 
 export const projects = [
@@ -152,6 +156,25 @@ export const projects = [
     course: "Image Processing & Web Apps",
   },
   {
+    id: 4,
+    title: "SecureIt – Password Manager",
+    des: "Built a secure password management web application with encrypted storage, master key authentication, and a clean dashboard UI. Features include password generation, categorized vault entries, and copy-to-clipboard functionality with auto-clear for security.",
+    img: "/secure.png",
+    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
+    demoLink: "https://secureit-web-password-manager-frontend.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/secureit-web-password-manager",
+    status: "completed",
+    category: "Security & Utility",
+    duration: "3 weeks",
+    features: [
+      "Encrypted password storage",
+      "Master key authentication",
+      "Password strength generator",
+      "Categorized vault management",
+    ],
+    course: "Cybersecurity & Web Development",
+  },
+  {
   id: 5,
   title: "SilverCare-AI – Voice-First Accessible AI Assistant",
   des: "A full-stack, voice-first AI assistant designed for senior citizens, featuring step-by-step onboarding, voice-enabled chat, smart reminders, emergency alerts, and a mobile-first accessible UI. Built with React, Tailwind CSS, and Flask, it integrates AI, speech recognition, and real-time databases to empower independent living.",
@@ -185,33 +208,70 @@ export const projects = [
     "Secure authentication and profile management"
   ],
   course: "Full Stack AI Development"
-}
-
+},
+  {
+    id: 6,
+    title: "MindSphere – Mental Wellness Platform",
+    des: "A comprehensive mental wellness web application that provides mood tracking, guided mindfulness exercises, journaling features, and personalized wellness recommendations. Built with a focus on accessible design and calming user experience.",
+    img: "/mind-sphere.png",
+    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Flask"],
+    demoLink: "https://mind-sphere-web.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/MindSphere",
+    status: "completed",
+    category: "Health & Wellness",
+    duration: "1.5 months",
+    features: [
+      "Mood tracking with visual analytics",
+      "Guided mindfulness exercises",
+      "Personal journaling system",
+      "AI-powered wellness recommendations",
+    ],
+    course: "Full Stack Development & AI",
+  },
+  {
+    id: 7,
+    title: "Edvanta – EdTech Learning Platform",
+    des: "A full-featured educational technology platform with course management, video lessons, progress tracking, and quiz assessments. Includes instructor dashboard for content management and student analytics.",
+    img: "/edvanta.png",
+    techStack: ["React", "Vite", "Tailwind CSS", "Python", "Flask", "MongoDB"],
+    demoLink: "https://edvanta-web.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/edvanta",
+    status: "completed",
+    category: "EdTech",
+    duration: "2 months",
+    features: [
+      "Course management system",
+      "Video lesson streaming",
+      "Progress tracking dashboard",
+      "Quiz and assessment engine",
+    ],
+    course: "Educational Technology",
+  },
 ];
 
 export const workExperience = [
   {
     id: 1,
-    title: "Engineering Student",
-    desc: "Currently pursuing Bachelor of Engineering at Vivekanand Education Society's Institute of Technology, specializing in Automation and Robotics Branch and developing practical skills through various projects.",
+    title: "Engineering Student at VESIT",
+    desc: "Pursuing B.E. in Automation and Robotics at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai. Building real-world projects across web development, embedded systems, and AI while maintaining strong academic performance.",
     thumbnail: "/exp1.svg",
   },
   {
     id: 2,
-    title: "Frontend Development Internship",
-    desc: "Completed remote internship in Plasmid, located at Banglore. Implemented frontend skills like HTML, CSS, JS and Bootstrap in building responsive and modern web design across websites.",
+    title: "Frontend Development Intern — Plasmid",
+    desc: "Completed a remote frontend development internship at Plasmid, Bangalore. Built responsive and modern web interfaces using HTML, CSS, JavaScript, and Bootstrap. Collaborated with the team to deliver pixel-perfect designs and optimize page performance.",
     thumbnail: "/exp2.svg",
   },
   {
     id: 3,
-    title: "Full Stack Development Internship",
-    desc: "Completed remote internship in BWS, located at New Delhi. Worked upon skills such as Python, Flask and Bootstrap in building web applications across front-end and back-end. Created dynamic Single Page Applications.",
+    title: "Full Stack Development Intern — BWS",
+    desc: "Completed a remote internship at BWS, New Delhi. Developed full-stack web applications using Python, Flask, and Bootstrap. Built dynamic Single Page Applications with RESTful APIs and database integration. Gained hands-on experience in backend architecture.",
     thumbnail: "/exp3.svg",
   },
   {
     id: 4,
-    title: "Dynamic Learning & Active Project Building",
-    desc: "Worked upon various projects in the field of Web development, continuously learning evolving technologies like MongoDB, Express, React, NodeJS, Tailwind, NextJS and Vercel to enhance skills and knowledge.",
+    title: "Continuous Learning & Open Source",
+    desc: "Actively building and shipping projects using the MERN stack, Next.js, and AI tools. Exploring cutting-edge technologies like LangChain, Hugging Face, and Three.js. Passionate about open-source contributions and community-driven development.",
     thumbnail: "/exp4.svg",
   },
 ];
@@ -239,9 +299,9 @@ export const personalInfo = {
   email: "tanishjain020205@gmail.com",
   location: "Mumbai, India",
   university: "VESIT",
-  degree: "Bachelor of Engineering - Computer Science",
-  status: "Engineering Student",
-  bio: "Engineering student passionate about creating innovative solutions to real-world problems. Constantly learning and exploring new technologies.",
+  degree: "Bachelor of Engineering - Automation & Robotics",
+  status: "Full Stack Developer & Engineering Student",
+  bio: "Full Stack Developer and Engineering student specializing in building scalable web applications and AI-powered solutions. Passionate about clean code, user experience, and continuous learning.",
   experience: "3+ years",
   projectsCompleted: "15+",
   technologiesUsed: "25+",
@@ -252,7 +312,7 @@ export const personalInfo = {
 export const contactInfo = {
   title: "Let's Connect",
   subtitle:
-    "Ready to collaborate on exciting projects? Let's build something amazing together!",
+    "Have a project in mind or want to collaborate? I'd love to hear from you. Let's build something great together!",
   email: "tanishjain020205@gmail.com",
   phone: "+91 98765 43210",
   location: "Mumbai, India",
@@ -304,7 +364,7 @@ export const footerData = {
     accent: "purple",
   },
   description:
-    "Engineering student passionate about creating innovative solutions to real-world problems. Constantly learning and exploring new technologies.",
+    "Full Stack Developer and Engineering student at VESIT, Mumbai. I build scalable web applications, AI solutions, and love turning ideas into reality.",
   sections: [
     {
       title: "Quick Links",
@@ -322,7 +382,7 @@ export const footerData = {
 export const bentoGridData = {
   title: "About Me",
   subtitle:
-    "I'm a passionate Engineering student at Vivekanand Education Society's Institute of Technology with a deep love for technology and innovation.",
+    "Full Stack Developer and Engineering student at VESIT with a passion for building impactful digital products and exploring cutting-edge technologies.",
   items: [
     {
       id: 1,

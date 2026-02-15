@@ -44,9 +44,15 @@ const Grid = () => {
     <section id="about" className="py-10 w-[90vw] mx-auto scroll-mt-20" ref={sectionRef}>      
     <div className="mb-12 text-center section-transition opacity-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white tracking-tight">
-          {bentoGridData.title}
+          {bentoGridData.title.split(" ").map((word, i) =>
+            i === 0 ? (
+              <span key={i} className="text-purple">{word} </span>
+            ) : (
+              <span key={i}>{word} </span>
+            )
+          )}
         </h2>
-        <p className="text-[#C1C2D3] max-w-xl mx-auto">
+        <p className="text-[#C1C2D3] max-w-xl mx-auto text-sm md:text-base">
           {bentoGridData.subtitle}
         </p>
       </div>

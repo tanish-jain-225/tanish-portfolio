@@ -100,13 +100,16 @@ const Contact = () => {
         {contactInfo.title.split(" ").map((word, index) =>
           word === "Connect" ? (
             <span key={index} className="text-purple">
-              {word}
+              {word}{" "}
             </span>
           ) : (
             <span key={index}>{word} </span>
           )
         )}
       </h1>
+      <p className="text-center text-[#BEC1DD] text-sm md:text-base max-w-xl mx-auto mt-3 mb-8">
+        {contactInfo.subtitle}
+      </p>
       <div className="flex flex-col lg:flex-row gap-5 sm:gap-8 lg:gap-10 mt-6 sm:mt-8 md:mt-10 w-full">
         {/* Contact Form */}
         <motion.div
@@ -154,16 +157,16 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full font-medium py-2 sm:py-3 px-4 sm:px-6 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base ${
+              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base ${
                 justSent 
-                  ? 'bg-green-600 hover:bg-green-700 text-white' 
-                  : 'bg-purple-600 hover:bg-purple-700 text-white'
+                  ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02]' 
+                  : 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01]'
               }`}
             >
               {isSubmitting
                 ? uiText.contact.sending
                 : justSent
-                ? "Message Sent!"
+                ? "✓ Message Sent!"
                 : contactInfo.form.submitButton}
             </button>
           </form>
@@ -211,9 +214,10 @@ const Contact = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="bg-purple-900/20 hover:bg-purple-900/40 p-2 sm:p-3 rounded-full transition-colors flex items-center justify-center"
+                    aria-label={`Visit ${social.name} profile`}
+                    className="bg-purple-900/20 hover:bg-purple-900/40 p-2.5 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-purple-500/20"
                   >
-                    <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
+                    <IconComponent className="text-purple-300 w-5 h-5 sm:w-6 sm:h-6" />
                   </a>
                 );
               })}

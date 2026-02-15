@@ -25,26 +25,21 @@ export const FloatingNav = ({
   const [visible, setVisible] = useState(true);
 
   useMotionValueEvent(scrollYProgress, "change", (current) => {
-    // Check if current is not undefined and is a number
     if (typeof current === "number") {
-      // let direction = current! - scrollYProgress.getPrevious()!;
+      const direction = current - (scrollYProgress.getPrevious() ?? 0);
 
-      //   if (scrollYProgress.get() < 0.05) {
-      //     setVisible(false);
-      //   } else {
-      //     if (direction < 0) {
-      //       setVisible(true);
-      //     } else {
-      //       setVisible(false);
-      //     }
-      //   }
-      setVisible(true);
+      if (scrollYProgress.get() < 0.05) {
+        // Always show at top of page
+        setVisible(true);
+      } else {
+        // Show when scrolling up, hide when scrolling down
+        setVisible(direction < 0);
+      }
     }
   });
 
   return (
     <nav
-      className="..."
       role="navigation"
       aria-label="Main Navigation"
     >

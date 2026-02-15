@@ -1,10 +1,10 @@
 "use client";
 
-import React, { Suspense } from "react";
+import React, { Suspense, useEffect, useState, useCallback } from "react";
 import Hero from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
 import { navItems } from "@/data";
-import * as FaIcons from "react-icons/fa";
+import { getIcon, FaArrowUp } from "@/lib/icons";
 import Footer from "@/components/Footer";
 import RecentProjects from "@/components/RecentProjects";
 import dynamic from "next/dynamic";
@@ -13,6 +13,31 @@ import MyWorkExperience from "@/components/MyWorkExperience";
 // Dynamically import components that might cause hydration issues
 const DynamicGrid = dynamic(() => import("@/components/Grid"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
 const DynamicContact = dynamic(() => import("@/components/Contact"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
+
+// Scroll-to-top button component
+const ScrollToTop = () => {
+  const [isVisible, setIsVisible] = useState(false);
+
+  const handleScroll = useCallback(() => {
+    setIsVisible(window.scrollY > 400);
+  }, []);
+
+  useEffect(() => {
+    window.addEventListener("scroll", handleScroll, { passive: true });
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, [handleScroll]);
+
+  return (
+    <button
+      className={`scroll-to-top ${isVisible ? "visible" : ""}`}
+      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      aria-label="Scroll to top"
+      title="Back to top"
+    >
+      <FaArrowUp size={18} />
+    </button>
+  );
+};
 
 export default function Home() {
   return (
@@ -23,9 +48,7 @@ export default function Home() {
           navItems={navItems.map((item) => ({
             name: item.name,
             link: item.link,
-            icon: React.createElement(
-              FaIcons[item.icon as keyof typeof FaIcons]
-            ),
+            icon: React.createElement(getIcon(item.icon)),
           }))}
         />
         <Hero />
@@ -43,6 +66,7 @@ export default function Home() {
         </Suspense>
       </div>
       <Footer />
+      <ScrollToTop />
     </main>
   );
 }

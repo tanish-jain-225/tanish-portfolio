@@ -30,7 +30,7 @@ async function connectToDatabase() {
   return { client, db };
 }
 
-// Mail recieveing function
+// Mail receiving function
 async function sendEmailNotification(contactData) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST, // SMTP host Eg. 'smtp.example.com'

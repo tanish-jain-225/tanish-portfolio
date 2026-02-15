@@ -2,7 +2,7 @@
 
 import React from "react";
 import { navItems, socialMedia, footerData, personalInfo, uiText } from "@/data";
-import * as FaIcons from "react-icons/fa";
+import { getIcon, FaEnvelope } from "@/lib/icons";
 
 const Footer = () => {
   // Smooth scroll function for navigation
@@ -42,8 +42,8 @@ const Footer = () => {
           {/* Logo and description */}
           <div className="flex-1 min-w-[180px] sm:min-w-[220px] flex flex-col justify-center md:justify-start mb-8 md:mb-0">
             <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
-              <span className="text-2xl sm:text-3xl">{footerData.logo.text}</span>
-              <div className={`w-2 h-8 bg-${footerData.logo.accent}-500 rounded-full`}></div>
+              <span className="text-2xl sm:text-3xl gradient-text">{footerData.logo.text}</span>
+              <div className="w-2 h-8 bg-purple-500 rounded-full"></div>
             </h2>
             <p className="mt-4 text-[#BEC1DD] text-xs sm:text-sm leading-relaxed max-w-xs sm:max-w-md break-words">
               {footerData.description}
@@ -54,7 +54,7 @@ const Footer = () => {
             <h3 className="text-white font-semibold mb-3 sm:mb-4 text-base sm:text-lg">{uiText.footer.quickLinks}</h3>
             <ul className="flex flex-col gap-2 sm:gap-3">
               {navItems.map((item, index) => {
-                const IconComponent = FaIcons[item.icon as keyof typeof FaIcons];
+                const IconComponent = getIcon(item.icon);
                 return (
                   <li key={index} className="w-full">
                     <a 
@@ -80,12 +80,12 @@ const Footer = () => {
                   className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-sm sm:text-base px-2 py-1 break-all whitespace-normal w-full"
                   style={{lineHeight: '1.5'}}
                 >
-                  <FaIcons.FaEnvelope size={20} className="min-w-[20px] min-h-[20px]" />
+                  <FaEnvelope size={20} className="min-w-[20px] min-h-[20px]" />
                   <span className="break-all whitespace-normal w-full">{personalInfo.email}</span>
                 </a>
               </li>
               {socialMedia.slice(0, 2).map((social) => {
-                const IconComponent = FaIcons[social.icon as keyof typeof FaIcons];
+                const IconComponent = getIcon(social.icon);
                 return (
                   <li key={social.id} className="w-full">
                     <a 
@@ -106,7 +106,10 @@ const Footer = () => {
         </div>
         <div className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 w-full">
           <p className="text-[#BEC1DD] text-xs sm:text-sm text-center md:text-left w-full md:w-auto break-words">
-            &copy; {footerData.copyright.year} {footerData.copyright.text}
+            &copy; {footerData.copyright.year} {footerData.copyright.text}. All rights reserved.
+          </p>
+          <p className="text-[#BEC1DD]/60 text-xs text-center md:text-right">
+            Built with Next.js, Tailwind CSS & Framer Motion
           </p>
         </div>
       </div>

@@ -137,12 +137,6 @@ const submitForm = async (formData) => {
     });
     
     const data = await response.json();
-    
-    if (data.success) {
-      console.log('Message sent successfully!');
-    } else {
-      console.error('Validation errors:', data.errors);
-    }
   } catch (error) {
     console.error('Network error:', error);
   }

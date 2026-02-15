@@ -6,11 +6,11 @@ import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 import MagicButton from "./ui/MagicButton";
 import { heroData } from "@/data";
-import * as FaIcons from "react-icons/fa";
+import { getIcon } from "@/lib/icons";
 
 const Hero = () => {
   // Get the icon component dynamically from the icon name in heroData
-  const IconComponent = FaIcons[heroData.ctaButton.icon as keyof typeof FaIcons];
+  const IconComponent = getIcon(heroData.ctaButton.icon);
   const heroRef = useRef<HTMLDivElement>(null);
   useEffect(() => {
     // Create staggered animation effect for hero elements
@@ -88,9 +88,21 @@ const Hero = () => {
             />
           </div>
 
-          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white px-2 sm:px-4 md:px-6">
+          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-2 sm:px-4 md:px-6">
             {heroData.description}
           </p>
+
+          {/* Tech badges */}
+          <div className="flex flex-wrap justify-center gap-2 mb-6 hero-animate opacity-0 px-2">
+            {["React", "Next.js", "Node.js", "Python", "MongoDB"].map((tech) => (
+              <span
+                key={tech}
+                className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm"
+              >
+                {tech}
+              </span>
+            ))}
+          </div>
           <div className="hero-animate opacity-0">
             <a 
               href={heroData.ctaButton.link}
@@ -112,7 +124,12 @@ const Hero = () => {
           </div>
           {/* Scroll indicator */}
           <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 mt-12 scroll-indicator opacity-0 transition-opacity duration-700">
-            
+            <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">
+              <span className="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white/40">
+                <path d="M10 4L10 16M10 16L4 10M10 16L16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" transform="rotate(180 10 10)"/>
+              </svg>
+            </div>
           </div>
         </div>
       </div>
