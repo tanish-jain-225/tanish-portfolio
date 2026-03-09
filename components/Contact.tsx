@@ -18,7 +18,7 @@ const Contact = () => {
 
   // Handle input changes for all fields
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
   ) => {
     setFormData({
       ...formData,
@@ -32,7 +32,12 @@ const Contact = () => {
     setIsSubmitting(true);
 
     // Client-side required check (defensive, backend also checks)
-    if (!formData.name || !formData.email || !formData.subject || !formData.message) {
+    if (
+      !formData.name ||
+      !formData.email ||
+      !formData.subject ||
+      !formData.message
+    ) {
       alert("All fields are required.");
       setIsSubmitting(false);
       return;
@@ -84,7 +89,7 @@ const Contact = () => {
             </span>
           ) : (
             <span key={i}>{word} </span>
-          )
+          ),
         )}
       </h1>
       <p className="text-center text-[#BEC1DD] text-sm md:text-base max-w-xl mx-auto mt-3 mb-8">
@@ -138,16 +143,16 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base ${
-                justSent 
-                  ? 'bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02]' 
-                  : 'bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01]'
+                justSent
+                  ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02]"
+                  : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01]"
               }`}
             >
               {isSubmitting
                 ? uiText.contact.sending
                 : justSent
-                ? "✓ Message Sent!"
-                : contactInfo.form.submitButton}
+                  ? "✓ Message Sent!"
+                  : contactInfo.form.submitButton}
             </button>
           </form>
         </motion.div>
@@ -172,8 +177,12 @@ const Contact = () => {
                       <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div className="flex flex-col">
-                      <p className="text-[#BEC1DD] text-xs sm:text-sm">{item.label}</p>
-                      <p className="text-white text-sm sm:text-base break-all">{item.value}</p>
+                      <p className="text-[#BEC1DD] text-xs sm:text-sm">
+                        {item.label}
+                      </p>
+                      <p className="text-white text-sm sm:text-base break-all">
+                        {item.value}
+                      </p>
                     </div>
                   </div>
                 );
