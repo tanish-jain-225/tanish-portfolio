@@ -34,8 +34,8 @@ async function connectToDatabase() {
 async function sendEmailNotification(contactData) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST, // SMTP host Eg. 'smtp.example.com'
-    port: process.env.SMTP_PORT, // SMTP port Eg. 587 for TLS or 465 for SSL
-    secure: process.env.SMTP_SECURE,
+    port: parseInt(process.env.SMTP_PORT), // Parse as number
+    secure: process.env.SMTP_SECURE === 'true', // Parse as boolean
     auth: {
       user: process.env.SMTP_USER, // SMTP username Eg. 'tanish' or 'demo'
       pass: process.env.SMTP_PASSWORD, // SMTP password Eg. 'tanish123' or 'demo123'
@@ -54,6 +54,7 @@ async function sendEmailNotification(contactData) {
 
   try {
     await transporter.sendMail(mailOptions);
+    console.log('Email notification sent successfully to:', process.env.NOTIFICATION_EMAIL);
   } catch (error) {
     console.error('Error sending email notification:', error);
   }
