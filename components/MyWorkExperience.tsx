@@ -7,7 +7,7 @@ const MyWorkExperience = () => {
   return (
     <section id="experience" className="py-20 w-[90vw] mx-auto scroll-mt-20">
       <h1 className="heading text-white">
-        {sectionTitles.experience.split(" ").map((word, i) =>
+        {sectionTitles.experience.title.split(" ").map((word, i) =>
           i === 0 ? (
             <span key={i} className="text-purple">{word} </span>
           ) : (
@@ -16,7 +16,7 @@ const MyWorkExperience = () => {
         )}
       </h1>
       <p className="text-center text-[#BEC1DD] text-sm md:text-base max-w-2xl mx-auto mt-3 mb-6">
-        My journey of continuous growth through academics, internships, and hands-on project building.
+        {sectionTitles.experience.subtitle}
       </p>
       <div className="flex flex-wrap justify-center items-start gap-4 my-2">
         {workExperience.map((card, index) => (

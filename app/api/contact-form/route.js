@@ -35,7 +35,7 @@ async function sendEmailNotification(contactData) {
   const transporter = nodemailer.createTransport({
     host: process.env.SMTP_HOST, // SMTP host Eg. 'smtp.example.com'
     port: process.env.SMTP_PORT, // SMTP port Eg. 587 for TLS or 465 for SSL
-    secure: process.env.SMTP_SECURE === 'false',
+    secure: process.env.SMTP_SECURE,
     auth: {
       user: process.env.SMTP_USER, // SMTP username Eg. 'tanish' or 'demo'
       pass: process.env.SMTP_PASSWORD, // SMTP password Eg. 'tanish123' or 'demo123'
@@ -43,7 +43,7 @@ async function sendEmailNotification(contactData) {
   });
 
   const mailOptions = {
-    from: process.env.SMTP_USER, // Always send from your own SMTP user
+    from: process.env.SMTP_ADMIN, // Always send from your own SMTP as admin email
     replyTo: `${contactData.name} <${contactData.email}>`, // Set reply-to to sender's email
     to: process.env.NOTIFICATION_EMAIL, // Notification email address
     subject: contactData.subject
@@ -157,7 +157,6 @@ export async function POST(request) {
       {
         success: false,
         message: 'Failed to send message. Please try again later.',
-        error: error.message
       },
       { status: 500 }
     );
@@ -169,7 +168,7 @@ export async function OPTIONS() {
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': '*', // Allow all origins for testing, change to specific origin in production
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     },

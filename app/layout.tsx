@@ -3,38 +3,13 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
+import { siteConfig, socialMedia, techStack } from "@/data";
 
 const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
 });
-
-const siteConfig = {
-  name: "Tanish Sanghvi | Full Stack Developer & Engineering Student",
-  description:
-    "Portfolio of Tanish Sanghvi — Full Stack Developer & Engineering student at VESIT, Mumbai. Explore projects built with React, Next.js, Node.js, Python, and MongoDB. Open to collaborations and freelance opportunities.",
-  favicon: "/favicon.ico",
-  url: "https://tanish-portfolio-web.vercel.app",
-  creator: "Tanish Sanghvi",
-  keywords: [
-    "Tanish Sanghvi",
-    "Full Stack Developer",
-    "Engineering Student",
-    "VESIT Mumbai",
-    "React Developer",
-    "Next.js Portfolio",
-    "MERN Stack Developer",
-    "Node.js",
-    "Python Developer",
-    "Web Developer Mumbai",
-    "AI Projects",
-    "Software Engineer Portfolio",
-    "Frontend Developer",
-    "Backend Developer",
-  ],
-  ogImage: "/og-image.png",
-};
 
 export const metadata: Metadata = {
   title: {
@@ -83,7 +58,7 @@ export const metadata: Metadata = {
   icons: {
     icon: siteConfig.favicon,
     shortcut: siteConfig.favicon,
-    apple: siteConfig.favicon,
+    apple: "/profile.svg",
   },
 
   robots: {
@@ -95,9 +70,10 @@ export const metadata: Metadata = {
     canonical: siteConfig.url,
   },
 
+  manifest: "/manifest.json",
+
   other: {
     "application-name": siteConfig.name,
-    "theme-color": "#8b5cf6",
     manifest: "/manifest.json",
   },
 };
@@ -110,12 +86,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="manifest" href="/manifest.json" />
-        <link rel="canonical" href={siteConfig.url} />
-        <link rel="icon" href="/favicon.ico" />
-        <link rel="apple-touch-icon" href="/profile.svg" />
-        <meta name="theme-color" content="#8b5cf6" />
-        <meta name="viewport" content="width=device-width, initial-scale=1" />
         <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <script
           type="application/ld+json"
@@ -125,12 +95,9 @@ export default function RootLayout({
               "@type": "Person",
               name: siteConfig.creator,
               url: siteConfig.url,
-              jobTitle: "Engineering Student & Full Stack Developer",
-              knowsAbout: ["React", "Next.js", "Node.js", "Python", "MongoDB", "TypeScript"],
-              sameAs: [
-                "https://github.com/tanish-jain-225",
-                "https://linkedin.com/in/tanish-jain-tj02022005",
-              ],
+              jobTitle: siteConfig.jobTitle,
+              knowsAbout: techStack.slice(0, 6),
+              sameAs: socialMedia.map((s) => s.url),
             }),
           }}
         />

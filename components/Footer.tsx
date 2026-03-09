@@ -109,7 +109,7 @@ const Footer = () => {
             &copy; {footerData.copyright.year} {footerData.copyright.text}. All rights reserved.
           </p>
           <p className="text-[#BEC1DD]/60 text-xs text-center md:text-right">
-            Built with Next.js, Tailwind CSS & Framer Motion
+            {footerData.builtWith}
           </p>
         </div>
       </div>

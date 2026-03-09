@@ -1,4 +1,48 @@
-export const navItems = [
+import type {
+  SiteConfig,
+  NavItem,
+  NavigationConfig,
+  HeroData,
+  Project,
+  WorkExperienceItem,
+  SocialMediaItem,
+  PersonalInfo,
+  ContactInfo,
+  FooterData,
+  BentoGridData,
+  Images,
+} from "./types";
+
+// ─── Site Configuration (SEO, metadata, OpenGraph) ───
+export const siteConfig: SiteConfig = {
+  name: "Tanish Sanghvi | Full Stack Developer & Engineering Student",
+  description:
+    "Portfolio of Tanish Sanghvi — Full Stack Developer & Engineering student at VESIT, Mumbai. Explore projects built with React, Next.js, Node.js, Python, and MongoDB. Open to collaborations and freelance opportunities.",
+  favicon: "/favicon.ico",
+  url: "https://tanish-portfolio-web.vercel.app",
+  creator: "Tanish Sanghvi",
+  keywords: [
+    "Tanish Sanghvi",
+    "Full Stack Developer",
+    "Engineering Student",
+    "VESIT Mumbai",
+    "React Developer",
+    "Next.js Portfolio",
+    "MERN Stack Developer",
+    "Node.js",
+    "Python Developer",
+    "Web Developer Mumbai",
+    "AI Projects",
+    "Software Engineer Portfolio",
+    "Frontend Developer",
+    "Backend Developer",
+  ],
+  ogImage: "/og-image.png",
+  themeColor: "#8b5cf6",
+  jobTitle: "Engineering Student & Full Stack Developer",
+};
+
+export const navItems: NavItem[] = [
   { name: "Home", link: "#home", icon: "FaHome" },
   { name: "About", link: "#about", icon: "FaUser" },
   { name: "Projects", link: "#projects", icon: "FaProjectDiagram" },
@@ -6,7 +50,7 @@ export const navItems = [
   { name: "Contact", link: "#contact", icon: "FaEnvelope" },
 ];
 
-export const navigationConfig = {
+export const navigationConfig: NavigationConfig = {
   resumeButton: {
     text: "Resume",
     link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing", // You can update this to actual resume link
@@ -15,8 +59,16 @@ export const navigationConfig = {
 };
 
 export const sectionTitles = {
-  experience: "Professional & Academic Experience",
-  projects: "Highlighted Projects",
+  experience: {
+    title: "Professional & Academic Experience",
+    subtitle:
+      "My journey of continuous growth through academics, internships, and hands-on project building.",
+  },
+  projects: {
+    title: "Highlighted Projects",
+    subtitle:
+      "A collection of projects showcasing full-stack development, AI integration, and creative problem-solving.",
+  },
 };
 
 export const uiText = {
@@ -61,7 +113,7 @@ export const uiText = {
   },
 };
 
-export const heroData = {
+export const heroData: HeroData = {
   subtitle: "Full Stack Developer & Engineering Student",
   title: "Building Tomorrow's Technology Today And Learning Along The Way",
   description:
@@ -72,6 +124,7 @@ export const heroData = {
     icon: "FaLocationArrow",
     position: "right",
   },
+  techBadges: ["React", "Next.js", "Node.js", "Python", "MongoDB"],
 };
 
 export const techStack = [
@@ -97,7 +150,7 @@ export const techStack = [
   "Three.js",
 ];
 
-export const projects = [
+export const projects: Project[] = [
   {
     id: 1,
     title: "PowerUp - Exercise Simulator",
@@ -175,40 +228,40 @@ export const projects = [
     course: "Cybersecurity & Web Development",
   },
   {
-  id: 5,
-  title: "SilverCare-AI – Voice-First Accessible AI Assistant",
-  des: "A full-stack, voice-first AI assistant designed for senior citizens, featuring step-by-step onboarding, voice-enabled chat, smart reminders, emergency alerts, and a mobile-first accessible UI. Built with React, Tailwind CSS, and Flask, it integrates AI, speech recognition, and real-time databases to empower independent living.",
-  img: "/SilverCareAI.png",
-  techStack: [
-    "React 18",
-    "Vite",
-    "Tailwind CSS",
-    "Framer Motion",
-    "React Router DOM",
-    "Firebase Auth",
-    "Web Speech API",
-    "Python",
-    "Flask",
-    "MongoDB",
-    "Firebase Firestore",
-    "Together AI",
-    "TextBlob"
-  ],
-  demoLink: "https://silvercare-ai.vercel.app",
-  sourceLink: "https://github.com/tanish-jain-225/SilverCare-AI",
-  status: "completed",
-  category: "AI Assistant",
-  duration: "2 months",
-  features: [
-    "Voice-first chat interface with text-to-speech",
-    "Emergency detection and WhatsApp alerts with GPS",
-    "Smart reminders with natural language processing",
-    "Mobile-first, senior-friendly accessible design",
-    "Curated news and health tips for seniors",
-    "Secure authentication and profile management"
-  ],
-  course: "Full Stack AI Development"
-},
+    id: 5,
+    title: "SilverCare-AI – Voice-First Accessible AI Assistant",
+    des: "A full-stack, voice-first AI assistant designed for senior citizens, featuring step-by-step onboarding, voice-enabled chat, smart reminders, emergency alerts, and a mobile-first accessible UI. Built with React, Tailwind CSS, and Flask, it integrates AI, speech recognition, and real-time databases to empower independent living.",
+    img: "/SilverCareAI.png",
+    techStack: [
+      "React 18",
+      "Vite",
+      "Tailwind CSS",
+      "Framer Motion",
+      "React Router DOM",
+      "Firebase Auth",
+      "Web Speech API",
+      "Python",
+      "Flask",
+      "MongoDB",
+      "Firebase Firestore",
+      "Together AI",
+      "TextBlob",
+    ],
+    demoLink: "https://silvercare-ai.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/SilverCare-AI",
+    status: "completed",
+    category: "AI Assistant",
+    duration: "2 months",
+    features: [
+      "Voice-first chat interface with text-to-speech",
+      "Emergency detection and WhatsApp alerts with GPS",
+      "Smart reminders with natural language processing",
+      "Mobile-first, senior-friendly accessible design",
+      "Curated news and health tips for seniors",
+      "Secure authentication and profile management",
+    ],
+    course: "Full Stack AI Development",
+  },
   {
     id: 6,
     title: "MindSphere – Mental Wellness Platform",
@@ -249,7 +302,7 @@ export const projects = [
   },
 ];
 
-export const workExperience = [
+export const workExperience: WorkExperienceItem[] = [
   {
     id: 1,
     title: "Engineering Student at VESIT",
@@ -276,7 +329,7 @@ export const workExperience = [
   },
 ];
 
-export const socialMedia = [
+export const socialMedia: SocialMediaItem[] = [
   {
     id: 1,
     img: "/git.svg",
@@ -294,7 +347,7 @@ export const socialMedia = [
 ];
 
 // Personal Information
-export const personalInfo = {
+export const personalInfo: PersonalInfo = {
   name: "Tanish Sanghvi",
   email: "tanishjain020205@gmail.com",
   location: "Mumbai, India",
@@ -309,7 +362,7 @@ export const personalInfo = {
 };
 
 // Contact Information
-export const contactInfo = {
+export const contactInfo: ContactInfo = {
   title: "Let's Connect",
   subtitle:
     "Have a project in mind or want to collaborate? I'd love to hear from you. Let's build something great together!",
@@ -358,7 +411,7 @@ export const contactInfo = {
 };
 
 // Footer Data
-export const footerData = {
+export const footerData: FooterData = {
   logo: {
     text: "Tanish Sanghvi",
     accent: "purple",
@@ -375,11 +428,12 @@ export const footerData = {
     text: "Built by Tanish Sanghvi",
     year: new Date().getFullYear(),
   },
+  builtWith: "Built with Next.js, Tailwind CSS & Framer Motion",
   socialLinks: socialMedia,
 };
 
 // Bento Grid Data - About Me Section
-export const bentoGridData = {
+export const bentoGridData: BentoGridData = {
   title: "About Me",
   subtitle:
     "Full Stack Developer and Engineering student at VESIT with a passion for building impactful digital products and exploring cutting-edge technologies.",
@@ -468,7 +522,7 @@ export const bentoGridData = {
 };
 
 // Centralized Images Configuration
-export const images = {
+export const images: Images = {
   backgrounds: {
     projectsBackground: "/bg.png",
     footerGrid: "/footer-grid.svg",

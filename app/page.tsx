@@ -41,7 +41,7 @@ const ScrollToTop = () => {
 
 export default function Home() {
   return (
-    <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto" suppressHydrationWarning>
+    <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto">
       {/* Full-width hero section */}
       <section className="w-full">
         <FloatingNav

@@ -8,9 +8,9 @@ import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
   return (
-    <div id="projects" className="py-10 scroll-mt-20">
+    <section id="projects" className="py-20 w-[90vw] mx-auto scroll-mt-20">
       <h1 className="heading text-white p-2">
-        {sectionTitles.projects.split(" ").map((word, i) =>
+        {sectionTitles.projects.title.split(" ").map((word, i) =>
           i === 0 ? (
             <span key={i} className="text-purple">{word} </span>
           ) : (
@@ -19,7 +19,7 @@ const RecentProjects = () => {
         )}
       </h1>
       <p className="text-center text-[#BEC1DD] text-sm md:text-base max-w-2xl mx-auto mt-3 mb-2 px-4">
-        A collection of projects showcasing full-stack development, AI integration, and creative problem-solving.
+        {sectionTitles.projects.subtitle}
       </p>
       <div className="flex flex-wrap items-center justify-center p-4 m-4 md:gap-10">
         {projects.map((item) => (
@@ -115,7 +115,7 @@ const RecentProjects = () => {
           </div>
         ))}
       </div>
-    </div>
+    </section>
   );
 };
 

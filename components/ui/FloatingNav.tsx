@@ -68,7 +68,7 @@ export const FloatingNav = ({
               idx: number
             ) => (
               <a
-                key={`link=${idx}`}
+                key={navItem.link}
                 href={navItem.link}
                 onClick={(e) => {
                   e.preventDefault();

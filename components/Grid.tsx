@@ -41,7 +41,7 @@ const Grid = () => {
   }, []);
   
   return (
-    <section id="about" className="py-10 w-[90vw] mx-auto scroll-mt-20" ref={sectionRef}>      
+    <section id="about" className="py-20 w-[90vw] mx-auto scroll-mt-20" ref={sectionRef}>      
     <div className="mb-12 text-center section-transition opacity-0">
         <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold mb-4 text-white tracking-tight">
           {bentoGridData.title.split(" ").map((word, i) =>

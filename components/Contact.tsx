@@ -2,14 +2,7 @@
 
 import React, { useState } from "react";
 import { motion } from "framer-motion";
-import {
-  FaGithub,
-  FaLinkedin,
-  FaTwitter,
-  FaEnvelope,
-  FaPhone,
-  FaMapMarkerAlt,
-} from "react-icons/fa";
+import { getIcon } from "@/lib/icons";
 import { socialMedia, contactInfo, uiText } from "@/data";
 
 const Contact = () => {
@@ -77,33 +70,20 @@ const Contact = () => {
       setIsSubmitting(false);
     }
   };
-  const getIconComponent = (iconName: string) => {
-    const iconMap: {
-      [key: string]: React.ComponentType<{ className?: string; size?: number }>;
-    } = {
-      FaEnvelope,
-      FaPhone,
-      FaMapMarkerAlt,
-      FaGithub,
-      FaLinkedin,
-      FaTwitter,
-    };
-    return iconMap[iconName] || FaEnvelope;
-  };
 
   return (
     <section
       id="contact"
-      className="py-10 sm:py-16 md:py-20 text-white w-full max-w-7xl mx-auto scroll-mt-20 px-4 sm:px-6 lg:px-8"
+      className="py-20 text-white w-[90vw] mx-auto scroll-mt-20"
     >
       <h1 className="heading text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-        {contactInfo.title.split(" ").map((word, index) =>
-          word === "Connect" ? (
-            <span key={index} className="text-purple">
+        {contactInfo.title.split(" ").map((word, i) =>
+          i === 0 ? (
+            <span key={i} className="text-purple">
               {word}{" "}
             </span>
           ) : (
-            <span key={index}>{word} </span>
+            <span key={i}>{word} </span>
           )
         )}
       </h1>
@@ -185,7 +165,7 @@ const Contact = () => {
             </h2>
             <div className="flex flex-col gap-4 sm:gap-6 p-1 sm:p-2">
               {contactInfo.details.items.map((item, index) => {
-                const IconComponent = getIconComponent(item.icon);
+                const IconComponent = getIcon(item.icon);
                 return (
                   <div key={index} className="flex items-center gap-3 sm:gap-4">
                     <div className="bg-purple-900/20 p-2 sm:p-3 rounded-full flex items-center justify-center">
@@ -207,7 +187,7 @@ const Contact = () => {
             </h3>
             <div className="flex flex-wrap gap-3 sm:gap-4 w-full">
               {socialMedia.map((social) => {
-                const IconComponent = getIconComponent(social.icon);
+                const IconComponent = getIcon(social.icon);
                 return (
                   <a
                     key={social.id}

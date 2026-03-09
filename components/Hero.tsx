@@ -94,7 +94,7 @@ const Hero = () => {
 
           {/* Tech badges */}
           <div className="flex flex-wrap justify-center gap-2 mb-6 hero-animate opacity-0 px-2">
-            {["React", "Next.js", "Node.js", "Python", "MongoDB"].map((tech) => (
+            {heroData.techBadges.map((tech) => (
               <span
                 key={tech}
                 className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm"
