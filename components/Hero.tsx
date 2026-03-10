@@ -85,6 +85,7 @@ const Hero = () => {
             <TextGenerateEffect 
               className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
               words={heroData.title}
+              accentWordIndex={heroData.accentWordIndex}
             />
           </div>
 
@@ -125,7 +126,7 @@ const Hero = () => {
           {/* Scroll indicator */}
           <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 mt-12 scroll-indicator opacity-0 transition-opacity duration-700">
             <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">
-              <span className="text-white/40 text-xs tracking-widest uppercase">Scroll</span>
+              <span className="text-white/40 text-xs tracking-widest uppercase">{heroData.scrollText}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white/40">
                 <path d="M10 4L10 16M10 16L4 10M10 16L16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" transform="rotate(180 10 10)"/>
               </svg>

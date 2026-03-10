@@ -410,11 +410,11 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                           setTimeout(() => setCopied(false), 3000);
                         } catch (err) {
                           setCopied(false);
-                          alert('Copy to clipboard failed.');
+                          alert(uiText.contact.copyError);
                         }
                       } else {
                         setCopied(false);
-                        alert('Copy to clipboard is not supported in this browser.');
+                        alert(uiText.contact.copyNotSupported);
                       }
                     }}
                     className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-xs sm:text-sm md:text-base m-2 flex items-center max-w-full min-w-0"
@@ -425,7 +425,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                     }}
                   >
                     <span className="truncate block max-w-[60vw] sm:max-w-[40vw] md:max-w-[22vw] lg:max-w-[300px] text-ellipsis overflow-hidden text-left">
-                      {copied ? 'Copied!' : `Copy Email: ${content.email}`}
+                      {copied ? uiText.contact.copied : `${uiText.contact.copy}: ${content.email}`}
                     </span>
                   </button>
                 </div>

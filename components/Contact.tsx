@@ -151,7 +151,7 @@ const Contact = () => {
               {isSubmitting
                 ? uiText.contact.sending
                 : justSent
-                  ? "✓ Message Sent!"
+                  ? uiText.contact.messageSent
                   : contactInfo.form.submitButton}
             </button>
           </form>

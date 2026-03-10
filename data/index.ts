@@ -1,17 +1,222 @@
-import type {
-  SiteConfig,
-  NavItem,
-  NavigationConfig,
-  HeroData,
-  Project,
-  WorkExperienceItem,
-  SocialMediaItem,
-  PersonalInfo,
-  ContactInfo,
-  FooterData,
-  BentoGridData,
-  Images,
-} from "./types";
+// ─── TypeScript interfaces for all centralized data structures ───
+
+export interface NavItem {
+  name: string;
+  link: string;
+  icon: string;
+}
+
+export interface SiteConfig {
+  name: string;
+  description: string;
+  favicon: string;
+  url: string;
+  creator: string;
+  keywords: string[];
+  ogImage: string;
+  themeColor: string;
+  jobTitle: string;
+}
+
+export interface NavigationConfig {
+  resumeButton: {
+    text: string;
+    link: string;
+    enabled: boolean;
+  };
+}
+
+export interface SectionTitle {
+  title: string;
+  subtitle: string;
+}
+
+export interface HeroData {
+  subtitle: string;
+  title: string;
+  description: string;
+  ctaButton: {
+    text: string;
+    link: string;
+    icon: string;
+    position: string;
+  };
+  techBadges: string[];
+  scrollText: string;
+  accentWordIndex: number;
+}
+
+export interface Project {
+  id: number;
+  title: string;
+  des: string;
+  img: string;
+  techStack: string[];
+  demoLink: string;
+  sourceLink: string;
+  status: "completed" | "in-progress";
+  category: string;
+  duration: string;
+  features: string[];
+  course: string;
+}
+
+export interface WorkExperienceItem {
+  id: number;
+  title: string;
+  desc: string;
+  thumbnail: string;
+}
+
+export interface SocialMediaItem {
+  id: number;
+  img: string;
+  name: string;
+  url: string;
+  icon: string;
+}
+
+export interface PersonalInfo {
+  name: string;
+  email: string;
+  location: string;
+  university: string;
+  degree: string;
+  status: string;
+  bio: string;
+  experience: string;
+  projectsCompleted: string;
+  technologiesUsed: string;
+  avatar: string;
+}
+
+export interface ContactFormField {
+  name: string;
+  label: string;
+  type: string;
+  required: boolean;
+}
+
+export interface ContactDetailItem {
+  icon: string;
+  label: string;
+  value: string;
+}
+
+export interface ContactInfo {
+  title: string;
+  subtitle: string;
+  email: string;
+  phone: string;
+  location: string;
+  availability: string;
+  responseTime: string;
+  form: {
+    title: string;
+    fields: ContactFormField[];
+    submitButton: string;
+    successMessage: string;
+    errorMessage: string;
+  };
+  details: {
+    title: string;
+    items: ContactDetailItem[];
+  };
+}
+
+export interface FooterData {
+  logo: {
+    text: string;
+    accent: string;
+  };
+  description: string;
+  sections: {
+    title: string;
+    items: NavItem[];
+  }[];
+  copyright: {
+    text: string;
+    year: number;
+  };
+  builtWith: string;
+  socialLinks: SocialMediaItem[];
+}
+
+// Bento Grid types
+export interface BentoStat {
+  label: string;
+  value: string;
+}
+
+export interface BentoInterest {
+  name: string;
+  icon: string;
+  color: string;
+}
+
+export type BentoContentType =
+  | {
+      type: "engineering";
+      text: string;
+      stats?: BentoStat[];
+      interests?: BentoInterest[];
+      currentStudy?: string;
+    }
+  | {
+      type: "collaboration";
+      text: string;
+      availability?: { status: string; schedule: string };
+    }
+  | {
+      type: "techstack";
+      text: string;
+      note?: string;
+    }
+  | {
+      type: "project";
+      text: string;
+      technologies?: string[];
+      repository?: string;
+    }
+  | {
+      type: "contact";
+      email: string;
+    }
+  | {
+      type: "academic";
+      text: string;
+      stats?: BentoStat[];
+    };
+
+export interface BentoGridItem {
+  id: number;
+  title: string;
+  description: string;
+  img: string;
+  spareImg: string;
+  content: BentoContentType;
+}
+
+export interface BentoGridData {
+  title: string;
+  subtitle: string;
+  items: BentoGridItem[];
+}
+
+export interface Images {
+  backgrounds: {
+    projectsBackground: string;
+    footerGrid: string;
+    cloud: string;
+    grid: string;
+  };
+  icons: {
+    git: string;
+    link: string;
+  };
+  profile: string;
+  confetti: string;
+}
 
 // ─── Site Configuration (SEO, metadata, OpenGraph) ───
 export const siteConfig: SiteConfig = {
@@ -106,10 +311,15 @@ export const uiText = {
   contact: {
     connectWithMe: "Connect with me",
     sending: "Sending...",
+    messageSent: "✓ Message Sent!",
     copy: "Copy Email",
     copied: "Copied!",
     copyError: "Copy to clipboard failed.",
     copyNotSupported: "Copy to clipboard is not supported in this browser.",
+  },
+  status: {
+    completed: "✓ Completed",
+    inProgress: "⏳ In Progress",
   },
 };
 
@@ -125,6 +335,8 @@ export const heroData: HeroData = {
     position: "right",
   },
   techBadges: ["React", "Next.js", "Node.js", "Python", "MongoDB"],
+  scrollText: "Scroll",
+  accentWordIndex: 5,
 };
 
 export const techStack = [
@@ -519,6 +731,33 @@ export const bentoGridData: BentoGridData = {
       },
     },
   ],
+};
+
+// API / Contact Form Text (used by server-side route)
+export const apiText = {
+  emailSubjectPrefix: "Portfolio - Contact Form: ",
+  emailSubjectFallback: "Portfolio - Contact Form Mail Query",
+  emailBodyPrefix: "You have a new message from",
+  healthCheckMessage: "Contact Form API is working!",
+  successMessage: "Message sent successfully! Thank you for reaching out.",
+  errorMessage: "Failed to send message. Please try again later.",
+  validation: {
+    nameTooShort: "Name must be at least 2 characters long",
+    invalidEmail: "Please provide a valid email address",
+    messageTooShort: "Message must be at least 2 characters long",
+    nameTooLong: "Name cannot exceed 100 characters",
+    messageTooLong: "Message cannot exceed 10000 characters",
+    subjectTooLong: "Subject cannot exceed 200 characters",
+  },
+};
+
+// Manifest / PWA configuration
+export const manifestData = {
+  name: siteConfig.name,
+  shortName: siteConfig.creator.replace(/\s+/g, "") + "Portfolio",
+  description: siteConfig.description,
+  themeColor: siteConfig.themeColor,
+  backgroundColor: "#0f172a",
 };
 
 // Centralized Images Configuration

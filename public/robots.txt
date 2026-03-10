@@ -1,5 +1,0 @@
-User-agent: *
-Allow: /
-Disallow: /api/
-
-Sitemap: https://tanish-portfolio-web.vercel.app/sitemap.xml

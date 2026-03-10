@@ -61,7 +61,7 @@ const RecentProjects = () => {
                       ? 'bg-green-900/30 text-green-400 border border-green-500/20' 
                       : 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/20'
                   }`}>
-                    {item.status === 'completed' ? '✓ Completed' : '⏳ In Progress'}
+                    {item.status === 'completed' ? uiText.status.completed : uiText.status.inProgress}
                   </span>
                 </div>
 

@@ -69,13 +69,6 @@ export const metadata: Metadata = {
   alternates: {
     canonical: siteConfig.url,
   },
-
-  manifest: "/manifest.json",
-
-  other: {
-    "application-name": siteConfig.name,
-    manifest: "/manifest.json",
-  },
 };
 
 export default function RootLayout({
@@ -86,7 +79,6 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <head>
-        <link rel="sitemap" type="application/xml" href="/sitemap.xml" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
