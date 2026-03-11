@@ -1,5 +1,5 @@
 import type { MetadataRoute } from "next";
-import { manifestData, images } from "@/data";
+import { manifestData, siteConfig } from "@/data";
 
 export default function manifest(): MetadataRoute.Manifest {
   return {
@@ -12,14 +12,14 @@ export default function manifest(): MetadataRoute.Manifest {
     theme_color: manifestData.themeColor,
     icons: [
       {
-        src: images.profile,
+        src: siteConfig.favicon,
         sizes: "192x192",
-        type: "image/svg+xml",
+        type: "image/x-icon",
       },
       {
-        src: images.profile,
+        src: siteConfig.favicon,
         sizes: "512x512",
-        type: "image/svg+xml",
+        type: "image/x-icon",
       },
     ],
   };

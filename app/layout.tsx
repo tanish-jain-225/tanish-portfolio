@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { siteConfig, socialMedia, techStack, images, uiText } from "@/data";
+import { siteConfig, socialMedia, techStack, uiText } from "@/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -58,7 +58,7 @@ export const metadata: Metadata = {
   icons: {
     icon: siteConfig.favicon,
     shortcut: siteConfig.favicon,
-    apple: images.profile,
+    apple: siteConfig.favicon,
   },
 
   robots: {

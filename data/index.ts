@@ -70,7 +70,6 @@ export interface WorkExperienceItem {
 
 export interface SocialMediaItem {
   id: number;
-  img: string;
   name: string;
   url: string;
   icon: string;
@@ -87,7 +86,6 @@ export interface PersonalInfo {
   experience: string;
   projectsCompleted: string;
   technologiesUsed: string;
-  avatar: string;
 }
 
 export interface ContactFormField {
@@ -156,37 +154,37 @@ export interface BentoInterest {
 
 export type BentoContentType =
   | {
-      type: "engineering";
-      text: string;
-      stats?: BentoStat[];
-      interests?: BentoInterest[];
-      currentStudy?: string;
-    }
+    type: "engineering";
+    text: string;
+    stats?: BentoStat[];
+    interests?: BentoInterest[];
+    currentStudy?: string;
+  }
   | {
-      type: "collaboration";
-      text: string;
-      availability?: { status: string; schedule: string };
-    }
+    type: "collaboration";
+    text: string;
+    availability?: { status: string; schedule: string };
+  }
   | {
-      type: "techstack";
-      text: string;
-      note?: string;
-    }
+    type: "techstack";
+    text: string;
+    note?: string;
+  }
   | {
-      type: "project";
-      text: string;
-      technologies?: string[];
-      repository?: string;
-    }
+    type: "project";
+    text: string;
+    technologies?: string[];
+    repository?: string;
+  }
   | {
-      type: "contact";
-      email: string;
-    }
+    type: "contact";
+    email: string;
+  }
   | {
-      type: "academic";
-      text: string;
-      stats?: BentoStat[];
-    };
+    type: "academic";
+    text: string;
+    stats?: BentoStat[];
+  };
 
 export interface BentoGridItem {
   id: number;
@@ -212,10 +210,7 @@ export interface Images {
   };
   icons: {
     git: string;
-    link: string;
   };
-  profile: string;
-  confetti: string;
 }
 
 // ─── Site Configuration (SEO, metadata, OpenGraph) ───
@@ -555,14 +550,12 @@ export const workExperience: WorkExperienceItem[] = [
 export const socialMedia: SocialMediaItem[] = [
   {
     id: 1,
-    img: "/git.svg",
     name: "GitHub",
     url: "https://github.com/tanish-jain-225",
     icon: "FaGithub",
   },
   {
     id: 2,
-    img: "/link.svg",
     name: "LinkedIn",
     url: "https://linkedin.com/in/tanish-jain-tj02022005",
     icon: "FaLinkedin",
@@ -581,7 +574,7 @@ export const personalInfo: PersonalInfo = {
   experience: "3+ years",
   projectsCompleted: "20+",
   technologiesUsed: "25+",
-  avatar: "/profile.svg",
+
 };
 
 // Contact Information
@@ -783,8 +776,5 @@ export const images: Images = {
   },
   icons: {
     git: "/git.svg",
-    link: "/link.svg",
   },
-  profile: "/profile.svg",
-  confetti: "/confetti.gif",
 };
