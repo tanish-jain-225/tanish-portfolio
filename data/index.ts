@@ -307,6 +307,7 @@ export const uiText = {
   footer: {
     quickLinks: "Quick Links",
     contact: "Contact",
+    allRightsReserved: "All rights reserved.",
   },
   contact: {
     connectWithMe: "Connect with me",
@@ -316,10 +317,18 @@ export const uiText = {
     copied: "Copied!",
     copyError: "Copy to clipboard failed.",
     copyNotSupported: "Copy to clipboard is not supported in this browser.",
+    allFieldsRequired: "All fields are required.",
+    validationErrorsPrefix: "Validation errors:",
+    networkError: "Network error. Please check your connection and try again.",
   },
   status: {
     completed: "✓ Completed",
     inProgress: "⏳ In Progress",
+  },
+  accessibility: {
+    skipToContent: "Skip to main content",
+    scrollToTop: "Scroll to top",
+    backToTop: "Back to top",
   },
 };
 
@@ -340,6 +349,8 @@ export const heroData: HeroData = {
 };
 
 export const techStack = [
+  "C",
+  "C++",
   "HTML/CSS",
   "JavaScript",
   "TypeScript",
@@ -562,13 +573,13 @@ export const socialMedia: SocialMediaItem[] = [
 export const personalInfo: PersonalInfo = {
   name: "Tanish Sanghvi",
   email: "tanishjain020205@gmail.com",
-  location: "Mumbai, India",
+  location: "Mumbai, Maharashtra",
   university: "VESIT",
   degree: "Bachelor of Engineering - Automation & Robotics",
   status: "Full Stack Developer & Engineering Student",
-  bio: "Full Stack Developer and Engineering student specializing in building scalable web applications and AI-powered solutions. Passionate about clean code, user experience, and continuous learning.",
+  bio: "Engineering student and full-stack developer focused on building practical, scalable and user-friendly applications. I enjoy working across the complete development lifecycle — from designing responsive interfaces to developing efficient backend systems and databases. Driven by problem-solving, continuous improvement and learning technologies by building real-world projects.",
   experience: "3+ years",
-  projectsCompleted: "15+",
+  projectsCompleted: "20+",
   technologiesUsed: "25+",
   avatar: "/profile.svg",
 };
@@ -629,7 +640,7 @@ export const footerData: FooterData = {
     accent: "purple",
   },
   description:
-    "Full Stack Developer and Engineering student at VESIT, Mumbai. I build scalable web applications, AI solutions, and love turning ideas into reality.",
+    "Engineering student and full-stack developer focused on building practical, scalable and user-friendly applications. 575+ GitHub contributions and 20+ projects deployed.",
   sections: [
     {
       title: "Quick Links",
@@ -648,7 +659,7 @@ export const footerData: FooterData = {
 export const bentoGridData: BentoGridData = {
   title: "About Me",
   subtitle:
-    "Full Stack Developer and Engineering student at VESIT with a passion for building impactful digital products and exploring cutting-edge technologies.",
+    "Engineering student and full-stack developer at VESIT with 575+ GitHub contributions, focused on building practical, scalable and user-friendly applications.",
   items: [
     {
       id: 1,
@@ -661,7 +672,7 @@ export const bentoGridData: BentoGridData = {
         text: "Built and applied microcontroller-based systems using N76E003 for real-time applications. Also worked on Web development projects using MERN stack. Balanced academic and personal projects to enhance practical skills.",
         stats: [
           { label: "GPA", value: "7.5" },
-          { label: "Projects Completed", value: "6+" },
+          { label: "Projects Completed", value: "20+" },
         ],
       },
     },
@@ -741,6 +752,8 @@ export const apiText = {
   healthCheckMessage: "Contact Form API is working!",
   successMessage: "Message sent successfully! Thank you for reaching out.",
   errorMessage: "Failed to send message. Please try again later.",
+  validationFailed: "Validation failed",
+  failedToSave: "Failed to save message",
   validation: {
     nameTooShort: "Name must be at least 2 characters long",
     invalidEmail: "Please provide a valid email address",

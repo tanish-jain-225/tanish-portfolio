@@ -3,7 +3,7 @@
 import React, { Suspense, useEffect, useState, useCallback } from "react";
 import Hero from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
-import { navItems } from "@/data";
+import { navItems, uiText } from "@/data";
 import { getIcon, FaArrowUp } from "@/lib/icons";
 import Footer from "@/components/Footer";
 import RecentProjects from "@/components/RecentProjects";
@@ -31,8 +31,8 @@ const ScrollToTop = () => {
     <button
       className={`scroll-to-top ${isVisible ? "visible" : ""}`}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label="Scroll to top"
-      title="Back to top"
+      aria-label={uiText.accessibility.scrollToTop}
+      title={uiText.accessibility.backToTop}
     >
       <FaArrowUp size={18} />
     </button>

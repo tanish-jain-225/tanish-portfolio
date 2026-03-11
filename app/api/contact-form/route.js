@@ -114,7 +114,7 @@ export async function POST(request) {
       return NextResponse.json(
         {
           success: false,
-          message: 'Validation failed',
+          message: apiText.validationFailed,
           errors: validationErrors
         },
         { status: 400 }
@@ -150,7 +150,7 @@ export async function POST(request) {
         id: result.insertedId
       });
     } else {
-      throw new Error('Failed to save message');
+      throw new Error(apiText.failedToSave);
     }
   } catch (error) {
     console.error('Contact form submission error:', error);

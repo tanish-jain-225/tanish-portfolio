@@ -106,7 +106,7 @@ const Footer = () => {
         </div>
         <div className="mt-8 sm:mt-12 pt-4 sm:pt-6 border-t border-white/10 flex flex-col md:flex-row justify-between items-center gap-3 md:gap-0 w-full">
           <p className="text-[#BEC1DD] text-xs sm:text-sm text-center md:text-left w-full md:w-auto break-words">
-            &copy; {footerData.copyright.year} {footerData.copyright.text}. All rights reserved.
+            &copy; {footerData.copyright.year} {footerData.copyright.text}. {uiText.footer.allRightsReserved}
           </p>
           <p className="text-[#BEC1DD]/60 text-xs text-center md:text-right">
             {footerData.builtWith}

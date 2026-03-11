@@ -38,7 +38,7 @@ const Contact = () => {
       !formData.subject ||
       !formData.message
     ) {
-      alert("All fields are required.");
+      alert(uiText.contact.allFieldsRequired);
       setIsSubmitting(false);
       return;
     }
@@ -63,14 +63,14 @@ const Contact = () => {
         // Handle validation errors or other issues
         console.error("Form submission failed:", data.message);
         if (data.errors && Array.isArray(data.errors)) {
-          alert(`Validation errors:\n• ${data.errors.join("\n• ")}`);
+          alert(`${uiText.contact.validationErrorsPrefix}\n\u2022 ${data.errors.join("\n\u2022 ")}`);
         } else {
-          alert(data.message || "Failed to send message. Please try again.");
+          alert(data.message || contactInfo.form.errorMessage);
         }
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert("Network error. Please check your connection and try again.");
+      alert(uiText.contact.networkError);
     } finally {
       setIsSubmitting(false);
     }

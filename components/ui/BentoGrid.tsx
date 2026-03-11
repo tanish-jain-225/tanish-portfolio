@@ -5,7 +5,7 @@ import Image from "next/image";
 import { useState } from "react";
 
 import { cn } from "@/lib/utils";
-import { techStack, personalInfo, images, bentoGridData, uiText } from "@/data";
+import { techStack, images, bentoGridData, uiText } from "@/data";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
 
