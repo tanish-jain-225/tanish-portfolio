@@ -45,7 +45,7 @@ const RecentProjects = () => {
                   alt={`${item.title} preview`}
                   className="z-10 absolute bottom-0 w-full h-full object-cover object-top"
                   fill
-                  sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                  sizes="(max-width: 640px) 80vw, (max-width: 1200px) 384px, 384px"
                 />
               </div>
 

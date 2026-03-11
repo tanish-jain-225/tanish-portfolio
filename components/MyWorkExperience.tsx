@@ -54,7 +54,7 @@ const MyWorkExperience = () => {
 
                 <div className="flex flex-col justify-end flex-shrink-0">
                   <CardItem translateZ="100" className="w-full mb-4">
-                    <div className="flex items-center justify-center h-48 w-full bg-white dark:bg-black rounded-xl overflow-hidden" style={{position: 'relative', height: '12rem'}}>
+                    <div className="flex items-center justify-center h-48 w-full bg-white dark:bg-black rounded-xl overflow-hidden" style={{ position: 'relative', height: '12rem' }}>
                       <Image
                         src={card.thumbnail}
                         height={180}
@@ -62,6 +62,7 @@ const MyWorkExperience = () => {
                         className="max-h-full max-w-full object-contain"
                         alt={card.title}
                         sizes="180px"
+                        loading="lazy"
                       />
                     </div>
                   </CardItem>
