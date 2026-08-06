@@ -109,7 +109,16 @@ Required in `.env.local`:
 ```bash
 MONGODB_URI='mongodb+srv://username:password@cluster.mongodb.net'
 DB_NAME='portfolio'
-COLLECTION_DB='contactMessages'
+COLLECTION_NAME='contactMessages'
+
+# Email alerts / SMTP configurations (optional)
+NOTIFICATION_EMAIL='your-notification-email-here'
+SMTP_HOST='your-smtp-host-here'
+SMTP_PORT='your-smtp-port-here'
+SMTP_USER='your-smtp-user-email-here'
+SMTP_PASSWORD='your-smtp-user-password-here'
+SMTP_ADMIN='your-smtp-admin-email-here'
+SMTP_SECURE='false'
 ```
 
 ## Rate Limiting

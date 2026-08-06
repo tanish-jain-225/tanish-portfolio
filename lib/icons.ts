@@ -16,6 +16,7 @@ import {
   FaMapMarkerAlt,
   FaArrowUp,
   FaTwitter,
+  FaInstagram,
 } from "react-icons/fa";
 import type { IconType } from "react-icons";
 
@@ -32,6 +33,7 @@ export const iconMap: Record<string, IconType> = {
   FaMapMarkerAlt,
   FaArrowUp,
   FaTwitter,
+  FaInstagram,
 };
 
 /**
@@ -56,4 +58,5 @@ export {
   FaMapMarkerAlt,
   FaArrowUp,
   FaTwitter,
+  FaInstagram,
 };

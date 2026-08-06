@@ -1,10 +1,8 @@
 "use client";
-import React, { JSX, useState } from "react";
+import React, { JSX } from "react";
 import {
   motion,
   AnimatePresence,
-  useScroll,
-  useMotionValueEvent,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { navigationConfig } from "@/data";
@@ -20,23 +18,7 @@ export const FloatingNav = ({
   }[];
   className?: string;
 }) => {
-  const { scrollYProgress } = useScroll();
-
-  const [visible, setVisible] = useState(true);
-
-  useMotionValueEvent(scrollYProgress, "change", (current) => {
-    if (typeof current === "number") {
-      const direction = current - (scrollYProgress.getPrevious() ?? 0);
-
-      if (scrollYProgress.get() < 0.05) {
-        // Always show at top of page
-        setVisible(true);
-      } else {
-        // Show when scrolling up, hide when scrolling down
-        setVisible(direction < 0);
-      }
-    }
-  });
+  const visible = true;
 
   return (
     <nav
@@ -64,8 +46,7 @@ export const FloatingNav = ({
           {" "}
           {navItems.map(
             (
-              navItem: { link: string; name: string; icon?: React.JSX.Element },
-              idx: number
+              navItem: { link: string; name: string; icon?: React.JSX.Element }
             ) => (
               <a
                 key={navItem.link}

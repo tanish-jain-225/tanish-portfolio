@@ -119,14 +119,17 @@ export const CardItem = React.forwardRef<
   ...rest 
 }, ref) => {
   const [isMouseEntered] = useMouseEnter();
+  const localRef = useRef<HTMLDivElement>(null);
+  const resolvedRef = (ref || localRef) as React.RefObject<HTMLDivElement | null>;
+
   const handleAnimations = useCallback(() => {
-    if (!ref || typeof ref === 'function' || !ref.current) return;
+    if (!resolvedRef.current) return;
     if (isMouseEntered) {
-      ref.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
+      resolvedRef.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
     } else {
-      ref.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
+      resolvedRef.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
     }
-  }, [isMouseEntered, ref, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
+  }, [isMouseEntered, resolvedRef, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
 
   useEffect(() => {
     handleAnimations();
@@ -135,7 +138,7 @@ export const CardItem = React.forwardRef<
   return React.createElement(
     Component,
     {
-      ref,
+      ref: resolvedRef,
       className: cn("w-fit transition duration-200 ease-linear", className),
       ...rest,
     },

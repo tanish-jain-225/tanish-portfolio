@@ -84,7 +84,7 @@ const Footer = () => {
                   <span className="break-all whitespace-normal w-full">{personalInfo.email}</span>
                 </a>
               </li>
-              {socialMedia.slice(0, 2).map((social) => {
+              {socialMedia.map((social) => {
                 const IconComponent = getIcon(social.icon);
                 return (
                   <li key={social.id} className="w-full">

@@ -77,7 +77,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   const [copied, setCopied] = useState(false);
   const item = bentoGridData.items.find((item) => item.id === id);
   if (!item) return null;
-  const { title, img, spareImg, content } = item as {
+  const { title, img, content } = item as {
     title?: string;
     img?: string;
     spareImg?: string;
@@ -109,7 +109,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
       {/* Card background images and overlays */}
       <div
         className={cn(
-          "flex-1 flex flex-col h-full w-full",
+          "flex-1 flex flex-col h-full w-full relative",
           id === 6 ? "justify-center items-center" : ""
         )}
       >
@@ -117,7 +117,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
         {img && (
           <div
             className={id === 4 || id === 5 ? "absolute inset-0 w-full h-full z-0" : "w-full h-full absolute"}
-            style={id === 1 ? { position: "relative", minHeight: 220 } : { position: "relative", height: "100%" }}
+            style={id === 1 ? { position: "relative", minHeight: 220 } : { position: "absolute", height: "100%" }}
             aria-hidden="true"
           >
             <Image
@@ -171,20 +171,16 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                 <>
                   {/* Decorative background */}
                   <div
-                    className="absolute bottom-0 right-0 w-full h-full opacity-10"
-                    style={{ position: "relative", height: "100%" }}
+                    className="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
                     aria-hidden="true"
                   >
-                    <div className="w-full h-full flex items-center justify-center">
-                      <Image
-                        src={images.backgrounds.footerGrid}
-                        alt="Background pattern"
-                        className="object-cover min-w-full min-h-full"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-black/40 z-10" />
-                    </div>
+                    <Image
+                      src={images.backgrounds.footerGrid}
+                      alt="Background pattern"
+                      className="object-cover object-right-bottom"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </div>
                   {/* Academic text and stats */}
                   <div className="mt-4 flex flex-col gap-3 sm:gap-5 relative z-10">
@@ -221,6 +217,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                       className="object-contain"
                       width={150}
                       height={150}
+                      style={{ width: "auto", height: "auto" }}
                       sizes="150px"
                       loading="lazy"
                     />
@@ -268,20 +265,16 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               {content.type === "engineering" && (
                 <>
                   <div
-                    className="absolute top-0 left-0 w-full h-full opacity-10"
-                    style={{ position: "relative", height: "100%" }}
+                    className="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
                     aria-hidden="true"
                   >
-                    <div className="w-full h-full flex items-center justify-center overflow-hidden">
-                      <Image
-                        src={images.backgrounds.grid}
-                        alt="Tech background"
-                        className="object-cover min-w-full min-h-full"
-                        fill
-                        sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                      />
-                      <div className="absolute inset-0 bg-black/40 z-10" />
-                    </div>
+                    <Image
+                      src={images.backgrounds.grid}
+                      alt="Tech background"
+                      className="object-cover"
+                      fill
+                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
+                    />
                   </div>
                   <div className="mt-4 relative z-10 flex flex-col gap-2 sm:gap-3">
                     <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed">
@@ -410,7 +403,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                           await navigator.clipboard.writeText(content.email);
                           setCopied(true);
                           setTimeout(() => setCopied(false), 3000);
-                        } catch (err) {
+                        } catch {
                           setCopied(false);
                           alert(uiText.contact.copyError);
                         }

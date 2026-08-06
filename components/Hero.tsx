@@ -49,14 +49,14 @@ const Hero = () => {
         {/* Spotlight container with proper positioning */}
         <div className="absolute inset-0 overflow-hidden">
           <Spotlight
-            className="-top-40 -left-10 sm:-left-20 md:-left-32 md:-top-20 h-screen"
+            className="-top-40 -left-10 sm:-left-20 md:-left-32 md:-top-20 h-screen animate-spotlight"
             fill="white"
           />
           <Spotlight
-            className="top-10 left-[40%] sm:left-[45%] md:left-[70%] h-[80vh] w-[50vw]"
-            fill="red"
+            className="top-10 left-[40%] sm:left-[45%] md:left-[70%] h-[80vh] w-[50vw] animate-spotlight"
+            fill="#cbacf9"
           />
-          <Spotlight className="top-28 left-[20%] sm:left-[25%] md:left-[40%] h-[80vh] w-[50vw]" fill="blue" />
+          <Spotlight className="top-28 left-[20%] sm:left-[25%] md:left-[40%] h-[80vh] w-[50vw] animate-spotlight" fill="#8b5cf6" />
         </div>
 
         {/* Grid background layer */}
@@ -128,7 +128,7 @@ const Hero = () => {
             <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">
               <span className="text-white/40 text-xs tracking-widest uppercase">{heroData.scrollText}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white/40">
-                <path d="M10 4L10 16M10 16L4 10M10 16L16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" transform="rotate(180 10 10)"/>
+                <path d="M10 4L10 16M10 16L4 10M10 16L16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
               </svg>
             </div>
           </div>

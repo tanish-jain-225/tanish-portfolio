@@ -15,6 +15,7 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [justSent, setJustSent] = useState(false);
+  const [statusMessage, setStatusMessage] = useState<{ text: string; type: "success" | "error" | null }>({ text: "", type: null });
 
   // Handle input changes for all fields
   const handleChange = (
@@ -24,21 +25,26 @@ const Contact = () => {
       ...formData,
       [e.target.name]: e.target.value,
     });
+    // Clear status message when user types
+    if (statusMessage.type) {
+      setStatusMessage({ text: "", type: null });
+    }
   };
 
   // Submit handler: all fields are required and sent as JSON
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
+    setStatusMessage({ text: "", type: null });
 
     // Client-side required check (defensive, backend also checks)
-    if (
-      !formData.name ||
-      !formData.email ||
-      !formData.subject ||
-      !formData.message
-    ) {
-      alert(uiText.contact.allFieldsRequired);
+    const requiredFields = contactInfo.form.fields.filter((field) => field.required);
+    const hasMissingFields = requiredFields.some(
+      (field) => !formData[field.name as keyof typeof formData]?.trim(),
+    );
+
+    if (hasMissingFields) {
+      setStatusMessage({ text: uiText.contact.allFieldsRequired, type: "error" });
       setIsSubmitting(false);
       return;
     }
@@ -58,19 +64,26 @@ const Contact = () => {
         // Reset form and show sent state temporarily
         setFormData({ name: "", email: "", subject: "", message: "" });
         setJustSent(true);
-        setTimeout(() => setJustSent(false), 2000);
+        setStatusMessage({ text: contactInfo.form.successMessage, type: "success" });
+        setTimeout(() => {
+          setJustSent(false);
+          setStatusMessage({ text: "", type: null });
+        }, 5000);
       } else {
         // Handle validation errors or other issues
         console.error("Form submission failed:", data.message);
         if (data.errors && Array.isArray(data.errors)) {
-          alert(`${uiText.contact.validationErrorsPrefix}\n\u2022 ${data.errors.join("\n\u2022 ")}`);
+          setStatusMessage({
+            text: `${uiText.contact.validationErrorsPrefix} ${data.errors.join(", ")}`,
+            type: "error"
+          });
         } else {
-          alert(data.message || contactInfo.form.errorMessage);
+          setStatusMessage({ text: data.message || contactInfo.form.errorMessage, type: "error" });
         }
       }
     } catch (error) {
       console.error("Error submitting form:", error);
-      alert(uiText.contact.networkError);
+      setStatusMessage({ text: uiText.contact.networkError, type: "error" });
     } finally {
       setIsSubmitting(false);
     }
@@ -122,7 +135,7 @@ const Contact = () => {
                     name={field.name}
                     value={formData[field.name as keyof typeof formData] || ""}
                     onChange={handleChange}
-                    required
+                    required={field.required}
                     rows={3}
                     className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-vertical"
                   />
@@ -133,12 +146,24 @@ const Contact = () => {
                     name={field.name}
                     value={formData[field.name as keyof typeof formData] || ""}
                     onChange={handleChange}
-                    required
+                    required={field.required}
+                    autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
                     className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
                   />
                 )}
               </div>
             ))}
+            {statusMessage.type && (
+              <div 
+                className={`p-3 rounded-md text-xs sm:text-sm border transition-all duration-300 ${
+                  statusMessage.type === "success" 
+                    ? "bg-green-950/40 text-green-300 border-green-500/30" 
+                    : "bg-red-950/40 text-red-300 border-red-500/30"
+                }`}
+              >
+                {statusMessage.text}
+              </div>
+            )}
             <button
               type="submit"
               disabled={isSubmitting}

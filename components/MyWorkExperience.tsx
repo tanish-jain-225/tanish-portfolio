@@ -60,6 +60,7 @@ const MyWorkExperience = () => {
                         height={180}
                         width={180}
                         className="max-h-full max-w-full object-contain"
+                        style={{ width: "auto", height: "auto" }}
                         alt={card.title}
                         sizes="180px"
                         loading="lazy"
@@ -67,7 +68,7 @@ const MyWorkExperience = () => {
                     </div>
                   </CardItem>
                   <a
-                    href={uiText.experience.linkedInProfile}
+                    href={card.link || uiText.experience.linkedInProfile}
                     target="_blank"
                     rel="noopener noreferrer"
                     className="cursor-pointer"

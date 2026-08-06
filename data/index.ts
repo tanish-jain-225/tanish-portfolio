@@ -66,6 +66,7 @@ export interface WorkExperienceItem {
   title: string;
   desc: string;
   thumbnail: string;
+  link?: string;
 }
 
 export interface SocialMediaItem {
@@ -215,14 +216,15 @@ export interface Images {
 
 // ─── Site Configuration (SEO, metadata, OpenGraph) ───
 export const siteConfig: SiteConfig = {
-  name: "Tanish Sanghvi | Full Stack Developer & Engineering Student",
+  name: "Tanish Sanghvi | Software Engineer & Full Stack Developer",
   description:
-    "Portfolio of Tanish Sanghvi — Full Stack Developer & Engineering student at VESIT, Mumbai. Explore projects built with React, Next.js, Node.js, Python, and MongoDB. Open to collaborations and freelance opportunities.",
+    "Portfolio of Tanish Sanghvi — Software Engineer & Full Stack Developer at VESIT, Mumbai. Specializing in Next.js, React, Node.js, Express, MongoDB, and AI system integration.",
   favicon: "/favicon.ico",
   url: "https://tanish-portfolio-web.vercel.app",
   creator: "Tanish Sanghvi",
   keywords: [
     "Tanish Sanghvi",
+    "Software Engineer",
     "Full Stack Developer",
     "Engineering Student",
     "VESIT Mumbai",
@@ -239,7 +241,7 @@ export const siteConfig: SiteConfig = {
   ],
   ogImage: "/og-image.png",
   themeColor: "#8b5cf6",
-  jobTitle: "Engineering Student & Full Stack Developer",
+  jobTitle: "Software Engineer & Full Stack Developer",
 };
 
 export const navItems: NavItem[] = [
@@ -253,7 +255,7 @@ export const navItems: NavItem[] = [
 export const navigationConfig: NavigationConfig = {
   resumeButton: {
     text: "Resume",
-    link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing", // You can update this to actual resume link
+    link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing",
     enabled: true,
   },
 };
@@ -262,7 +264,7 @@ export const sectionTitles = {
   experience: {
     title: "Professional & Academic Experience",
     subtitle:
-      "My journey of continuous growth through academics, internships, and hands-on project building.",
+      "My journey of continuous growth through internships, hackathons, and hands-on project building.",
   },
   projects: {
     title: "Highlighted Projects",
@@ -328,17 +330,17 @@ export const uiText = {
 };
 
 export const heroData: HeroData = {
-  subtitle: "Full Stack Developer & Engineering Student",
+  subtitle: "Software Engineer & Full Stack Developer",
   title: "Building Tomorrow's Technology Today And Learning Along The Way",
   description:
-    "Hi, I'm Tanish — a Full Stack Developer and Engineering student at VESIT, Mumbai. I craft performant web apps and AI-powered solutions.",
+    "Hi, I'm Tanish Sanghvi — a Software Engineer and Full Stack Developer focused on building robust backends, responsive interfaces, and practical AI integrations.",
   ctaButton: {
     text: "View My Projects",
     link: "#projects",
     icon: "FaLocationArrow",
     position: "right",
   },
-  techBadges: ["React", "Next.js", "Node.js", "Python", "MongoDB"],
+  techBadges: ["React", "Next.js", "Node.js", "Python", "MongoDB", "Gemini AI"],
   scrollText: "Scroll",
   accentWordIndex: 5,
 };
@@ -366,6 +368,10 @@ export const techStack = [
   "Vercel",
   "REST APIs",
   "Three.js",
+  "Jest",
+  "Playwright",
+  "Gemini AI API",
+  "Firebase Admin SDK",
 ];
 
 export const projects: Project[] = [
@@ -391,7 +397,7 @@ export const projects: Project[] = [
   {
     id: 2,
     title: "DineEase – Hotel Management App",
-    des: "Developed a MERN stack-based hotel food ordering system with dynamic cart, real-time order tracking and secure admin login. Included admin panel for menu/order management and implemented efficient state management for smooth experience along with responsive design.",
+    des: "Developed a full-stack hotel food ordering system featuring modular backend routing and interactive checkouts. Solved local storage cart state synchronization with MongoDB databases and optimized serverless API database connection pools to eliminate timeout constraints.",
     img: "/hotel.png",
     techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS"],
     demoLink: "https://hotel-management-system-web.vercel.app",
@@ -400,10 +406,10 @@ export const projects: Project[] = [
     category: "Food and Beverage",
     duration: "1 month",
     features: [
-      "Real-time order tracking",
-      "Admin menu/order control panel",
-      "Cart & checkout management",
-      "Responsive interface",
+      "14 modular REST APIs for order & menu management",
+      "Local storage shopping cart synchronization with MongoDB",
+      "Serverless database connection pooling optimizations",
+      "Real-time order tracking & admin control panels",
     ],
     course: "Web Development & Management",
   },
@@ -483,67 +489,90 @@ export const projects: Project[] = [
   {
     id: 6,
     title: "MindSphere – Mental Wellness Platform",
-    des: "A comprehensive mental wellness web application that provides mood tracking, guided mindfulness exercises, journaling features, and personalized wellness recommendations. Built with a focus on accessible design and calming user experience.",
+    des: "A comprehensive student mental health ecosystem. Integrates clinical PHQ-9 assessment tracking, appointment bookings, and an interactive peer community dashboard. Combines Next.js and Flask backend APIs with Gemini conversational model interfaces.",
     img: "/mind-sphere.png",
-    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Flask"],
+    techStack: ["React", "Node.js", "Express", "MongoDB", "Tailwind CSS", "Flask", "Gemini AI"],
     demoLink: "https://mind-sphere-web.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/MindSphere",
     status: "completed",
     category: "Health & Wellness",
     duration: "1.5 months",
     features: [
-      "Mood tracking with visual analytics",
-      "Guided mindfulness exercises",
-      "Personal journaling system",
-      "AI-powered wellness recommendations",
+      "AI-powered wellness recommendations and chatbot with Gemini AI",
+      "Clinical PHQ-9 wellness assessment tracking with visual analytics",
+      "Secure appointment scheduling and peer discussion platform",
+      "Strict data privacy, accessibility and student trust design patterns",
     ],
     course: "Full Stack Development & AI",
   },
   {
     id: 7,
-    title: "Edvanta – EdTech Learning Platform",
-    des: "A full-featured educational technology platform with course management, video lessons, progress tracking, and quiz assessments. Includes instructor dashboard for content management and student analytics.",
+    title: "Edvanta – AI-Powered Career Platform",
+    des: "An intelligent guidance and roadmap generator designed for learners. Built a modular backend supporting 33 API routes managing user roadmaps, AI chat limits, and personalized guidance resources. Contributed to recognition as Hack Celestial 2.0 National Finalist.",
     img: "/edvanta.png",
-    techStack: ["React", "Vite", "Tailwind CSS", "Python", "Flask", "MongoDB"],
+    techStack: ["React", "Vite", "Tailwind CSS", "Python", "Flask", "MongoDB", "Firebase Auth", "Gemini AI API"],
     demoLink: "https://edvanta-web.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/edvanta",
     status: "completed",
     category: "EdTech",
     duration: "2 months",
     features: [
-      "Course management system",
-      "Video lesson streaming",
-      "Progress tracking dashboard",
-      "Quiz and assessment engine",
+      "National Finalist at Hack Celestial 2.0 (Top tiers out of 320+ teams)",
+      "Robust backend architecture with 33 REST API endpoints",
+      "Intelligent roadmap and career guidance utilizing Google Gemini API",
+      "Secure user flows and Firebase Auth integration",
     ],
     course: "Educational Technology",
+  },
+  {
+    id: 8,
+    title: "Department Ledger Portal",
+    des: "An institutional record management system engineered with strict security criteria. Implemented secure routing architectures via Firebase token verification and achieved production-grade reliability using automated pipelines.",
+    img: "/department-ledger-portal.png",
+    techStack: ["Next.js", "React", "Tailwind CSS", "Firebase Authentication", "Firestore", "Firebase Admin SDK", "Gemini AI", "Jest", "Playwright"],
+    demoLink: "https://department-ledger-portal.vercel.app",
+    sourceLink: "https://github.com/tanish-jain-225/Department-Ledger-Portal",
+    status: "completed",
+    category: "Academic Management",
+    duration: "2 months",
+    features: [
+      "Robust testing suite with 77 Jest unit tests & 5 Playwright E2E pipelines",
+      "Cryptographically verified API routes via Firebase Admin SDK",
+      "Tamper-resistant audit logging for institutional records",
+      "Intelligent document processing with Gemini AI integration",
+    ],
+    course: "Software Quality & Record Management",
   },
 ];
 
 export const workExperience: WorkExperienceItem[] = [
   {
     id: 1,
-    title: "Engineering Student at VESIT",
-    desc: "Pursuing B.E. in Automation and Robotics at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai. Building real-world projects across web development, embedded systems, and AI while maintaining strong academic performance.",
+    title: "Software Engineering Student at VESIT",
+    desc: "B.E. student at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai. Focused on full stack development, cloud deployment, and AI system design, building scalable web products and maintaining a strong academic record.",
     thumbnail: "/exp1.svg",
+    link: "https://vesit.ves.ac.in",
   },
   {
     id: 2,
     title: "Frontend Development Intern — Plasmid",
     desc: "Completed a remote frontend development internship at Plasmid, Bangalore. Built responsive and modern web interfaces using HTML, CSS, JavaScript, and Bootstrap. Collaborated with the team to deliver pixel-perfect designs and optimize page performance.",
     thumbnail: "/exp2.svg",
+    link: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
   {
     id: 3,
     title: "Full Stack Development Intern — BWS",
     desc: "Completed a remote internship at BWS, New Delhi. Developed full-stack web applications using Python, Flask, and Bootstrap. Built dynamic Single Page Applications with RESTful APIs and database integration. Gained hands-on experience in backend architecture.",
     thumbnail: "/exp3.svg",
+    link: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
   {
     id: 4,
-    title: "Continuous Learning & Open Source",
-    desc: "Actively building and shipping projects using the MERN stack, Next.js, and AI tools. Exploring cutting-edge technologies like LangChain, Hugging Face, and Three.js. Passionate about open-source contributions and community-driven development.",
+    title: "Co-Organizer — UniMerge 1.0 Hackathon",
+    desc: "Co-organized a national-level online hackathon, coordinating scheduling, technical queries, and logistics for over 130 participants across India. Solved participant issues and platform challenges under tight deadlines.",
     thumbnail: "/exp4.svg",
+    link: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
 ];
 
@@ -560,6 +589,12 @@ export const socialMedia: SocialMediaItem[] = [
     url: "https://linkedin.com/in/tanish-jain-tj02022005",
     icon: "FaLinkedin",
   },
+  {
+    id: 3,
+    name: "Instagram",
+    url: "https://www.instagram.com/tanish_jain_225",
+    icon: "FaInstagram",
+  },
 ];
 
 // Personal Information
@@ -568,13 +603,12 @@ export const personalInfo: PersonalInfo = {
   email: "tanishjain020205@gmail.com",
   location: "Mumbai, Maharashtra",
   university: "VESIT",
-  degree: "Bachelor of Engineering - Automation & Robotics",
-  status: "Full Stack Developer & Engineering Student",
-  bio: "Engineering student and full-stack developer focused on building practical, scalable and user-friendly applications. I enjoy working across the complete development lifecycle — from designing responsive interfaces to developing efficient backend systems and databases. Driven by problem-solving, continuous improvement and learning technologies by building real-world projects.",
+  degree: "Bachelor of Engineering (B.E.)",
+  status: "Software Engineer & Full Stack Developer",
+  bio: "I am a Software Engineer and Full Stack Developer who enjoys building scalable, end-to-end applications. From designing responsive user interfaces to architecting robust APIs, modular databases, and custom AI workflows, I focus on software quality and security.",
   experience: "3+ years",
   projectsCompleted: "20+",
   technologiesUsed: "25+",
-
 };
 
 // Contact Information
@@ -583,9 +617,9 @@ export const contactInfo: ContactInfo = {
   subtitle:
     "Have a project in mind or want to collaborate? I'd love to hear from you. Let's build something great together!",
   email: "tanishjain020205@gmail.com",
-  phone: "+91 98765 43210",
+  phone: "+91-7021341948",
   location: "Mumbai, India",
-  availability: "Available for student collaborations and project partnerships",
+  availability: "Available for collaboration, hackathons, and software engineering opportunities",
   responseTime: "Usually responds within 24 hours",
   form: {
     title: "Send me a message",
@@ -633,7 +667,7 @@ export const footerData: FooterData = {
     accent: "purple",
   },
   description:
-    "Engineering student and full-stack developer focused on building practical, scalable and user-friendly applications. 575+ GitHub contributions and 20+ projects deployed.",
+    "Creating meaningful products by combining robust backend logic, clean architectures, and intelligent AI features.",
   sections: [
     {
       title: "Quick Links",
@@ -652,7 +686,7 @@ export const footerData: FooterData = {
 export const bentoGridData: BentoGridData = {
   title: "About Me",
   subtitle:
-    "Engineering student and full-stack developer at VESIT with 575+ GitHub contributions, focused on building practical, scalable and user-friendly applications.",
+    "B.E. student and developer at VESIT with 575+ commits. Explore my journey from writing code to building production-ready, fully tested applications.",
   items: [
     {
       id: 1,
@@ -662,7 +696,7 @@ export const bentoGridData: BentoGridData = {
       spareImg: "",
       content: {
         type: "engineering",
-        text: "Built and applied microcontroller-based systems using N76E003 for real-time applications. Also worked on Web development projects using MERN stack. Balanced academic and personal projects to enhance practical skills.",
+        text: "Focused heavily on software system architecture, database modeling, and MERN stack development. Balanced academic research and personal projects to refine core engineering and development skills.",
         stats: [
           { label: "GPA", value: "7.5" },
           { label: "Projects Completed", value: "20+" },
@@ -677,7 +711,7 @@ export const bentoGridData: BentoGridData = {
       spareImg: "",
       content: {
         type: "collaboration",
-        text: "Open to working with interdisciplinary teams for engineering, web or robotics-based hackathons.",
+        text: "Open to working with interdisciplinary teams for engineering, web or software-based hackathons and collaborations.",
         availability: {
           status: "Actively looking for tech teammates",
           schedule: "Weekends & Evenings",
@@ -692,21 +726,21 @@ export const bentoGridData: BentoGridData = {
       spareImg: "",
       content: {
         type: "techstack",
-        text: "Comfortable with MERN Stack, Python and DSA",
-        note: "Currently exploring: LangChain and Hugging Face AI Models",
+        text: "Comfortable with MERN Stack, Next.js, Python, and DSA",
+        note: "Currently exploring: LLMs, RAG, and AI Agent workflows",
       },
     },
     {
       id: 4,
-      title: "Safe Load Indicator System",
-      description: "Real-time safety system for crane operators",
+      title: "Department Ledger Portal",
+      description: "Production-grade record management system",
       img: "/b4.svg",
       spareImg: "",
       content: {
         type: "project",
-        text: "Designed an SLI using accelerometers & gyros for jerk detection and safety logging. Data used to analyze operator behavior.",
-        technologies: ["N76E003", "MPU6050", "Serial Logger", "TM1640 Display"],
-        repository: "Private field deployment",
+        text: "Engineered with cryptographically verified routing via Firebase Admin SDK and verified by 77 Jest tests and 5 Playwright E2E suites.",
+        technologies: ["Next.js", "Firebase", "Jest", "Playwright"],
+        repository: "Source on GitHub",
       },
     },
     {
@@ -718,7 +752,7 @@ export const bentoGridData: BentoGridData = {
       spareImg: "/grid.svg",
       content: {
         type: "project",
-        text: "Built with MERN stack for smooth customer and admin experience. Integrated authentication and cart flow with cash order support.",
+        text: "Focused on serverless hosting connection pooling and local storage synchronization workflows to ensure zero-timeout cart transactions.",
         technologies: ["React", "Express", "MongoDB", "Node.js"],
         repository: "See on GitHub",
       },
