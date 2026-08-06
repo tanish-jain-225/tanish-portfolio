@@ -22,7 +22,9 @@ const RecentProjects = () => {
         {sectionTitles.projects.subtitle}
       </p>
       <div className="flex flex-wrap items-center justify-center p-4 m-4 md:gap-10">
-        {projects.map((item) => (
+        {[...projects]
+          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
+          .map((item) => (
           <div
             className="flex items-center justify-center sm:w-96 w-[80vw] cardContainer"
             style={{ minHeight: '34rem', height: '100%', maxHeight: '40rem' }}
