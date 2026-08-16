@@ -240,7 +240,7 @@ export const siteConfig: SiteConfig = {
     "Frontend Developer",
     "Backend Developer",
   ],
-  ogImage: "/og-image.png",
+  ogImage: "/logo.png",
   themeColor: "#8b5cf6",
   jobTitle: "Software Engineer & Full Stack Developer",
 };

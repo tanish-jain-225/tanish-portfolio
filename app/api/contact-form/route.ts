@@ -177,11 +177,18 @@ export async function POST(request: NextRequest) {
 }
 
 // OPTIONS method - CORS handling
-export async function OPTIONS() {
+export async function OPTIONS(request: NextRequest) {
+  const origin = request.headers.get('origin') || '';
+  const allowedOrigins = [
+    'https://tanish-portfolio-web.vercel.app',
+    'http://localhost:3000',
+  ];
+  const isAllowed = !origin || allowedOrigins.includes(origin) || origin.endsWith('.vercel.app');
+
   return new NextResponse(null, {
     status: 200,
     headers: {
-      'Access-Control-Allow-Origin': '*',
+      'Access-Control-Allow-Origin': isAllowed ? (origin || '*') : 'https://tanish-portfolio-web.vercel.app',
       'Access-Control-Allow-Methods': 'GET, POST, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
     },
