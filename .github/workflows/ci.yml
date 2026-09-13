@@ -1,0 +1,50 @@
+name: Portfolio CI Pipeline
+
+on:
+  push:
+    branches: [ "**" ]
+  pull_request:
+    branches: [ "**" ]
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: ci-portfolio-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  verify:
+    name: Type Check, Test & Build
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        node-version: [20.x, 22.x]
+
+    env:
+      MONGODB_URI: "mongodb://localhost:27017"
+      DB_NAME: "portfolio_test"
+      COLLECTION_NAME: "contacts"
+
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js ${{ matrix.node-version }}
+        uses: actions/setup-node@v4
+        with:
+          node-version: ${{ matrix.node-version }}
+          cache: 'npm'
+
+      - name: Install Dependencies
+        run: npm ci
+
+      - name: TypeScript Static Type Checking
+        run: npx tsc --noEmit
+
+      - name: Run Vitest Unit & Integration Tests
+        run: npm test
+
+      - name: Build Next.js Production Bundle
+        run: npm run build

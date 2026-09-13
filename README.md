@@ -128,6 +128,35 @@ npm run dev
 ```
 Open [http://localhost:3000](http://localhost:3000) in your web browser to view your site locally.
 
+### 5. Automated Testing & Verification
+The repository includes a comprehensive test suite powered by **Vitest** and **React Testing Library**:
+```bash
+# Run all unit and integration tests
+npm test
+
+# Run tests in watch mode
+npm run test:watch
+
+# Static TypeScript type check
+npx tsc --noEmit
+```
+
+*Coverage:*
+- `__tests__/rateLimit.test.ts`: IP-based sliding window rate limiter verification, window eviction, and spam protection.
+- `__tests__/mongodb.test.ts`: Database configuration verification, environment variable presence checks, and connection pooling caching.
+- `__tests__/contact-api.test.ts`: Next.js Route Handler tests for `/api/contact-form` (GET health check, POST payload validation, rate-limiting HTTP 429, and database insertion).
+- `__tests__/components.test.tsx`: Component tests for `Hero`, `Contact`, and `Footer` rendering and interactions.
+
+---
+
+## 🚀 CI/CD Pipeline
+
+Automated quality gates are enforced on every push and pull request via GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)):
+- **Multi-Version Matrix:** Node.js 20.x and 22.x execution.
+- **Strict Static Type Checking:** `npx tsc --noEmit`.
+- **Vitest Automated Testing:** `npm test`.
+- **Next.js Production Build:** `npm run build`.
+
 ---
 
 ## 📊 API Reference
