@@ -44,7 +44,7 @@ export const PinContainer = ({
   const content = (
     <div
       className={cn(
-        "relative group/pin z-50 w-50",
+        "relative group/pin z-50 max-w-full",
         containerClassName
       )}
       onMouseEnter={onMouseEnter}
@@ -61,9 +61,9 @@ export const PinContainer = ({
           style={{
             transform: reducedMotion ? "translate(-50%,-50%)" : transform,
           }}
-          className="absolute left-1/2 p-4 top-1/2 flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden"
+          className="absolute left-1/2 p-3 sm:p-4 top-1/2 flex justify-start items-start rounded-2xl shadow-[0_8px_16px_rgb(0_0_0/0.4)] border border-white/[0.1] group-hover/pin:border-white/[0.2] transition duration-700 overflow-hidden max-w-[calc(100vw-1rem)]"
         >
-          <div className={cn(" relative z-50 pointer-events-auto", className)}>{children}</div>
+          <div className={cn(" relative z-50 pointer-events-auto w-full", className)}>{children}</div>
         </div>
       </div>
       <PinPerspective title={title} href={href} />

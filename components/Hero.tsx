@@ -75,40 +75,40 @@ const Hero = () => {
       </div>
 
       {/* Content layer with proper z-index */}
-      <div className="relative z-10 flex flex-col items-center justify-center py-20 w-full px-4 sm:px-8">
-        <div className="max-w-[95vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center justify-center">
-          <h2 className="uppercase tracking-widest text-xs sm:text-sm text-center text-blue-100 max-w-64 sm:max-w-80 hero-animate opacity-0 pt-4 sm:pt-8 md:pt-10">
+      <div className="relative z-10 flex flex-col items-center justify-center py-16 sm:py-20 w-full px-2 sm:px-8">
+        <div className="max-w-[96vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center justify-center w-full">
+          <h2 className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-80 hero-animate opacity-0 pt-2 sm:pt-8 md:pt-10 break-words">
             {heroData.subtitle}
           </h2>
           
-          <div className="hero-animate opacity-0">
+          <div className="hero-animate opacity-0 w-full">
             <TextGenerateEffect 
-              className="text-center text-2xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl"
+              className="text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl break-words px-1"
               words={heroData.title}
               accentWordIndex={heroData.accentWordIndex}
             />
           </div>
 
-          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-2 sm:px-4 md:px-6">
+          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-1 sm:px-4 md:px-6 break-words">
             {heroData.description}
           </p>
 
           {/* Tech badges */}
-          <div className="flex flex-wrap justify-center gap-2 mb-6 hero-animate opacity-0 px-2">
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-6 hero-animate opacity-0 px-1 max-w-full">
             {heroData.techBadges.map((tech) => (
               <span
                 key={tech}
-                className="px-3 py-1 text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm"
+                className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm whitespace-nowrap"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <div className="hero-animate opacity-0">
+          <div className="hero-animate opacity-0 max-w-full">
             <a 
               href={heroData.ctaButton.link}
               aria-label={heroData.ctaButton.text}
-              className="inline-block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+              className="inline-block max-w-full rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               onClick={(e) => {
                 e.preventDefault();
                 const projectsSection = document.getElementById('projects');

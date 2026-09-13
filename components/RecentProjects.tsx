@@ -8,7 +8,7 @@ import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
   return (
-    <section id="projects" className="py-20 w-[90vw] mx-auto scroll-mt-20">
+    <section id="projects" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20">
       <h1 className="heading text-white p-2">
         {sectionTitles.projects.title.split(" ").map((word, i) =>
           i === 0 ? (
@@ -18,16 +18,16 @@ const RecentProjects = () => {
           )
         )}
       </h1>
-      <p className="text-center text-[#BEC1DD] text-sm md:text-base max-w-2xl mx-auto mt-3 mb-2 px-4">
+      <p className="text-center text-[#BEC1DD] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 sm:mt-3 mb-2 px-2 sm:px-4">
         {sectionTitles.projects.subtitle}
       </p>
-      <div className="flex flex-wrap items-center justify-center p-4 m-4 md:gap-10">
+      <div className="flex flex-wrap items-center justify-center px-1 py-4 sm:p-4 my-2 sm:m-4 gap-6 md:gap-10">
         {[...projects]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .map((item) => (
           <div
-            className="flex items-center justify-center sm:w-96 w-[80vw] cardContainer"
-            style={{ minHeight: '34rem', height: '100%', maxHeight: '40rem' }}
+            className="flex items-center justify-center w-full max-w-[360px] cardContainer"
+            style={{ minHeight: '34rem', height: '100%', maxHeight: '44rem' }}
             key={item.id}
           >            
           <PinContainer
@@ -35,7 +35,7 @@ const RecentProjects = () => {
               href={item.demoLink}
               disableWrapper={true}
             >
-              <div className="relative flex items-center justify-center sm:w-96 w-[80vw] overflow-hidden" style={{ height: '22vh', minHeight: 160, maxHeight: 240, marginBottom: 24, position: 'relative' }}>
+              <div className="relative flex items-center justify-center w-[84vw] xs:w-[80vw] sm:w-96 max-w-[360px] overflow-hidden" style={{ height: '22vh', minHeight: 150, maxHeight: 240, marginBottom: 20, position: 'relative' }}>
                 <div
                   className="relative w-full h-full overflow-hidden lg:rounded-3xl"
                   style={{ backgroundColor: "#13162D", position: 'relative', height: '100%' }}
@@ -48,7 +48,7 @@ const RecentProjects = () => {
                     alt={`${item.title} preview`}
                     className="z-10 absolute bottom-0 w-full h-full object-cover object-top"
                     fill
-                    sizes="(max-width: 640px) 80vw, (max-width: 1200px) 384px, 384px"
+                    sizes="(max-width: 640px) 85vw, (max-width: 1200px) 384px, 384px"
                   />
                 ) : (
                   <div className="z-10 absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-950/80 to-indigo-950/80 border border-white/10 rounded-2xl">
@@ -59,7 +59,7 @@ const RecentProjects = () => {
                 )}
               </div>
 
-              <div className="space-y-3">
+              <div className="w-[84vw] xs:w-[80vw] sm:w-96 max-w-[360px] space-y-3">
                 {/* Category & Status */}
                 <div className="flex items-center justify-between text-xs">
                   <div className="flex items-center gap-1 text-purple-300">
@@ -103,22 +103,22 @@ const RecentProjects = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex items-center justify-between mt-4 pt-3 border-t border-white/10 gap-3 relative z-20">
+                <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between mt-4 pt-3 border-t border-white/10 gap-2 xs:gap-3 relative z-20">
                   {item.sourceLink ? (
                     <a 
                       href={item.sourceLink}
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View source code for ${item.title} on GitHub (opens in new tab)`}
-                      className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded-lg text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     >
-                      <FaGithub className="w-3.5 h-3.5" aria-hidden="true" />
-                      <span>{uiText.projects.sourceCode}</span>
+                      <FaGithub className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
+                      <span className="truncate">{uiText.projects.sourceCode}</span>
                     </a>
                   ) : (
-                    <div className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-black/20 border border-white/5 rounded-lg text-xs text-white/30 cursor-not-allowed select-none" aria-hidden="true">
-                      <FaGithub className="w-3.5 h-3.5" />
-                      <span>{uiText.projects.sourceCode}</span>
+                    <div className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-black/20 border border-white/5 rounded-lg text-[11px] sm:text-xs text-white/30 cursor-not-allowed select-none" aria-hidden="true">
+                      <FaGithub className="w-3.5 h-3.5 flex-shrink-0" />
+                      <span className="truncate">{uiText.projects.sourceCode}</span>
                     </div>
                   )}
                   
@@ -128,15 +128,15 @@ const RecentProjects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Visit live demo for ${item.title} (opens in new tab)`}
-                      className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-gradient-to-r from-purple-900/40 to-purple-800/40 hover:from-purple-900/60 hover:to-purple-800/60 border border-purple-500/30 hover:border-purple-500/50 rounded-lg text-xs text-purple-300 hover:text-purple-200 transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-gradient-to-r from-purple-900/40 to-purple-800/40 hover:from-purple-900/60 hover:to-purple-800/60 border border-purple-500/30 hover:border-purple-500/50 rounded-lg text-[11px] sm:text-xs text-purple-300 hover:text-purple-200 transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     >
-                      <span>{uiText.projects.liveProject}</span>
-                      <FaLocationArrow className="w-3 h-3" aria-hidden="true" />
+                      <span className="truncate">{uiText.projects.liveProject}</span>
+                      <FaLocationArrow className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
                     </a>
                   ) : (
-                    <div className="flex items-center justify-center gap-2 flex-1 py-2 px-3 bg-purple-900/10 border border-purple-500/10 rounded-lg text-xs text-purple-300/30 cursor-not-allowed select-none" aria-hidden="true">
-                      <span>{uiText.projects.liveProject}</span>
-                      <FaLocationArrow className="w-3 h-3" />
+                    <div className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-purple-900/10 border border-purple-500/10 rounded-lg text-[11px] sm:text-xs text-purple-300/30 cursor-not-allowed select-none" aria-hidden="true">
+                      <span className="truncate">{uiText.projects.liveProject}</span>
+                      <FaLocationArrow className="w-3 h-3 flex-shrink-0" />
                     </div>
                   )}
                 </div>

@@ -97,7 +97,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   // Card container
   return (
     <section
-      className="relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[260px] bento-item"
+      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full max-w-full"
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
@@ -156,11 +156,11 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
           )}
         {/* Card content */}
         <div
-          className="group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-4 sm:p-5 md:p-6 lg:p-8 xl:p-10 z-20 w-full h-full"
+          className="group-hover/bento:translate-x-1 sm:group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-3 sm:p-5 md:p-6 lg:p-8 z-20 w-full h-full"
         >
           {/* Card title */}
           {title && (
-            <h3 className="font-sans text-base sm:text-lg md:text-2xl lg:text-3xl max-w-full sm:max-w-96 font-bold z-10 text-white tracking-tight " id={`bento-title-${id}`}>
+            <h3 className="font-sans text-sm sm:text-lg md:text-2xl lg:text-3xl max-w-full font-bold z-10 text-white tracking-tight break-words" id={`bento-title-${id}`}>
               {title}
             </h3>
           )}
@@ -397,7 +397,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               )}
               {/* Contact card */}
               {content.type === "contact" && (
-                <div className="flex flex-col items-center justify-center w-full h-full p-4 m-2 relative z-30 pointer-events-auto">
+                <div className="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 m-1 sm:m-2 relative z-30 pointer-events-auto">
                   <button
                     type="button"
                     onClick={async () => {
@@ -417,14 +417,14 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                     }}
                     aria-label={copied ? "Email copied to clipboard" : `Copy email address ${content.email}`}
                     aria-live="polite"
-                    className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-xs sm:text-sm md:text-base m-2 flex items-center max-w-full min-w-0 select-none"
+                    className="px-2.5 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-[11px] sm:text-sm md:text-base m-1 sm:m-2 flex items-center max-w-full min-w-0 select-none"
                     style={{
                       wordBreak: 'break-all',
                       whiteSpace: 'pre-line',
                       minWidth: 0,
                     }}
                   >
-                    <span className="truncate block max-w-[60vw] sm:max-w-[40vw] md:max-w-[22vw] lg:max-w-[300px] text-ellipsis overflow-hidden text-left">
+                    <span className="truncate block max-w-[200px] xs:max-w-[240px] sm:max-w-[300px] text-ellipsis overflow-hidden text-center">
                       {copied ? uiText.contact.copied : `${uiText.contact.copy}: ${content.email}`}
                     </span>
                   </button>

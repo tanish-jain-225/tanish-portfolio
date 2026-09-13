@@ -59,7 +59,7 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-4 sm:py-6 flex items-center justify-center",
+          "py-2 sm:py-4 flex items-center justify-center w-full",
           containerClassName
         )}
         style={{
@@ -72,7 +72,7 @@ export const CardContainer = ({
           onMouseMove={handleMouseMove}
           onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear",
+            "flex items-center justify-center relative transition-all duration-200 ease-linear w-full",
             className
           )}
           style={{
@@ -96,7 +96,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "h-96 w-96 [transform-style:preserve-3d]  [&>*]:[transform-style:preserve-3d]",
+        "w-full h-auto [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
         className
       )}
     >
@@ -106,8 +106,8 @@ export const CardBody = ({
 };
 
 export const CardItem = React.forwardRef<
-  HTMLDivElement,
-  React.HTMLAttributes<HTMLDivElement> & {
+  any,
+  React.AllHTMLAttributes<HTMLElement> & {
     as?: React.ElementType;
     translateX?: number | string;
     translateY?: number | string;
@@ -129,8 +129,8 @@ export const CardItem = React.forwardRef<
   ...rest 
 }, ref) => {
   const [isMouseEntered] = useMouseEnter();
-  const localRef = useRef<HTMLDivElement>(null);
-  const resolvedRef = (ref || localRef) as React.RefObject<HTMLDivElement | null>;
+  const localRef = useRef<HTMLElement>(null);
+  const resolvedRef = (ref || localRef) as React.RefObject<HTMLElement | null>;
 
   const handleAnimations = useCallback(() => {
     if (!resolvedRef.current) return;
