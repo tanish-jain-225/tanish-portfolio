@@ -18,11 +18,11 @@ const MyWorkExperience = () => {
       <p className="text-center text-[#BEC1DD] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 sm:mt-3 mb-6 px-2 sm:px-4">
         {sectionTitles.experience.subtitle}
       </p>
-      <div className="flex flex-wrap justify-center items-start gap-4 my-2">
+      <div className="flex flex-wrap justify-center items-stretch gap-4 sm:gap-6 my-2 w-full">
         {workExperience.map((card, index) => (
           <div
             key={card.id}
-            className="flex-1 min-w-0 w-full max-w-[380px] flex flex-col"
+            className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(50%-1rem)] max-w-[500px] flex flex-col"
           >
             <CardContainer containerClassName="w-full h-full py-2" className="w-full h-full">
               <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-purple-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-2xl p-3.5 sm:p-5 md:p-6 border flex flex-col justify-between min-h-[480px] sm:min-h-[540px] card-glow">

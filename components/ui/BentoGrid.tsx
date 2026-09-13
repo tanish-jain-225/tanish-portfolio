@@ -97,7 +97,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   // Card container
   return (
     <section
-      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] min-w-0 max-w-full"
+      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)] min-w-0 max-w-full"
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
