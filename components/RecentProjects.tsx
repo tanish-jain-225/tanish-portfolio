@@ -8,7 +8,7 @@ import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
   return (
-    <section id="projects" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20">
+    <section id="projects" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center">
       <h1 className="heading text-white p-2">
         {sectionTitles.projects.title.split(" ").map((word, i) =>
           i === 0 ? (

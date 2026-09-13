@@ -44,7 +44,7 @@ export default function Home() {
   return (
     <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto">
       {/* Full-width hero section */}
-      <section className="w-full">
+      <section className="w-full flex flex-col items-center">
         <FloatingNav
           navItems={navItems.map((item) => ({
             name: item.name,
@@ -56,7 +56,7 @@ export default function Home() {
       </section>
       
       {/* Content with max-width constraint */}
-      <div className="w-full">
+      <div className="w-full flex flex-col items-center">
         <Suspense fallback={<div className="content-loader h-96 w-full" />}>
           <DynamicGrid />
         </Suspense>

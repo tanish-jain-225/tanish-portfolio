@@ -30,14 +30,14 @@ const Footer = () => {
   };
   
   return (
-    <footer className="relative w-full max-w-full mx-auto px-3 py-8 sm:p-8 border-t border-white/10 bg-[#181A2A] text-white overflow-hidden" role="contentinfo">
+    <footer className="relative w-full max-w-full mx-auto px-3 py-8 sm:p-8 border-t border-white/10 bg-[#181A2A] text-white overflow-hidden flex flex-col items-center" role="contentinfo">
       {/* Decorative background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <div className="absolute top-0 left-1/4 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-purple-600/10 filter blur-3xl"></div>
         <div className="absolute bottom-0 right-1/4 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-blue-600/10 filter blur-3xl"></div>
         <div className="h-full w-full opacity-10 [background-image:linear-gradient(to_right,#1e2142_1px,transparent_1px),linear-gradient(to_bottom,#1e2142_1px,transparent_1px)] [background-size:32px_32px] sm:[background-size:40px_40px]"></div>
       </div>
-      <div className="relative z-10 max-w-7xl mx-auto px-1 sm:px-4 md:px-6 lg:px-8 w-full">
+      <div className="relative z-10 max-w-7xl mx-auto px-1 sm:px-4 md:px-6 lg:px-8 w-full flex flex-col">
         <div className="flex flex-col md:flex-row flex-wrap gap-6 sm:gap-8 md:gap-10 items-stretch md:items-start w-full">
           {/* Logo and description */}
           <div className="flex-1 min-w-[140px] sm:min-w-[220px] flex flex-col justify-center md:justify-start mb-6 md:mb-0">

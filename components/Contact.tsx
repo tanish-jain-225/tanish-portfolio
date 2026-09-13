@@ -92,7 +92,7 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-14 sm:py-20 text-white w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20"
+      className="py-14 sm:py-20 text-white w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center"
     >
       <h1 className="heading text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl">
         {contactInfo.title.split(" ").map((word, i) =>

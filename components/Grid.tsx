@@ -41,8 +41,8 @@ const Grid = () => {
   }, []);
   
   return (
-    <section id="about" className="py-16 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20" ref={sectionRef}>      
-      <div className="mb-8 sm:mb-12 text-center section-transition opacity-0">
+    <section id="about" className="py-16 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center" ref={sectionRef}>      
+      <div className="mb-8 sm:mb-12 text-center section-transition opacity-0 flex flex-col items-center w-full">
         <h2 className="text-2xl sm:text-4xl lg:text-5xl font-bold mb-3 sm:mb-4 text-white tracking-tight break-words px-1">
           {bentoGridData.title.split(" ").map((word, i) =>
             i === 0 ? (
@@ -56,7 +56,7 @@ const Grid = () => {
           {bentoGridData.subtitle}
         </p>
       </div>
-      <div aria-label="Skills and interests flex" className="w-full">
+      <div aria-label="Skills and interests flex" className="w-full flex flex-col items-center">
         <BentoGrid />
       </div>
     </section>

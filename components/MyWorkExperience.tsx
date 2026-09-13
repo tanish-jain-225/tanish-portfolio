@@ -5,7 +5,7 @@ import { workExperience, sectionTitles, uiText } from "@/data";
 
 const MyWorkExperience = () => {
   return (
-    <section id="experience" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20">
+    <section id="experience" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center">
       <h1 className="heading text-white">
         {sectionTitles.experience.title.split(" ").map((word, i) =>
           i === 0 ? (

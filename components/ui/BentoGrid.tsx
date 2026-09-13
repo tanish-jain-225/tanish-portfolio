@@ -9,12 +9,12 @@ import { techStack, images, bentoGridData, uiText } from "@/data";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
 
-// Main BentoGrid component: renders a responsive flexbox grid of BentoGridItem cards
+// Main BentoGrid component: renders a responsive pure flexbox layout of BentoGridItem cards
 export const BentoGrid = ({ className }: { className?: string }) => (
   <div
     className={cn(
-      // Responsive grid: 1 col xs, 2 cols sm, 3 cols md+, tight gap
-      "grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3 sm:gap-4 md:gap-6 mx-auto w-full py-6 sm:py-8 md:py-10",
+      // Responsive flexbox layout: 1 col on mobile (<640px), 2 cols on sm (640px+), 3 cols on md+ (768px+)
+      "flex flex-wrap items-stretch justify-center gap-3 sm:gap-4 md:gap-6 mx-auto w-full py-6 sm:py-8 md:py-10",
       className
     )}
     role="list"
@@ -97,7 +97,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   // Card container
   return (
     <section
-      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full max-w-full"
+      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full sm:w-[calc(50%-0.5rem)] md:w-[calc(33.333%-1rem)] min-w-0 max-w-full"
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
