@@ -8,20 +8,22 @@ import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
   return (
-    <section id="projects" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center">
-      <h1 className="heading text-white p-2">
-        {sectionTitles.projects.title.split(" ").map((word, i) =>
-          i === 0 ? (
-            <span key={i} className="text-purple">{word} </span>
-          ) : (
-            <span key={i}>{word} </span>
-          )
-        )}
-      </h1>
-      <p className="text-center text-[#BEC1DD] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 sm:mt-3 mb-2 px-2 sm:px-4">
-        {sectionTitles.projects.subtitle}
-      </p>
-      <div className="flex flex-wrap items-center justify-center px-1 py-4 sm:p-4 my-2 sm:m-4 gap-6 md:gap-10">
+    <section id="projects" aria-labelledby="projects-heading" className="section-container">
+      <div className="text-center w-full">
+        <h2 id="projects-heading" className="heading text-white">
+          {sectionTitles.projects.title.split(" ").map((word, i) =>
+            i === 0 ? (
+              <span key={i} className="text-purple">{word} </span>
+            ) : (
+              <span key={i}>{word} </span>
+            )
+          )}
+        </h2>
+        <p className="section-subtitle">
+          {sectionTitles.projects.subtitle}
+        </p>
+      </div>
+      <div className="flex flex-wrap items-center justify-center px-1 py-2 sm:p-4 my-2 gap-6 md:gap-10 w-full">
         {[...projects]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .map((item) => (

@@ -77,17 +77,17 @@ const Hero = () => {
       {/* Content layer with proper z-index */}
       <div className="relative z-10 flex flex-col items-center justify-center py-16 sm:py-20 w-full px-2 sm:px-8">
         <div className="max-w-[96vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center justify-center w-full">
-          <h2 className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-80 hero-animate opacity-0 pt-2 sm:pt-8 md:pt-10 break-words">
+          <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-80 hero-animate opacity-0 pt-2 sm:pt-8 md:pt-10 break-words font-medium">
             {heroData.subtitle}
-          </h2>
+          </p>
           
-          <div className="hero-animate opacity-0 w-full">
+          <h1 className="hero-animate opacity-0 w-full">
             <TextGenerateEffect 
               className="text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl break-words px-1"
               words={heroData.title}
               accentWordIndex={heroData.accentWordIndex}
             />
-          </div>
+          </h1>
 
           <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-1 sm:px-4 md:px-6 break-words">
             {heroData.description}

@@ -92,72 +92,77 @@ const Contact = () => {
   return (
     <section
       id="contact"
-      className="py-14 sm:py-20 text-white w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center"
+      aria-labelledby="contact-heading"
+      className="section-container text-white"
     >
-      <h1 className="heading text-center text-xl sm:text-2xl md:text-3xl lg:text-4xl">
-        {contactInfo.title.split(" ").map((word, i) =>
-          i === 0 ? (
-            <span key={i} className="text-purple">
-              {word}{" "}
-            </span>
-          ) : (
-            <span key={i}>{word} </span>
-          ),
-        )}
-      </h1>
-      <p className="text-center text-[#BEC1DD] text-xs sm:text-sm md:text-base max-w-xl mx-auto mt-2 sm:mt-3 mb-6 sm:mb-8 px-2">
-        {contactInfo.subtitle}
-      </p>
-      <div className="flex flex-col lg:flex-row gap-5 sm:gap-8 lg:gap-10 mt-6 sm:mt-8 md:mt-10 w-full">
+      <div className="text-center w-full">
+        <h2 id="contact-heading" className="heading">
+          {contactInfo.title.split(" ").map((word, i) =>
+            i === 0 ? (
+              <span key={i} className="text-purple">
+                {word}{" "}
+              </span>
+            ) : (
+              <span key={i}>{word} </span>
+            ),
+          )}
+        </h2>
+        <p className="section-subtitle">
+          {contactInfo.subtitle}
+        </p>
+      </div>
+      <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8 w-full">
         {/* Contact Form */}
         <motion.div
-          className="flex-1 bg-[#13162D] p-3.5 sm:p-5 md:p-6 rounded-xl border border-white/10 min-w-0"
+          className="flex-1 bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h2 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left">
+          <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left">
             {contactInfo.form.title}
-          </h2>
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4">
-            {contactInfo.form.fields.map((field) => (
-              <div key={field.name} className="flex flex-col">
-                <label
-                  htmlFor={field.name}
-                  className="block text-xs sm:text-sm text-[#BEC1DD] mb-1"
-                >
-                  {field.label}
-                </label>
-                {field.type === "textarea" ? (
-                  <textarea
-                    id={field.name}
-                    name={field.name}
-                    value={formData[field.name as keyof typeof formData] || ""}
-                    onChange={handleChange}
-                    required={field.required}
-                    rows={3}
-                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors resize-vertical"
-                  />
-                ) : (
-                  <input
-                    type={field.type}
-                    id={field.name}
-                    name={field.name}
-                    value={formData[field.name as keyof typeof formData] || ""}
-                    onChange={handleChange}
-                    required={field.required}
-                    autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
-                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors"
-                  />
-                )}
-              </div>
-            ))}
+          </h3>
+          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between">
+            <div className="space-y-3 sm:space-y-4">
+              {contactInfo.form.fields.map((field) => (
+                <div key={field.name} className="flex flex-col">
+                  <label
+                    htmlFor={field.name}
+                    className="block text-xs sm:text-sm text-[#BEC1DD] mb-1"
+                  >
+                    {field.label}
+                  </label>
+                  {field.type === "textarea" ? (
+                    <textarea
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData] || ""}
+                      onChange={handleChange}
+                      required={field.required}
+                      rows={3}
+                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors resize-vertical"
+                    />
+                  ) : (
+                    <input
+                      type={field.type}
+                      id={field.name}
+                      name={field.name}
+                      value={formData[field.name as keyof typeof formData] || ""}
+                      onChange={handleChange}
+                      required={field.required}
+                      autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
+                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors"
+                    />
+                  )}
+                </div>
+              ))}
+            </div>
             {statusMessage.type && (
               <div 
                 role={statusMessage.type === "error" ? "alert" : "status"}
                 aria-live="polite"
-                className={`p-3 rounded-md text-xs sm:text-sm border transition-all duration-300 ${
+                className={`p-3 rounded-md text-xs sm:text-sm border transition-all duration-300 my-2 ${
                   statusMessage.type === "success" 
                     ? "bg-green-950/40 text-green-300 border-green-500/30" 
                     : "bg-red-950/40 text-red-300 border-red-500/30"
@@ -170,7 +175,7 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               aria-live="polite"
-              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-xs sm:text-sm md:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${
+              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-xs sm:text-sm md:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 mt-2 ${
                 justSent
                   ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02] motion-reduce:scale-100"
                   : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01] motion-reduce:hover:scale-100"
@@ -186,22 +191,22 @@ const Contact = () => {
         </motion.div>
         {/* Contact Info & Socials */}
         <motion.div
-          className="flex-1 flex flex-col gap-4 sm:gap-6 min-w-0"
+          className="flex-1 flex flex-col gap-6 min-w-0"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="bg-[#13162D] p-3.5 sm:p-5 md:p-6 rounded-xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0">
-            <h2 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left">
+          <div className="bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0">
+            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left">
               {contactInfo.details.title}
-            </h2>
-            <div className="flex flex-col gap-3.5 sm:gap-6 p-0.5 sm:p-2">
+            </h3>
+            <div className="flex flex-col gap-3.5 sm:gap-6 p-0.5 sm:p-2 flex-1 justify-center">
               {contactInfo.details.items.map((item, index) => {
                 const IconComponent = getIcon(item.icon);
                 return (
                   <div key={index} className="flex items-center gap-3 sm:gap-4">
-                    <div className="bg-purple-900/20 p-2 sm:p-3 rounded-full flex items-center justify-center flex-shrink-0">
+                    <div className="bg-purple-900/20 p-2.5 sm:p-3 rounded-full flex items-center justify-center flex-shrink-0">
                       <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div className="flex flex-col min-w-0">
@@ -218,7 +223,7 @@ const Contact = () => {
             </div>
           </div>
           {/* Social Links */}
-          <div className="bg-[#13162D] p-3.5 sm:p-5 md:p-6 rounded-xl border border-white/10 flex flex-col min-w-0">
+          <div className="bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0">
             <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4">
               {uiText.contact.connectWithMe}
             </h3>

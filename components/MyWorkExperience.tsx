@@ -5,24 +5,26 @@ import { workExperience, sectionTitles, uiText } from "@/data";
 
 const MyWorkExperience = () => {
   return (
-    <section id="experience" className="py-14 sm:py-20 w-[94vw] sm:w-[90vw] max-w-7xl mx-auto scroll-mt-20 flex flex-col items-center">
-      <h1 className="heading text-white">
-        {sectionTitles.experience.title.split(" ").map((word, i) =>
-          i === 0 ? (
-            <span key={i} className="text-purple">{word} </span>
-          ) : (
-            <span key={i}>{word} </span>
-          )
-        )}
-      </h1>
-      <p className="text-center text-[#BEC1DD] text-xs sm:text-sm md:text-base max-w-2xl mx-auto mt-2 sm:mt-3 mb-6 px-2 sm:px-4">
-        {sectionTitles.experience.subtitle}
-      </p>
+    <section id="experience" aria-labelledby="experience-heading" className="section-container">
+      <div className="text-center w-full">
+        <h2 id="experience-heading" className="heading text-white">
+          {sectionTitles.experience.title.split(" ").map((word, i) =>
+            i === 0 ? (
+              <span key={i} className="text-purple">{word} </span>
+            ) : (
+              <span key={i}>{word} </span>
+            )
+          )}
+        </h2>
+        <p className="section-subtitle">
+          {sectionTitles.experience.subtitle}
+        </p>
+      </div>
       <div className="flex flex-wrap justify-center items-stretch gap-4 sm:gap-6 my-2 w-full">
         {workExperience.map((card, index) => (
           <div
             key={card.id}
-            className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(50%-1rem)] max-w-[500px] flex flex-col"
+            className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(50%-1rem)] max-w-[480px] flex flex-col"
           >
             <CardContainer containerClassName="w-full h-full py-2" className="w-full h-full">
               <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-purple-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-2xl p-3.5 sm:p-5 md:p-6 border flex flex-col justify-between min-h-[480px] sm:min-h-[540px] card-glow">
