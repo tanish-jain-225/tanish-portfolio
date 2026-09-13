@@ -125,12 +125,12 @@ export const BackgroundGradientAnimation = ({
           </filter>
         </defs>
       </svg>
-      <div className={cn("", className)}>{children}</div>
       <div
         className={cn(
-          "gradients-container h-full w-full blur-lg",
+          "gradients-container h-full w-full blur-lg pointer-events-none select-none",
           isSafari ? "blur-2xl" : "[filter:url(#blurMe)_blur(40px)]"
         )}
+        aria-hidden="true"
       >
         <div
           className={cn(
@@ -190,6 +190,7 @@ export const BackgroundGradientAnimation = ({
           ></div>
         )}
       </div>
+      <div className={cn("relative z-20 pointer-events-auto", className)}>{children}</div>
     </div>
   );
 };

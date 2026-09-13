@@ -51,6 +51,7 @@ export const FloatingNav = ({
               <a
                 key={navItem.link}
                 href={navItem.link}
+                aria-label={navItem.name}
                 onClick={(e) => {
                   e.preventDefault();
                   const sectionId = navItem.link.replace("#", "");
@@ -61,6 +62,8 @@ export const FloatingNav = ({
                         behavior: "smooth",
                         block: "start",
                       });
+                      window.history.pushState(null, '', navItem.link);
+                      section.focus({ preventScroll: true });
                     }
                   } else {
                     // If no section ID, scroll to top
@@ -68,13 +71,14 @@ export const FloatingNav = ({
                       top: 0,
                       behavior: "smooth",
                     });
+                    window.history.pushState(null, '', '#');
                   }
                 }}
                 className={cn(
-                  "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer"
+                  "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer p-1.5 sm:px-2 sm:py-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
                 )}
               >
-                <span className="block sm:hidden">{navItem.icon}</span>
+                <span className="block sm:hidden" aria-hidden="true">{navItem.icon}</span>
                 <span className="hidden sm:block text-sm">{navItem.name}</span>
               </a>
             )
@@ -84,10 +88,11 @@ export const FloatingNav = ({
               href={navigationConfig.resumeButton.link}
               target="_blank"
               rel="noopener noreferrer"
-              className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full hover:text-purple-300"
+              aria-label={`${navigationConfig.resumeButton.text} (opens in new tab)`}
+              className="border text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-4 py-2 rounded-full hover:text-purple-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors"
             >
               <span>{navigationConfig.resumeButton.text}</span>
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-purple-500 to-transparent h-px" />
+              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-purple-500 to-transparent h-px pointer-events-none" aria-hidden="true" />
             </a>
           )}
         </motion.div>

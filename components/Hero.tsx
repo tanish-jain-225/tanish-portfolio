@@ -45,9 +45,9 @@ const Hero = () => {
   }, []);    return (
     <div id="home" className="w-full relative min-h-screen flex items-center justify-center scroll-mt-20" ref={heroRef}>
       {/* Fixed position background container */}
-      <div className="absolute inset-0 overflow-hidden">
+      <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
         {/* Spotlight container with proper positioning */}
-        <div className="absolute inset-0 overflow-hidden">
+        <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Spotlight
             className="-top-40 -left-10 sm:-left-20 md:-left-32 md:-top-20 h-screen animate-spotlight"
             fill="white"
@@ -60,7 +60,7 @@ const Hero = () => {
         </div>
 
         {/* Grid background layer */}
-        <div className="absolute inset-0 bg-white dark:bg-black">
+        <div className="absolute inset-0 bg-white dark:bg-black pointer-events-none">
           <div
             className={cn(
               "absolute inset-0",
@@ -108,15 +108,19 @@ const Hero = () => {
             <a 
               href={heroData.ctaButton.link}
               aria-label={heroData.ctaButton.text}
+              className="inline-block rounded-lg focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
               onClick={(e) => {
                 e.preventDefault();
                 const projectsSection = document.getElementById('projects');
                 if (projectsSection) {
                   projectsSection.scrollIntoView({ behavior: 'smooth' });
+                  window.history.pushState(null, '', '#projects');
+                  projectsSection.focus({ preventScroll: true });
                 }
               }}
             >
               <MagicButton 
+                as="span"
                 title={heroData.ctaButton.text}
                 icon={<IconComponent />}
                 position={heroData.ctaButton.position}
@@ -124,7 +128,10 @@ const Hero = () => {
             </a>
           </div>
           {/* Scroll indicator */}
-          <div className="absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 mt-12 scroll-indicator opacity-0 transition-opacity duration-700">
+          <div 
+            className="pointer-events-none select-none absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 mt-12 scroll-indicator opacity-0 transition-opacity duration-700"
+            aria-hidden="true"
+          >
             <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">
               <span className="text-white/40 text-xs tracking-widest uppercase">{heroData.scrollText}</span>
               <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white/40">

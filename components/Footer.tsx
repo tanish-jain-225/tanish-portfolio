@@ -59,10 +59,11 @@ const Footer = () => {
                   <li key={index} className="w-full">
                     <a 
                       href={item.link} 
+                      aria-label={`Scroll to ${item.name} section`}
                       onClick={(e) => handleSmoothScroll(e, item.link)}
-                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors hover:underline text-sm sm:text-base cursor-pointer px-2 py-1 rounded-md break-all whitespace-normal w-full"
+                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors hover:underline text-sm sm:text-base cursor-pointer px-2 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
                     >
-                      <IconComponent size={18} />
+                      <IconComponent size={18} aria-hidden="true" />
                       <span className="break-all whitespace-normal w-full">{item.name}</span>
                     </a>
                   </li>
@@ -77,10 +78,11 @@ const Footer = () => {
               <li className="w-full">
                 <a 
                   href={`mailto:${personalInfo.email}`} 
-                  className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-sm sm:text-base px-2 py-1 break-all whitespace-normal w-full"
+                  aria-label={`Send email to ${personalInfo.email}`}
+                  className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-sm sm:text-base px-2 py-1 break-all whitespace-normal w-full rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
                   style={{lineHeight: '1.5'}}
                 >
-                  <FaEnvelope size={20} className="min-w-[20px] min-h-[20px]" />
+                  <FaEnvelope size={20} className="min-w-[20px] min-h-[20px]" aria-hidden="true" />
                   <span className="break-all whitespace-normal w-full">{personalInfo.email}</span>
                 </a>
               </li>
@@ -90,12 +92,13 @@ const Footer = () => {
                   <li key={social.id} className="w-full">
                     <a 
                       href={social.url} 
-                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-sm sm:text-base px-2 py-1 rounded-md break-all whitespace-normal w-full"
+                      aria-label={`Visit my ${social.name} profile (opens in new tab)`}
+                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-sm sm:text-base px-2 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{lineHeight: '1.5'}}
                     >
-                      <IconComponent size={20} className="min-w-[20px] min-h-[20px]" />
+                      <IconComponent size={20} className="min-w-[20px] min-h-[20px]" aria-hidden="true" />
                       <span className="break-all whitespace-normal w-full">{social.url.replace('https://', '')}</span>
                     </a>
                   </li>

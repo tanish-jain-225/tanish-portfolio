@@ -29,12 +29,13 @@ const ScrollToTop = () => {
 
   return (
     <button
-      className={`scroll-to-top ${isVisible ? "visible" : ""}`}
+      type="button"
+      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-purple-900`}
       onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
       aria-label={uiText.accessibility.scrollToTop}
       title={uiText.accessibility.backToTop}
     >
-      <FaArrowUp size={18} />
+      <FaArrowUp size={18} aria-hidden="true" />
     </button>
   );
 };

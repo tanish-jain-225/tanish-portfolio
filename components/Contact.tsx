@@ -137,7 +137,7 @@ const Contact = () => {
                     onChange={handleChange}
                     required={field.required}
                     rows={3}
-                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors resize-vertical"
+                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors resize-vertical"
                   />
                 ) : (
                   <input
@@ -148,13 +148,15 @@ const Contact = () => {
                     onChange={handleChange}
                     required={field.required}
                     autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
-                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus:ring-1 focus:ring-purple-500 transition-colors"
+                    className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-sm sm:text-base focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors"
                   />
                 )}
               </div>
             ))}
             {statusMessage.type && (
               <div 
+                role={statusMessage.type === "error" ? "alert" : "status"}
+                aria-live="polite"
                 className={`p-3 rounded-md text-xs sm:text-sm border transition-all duration-300 ${
                   statusMessage.type === "success" 
                     ? "bg-green-950/40 text-green-300 border-green-500/30" 
@@ -167,10 +169,11 @@ const Contact = () => {
             <button
               type="submit"
               disabled={isSubmitting}
-              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base ${
+              aria-live="polite"
+              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm sm:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 ${
                 justSent
-                  ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02]"
-                  : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01]"
+                  ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02] motion-reduce:scale-100"
+                  : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01] motion-reduce:hover:scale-100"
               }`}
             >
               {isSubmitting
@@ -228,10 +231,10 @@ const Contact = () => {
                     href={social.url}
                     target="_blank"
                     rel="noopener noreferrer"
-                    aria-label={`Visit ${social.name} profile`}
-                    className="bg-purple-900/20 hover:bg-purple-900/40 p-2.5 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 hover:shadow-lg hover:shadow-purple-500/20"
+                    aria-label={`Visit ${social.name} profile (opens in new tab)`}
+                    className="bg-purple-900/20 hover:bg-purple-900/40 p-2.5 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-lg hover:shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
                   >
-                    <IconComponent className="text-purple-300 w-5 h-5 sm:w-6 sm:h-6" />
+                    <IconComponent className="text-purple-300 w-5 h-5 sm:w-6 sm:h-6" aria-hidden="true" />
                   </a>
                 );
               })}

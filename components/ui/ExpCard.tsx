@@ -26,18 +26,28 @@ export const CardContainer = ({
 }) => {
   const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
+  const [reducedMotion, setReducedMotion] = useState(false);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
+    setReducedMotion(mediaQuery.matches);
+    const listener = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
+    mediaQuery.addEventListener?.("change", listener);
+    return () => mediaQuery.removeEventListener?.("change", listener);
+  }, []);
 
   const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current) return;
+    if (!containerRef.current || reducedMotion) return;
     const { left, top, width, height } =
       containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 25;
-    const y = (e.clientY - top - height / 2) / 25;
+    const x = (e.clientX - left - width / 2) / 35;
+    const y = (e.clientY - top - height / 2) / 35;
     containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
   };
   const handleMouseEnter = () => {
     setIsMouseEntered(true);
-    if (!containerRef.current) return;
+    if (!containerRef.current || reducedMotion) return;
   };
 
   const handleMouseLeave = () => {
@@ -49,11 +59,11 @@ export const CardContainer = ({
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-20 flex items-center justify-center",
+          "py-4 sm:py-6 flex items-center justify-center",
           containerClassName
         )}
         style={{
-          perspective: "1000px",
+          perspective: reducedMotion ? "none" : "1000px",
         }}
       >
         <div
@@ -66,7 +76,7 @@ export const CardContainer = ({
             className
           )}
           style={{
-            transformStyle: "preserve-3d",
+            transformStyle: reducedMotion ? "flat" : "preserve-3d",
           }}
         >
           {children}

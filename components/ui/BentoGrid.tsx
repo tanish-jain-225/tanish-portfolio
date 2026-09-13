@@ -97,12 +97,11 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   // Card container
   return (
     <section
-      className="relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] min-h-[260px] bento-item"
+      className="relative overflow-hidden rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[260px] bento-item"
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
       }}
-      tabIndex={0}
       aria-label={title || `Bento card ${id}`}
       role="listitem"
     >
@@ -116,27 +115,29 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
         {/* Main image backgrounds for visual cards */}
         {img && (
           <div
-            className={id === 4 || id === 5 ? "absolute inset-0 w-full h-full z-0" : "w-full h-full absolute"}
+            className={id === 4 || id === 5 ? "absolute inset-0 w-full h-full z-0 pointer-events-none" : "w-full h-full absolute pointer-events-none"}
             style={id === 1 ? { position: "relative", minHeight: 220 } : { position: "absolute", height: "100%" }}
             aria-hidden="true"
           >
             <Image
               src={img}
               alt={title ? `${title} illustration` : `Grid item ${id}`}
-              className="object-cover object-center"
+              className="object-cover object-center pointer-events-none select-none"
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={id === 4 || id === 5}
             />
-            <div className="absolute inset-0 bg-black/40 z-10" />
+            <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
           </div>
         )}
         {/* Animated background for contact card */}
         {id === 6 && (
-          <BackgroundGradientAnimation>
-            <div className="absolute inset-0 z-10" />
-            <div className="absolute z-20 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none opacity-30"></div>
-          </BackgroundGradientAnimation>
+          <div className="absolute inset-0 pointer-events-none select-none z-0" aria-hidden="true">
+            <BackgroundGradientAnimation>
+              <div className="absolute inset-0 z-10" />
+              <div className="absolute z-20 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none opacity-30"></div>
+            </BackgroundGradientAnimation>
+          </div>
         )}
         {/* Overlay for text readability on certain cards */}
         {id !== 1 &&
@@ -379,7 +380,8 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                                 href={content.repository}
                                 target="_blank"
                                 rel="noopener noreferrer"
-                                className="underline hover:text-purple-400 transition-colors"
+                                aria-label={`View repository on GitHub (opens in new tab)`}
+                                className="underline hover:text-purple-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded px-1"
                               >
                                 {uiText.projects.sourceCode}
                               </a>
@@ -395,8 +397,9 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               )}
               {/* Contact card */}
               {content.type === "contact" && (
-                <div className="flex flex-col items-center justify-center w-full h-full p-4 m-2">
+                <div className="flex flex-col items-center justify-center w-full h-full p-4 m-2 relative z-30 pointer-events-auto">
                   <button
+                    type="button"
                     onClick={async () => {
                       if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
                         try {
@@ -412,7 +415,9 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                         alert(uiText.contact.copyNotSupported);
                       }
                     }}
-                    className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus:ring-2 focus:ring-purple-400 focus:ring-offset-2 cursor-pointer text-xs sm:text-sm md:text-base m-2 flex items-center max-w-full min-w-0"
+                    aria-label={copied ? "Email copied to clipboard" : `Copy email address ${content.email}`}
+                    aria-live="polite"
+                    className="px-3 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-xs sm:text-sm md:text-base m-2 flex items-center max-w-full min-w-0 select-none"
                     style={{
                       wordBreak: 'break-all',
                       whiteSpace: 'pre-line',

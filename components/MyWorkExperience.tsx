@@ -71,13 +71,14 @@ const MyWorkExperience = () => {
                     href={card.link || uiText.experience.linkedInProfile}
                     target="_blank"
                     rel="noopener noreferrer"
-                    className="cursor-pointer"
+                    aria-label={`View details for ${card.title} (opens in new tab)`}
+                    className="cursor-pointer block w-full rounded-xl focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   >
                     <div className="flex justify-between items-center w-full cursor-pointer">
                       <CardItem
                         translateZ={20}
-                        as="button"
-                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-500 dark:to-purple-700 text-white text-xs font-bold hover:from-purple-700 hover:to-purple-900 transition-all duration-300 w-full cursor-pointer shadow-lg shadow-purple-500/20"
+                        as="span"
+                        className="px-4 py-2 rounded-xl bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-500 dark:to-purple-700 text-white text-xs font-bold hover:from-purple-700 hover:to-purple-900 transition-all duration-300 w-full cursor-pointer shadow-lg shadow-purple-500/20 text-center block motion-reduce:hover:from-purple-600 motion-reduce:hover:to-purple-800"
                       >
                         {uiText.experience.viewDetails}
                       </CardItem>
