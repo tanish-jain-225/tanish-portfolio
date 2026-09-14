@@ -42,9 +42,8 @@ const ScrollToTop = () => {
 
 export default function Home() {
   return (
-    <main id="main-content" tabIndex={-1} role="main" className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto">
-      {/* Full-width hero section */}
-      <section className="w-full flex flex-col items-center">
+    <>
+      <header role="banner" className="w-full">
         <FloatingNav
           navItems={navItems.map((item) => ({
             name: item.name,
@@ -52,22 +51,30 @@ export default function Home() {
             icon: React.createElement(getIcon(item.icon)),
           }))}
         />
+      </header>
+
+      <main
+        id="main-content"
+        tabIndex={-1}
+        role="main"
+        className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto w-full"
+      >
         <Hero />
-      </section>
-      
-      {/* Content with max-width constraint */}
-      <div className="w-full flex flex-col items-center">
-        <Suspense fallback={<div className="content-loader h-96 w-full" />}>
-          <DynamicGrid />
-        </Suspense>
-        <RecentProjects />
-        <MyWorkExperience />
-        <Suspense fallback={<div className="content-loader h-96 w-full" />}>
-          <DynamicContact />
-        </Suspense>
-      </div>
+        
+        <div className="w-full flex flex-col items-center">
+          <Suspense fallback={<div className="content-loader h-96 w-full" />}>
+            <DynamicGrid />
+          </Suspense>
+          <RecentProjects />
+          <MyWorkExperience />
+          <Suspense fallback={<div className="content-loader h-96 w-full" />}>
+            <DynamicContact />
+          </Suspense>
+        </div>
+      </main>
+
       <Footer />
       <ScrollToTop />
-    </main>
+    </>
   );
 }

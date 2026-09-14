@@ -38,9 +38,9 @@ const Footer = () => {
         <div className="h-full w-full opacity-10 [background-image:linear-gradient(to_right,#1e2142_1px,transparent_1px),linear-gradient(to_bottom,#1e2142_1px,transparent_1px)] [background-size:32px_32px] sm:[background-size:40px_40px]"></div>
       </div>
       <div className="relative z-10 max-w-7xl mx-auto px-1 sm:px-4 md:px-6 lg:px-8 w-full flex flex-col">
-        <div className="flex flex-col md:flex-row flex-wrap gap-6 sm:gap-8 md:gap-10 items-stretch md:items-start w-full">
+        <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8 md:gap-12 items-start w-full">
           {/* Logo and description */}
-          <div className="flex-1 min-w-[140px] sm:min-w-[220px] flex flex-col justify-center md:justify-start mb-6 md:mb-0">
+          <div className="flex flex-col justify-start sm:col-span-2 md:col-span-1">
             <h2 className="text-lg sm:text-xl font-bold text-white flex items-center gap-2">
               <span className="text-xl sm:text-3xl gradient-text">{footerData.logo.text}</span>
               <div className="w-1.5 sm:w-2 h-6 sm:h-8 bg-purple-500 rounded-full"></div>
@@ -50,7 +50,7 @@ const Footer = () => {
             </p>
           </div>
           {/* Navigation */}
-          <div className="flex-1 min-w-[130px] sm:min-w-[200px] mb-6 md:mb-0">
+          <div className="flex flex-col">
             <h3 className="text-white font-semibold mb-2 sm:mb-4 text-sm sm:text-lg">{uiText.footer.quickLinks}</h3>
             <ul className="flex flex-col gap-2 sm:gap-3">
               {navItems.map((item, index) => {

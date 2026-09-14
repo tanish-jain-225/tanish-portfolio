@@ -106,7 +106,7 @@ export const CardBody = ({
 };
 
 export const CardItem = React.forwardRef<
-  any,
+  HTMLElement,
   React.AllHTMLAttributes<HTMLElement> & {
     as?: React.ElementType;
     translateX?: number | string;

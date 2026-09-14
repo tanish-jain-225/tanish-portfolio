@@ -23,13 +23,13 @@ const RecentProjects = () => {
           {sectionTitles.projects.subtitle}
         </p>
       </div>
-      <div className="flex flex-wrap items-center justify-center px-1 py-2 sm:p-4 my-2 gap-6 md:gap-10 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
         {[...projects]
           .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
           .map((item) => (
           <div
-            className="flex items-center justify-center w-full max-w-[360px] cardContainer"
-            style={{ minHeight: '34rem', height: '100%', maxHeight: '44rem' }}
+            className="flex items-center justify-center w-full max-w-[380px] cardContainer"
+            style={{ minHeight: '32rem', height: '100%' }}
             key={item.id}
           >            
           <PinContainer
@@ -37,9 +37,12 @@ const RecentProjects = () => {
               href={item.demoLink}
               disableWrapper={true}
             >
-              <div className="relative flex items-center justify-center w-[84vw] xs:w-[80vw] sm:w-96 max-w-[360px] overflow-hidden" style={{ height: '22vh', minHeight: 150, maxHeight: 240, marginBottom: 20, position: 'relative' }}>
+              <div 
+                className="relative flex items-center justify-center w-[calc(100vw-3rem)] max-w-[340px] overflow-hidden rounded-xl"
+                style={{ height: '180px', marginBottom: 16, position: 'relative' }}
+              >
                 <div
-                  className="relative w-full h-full overflow-hidden lg:rounded-3xl"
+                  className="relative w-full h-full overflow-hidden rounded-xl lg:rounded-2xl"
                   style={{ backgroundColor: "#13162D", position: 'relative', height: '100%' }}
                 >
                   <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
@@ -61,51 +64,53 @@ const RecentProjects = () => {
                 )}
               </div>
 
-              <div className="w-[84vw] xs:w-[80vw] sm:w-96 max-w-[360px] space-y-3">
-                {/* Category & Status */}
-                <div className="flex items-center justify-between text-xs">
-                  <div className="flex items-center gap-1 text-purple-300">
-                    <MdCategory className="w-3 h-3" />
-                    <span>{item.category}</span>
+              <div className="w-[calc(100vw-3rem)] max-w-[340px] flex flex-col justify-between flex-1 space-y-3">
+                <div className="flex flex-col space-y-2.5 flex-1">
+                  {/* Category & Status */}
+                  <div className="flex items-center justify-between text-xs">
+                    <div className="flex items-center gap-1 text-purple-300">
+                      <MdCategory className="w-3 h-3" />
+                      <span>{item.category}</span>
+                    </div>
+                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
+                      item.status === 'completed' 
+                        ? 'bg-green-900/30 text-green-400 border border-green-500/20' 
+                        : 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/20'
+                    }`}>
+                      {item.status === 'completed' ? uiText.status.completed : uiText.status.inProgress}
+                    </span>
                   </div>
-                  <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
-                    item.status === 'completed' 
-                      ? 'bg-green-900/30 text-green-400 border border-green-500/20' 
-                      : 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/20'
-                  }`}>
-                    {item.status === 'completed' ? uiText.status.completed : uiText.status.inProgress}
-                  </span>
-                </div>
 
-                {/* Title */}
-                <h2 className="font-bold lg:text-xl md:text-lg text-base line-clamp-1 text-white">
-                  {item.title}
-                </h2>
+                  {/* Title */}
+                  <h2 className="font-bold lg:text-xl md:text-lg text-base line-clamp-1 text-white">
+                    {item.title}
+                  </h2>
 
-                {/* Description */}
-                <p
-                  className="lg:text-sm md:text-sm text-xs leading-relaxed line-clamp-4"
-                  style={{ color: "#BEC1DD" }}
-                >
-                  {item.des}
-                </p>
+                  {/* Description */}
+                  <p
+                    className="lg:text-sm md:text-sm text-xs leading-relaxed line-clamp-3"
+                    style={{ color: "#BEC1DD" }}
+                  >
+                    {item.des}
+                  </p>
 
-                {/* Tech Stack Tags */}
-                <div className="flex flex-wrap gap-1.5 pt-1">
-                  {item.techStack.slice(0, 4).map((tech, i) => (
-                    <span key={i} className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-purple-300">
-                      {tech}
-                    </span>
-                  ))}
-                  {item.techStack.length > 4 && (
-                    <span className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-[#BEC1DD]">
-                      +{item.techStack.length - 4} more
-                    </span>
-                  )}
+                  {/* Tech Stack Tags */}
+                  <div className="flex flex-wrap gap-1.5 pt-1">
+                    {item.techStack.slice(0, 4).map((tech, i) => (
+                      <span key={i} className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-purple-300">
+                        {tech}
+                      </span>
+                    ))}
+                    {item.techStack.length > 4 && (
+                      <span className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-[#BEC1DD]">
+                        +{item.techStack.length - 4} more
+                      </span>
+                    )}
+                  </div>
                 </div>
 
                 {/* Action Buttons */}
-                <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between mt-4 pt-3 border-t border-white/10 gap-2 xs:gap-3 relative z-20">
+                <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between mt-auto pt-3 border-t border-white/10 gap-2 xs:gap-3 relative z-20">
                   {item.sourceLink ? (
                     <a 
                       href={item.sourceLink}

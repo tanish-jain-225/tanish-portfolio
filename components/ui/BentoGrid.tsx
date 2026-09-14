@@ -9,12 +9,11 @@ import { techStack, images, bentoGridData, uiText } from "@/data";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
 
-// Main BentoGrid component: renders a responsive pure flexbox layout of BentoGridItem cards
+// Main BentoGrid component: renders a responsive CSS Grid layout with authentic Bento proportions
 export const BentoGrid = ({ className }: { className?: string }) => (
   <div
     className={cn(
-      // Responsive flexbox layout: 1 col on mobile (<640px), 2 cols on sm (640px+), 3 cols on md+ (768px+)
-      "flex flex-wrap items-stretch justify-center gap-3 sm:gap-4 md:gap-6 mx-auto w-full py-6 sm:py-8 md:py-10",
+      "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mx-auto w-full max-w-7xl py-4 sm:py-6 md:py-8",
       className
     )}
     role="list"
@@ -72,6 +71,18 @@ interface BentoGridItemProps {
   id: number;
 }
 
+// Column span helper for authentic Bento visual hierarchy
+const getColSpanClass = (itemId: number) => {
+  switch (itemId) {
+    case 1:
+      return "md:col-span-2 lg:col-span-2";
+    case 6:
+      return "md:col-span-2 lg:col-span-3";
+    default:
+      return "col-span-1";
+  }
+};
+
 // Individual grid item card
 export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   const [copied, setCopied] = useState(false);
@@ -97,7 +108,10 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   // Card container
   return (
     <section
-      className="relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[220px] sm:min-h-[260px] bento-item w-full sm:w-[calc(50%-0.5rem)] lg:w-[calc(33.333%-1rem)] min-w-0 max-w-full"
+      className={cn(
+        "relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[230px] sm:min-h-[260px] bento-item w-full min-w-0 max-w-full",
+        getColSpanClass(id)
+      )}
       style={{
         background:
           "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
@@ -115,14 +129,17 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
         {/* Main image backgrounds for visual cards */}
         {img && (
           <div
-            className={id === 4 || id === 5 ? "absolute inset-0 w-full h-full z-0 pointer-events-none" : "w-full h-full absolute pointer-events-none"}
-            style={id === 1 ? { position: "relative", minHeight: 220 } : { position: "absolute", height: "100%" }}
+            className="absolute inset-0 w-full h-full z-0 pointer-events-none"
+            style={{ position: "absolute", height: "100%" }}
             aria-hidden="true"
           >
             <Image
               src={img}
               alt={title ? `${title} illustration` : `Grid item ${id}`}
-              className="object-cover object-center pointer-events-none select-none"
+              className={cn(
+                "object-cover pointer-events-none select-none",
+                id === 1 ? "object-right-bottom opacity-30 sm:opacity-40" : "object-center"
+              )}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={id === 4 || id === 5}
@@ -140,9 +157,8 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
           </div>
         )}
         {/* Overlay for text readability on certain cards */}
-        {id !== 1 &&
-          id !== 6 &&
-          ["academic", "engineering", "techstack", "contact"].includes(
+        {id !== 6 &&
+          ["academic", "engineering", "techstack", "project", "contact"].includes(
             content?.type || ""
           ) && (
             <div
@@ -156,7 +172,10 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
           )}
         {/* Card content */}
         <div
-          className="group-hover/bento:translate-x-1 sm:group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-3 sm:p-5 md:p-6 lg:p-8 z-20 w-full h-full"
+          className={cn(
+            "group-hover/bento:translate-x-1 sm:group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-3.5 sm:p-5 md:p-6 lg:p-7 z-20 w-full h-full",
+            id === 6 ? "items-center text-center justify-center py-6 sm:py-8" : ""
+          )}
         >
           {/* Card title */}
           {title && (

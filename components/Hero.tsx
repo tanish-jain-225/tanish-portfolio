@@ -75,13 +75,13 @@ const Hero = () => {
       </div>
 
       {/* Content layer with proper z-index */}
-      <div className="relative z-10 flex flex-col items-center justify-center py-16 sm:py-20 w-full px-2 sm:px-8">
-        <div className="max-w-[96vw] sm:max-w-md md:max-w-lg lg:max-w-xl xl:max-w-2xl flex flex-col items-center justify-center w-full">
-          <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-80 hero-animate opacity-0 pt-2 sm:pt-8 md:pt-10 break-words font-medium">
+      <div className="relative z-10 flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 w-full px-2 sm:px-6 md:px-8">
+        <div className="w-full max-w-[calc(100vw-1rem)] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col items-center justify-center">
+          <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-md md:max-w-lg hero-animate opacity-0 pt-2 sm:pt-6 md:pt-8 break-words font-medium">
             {heroData.subtitle}
           </p>
           
-          <h1 className="hero-animate opacity-0 w-full">
+          <h1 className="hero-animate opacity-0 w-full max-w-4xl">
             <TextGenerateEffect 
               className="text-center text-xl sm:text-3xl md:text-4xl lg:text-5xl xl:text-6xl break-words px-1"
               words={heroData.title}
@@ -89,12 +89,12 @@ const Hero = () => {
             />
           </h1>
 
-          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-1 sm:px-4 md:px-6 break-words">
+          <p className="text-center md:tracking-wider mb-4 text-xs sm:text-sm md:text-lg lg:text-xl xl:text-2xl hero-animate opacity-0 text-white/80 px-1 sm:px-4 md:px-6 break-words max-w-3xl">
             {heroData.description}
           </p>
 
           {/* Tech badges */}
-          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-6 hero-animate opacity-0 px-1 max-w-full">
+          <div className="flex flex-wrap justify-center gap-1.5 sm:gap-2 mb-6 hero-animate opacity-0 px-1 max-w-3xl">
             {heroData.techBadges.map((tech) => (
               <span
                 key={tech}
@@ -129,7 +129,7 @@ const Hero = () => {
           </div>
           {/* Scroll indicator */}
           <div 
-            className="pointer-events-none select-none absolute bottom-6 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 mt-12 scroll-indicator opacity-0 transition-opacity duration-700"
+            className="pointer-events-none select-none absolute bottom-4 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator opacity-0 transition-opacity duration-700"
             aria-hidden="true"
           >
             <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">

@@ -1,201 +1,190 @@
-# Portfolio Contact Form API Documentation
+# 📬 Contact Form API Documentation — Tanish Portfolio
 
 ## Overview
-This API handles contact form submissions for the portfolio website, storing messages in MongoDB Atlas and providing validation.
+This serverless API handles contact form submissions for Tanish Sanghvi's portfolio website, validating user inputs, enforcing IP-based sliding-window rate limits, securely storing messages in **MongoDB Atlas**, and optionally dispatching email alerts via SMTP.
 
 ## Base URL
-- Development: `http://localhost:3000/api`
-- Production: `https://your-domain.vercel.app/api`
+- **Development:** `http://localhost:3000/api`
+- **Production:** `https://tanish-portfolio-web.vercel.app/api`
+
+---
 
 ## Endpoints
 
 ### 1. Health Check
-**GET** `/contact-form`
+**`GET /api/contact-form`**
 
-Returns API status and timestamp.
+Returns API health status, operational message, and server timestamp.
 
-**Response:**
+#### Response (200 OK):
 ```json
 {
   "message": "Contact Form API is working!",
-  "timestamp": "2025-06-02T10:30:00.000Z"
+  "timestamp": "2026-09-14T13:30:00.000Z"
 }
 ```
 
-### 2. Submit Contact Form
-**POST** `/contact-form`
+---
 
-Submits a new contact form message.
+### 2. Submit Contact Message
+**`POST /api/contact-form`**
 
-**Request Headers:**
-```
+Submits a new inquiry or message from the portfolio contact form.
+
+#### Request Headers:
+```http
 Content-Type: application/json
 ```
 
-**Request Body:**
+#### Request Body Schema:
 ```json
 {
-  "name": "John Doe",
-  "email": "john@example.com", 
-  "message": "Hello, I'd like to connect with you about potential opportunities."
+  "name": "Alex Chen",
+  "email": "alex.chen@example.com",
+  "subject": "Project Collaboration Inquiry",
+  "message": "Hi Tanish, I came across your portfolio and would love to discuss a full-stack project collaboration."
 }
 ```
 
-**Validation Rules:**
-- `name`: Required, 2-100 characters
-- `email`: Required, valid email format
-- `message`: Required, 10-1000 characters
+#### Field Validation Rules:
+| Field | Type | Required | Constraints |
+|---|---|---|---|
+| `name` | `string` | Yes | 2 to 100 characters, trimmed |
+| `email` | `string` | Yes | Valid email format (`/^[^\s@]+@[^\s@]+\.[^\s@]+$/`) |
+| `subject` | `string` | No | Up to 200 characters |
+| `message` | `string` | Yes | 2 to 10,000 characters, trimmed |
 
-**Success Response (200):**
+#### Success Response (`200 OK`):
 ```json
 {
   "success": true,
   "message": "Message sent successfully! Thank you for reaching out.",
-  "id": "ObjectId"
+  "id": "664b8c9d0a1b2c3d4e5f6789"
 }
 ```
 
-**Validation Error Response (400):**
-```json
-{
-  "success": false,
-  "message": "Validation failed",
-  "errors": [
-    "Name must be at least 2 characters long",
-    "Please provide a valid email address"
-  ]
-}
-```
+#### Error Responses:
+- **`400 Bad Request`** — Validation failure:
+  ```json
+  {
+    "success": false,
+    "message": "Validation failed",
+    "errors": [
+      "Name must be at least 2 characters long",
+      "Please provide a valid email address"
+    ]
+  }
+  ```
+- **`429 Too Many Requests`** — Exceeded rate limit:
+  ```json
+  {
+    "success": false,
+    "message": "Too many requests. Please wait a few minutes before trying again."
+  }
+  ```
+- **`500 Internal Server Error`** — Database or server connection failure:
+  ```json
+  {
+    "success": false,
+    "message": "Failed to send message. Please try again later.",
+    "error": "Connection timeout"
+  }
+  ```
 
-**Server Error Response (500):**
-```json
-{
-  "success": false,
-  "message": "Failed to send message. Please try again later.",
-  "error": "Connection timeout"
-}
-```
+---
 
-### 3. CORS Support
-**OPTIONS** `/contact-form`
+### 3. CORS Preflight
+**`OPTIONS /api/contact-form`**
 
-Handles CORS preflight requests.
+Handles browser CORS preflight requests for external integrations.
 
-**Response Headers:**
-```
+#### Response Headers:
+```http
 Access-Control-Allow-Origin: *
 Access-Control-Allow-Methods: GET, POST, OPTIONS
 Access-Control-Allow-Headers: Content-Type
 ```
 
-## Database Schema
+---
 
-### Collection: `contactMessages`
-```javascript
-{
-  _id: ObjectId,
-  name: String,           // Trimmed user name
-  email: String,          // Lowercase, trimmed email
-  message: String,        // Trimmed message content
-  createdAt: Date,        // Submission timestamp
-  ipAddress: String,      // Client IP address
-  userAgent: String       // Client browser info
+## 🛡️ Security & Rate Limiting
+
+### Sliding-Window IP Rate Limiting
+- **Window Size:** 5 minutes (300,000 ms)
+- **Maximum Submissions:** 3 requests per IP per window
+- **Enforcement:** [lib/rateLimit.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/lib/rateLimit.ts)
+- Returns HTTP status code `429 Too Many Requests` when threshold is exceeded.
+
+### Input Sanitization & Safety
+- Strict type checking and string trimming prevent empty-space submissions.
+- Boundary enforcement protects against buffer and document bloat.
+- MongoDB query parameters are constructed via typed object literals, shielding against NoSQL injection.
+- Client IP (`x-forwarded-for` / `x-real-ip`) and user agent are captured for auditing.
+
+---
+
+## 🗄️ Database Schema
+
+### Collection: `contactMessages` (MongoDB Atlas)
+```typescript
+interface ContactDocument {
+  _id: ObjectId;
+  name: string;        // Trimmed user name
+  email: string;       // Normalized, trimmed email address
+  subject?: string;    // Inquiry subject (optional)
+  message: string;     // Trimmed message body
+  createdAt: Date;     // ISO timestamp of submission
+  ipAddress: string;   // Client IP address (for rate limiting audit)
+  userAgent: string;   // Submitting browser user-agent header
 }
 ```
 
-## Environment Variables
+---
 
-Required in `.env.local`:
+## ⚙️ Environment Variables
+
+Configured in `.env.local` (local) and Vercel Environment Settings (production):
+
 ```bash
-MONGODB_URI='mongodb+srv://username:password@cluster.mongodb.net'
-DB_NAME='portfolio'
-COLLECTION_NAME='contactMessages'
+# MongoDB Atlas Database Credentials
+MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>.mongodb.net"
+DB_NAME="portfolio"
+COLLECTION_NAME="contactMessages"
 
-# Email alerts / SMTP configurations (optional)
-NOTIFICATION_EMAIL='your-notification-email-here'
-SMTP_HOST='your-smtp-host-here'
-SMTP_PORT='your-smtp-port-here'
-SMTP_USER='your-smtp-user-email-here'
-SMTP_PASSWORD='your-smtp-user-password-here'
-SMTP_ADMIN='your-smtp-admin-email-here'
-SMTP_SECURE='false'
+# SMTP Mail Server (Optional for Real-Time Email Notifications)
+NOTIFICATION_EMAIL="tanishjain020205@gmail.com"
+SMTP_HOST="smtp.yourprovider.com"
+SMTP_PORT="587"
+SMTP_USER="your-smtp-user@domain.com"
+SMTP_PASSWORD="your-smtp-password"
+SMTP_ADMIN="outgoing-admin@domain.com"
+SMTP_SECURE="false" # Set to 'true' for port 465 (SSL)
 ```
 
-## Rate Limiting
-- No current rate limiting implemented
-- Consider adding for production deployment
+---
 
-## Security Features
-- Input validation and sanitization
-- SQL injection prevention (NoSQL)
-- XSS protection through data trimming
-- IP address logging for monitoring
+## 🧪 Testing the API
 
-## Usage Examples
-
-### JavaScript/Fetch
-```javascript
-const submitForm = async (formData) => {
-  try {
-    const response = await fetch('/api/contact-form', {
-      method: 'POST',
-      headers: {
-        'Content-Type': 'application/json',
-      },
-      body: JSON.stringify(formData),
-    });
-    
-    const data = await response.json();
-  } catch (error) {
-    console.error('Network error:', error);
-  }
-};
+Run the automated test suite covering Route Handlers, MongoDB caching, and rate limiting:
+```bash
+npm test __tests__/contact-api.test.ts
+npm test __tests__/rateLimit.test.ts
+npm test __tests__/mongodb.test.ts
 ```
 
-### cURL
+### Manual cURL Testing
+
 ```bash
+# Health Check
+curl -X GET http://localhost:3000/api/contact-form
+
+# Submit Valid Message
 curl -X POST http://localhost:3000/api/contact-form \
   -H "Content-Type: application/json" \
   -d '{
-    "name": "John Doe",
-    "email": "john@example.com",
-    "message": "Hello, this is a test message."
+    "name": "Jane Doe",
+    "email": "jane@example.com",
+    "subject": "Portfolio Feedback",
+    "message": "Loved the Bento Grid layout and responsiveness!"
   }'
 ```
-
-## Error Handling
-- All errors are logged to console with stack traces
-- Client receives sanitized error messages
-- Development mode shows detailed error information
-- Production mode hides sensitive error details
-
-## MongoDB Connection
-- Uses connection pooling for efficiency
-- Cached connections to prevent reconnection overhead
-- Automatic reconnection on connection loss
-- Validates environment variables on startup
-
-## Deployment Notes
-- Works automatically on Vercel, Netlify, Railway
-- Ensure MongoDB Atlas allows connections from deployment platform
-- Set environment variables in deployment platform settings
-- API routes become serverless functions automatically
-
-## Testing
-```bash
-# Health check
-curl http://localhost:3000/api/contact-form
-
-# Test form submission
-curl -X POST http://localhost:3000/api/contact-form \
-  -H "Content-Type: application/json" \
-  -d '{"name":"Test","email":"test@test.com","message":"Test message"}'
-```
-
-## Version History
-- v1.0: Initial contact form API with MongoDB integration
-- Features: Validation, error handling, CORS support, connection caching
-
----
-Generated: June 2, 2025
-Last Updated: June 2, 2025 

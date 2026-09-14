@@ -20,14 +20,14 @@ const MyWorkExperience = () => {
           {sectionTitles.experience.subtitle}
         </p>
       </div>
-      <div className="flex flex-wrap justify-center items-stretch gap-4 sm:gap-6 my-2 w-full">
+      <div className="grid grid-cols-1 md:grid-cols-2 gap-6 md:gap-8 w-full max-w-5xl justify-items-center py-4 px-1 sm:px-4">
         {workExperience.map((card, index) => (
           <div
             key={card.id}
-            className="w-full sm:w-[calc(50%-0.75rem)] lg:w-[calc(50%-1rem)] max-w-[480px] flex flex-col"
+            className="w-full max-w-[480px] flex flex-col h-full"
           >
-            <CardContainer containerClassName="w-full h-full py-2" className="w-full h-full">
-              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-purple-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-2xl p-3.5 sm:p-5 md:p-6 border flex flex-col justify-between min-h-[480px] sm:min-h-[540px] card-glow">
+            <CardContainer containerClassName="w-full h-full py-1 sm:py-2" className="w-full h-full">
+              <CardBody className="bg-gray-50 relative group/card dark:hover:shadow-2xl dark:hover:shadow-purple-500/[0.1] dark:bg-black dark:border-white/[0.2] border-black/[0.1] w-full rounded-2xl p-3.5 sm:p-5 md:p-6 border flex flex-col justify-between h-full min-h-[440px] sm:min-h-[480px] card-glow">
                 <div className="flex flex-col flex-grow min-h-0">
                   {/* Timeline number */}
                   <div className="flex items-center gap-3 mb-3">

@@ -111,10 +111,10 @@ const Contact = () => {
           {contactInfo.subtitle}
         </p>
       </div>
-      <div className="flex flex-col lg:flex-row items-stretch gap-6 lg:gap-8 w-full">
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full max-w-6xl mx-auto items-stretch">
         {/* Contact Form */}
         <motion.div
-          className="flex-1 bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col"
+          className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col justify-between"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
@@ -191,13 +191,13 @@ const Contact = () => {
         </motion.div>
         {/* Contact Info & Socials */}
         <motion.div
-          className="flex-1 flex flex-col gap-6 min-w-0"
+          className="flex flex-col gap-6 min-w-0 h-full justify-between"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0">
+          <div className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0 justify-center">
             <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left">
               {contactInfo.details.title}
             </h3>
@@ -223,7 +223,7 @@ const Contact = () => {
             </div>
           </div>
           {/* Social Links */}
-          <div className="bg-[#13162D] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0">
+          <div className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0">
             <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4">
               {uiText.contact.connectWithMe}
             </h3>

@@ -1,8 +1,10 @@
-# 🚀 Next.js 15 Developer Portfolio
+# 🚀 Tanish Sanghvi — Full Stack Developer & Software Engineer Portfolio
 
-A stunning, highly interactive personal portfolio website built to showcase projects, professional experience, and academic history. Crafted with the cutting-edge stack of **Next.js 15**, **React 19**, and **Tailwind CSS 4.0**, featuring smooth 3D integrations, custom Framer Motion animations, and a fully functional contact form backed by **MongoDB Atlas**.
+A modern, high-performance personal portfolio website showcasing projects, professional experience, and academic milestones. Crafted with **Next.js 15**, **React 19**, and **Tailwind CSS 4.0**, featuring an authentic Bento Grid architecture, responsive card grids, GPU-accelerated Framer Motion micro-interactions, and a secure serverless contact endpoint backed by **MongoDB Atlas**.
 
-![Next.js](https://img.shields.io/badge/Next.js-15.3-black?style=for-the-badge&logo=next.js)
+Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web.vercel.app)**
+
+![Next.js](https://img.shields.io/badge/Next.js-15.5-black?style=for-the-badge&logo=next.js)
 ![React](https://img.shields.io/badge/React-19.0-61DAFB?style=for-the-badge&logo=react&logoColor=black)
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
@@ -13,41 +15,42 @@ A stunning, highly interactive personal portfolio website built to showcase proj
 
 ## ✨ Key Features & Technical Highlights
 
-### 🎨 **UI/UX & Interactive Design**
-* **Vibrant Glassmorphism:** Sleek dark-space background theme utilizing frosted glass panels, custom glowing borders, and rich radial gradients.
-* **GPU-Accelerated Animations:** Smooth scrolling, hover cards, text typing triggers, and staggered entry animations built with **Framer Motion** and raw CSS transitions optimized with GPU hints (`will-change`, `backface-visibility: hidden`).
-* **3D Visualizations:** Implements canvas rendering via `three`, `@react-three/fiber`, `@react-three/drei`, and `three-globe` for deep visual assets.
+### 🎨 **UI/UX & Structural Architecture**
+* **Authentic Bento Grid:** Responsive CSS Grid layout (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl`) featuring deliberate 2-column feature spans for engineering profile and stats, alongside a full-width bottom connect banner.
+* **Balanced Card Grids & Baseline Action Alignment:** Projects and Work Experience sections utilize clean CSS Grids with flex-grow descriptions, ensuring all action buttons ("Source Code" and "Live Demo") align on the exact same baseline across every card in each row.
+* **Ultra-Narrow (300px) Responsiveness:** Engineered and verified for viewports from **280px–300px** (e.g., Samsung Galaxy Z Fold outer screen) up to 4K displays. Project action buttons adaptively collapse to vertical stacking below `380px` (`xs`), preventing text truncation.
+* **GPU-Accelerated Micro-Animations:** Staggered entry reveals, hover card transforms, smooth text generation triggers, and interactive spotlight effects powered by Framer Motion and optimized CSS transitions.
 
 ### ⚡ **Performance & Optimization**
-* **Hydration Safety (No SSR Mismatch):** Heavily animated components and 3D scenes are dynamically loaded on the client side using Next.js `dynamic()` imports with `ssr: false`, preventing standard React 19 hydration bugs while displaying visual skeleton loader fallbacks.
-* **Asset Optimization:** Comprehensive Next.js `<Image>` implementations with strict responsive `sizes` boundaries, pre-fetching routing layers, and dynamic web manifest rendering.
-* **MongoDB Connection Pooling:** Database drivers cache active connections (`MongoClient` and `Db`) in serverless environments, preventing runtime container cold starts from exhausting database connection pools.
+* **Hydration Safety (Zero SSR Mismatch):** Heavily animated components and client-interactive widgets dynamically load via Next.js `dynamic()` imports with `ssr: false` and lightweight skeleton fallbacks, preventing React 19 hydration mismatches.
+* **Asset Optimization:** Comprehensive Next.js `<Image>` implementations with responsive `sizes` configurations, priority hints for hero assets, dynamic webmanifest, and automated XML sitemap generation.
+* **MongoDB Connection Pooling:** Serverless database client caches `MongoClient` and `Db` instances across function invocations, avoiding cold-start latency and connection exhaustion.
 
-### 🛡️ **API Robustness & Graceful Degradation**
-* **Strict Input Validation:** Form submissions validate types, pattern matches, and length boundaries on both the client (form controls) and server (Next.js serverless API endpoint), shielding database records.
-* **IP-Based Rate Limiting:** Integrated sliding-window rate limiting prevents spamming by allowing a maximum of 3 contact requests per 5-minute interval per IP address.
-* **Graceful SMTP Fallback:** If your SMTP server fails or hits sending thresholds, the API handles the failure gracefully by logging the incident and storing the record in MongoDB, assuring zero lost user messages.
+### 🛡️ **API Robustness & Security**
+* **Strict Input Validation & Sanitization:** Submissions validate required fields (`name`, `email`, `subject`, `message`), length bounds, and regex format on both client and server before database write.
+* **Sliding-Window IP Rate Limiting:** In-memory sliding window rate limiter restricts clients to 3 submissions per 5-minute window (HTTP 429 Too Many Requests), defending against spam.
+* **Graceful SMTP Fallback:** If SMTP dispatch is unavailable or encounters transmission limits, the endpoint securely logs the incident and persists the submission in MongoDB Atlas, ensuring zero lost messages.
 
 ### ♿ **Accessibility (a11y) & SEO Authority**
-* **Semantic Landmarks:** Employs standard HTML5 tags (`<main>`, `<section>`, `<footer>`, `<header>`) and appropriate ARIA roles (`role="list"`, `aria-label`, `tabIndex`).
-* **Skip-to-Content Navigation:** Features a keyboard-accessible skip anchor at the top of the viewport to improve navigation for users relying on screen readers or keyboard navigation.
-* **JSON-LD Schema Markup:** Renders rich structured `Person` metadata details for Google Search crawlers directly inside the document head.
-* **SEO Management:** Dynamic robots policies, customized automated sitemaps, open-graph image assets, and custom page meta mappings.
+* **W3C Semantic Landmark Architecture:** Standard HTML5 landmarks with top-level `<header role="banner">` (FloatingNav), `<main id="main-content" role="main">` for portfolio content, and `<footer role="contentinfo">` (Footer) outside main content.
+* **Keyboard Navigation & Skip Link:** Top-level `.skip-to-content` anchor enables fast focus traversal directly to the primary content for screen reader and keyboard users.
+* **JSON-LD Structured Data:** Embedded `Person` schema markup provides search crawlers with rich author, affiliation (VESIT), and social profile graph data.
+* **SEO Meta & OpenGraph:** Canonical URL mapping, dynamic robots.txt policy, OpenGraph previews, and custom Twitter Card tags.
 
 ---
 
 ## 🛠️ Tech Stack
 
-### **Core Stack**
-* **Framework:** Next.js 15 (App Router, Turbopack)
-* **Runtime Library:** React 19
-* **Language:** TypeScript 5
-* **CSS Framework:** Tailwind CSS 4.0
-
-### **Database & Integrations**
-* **Database Driver:** `mongodb` Node client
-* **Mail Transport:** `nodemailer`
-* **Analytics:** `@vercel/speed-insights`
+| Category | Technology |
+|---|---|
+| **Framework** | Next.js 15 (App Router, Turbopack) |
+| **Runtime & UI** | React 19, Framer Motion, React Icons |
+| **Language** | TypeScript 5 |
+| **Styling** | Tailwind CSS 4.0, Vanilla CSS Tokens |
+| **Database** | MongoDB Atlas (Native Node.js Driver) |
+| **Email Transport** | Nodemailer (Optional SMTP Alerts) |
+| **Testing** | Vitest, React Testing Library, Happy-DOM |
+| **Analytics** | Vercel Speed Insights |
 
 ---
 
@@ -55,43 +58,58 @@ A stunning, highly interactive personal portfolio website built to showcase proj
 
 ```text
 tanish-portfolio/
-├── app/                      # Next.js 15 App Router Directory
-│   ├── api/                  # Backend Serverless Endpoints
-│   │   └── contact-form/     # /api/contact-form endpoint files
-│   ├── layout.tsx            # Main layout configuration & SEO Schema
-│   ├── page.tsx              # Main portfolio home screen
-│   ├── globals.css           # Global Tailwind directives & variables
-│   ├── utilities.css         # Custom animations & utility classes
-│   ├── manifest.ts           # PWA Webmanifest generator
-│   └── sitemap.ts            # Dynamic sitemap creator
-├── components/               # React Layout Components
-│   ├── ui/                   # Reusable Visual Widgets (Bento, Spotlights, Button)
-│   ├── Hero.tsx              # Visual landing spotlight grid
-│   ├── Grid.tsx              # Bento grid summary panels
-│   ├── RecentProjects.tsx    # Interactive projects cards
-│   ├── MyWorkExperience.tsx  # Timeline timeline experience panels
-│   ├── Contact.tsx           # Contact form and social panels
-│   └── Footer.tsx            # Navigation link maps and copyrights
-├── data/                     # Single Source of Truth Configuration
-│   └── index.ts              # All text nodes, project links, and configurations
-├── lib/                      # Helper Functions & Utilities
-│   ├── mongodb.ts            # Connection pooling database connector
-│   ├── rateLimit.ts          # IP-based API sliding window rate-limiter
-│   ├── icons.ts              # Centralized react-icon mapping
-│   └── utils.ts              # Tailwind merge resolver
+├── app/                        # Next.js 15 App Router Directory
+│   ├── api/                    # Backend Serverless Route Handlers
+│   │   ├── contact-form/       # /api/contact-form POST & GET handlers
+│   │   └── info.md             # API technical documentation
+│   ├── layout.tsx              # Root Layout, Metadata & JSON-LD Schema
+│   ├── page.tsx                # Portfolio Page (Semantic Header, Main, Footer)
+│   ├── globals.css             # Tailwind v4 Directives & Custom Variables
+│   ├── utilities.css           # Utility classes, Shimmer & Accessibility Styles
+│   ├── manifest.ts             # Web App Manifest Generator
+│   ├── robots.ts               # Automated Robots.txt Policy
+│   └── sitemap.ts              # Dynamic Sitemap XML Creator
+├── components/                 # React Application Components
+│   ├── ui/                     # Reusable UI Widgets
+│   │   ├── BentoGrid.tsx       # Responsive Bento Grid & Item Component
+│   │   ├── ExpCard.tsx         # 3D Experience Card Component
+│   │   ├── FloatingNav.tsx     # Adaptive Floating Top Navigation
+│   │   ├── GradientBg.tsx      # Animated Background Gradients
+│   │   ├── MagicButton.tsx     # Animated Gradient Button
+│   │   ├── Pin.tsx             # 3D Pin Container for Projects
+│   │   ├── Spotlight.tsx       # SVG Spotlight Beam Effect
+│   │   └── TextGenerateEffect  # Staggered Headline Text Reveal
+│   ├── Hero.tsx                # Landing Section with Badges & CTA
+│   ├── Grid.tsx                # About Section (BentoGrid Wrapper)
+│   ├── RecentProjects.tsx      # Featured Projects Showcase Grid
+│   ├── MyWorkExperience.tsx    # Experience & Timeline Grid
+│   ├── Contact.tsx             # Interactive Contact Form & Social Links
+│   └── Footer.tsx              # Footer Links, Branding & Credits
+├── data/                       # Centralized Data Configuration
+│   └── index.ts                # Projects, Experience, Socials, Site Config
+├── lib/                        # Shared Utilities & Server Helpers
+│   ├── mongodb.ts              # Cached MongoDB Connection Pool
+│   ├── rateLimit.ts            # Sliding Window IP Rate Limiter
+│   ├── icons.ts                # Dynamic Icon Resolver
+│   └── utils.ts                # Classname Merge (clsx + tailwind-merge)
+└── __tests__/                  # Automated Test Suite (Vitest)
+    ├── accessibility.test.tsx  # Semantic Landmarks & a11y Suite
+    ├── components.test.tsx     # Hero, Contact, and Footer Component Tests
+    ├── contact-api.test.ts     # Contact Form API Handler Tests
+    ├── mongodb.test.ts         # Database Connection Pool Tests
+    └── rateLimit.test.ts       # Rate Limiting Logic Tests
 ```
 
 ---
 
-## 🚀 Setup & Installation
+## 🚀 Setup & Local Development
 
 ### 1. Prerequisites
-* **Node.js** v18 or newer
-* **npm** or **yarn** package manager
-* A **MongoDB Atlas** database cluster (or local MongoDB database instance)
+* **Node.js** v20.x or newer
+* **npm** or **yarn**
+* A **MongoDB Atlas** cluster URI (or local MongoDB database)
 
 ### 2. Installation
-Clone the repository and install dependencies:
 ```bash
 git clone https://github.com/tanish-jain-225/portfolio-website.git
 cd portfolio-website
@@ -99,117 +117,83 @@ npm install
 ```
 
 ### 3. Environment Configuration
-Duplicate the `.env.example` file to create your local variables configuration file:
+Create a local `.env.local` configuration file:
 ```bash
 cp .env.example .env.local
 ```
 
-Open `.env.local` and supply your database credentials and SMTP server properties:
+Configure your environment variables in `.env.local`:
 ```env
-# MongoDB Atlas Database URI Configuration
+# MongoDB Atlas Database Configuration
 MONGODB_URI="mongodb+srv://<username>:<password>@<cluster-url>.mongodb.net"
 DB_NAME="portfolio"
 COLLECTION_NAME="contactMessages"
 
-# SMTP Mail Server Configuration (Optional for Form alerts)
-NOTIFICATION_EMAIL="your-destination-email@domain.com"
+# SMTP Mail Server Configuration (Optional for Instant Email Alerts)
+NOTIFICATION_EMAIL="tanishjain020205@gmail.com"
 SMTP_HOST="smtp.yourprovider.com"
 SMTP_PORT="587"
 SMTP_USER="smtp-username@domain.com"
-SMTP_PASSWORD="smtp-authentication-password"
-SMTP_ADMIN="outgoing-notification-admin@domain.com"
+SMTP_PASSWORD="smtp-password"
+SMTP_ADMIN="outgoing-admin@domain.com"
 SMTP_SECURE="false" # Set to 'true' for port 465 (SSL)
 ```
 
 ### 4. Running Locally
-Start your Next.js Turbopack development server:
 ```bash
 npm run dev
 ```
-Open [http://localhost:3000](http://localhost:3000) in your web browser to view your site locally.
+Open [http://localhost:3000](http://localhost:3000) in your browser.
 
-### 5. Automated Testing & Verification
-The repository includes a comprehensive test suite powered by **Vitest** and **React Testing Library**:
+---
+
+## 🧪 Testing & Code Quality
+
+The codebase enforces testing and static analysis:
+
 ```bash
-# Run all unit and integration tests
+# Run all Vitest unit and accessibility tests
 npm test
 
 # Run tests in watch mode
 npm run test:watch
 
-# Static TypeScript type check
-npx tsc --noEmit
+# Run ESLint check
+npm run lint
+
+# Build production bundle
+npm run build
 ```
 
-*Coverage:*
-- `__tests__/rateLimit.test.ts`: IP-based sliding window rate limiter verification, window eviction, and spam protection.
-- `__tests__/mongodb.test.ts`: Database configuration verification, environment variable presence checks, and connection pooling caching.
-- `__tests__/contact-api.test.ts`: Next.js Route Handler tests for `/api/contact-form` (GET health check, POST payload validation, rate-limiting HTTP 429, and database insertion).
-- `__tests__/components.test.tsx`: Component tests for `Hero`, `Contact`, and `Footer` rendering and interactions.
+*Test Suites (23 Tests across 5 files):*
+- `__tests__/accessibility.test.tsx`: W3C landmarks, skip-link presence, non-nested buttons, focus-visible outlines.
+- `__tests__/components.test.tsx`: Rendering and form interaction for Hero, Contact, and Footer.
+- `__tests__/contact-api.test.ts`: Route handler validation, rate limiting (HTTP 429), and database insertion.
+- `__tests__/mongodb.test.ts`: Connection pooling and environment handling.
+- `__tests__/rateLimit.test.ts`: Sliding-window eviction and threshold enforcement.
 
 ---
 
-## 🚀 CI/CD Pipeline
+## 👨‍💻 Customizing Portfolio Content
 
-Automated quality gates are enforced on every push and pull request via GitHub Actions ([`.github/workflows/ci.yml`](.github/workflows/ci.yml)):
-- **Multi-Version Matrix:** Node.js 20.x and 22.x execution.
-- **Strict Static Type Checking:** `npx tsc --noEmit`.
-- **Vitest Automated Testing:** `npm test`.
-- **Next.js Production Build:** `npm run build`.
+All personal data, projects, work experiences, and text nodes are centralized in a single configuration file:
+👉 **[data/index.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/data/index.ts)**
 
----
-
-## 📊 API Reference
-
-The Contact form leverages Next.js serverless route handlers:
-
-### `POST /api/contact-form`
-* **Content-Type:** `application/json`
-* **Request Payload Schema:**
-  ```json
-  {
-    "name": "User Name",
-    "email": "user@example.com",
-    "subject": "Inquiry Topic",
-    "message": "Message details..."
-  }
-  ```
-* **Success Response (200 OK):**
-  ```json
-  {
-    "success": true,
-    "message": "Message saved successfully!",
-    "id": "database-document-object-id"
-  }
-  ```
-* **Failure Responses:**
-  * **400 Bad Request:** Form validation error (empty fields, long text strings, invalid emails).
-  * **429 Too Many Requests:** Client IP address sent more than 3 requests in a 5-minute window.
-  * **500 Server Error:** General database failure.
+- **`siteConfig`**: Name, bio, SEO keywords, open-graph image, and metadata.
+- **`heroData`**: Headline, subtitle, technology badge pills, and CTA button.
+- **`bentoGridData`**: About section items, academic stats, and collaboration notes.
+- **`projects`**: Project titles, descriptions, live demo links, repository URLs, and tech tags.
+- **`workExperience`**: Roles, organizations, descriptions, and thumbnail graphics.
+- **`socialMedia`**: GitHub, LinkedIn, and Instagram profile links.
+- **`personalInfo`**: Direct email, location, degree, and university details.
 
 ---
 
-## 👨‍💻 Customization & Setup Guide
+## 🌐 Deployment to Vercel
 
-This project is built to be modular. **You do not need to scour page components or HTML nodes to modify text properties.**
+Configured for automated zero-config deployments on **Vercel**:
 
-### How to customize the site content:
-1. Open the [data/index.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/data/index.ts) file.
-2. Edit the configurations to match your background:
-   * **`siteConfig`:** Update website title, SEO keywords, open-graph image placeholders, and name.
-   * **`heroData`:** Change subtitle slogans, headers, tech stack badge lists, and call-to-action targets.
-   * **`projects`:** Add or remove items from the showcase section, including category labels, live project demos, and source code repository links.
-   * **`workExperience`:** Provide thumbnails, timelines, job titles, and job roles.
-   * **`socialMedia`:** Define your Github, LinkedIn, Twitter links, and icon handles.
-
----
-
-## 🌐 Deploying to Vercel
-
-The architecture is configured for one-click deployment on Vercel:
-
-1. Push your customized codebase to a **GitHub / GitLab / Bitbucket** repository.
-2. Log into your **Vercel** workspace.
-3. Click **"Add New Project"** and select your repository.
-4. Expand **Environment Variables** and enter the environment fields from your `.env.local` file.
-5. Click **Deploy**.
+1. Push your repository to **GitHub**.
+2. Import the project into your **Vercel Dashboard**.
+3. Add the environment variables from `.env.local` in the Vercel project settings.
+4. Click **Deploy**.
