@@ -39,7 +39,7 @@ export const FloatingNav = ({
             duration: 0.4,
           }}
           className={cn(
-            "flex max-w-[calc(100vw-1rem)] w-fit fixed top-3 sm:top-8 inset-x-0 mx-auto border border-transparent dark:border-white/[0.2] rounded-full dark:bg-black/80 bg-white/80 backdrop-blur-md shadow-[0px_2px_3px_-1px_rgba(0,0,0,0.1),0px_1px_0px_0px_rgba(25,28,33,0.02),0px_0px_0px_1px_rgba(25,28,33,0.08)] z-[5000] px-2 sm:px-4 sm:pl-6 py-1.5 sm:py-2 items-center justify-center space-x-1 sm:space-x-3 md:space-x-4",
+            "flex max-w-[calc(100vw-1rem)] w-fit fixed top-3 sm:top-8 inset-x-0 mx-auto border border-white/[0.12] rounded-full bg-[#04071d]/85 backdrop-blur-xl shadow-[0_10px_30px_rgba(0,0,0,0.6),0_0_20px_rgba(139,92,246,0.15)] z-[5000] px-2 sm:px-4 sm:pl-6 py-1.5 sm:py-2 items-center justify-center space-x-1 sm:space-x-3 md:space-x-4",
             className
           )}
         >
@@ -74,7 +74,7 @@ export const FloatingNav = ({
                   }
                 }}
                 className={cn(
-                  "relative dark:text-neutral-50 items-center flex space-x-1 text-neutral-600 dark:hover:text-neutral-300 hover:text-neutral-500 cursor-pointer p-1 sm:px-2 sm:py-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors text-xs sm:text-sm"
+                  "relative text-neutral-300 hover:text-white hover:bg-white/[0.08] items-center flex space-x-1 cursor-pointer p-1 sm:px-2.5 sm:py-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all text-xs sm:text-sm font-medium"
                 )}
               >
                 <span className="block sm:hidden text-xs" aria-hidden="true">{navItem.icon}</span>
@@ -88,10 +88,10 @@ export const FloatingNav = ({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${navigationConfig.resumeButton.text} (opens in new tab)`}
-              className="border text-xs sm:text-sm font-medium relative border-neutral-200 dark:border-white/[0.2] text-black dark:text-white px-2.5 sm:px-4 py-1 sm:py-2 rounded-full hover:text-purple-300 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-colors whitespace-nowrap"
+              className="border text-xs sm:text-sm font-medium relative border-purple-500/40 bg-purple-950/40 text-purple-200 px-3 sm:px-4 py-1 sm:py-1.5 rounded-full hover:bg-purple-900/60 hover:text-white hover:border-purple-400 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all whitespace-nowrap shadow-sm shadow-purple-500/20"
             >
               <span>{navigationConfig.resumeButton.text}</span>
-              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-purple-500 to-transparent h-px pointer-events-none" aria-hidden="true" />
+              <span className="absolute inset-x-0 w-1/2 mx-auto -bottom-px bg-gradient-to-r from-transparent via-purple-400 to-transparent h-px pointer-events-none" aria-hidden="true" />
             </a>
           )}
         </motion.div>

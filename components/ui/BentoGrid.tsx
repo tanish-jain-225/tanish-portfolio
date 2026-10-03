@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { cn } from "@/lib/utils";
 import { techStack, images, bentoGridData, uiText } from "@/data";
+import { FaCopy, FaCheck } from "@/lib/icons";
 
 import { BackgroundGradientAnimation } from "./GradientBg";
 
@@ -109,7 +110,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
   return (
     <section
       className={cn(
-        "relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-white/[0.2] hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[230px] sm:min-h-[260px] bento-item w-full min-w-0 max-w-full",
+        "relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-2xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-purple-500/40 hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[230px] sm:min-h-[260px] bento-item w-full min-w-0 max-w-full card-glow",
         getColSpanClass(id)
       )}
       style={{
@@ -436,13 +437,18 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                     }}
                     aria-label={copied ? "Email copied to clipboard" : `Copy email address ${content.email}`}
                     aria-live="polite"
-                    className="px-2.5 sm:px-4 py-2 rounded-lg bg-gradient-to-r from-purple-500 to-blue-600 text-white font-semibold shadow-md hover:from-purple-600 hover:to-blue-700 transition-colors focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-[11px] sm:text-sm md:text-base m-1 sm:m-2 flex items-center max-w-full min-w-0 select-none"
+                    className="px-3.5 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-lg shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500 transition-all focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-xs sm:text-sm md:text-base m-1 sm:m-2 flex items-center gap-2 max-w-full min-w-0 select-none hover:scale-105 active:scale-95"
                     style={{
                       wordBreak: 'break-all',
                       whiteSpace: 'pre-line',
                       minWidth: 0,
                     }}
                   >
+                    {copied ? (
+                      <FaCheck className="w-4 h-4 text-emerald-300 flex-shrink-0" aria-hidden="true" />
+                    ) : (
+                      <FaCopy className="w-4 h-4 text-purple-200 flex-shrink-0" aria-hidden="true" />
+                    )}
                     <span className="truncate block max-w-[200px] xs:max-w-[240px] sm:max-w-[300px] text-ellipsis overflow-hidden text-center">
                       {copied ? uiText.contact.copied : `${uiText.contact.copy}: ${content.email}`}
                     </span>

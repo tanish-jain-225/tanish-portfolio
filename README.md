@@ -9,6 +9,8 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 ![TypeScript](https://img.shields.io/badge/TypeScript-5.0-blue?style=for-the-badge&logo=typescript)
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer)
+![Dark Mode](https://img.shields.io/badge/Theme-Consistent_Dark_Mode-8b5cf6?style=for-the-badge)
+![Tests](https://img.shields.io/badge/Tests-31_Passed_100%25-success?style=for-the-badge&logo=vitest)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?style=for-the-badge&logo=mongodb)
 
 ---
@@ -16,7 +18,9 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 ## ✨ Key Features & Technical Highlights
 
 ### 🎨 **UI/UX & Structural Architecture**
-* **Authentic Bento Grid:** Responsive CSS Grid layout (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl`) featuring deliberate 2-column feature spans for engineering profile and stats, alongside a full-width bottom connect banner.
+* **Native & Uncompromising Dark Mode:** Obsidian-toned canvas (`#000319`) with ethereal spotlights, glowing cyan and violet gradients, and zero light-mode color leaks or flash-of-white during page transitions and initial loads.
+* **Interactive Category Filtering:** Real-time filter pills across Featured Projects (*All*, *AI & Autonomous*, *Full-Stack Web*, *Security & Utilities*) allowing engineering leaders and recruiters to rapidly explore specialized project subsets.
+* **Authentic Bento Grid:** Responsive CSS Grid layout (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl`) featuring deliberate 2-column feature spans for engineering profile and stats, alongside a full-width bottom connect banner with instant clipboard copy and animated feedback.
 * **Balanced Card Grids & Baseline Action Alignment:** Projects and Work Experience sections utilize clean CSS Grids with flex-grow descriptions, ensuring all action buttons ("Source Code" and "Live Demo") align on the exact same baseline across every card in each row.
 * **Ultra-Narrow (300px) Responsiveness:** Engineered and verified for viewports from **280px–300px** (e.g., Samsung Galaxy Z Fold outer screen) up to 4K displays. Project action buttons adaptively collapse to vertical stacking below `380px` (`xs`), preventing text truncation.
 * **GPU-Accelerated Micro-Animations:** Staggered entry reveals, hover card transforms, smooth text generation triggers, and interactive spotlight effects powered by Framer Motion and optimized CSS transitions.
@@ -165,7 +169,8 @@ npm run lint
 npm run build
 ```
 
-*Test Suites (23 Tests across 5 files):*
+*Test Suites (31 Tests across 6 files):*
+- `__tests__/dark-mode.test.tsx`: Native dark mode consistency, absence of light theme artifacts, and category filtering.
 - `__tests__/accessibility.test.tsx`: W3C landmarks, skip-link presence, non-nested buttons, focus-visible outlines.
 - `__tests__/components.test.tsx`: Rendering and form interaction for Hero, Contact, and Footer.
 - `__tests__/contact-api.test.ts`: Route handler validation, rate limiting (HTTP 429), and database insertion.

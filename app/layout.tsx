@@ -77,8 +77,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
+    <html lang="en" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
       <head>
+        <meta name="color-scheme" content="dark" />
+        <meta name="theme-color" content="#000319" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
@@ -94,7 +96,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={inter.className}>
+      <body className={`${inter.className} bg-[#000319] text-white antialiased`}>
         <a href="#main-content" className="skip-to-content">
           {uiText.accessibility.skipToContent}
         </a>

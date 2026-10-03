@@ -43,41 +43,49 @@ const Hero = () => {
     }
     
   }, []);    return (
-    <div id="home" className="w-full relative min-h-screen flex items-center justify-center scroll-mt-20" ref={heroRef}>
+    <div id="home" className="w-full relative min-h-screen flex items-center justify-center scroll-mt-20 bg-[#000319]" ref={heroRef}>
       {/* Fixed position background container */}
       <div className="absolute inset-0 overflow-hidden pointer-events-none select-none" aria-hidden="true">
-        {/* Spotlight container with proper positioning */}
+        {/* Spotlight container with vibrant cosmic glow */}
         <div className="absolute inset-0 overflow-hidden pointer-events-none">
           <Spotlight
             className="-top-40 -left-10 sm:-left-20 md:-left-32 md:-top-20 h-screen animate-spotlight"
-            fill="white"
+            fill="#a855f7"
           />
           <Spotlight
             className="top-10 left-[40%] sm:left-[45%] md:left-[70%] h-[80vh] w-[50vw] animate-spotlight"
-            fill="#cbacf9"
+            fill="#38bdf8"
           />
           <Spotlight className="top-28 left-[20%] sm:left-[25%] md:left-[40%] h-[80vh] w-[50vw] animate-spotlight" fill="#8b5cf6" />
         </div>
 
-        {/* Grid background layer */}
-        <div className="absolute inset-0 bg-white dark:bg-black pointer-events-none">
+        {/* Dark cosmic grid background layer */}
+        <div className="absolute inset-0 bg-[#000319] pointer-events-none">
           <div
             className={cn(
-              "absolute inset-0",
-              "[background-size:20px_20px] sm:[background-size:30px_30px] md:[background-size:40px_40px]",
-              "[background-image:linear-gradient(to_right,#e4e4e7_1px,transparent_1px),linear-gradient(to_bottom,#e4e4e7_1px,transparent_1px)]",
-              "dark:[background-image:linear-gradient(to_right,#262626_1px,transparent_1px),linear-gradient(to_bottom,#262626_1px,transparent_1px)]"
+              "absolute inset-0 opacity-40",
+              "[background-size:24px_24px] sm:[background-size:36px_36px] md:[background-size:48px_48px]",
+              "[background-image:linear-gradient(to_right,#1f2448_1px,transparent_1px),linear-gradient(to_bottom,#1f2448_1px,transparent_1px)]"
             )}
           />
           {/* Radial gradient for the container to give a faded look */}
-          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-white [mask-image:radial-gradient(ellipse_at_center,transparent_20%,black)] dark:bg-black" />
+          <div className="pointer-events-none absolute inset-0 flex items-center justify-center bg-[#000319] [mask-image:radial-gradient(ellipse_at_center,transparent_20%,#000319)]" />
         </div>
       </div>
 
       {/* Content layer with proper z-index */}
       <div className="relative z-10 flex flex-col items-center justify-center py-16 sm:py-20 md:py-24 w-full px-2 sm:px-6 md:px-8">
         <div className="w-full max-w-[calc(100vw-1rem)] sm:max-w-2xl md:max-w-3xl lg:max-w-4xl xl:max-w-5xl flex flex-col items-center justify-center">
-          <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-blue-100 max-w-[260px] sm:max-w-md md:max-w-lg hero-animate opacity-0 pt-2 sm:pt-6 md:pt-8 break-words font-medium">
+          {/* Recruiter availability status badge */}
+          <div className="hero-animate opacity-0 mb-3 sm:mb-4 inline-flex items-center gap-2 px-3 sm:px-4 py-1.5 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-200 text-[11px] sm:text-xs font-medium backdrop-blur-md shadow-[0_0_20px_rgba(168,85,247,0.2)]">
+            <span className="relative flex h-2 w-2" aria-hidden="true">
+              <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
+              <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
+            </span>
+            <span>Available for Software Engineering & Full-Stack Roles</span>
+          </div>
+
+          <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-purple-200/90 max-w-[260px] sm:max-w-md md:max-w-lg hero-animate opacity-0 break-words font-semibold">
             {heroData.subtitle}
           </p>
           
@@ -98,13 +106,15 @@ const Hero = () => {
             {heroData.techBadges.map((tech) => (
               <span
                 key={tech}
-                className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm whitespace-nowrap"
+                className="px-2.5 py-0.5 sm:px-3 sm:py-1 text-[11px] sm:text-xs rounded-full bg-white/5 border border-white/10 text-purple-300 backdrop-blur-sm whitespace-nowrap hover:border-purple-400/40 transition-colors"
               >
                 {tech}
               </span>
             ))}
           </div>
-          <div className="hero-animate opacity-0 max-w-full">
+
+          {/* Dual Action Buttons */}
+          <div className="hero-animate opacity-0 flex flex-wrap items-center justify-center gap-3 sm:gap-4 max-w-full">
             <a 
               href={heroData.ctaButton.link}
               aria-label={heroData.ctaButton.text}
@@ -126,7 +136,37 @@ const Hero = () => {
                 position={heroData.ctaButton.position}
               />
             </a>
+
+            <a
+              href="/resume.pdf"
+              target="_blank"
+              rel="noopener noreferrer"
+              aria-label="View Resume PDF (opens in new tab)"
+              className="px-5 py-3 rounded-xl bg-[#0e1026] hover:bg-[#15193b] border border-white/10 hover:border-purple-500/40 text-xs sm:text-sm font-semibold text-white transition-all duration-300 shadow-lg shadow-black/40 hover:shadow-purple-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black flex items-center gap-2"
+            >
+              <span>Download CV</span>
+              <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+              </svg>
+            </a>
           </div>
+
+          {/* Engineering Highlights Strip */}
+          <div className="hero-animate opacity-0 mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-neutral-300 font-medium max-w-3xl">
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-purple-400" aria-hidden="true" />
+              <span><strong className="text-white">500+</strong> Automated Tests</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" aria-hidden="true" />
+              <span><strong className="text-white">94+</strong> Board ATS Engine</span>
+            </div>
+            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
+              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
+              <span><strong className="text-white">National Finalist</strong> (Hack Celestial)</span>
+            </div>
+          </div>
+
           {/* Scroll indicator */}
           <div 
             className="pointer-events-none select-none absolute bottom-4 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator opacity-0 transition-opacity duration-700"

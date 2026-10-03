@@ -30,7 +30,7 @@ const Footer = () => {
   };
   
   return (
-    <footer className="relative w-full max-w-full mx-auto px-3 py-8 sm:p-8 border-t border-white/10 bg-[#181A2A] text-white overflow-hidden flex flex-col items-center" role="contentinfo">
+    <footer className="relative w-full max-w-full mx-auto px-3 py-8 sm:p-10 border-t border-white/10 bg-gradient-to-b from-[#080b24] to-[#000319] text-white overflow-hidden flex flex-col items-center" role="contentinfo">
       {/* Decorative background */}
       <div className="absolute inset-0 w-full h-full pointer-events-none select-none z-0">
         <div className="absolute top-0 left-1/4 w-60 sm:w-80 h-60 sm:h-80 rounded-full bg-purple-600/10 filter blur-3xl"></div>
@@ -61,7 +61,7 @@ const Footer = () => {
                       href={item.link} 
                       aria-label={`Scroll to ${item.name} section`}
                       onClick={(e) => handleSmoothScroll(e, item.link)}
-                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors hover:underline text-xs sm:text-base cursor-pointer px-1.5 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
+                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors hover:underline text-xs sm:text-base cursor-pointer px-1.5 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080b24]"
                     >
                       <IconComponent size={16} className="min-w-[16px] min-h-[16px]" aria-hidden="true" />
                       <span className="break-all whitespace-normal w-full">{item.name}</span>
@@ -79,7 +79,7 @@ const Footer = () => {
                 <a 
                   href={`mailto:${personalInfo.email}`} 
                   aria-label={`Send email to ${personalInfo.email}`}
-                  className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-xs sm:text-base px-1.5 py-1 break-all whitespace-normal w-full rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
+                  className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-xs sm:text-base px-1.5 py-1 break-all whitespace-normal w-full rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080b24]"
                   style={{lineHeight: '1.5'}}
                 >
                   <FaEnvelope size={16} className="min-w-[16px] min-h-[16px]" aria-hidden="true" />
@@ -93,7 +93,7 @@ const Footer = () => {
                     <a 
                       href={social.url} 
                       aria-label={`Visit my ${social.name} profile (opens in new tab)`}
-                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-xs sm:text-base px-1.5 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#181A2A]"
+                      className="flex items-center gap-2 text-[#BEC1DD] hover:text-white transition-colors text-xs sm:text-base px-1.5 py-1 rounded-md break-all whitespace-normal w-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-1 focus-visible:ring-offset-[#080b24]"
                       target="_blank"
                       rel="noopener noreferrer"
                       style={{lineHeight: '1.5'}}

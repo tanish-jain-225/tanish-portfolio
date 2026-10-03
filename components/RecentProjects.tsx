@@ -1,5 +1,6 @@
 "use client";
 
+import React, { useState, useMemo } from "react";
 import Image from "next/image";
 import { FaLocationArrow, FaGithub } from "react-icons/fa6";
 import { MdCategory } from "react-icons/md";
@@ -7,6 +8,44 @@ import { projects, sectionTitles, uiText, images } from "@/data";
 import { PinContainer } from "./ui/Pin";
 
 const RecentProjects = () => {
+  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+
+  const categories = useMemo(() => {
+    return ["All", "AI & Autonomous", "Full-Stack Web", "Security & Utilities"];
+  }, []);
+
+  const filteredProjects = useMemo(() => {
+    const sorted = [...projects].sort(
+      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
+    );
+
+    if (selectedCategory === "All") return sorted;
+
+    return sorted.filter((item) => {
+      const cat = item.category || "";
+      if (selectedCategory === "AI & Autonomous") {
+        return cat.includes("AI") || cat.includes("Autonomous") || cat.includes("EdTech");
+      }
+      if (selectedCategory === "Full-Stack Web") {
+        return (
+          cat.includes("Management") ||
+          cat.includes("Hospitality") ||
+          cat.includes("Health") ||
+          cat.includes("Fitness")
+        );
+      }
+      if (selectedCategory === "Security & Utilities") {
+        return (
+          cat.includes("Security") ||
+          cat.includes("Application") ||
+          cat.includes("Privacy") ||
+          cat.includes("Image")
+        );
+      }
+      return true;
+    });
+  }, [selectedCategory]);
+
   return (
     <section id="projects" aria-labelledby="projects-heading" className="section-container">
       <div className="text-center w-full">
@@ -22,39 +61,62 @@ const RecentProjects = () => {
         <p className="section-subtitle">
           {sectionTitles.projects.subtitle}
         </p>
+
+        {/* Category Filter Pills */}
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8 px-2" role="tablist" aria-label="Project category filters">
+          {categories.map((cat) => (
+            <button
+              key={cat}
+              role="tab"
+              aria-selected={selectedCategory === cat}
+              onClick={() => setSelectedCategory(cat)}
+              className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
+                selectedCategory === cat
+                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30 scale-105"
+                  : "bg-[#0b0e24] text-neutral-400 border border-white/10 hover:border-purple-500/40 hover:text-white"
+              }`}
+            >
+              {cat}
+            </button>
+          ))}
+        </div>
       </div>
+
       <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
-        {[...projects]
-          .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
-          .map((item) => (
+        {filteredProjects.map((item) => (
           <div
             className="flex items-center justify-center w-full max-w-[380px] cardContainer"
             style={{ minHeight: '32rem', height: '100%' }}
             key={item.id}
           >            
-          <PinContainer
+            <PinContainer
               title={item.title}
               href={item.demoLink}
               disableWrapper={true}
             >
               <div 
-                className="relative flex items-center justify-center w-[calc(100vw-3rem)] max-w-[340px] overflow-hidden rounded-xl"
-                style={{ height: '180px', marginBottom: 16, position: 'relative' }}
+                className="relative flex items-center justify-center w-[calc(100vw-3rem)] max-w-[340px] overflow-hidden rounded-xl h-[180px] mb-4"
+                style={{ position: "relative", height: "180px", width: "100%" }}
               >
                 <div
-                  className="relative w-full h-full overflow-hidden rounded-xl lg:rounded-2xl"
-                  style={{ backgroundColor: "#13162D", position: 'relative', height: '100%' }}
+                  className="relative w-full h-[180px] overflow-hidden rounded-xl lg:rounded-2xl bg-[#13162D]"
+                  style={{ position: "relative", height: "180px", width: "100%" }}
                 >
                   <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 </div>
                 {item.img ? (
-                  <Image
-                    src={item.img}
-                    alt={`${item.title} preview`}
-                    className="z-10 absolute bottom-0 w-full h-full object-cover object-top"
-                    fill
-                    sizes="(max-width: 640px) 85vw, (max-width: 1200px) 384px, 384px"
-                  />
+                  <div 
+                    className="z-10 absolute inset-0 w-full h-[180px] overflow-hidden"
+                    style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, height: "180px", width: "100%" }}
+                  >
+                    <Image
+                      src={item.img}
+                      alt={`${item.title} preview`}
+                      className="w-full h-full object-cover object-top"
+                      fill
+                      sizes="(max-width: 640px) 85vw, (max-width: 1200px) 384px, 384px"
+                    />
+                  </div>
                 ) : (
                   <div className="z-10 absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-950/80 to-indigo-950/80 border border-white/10 rounded-2xl">
                     <span className="text-4xl font-extrabold text-white/30 tracking-widest select-none">
@@ -117,7 +179,7 @@ const RecentProjects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`View source code for ${item.title} on GitHub (opens in new tab)`}
-                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-black/60 hover:bg-black/80 border border-white/10 hover:border-white/20 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-[#0c0e24] hover:bg-[#16193d] border border-white/10 hover:border-white/20 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                     >
                       <FaGithub className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
                       <span className="truncate">{uiText.projects.sourceCode}</span>
@@ -135,7 +197,7 @@ const RecentProjects = () => {
                       target="_blank"
                       rel="noopener noreferrer"
                       aria-label={`Visit live demo for ${item.title} (opens in new tab)`}
-                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-gradient-to-r from-purple-900/40 to-purple-800/40 hover:from-purple-900/60 hover:to-purple-800/60 border border-purple-500/30 hover:border-purple-500/50 rounded-lg text-[11px] sm:text-xs text-purple-300 hover:text-purple-200 transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
+                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border border-purple-500/30 hover:border-purple-400/50 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black shadow-md shadow-purple-600/20"
                     >
                       <span className="truncate">{uiText.projects.liveProject}</span>
                       <FaLocationArrow className="w-3 h-3 flex-shrink-0" aria-hidden="true" />

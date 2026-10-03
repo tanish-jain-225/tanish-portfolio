@@ -81,3 +81,21 @@ vi.mock('framer-motion', async () => {
     stagger: (val: number) => val,
   };
 });
+
+// Mock next/image to render standard semantic img elements without virtual DOM layout warnings
+vi.mock('next/image', () => ({
+  __esModule: true,
+  default: ({ src, alt, fill, priority, sizes, className, style, ...props }: any) => {
+    // eslint-disable-next-line @next/next/no-img-element
+    return React.createElement('img', {
+      src,
+      alt,
+      className,
+      style: {
+        ...(fill ? { position: 'absolute', height: '100%', width: '100%', inset: 0 } : {}),
+        ...style,
+      },
+      ...props,
+    });
+  },
+}));

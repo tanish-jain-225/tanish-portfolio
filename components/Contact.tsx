@@ -114,13 +114,13 @@ const Contact = () => {
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full max-w-6xl mx-auto items-stretch">
         {/* Contact Form */}
         <motion.div
-          className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col justify-between"
+          className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col justify-between shadow-2xl shadow-black/50"
           initial={{ opacity: 0, y: 20 }}
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.5 }}
           viewport={{ once: true }}
         >
-          <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left">
+          <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left text-white">
             {contactInfo.form.title}
           </h3>
           <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between">
@@ -129,7 +129,7 @@ const Contact = () => {
                 <div key={field.name} className="flex flex-col">
                   <label
                     htmlFor={field.name}
-                    className="block text-xs sm:text-sm text-[#BEC1DD] mb-1"
+                    className="block text-xs sm:text-sm text-[#BEC1DD] mb-1 font-medium"
                   >
                     {field.label}
                   </label>
@@ -141,7 +141,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required={field.required}
                       rows={3}
-                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors resize-vertical"
+                      className="w-full bg-[#07091c] border border-white/10 rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-all resize-vertical placeholder-neutral-500"
                     />
                   ) : (
                     <input
@@ -152,7 +152,7 @@ const Contact = () => {
                       onChange={handleChange}
                       required={field.required}
                       autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
-                      className="w-full bg-[#1e2142] border border-white/10 rounded-md p-2 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-colors"
+                      className="w-full bg-[#07091c] border border-white/10 rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-all placeholder-neutral-500"
                     />
                   )}
                 </div>
@@ -162,9 +162,9 @@ const Contact = () => {
               <div 
                 role={statusMessage.type === "error" ? "alert" : "status"}
                 aria-live="polite"
-                className={`p-3 rounded-md text-xs sm:text-sm border transition-all duration-300 my-2 ${
+                className={`p-3 rounded-xl text-xs sm:text-sm border transition-all duration-300 my-2 ${
                   statusMessage.type === "success" 
-                    ? "bg-green-950/40 text-green-300 border-green-500/30" 
+                    ? "bg-emerald-950/40 text-emerald-300 border-emerald-500/30" 
                     : "bg-red-950/40 text-red-300 border-red-500/30"
                 }`}
               >
@@ -175,10 +175,10 @@ const Contact = () => {
               type="submit"
               disabled={isSubmitting}
               aria-live="polite"
-              className={`w-full font-medium py-2.5 sm:py-3 px-4 sm:px-6 rounded-lg transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-xs sm:text-sm md:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 mt-2 ${
+              className={`w-full font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-xs sm:text-sm md:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black mt-2 flex items-center justify-center gap-2 ${
                 justSent
-                  ? "bg-green-600 hover:bg-green-700 text-white shadow-lg shadow-green-500/20 scale-[1.02] motion-reduce:scale-100"
-                  : "bg-gradient-to-r from-purple-600 to-purple-700 hover:from-purple-700 hover:to-purple-800 text-white shadow-lg shadow-purple-500/20 hover:shadow-purple-500/40 hover:scale-[1.01] motion-reduce:hover:scale-100"
+                  ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/30 scale-[1.01]"
+                  : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-600/30 hover:scale-[1.01] motion-reduce:hover:scale-100"
               }`}
             >
               {isSubmitting
@@ -197,23 +197,23 @@ const Contact = () => {
           transition={{ duration: 0.5, delay: 0.2 }}
           viewport={{ once: true }}
         >
-          <div className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0 justify-center">
-            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left">
+          <div className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0 justify-center shadow-2xl shadow-black/50">
+            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left text-white">
               {contactInfo.details.title}
             </h3>
             <div className="flex flex-col gap-3.5 sm:gap-6 p-0.5 sm:p-2 flex-1 justify-center">
               {contactInfo.details.items.map((item, index) => {
                 const IconComponent = getIcon(item.icon);
                 return (
-                  <div key={index} className="flex items-center gap-3 sm:gap-4">
-                    <div className="bg-purple-900/20 p-2.5 sm:p-3 rounded-full flex items-center justify-center flex-shrink-0">
+                  <div key={index} className="flex items-center gap-3 sm:gap-4 p-2 rounded-xl hover:bg-white/[0.03] transition-colors">
+                    <div className="bg-purple-900/30 border border-purple-500/20 p-2.5 sm:p-3 rounded-xl flex items-center justify-center flex-shrink-0">
                       <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
                     </div>
                     <div className="flex flex-col min-w-0">
                       <p className="text-[#BEC1DD] text-[11px] sm:text-sm">
                         {item.label}
                       </p>
-                      <p className="text-white text-xs sm:text-base break-all">
+                      <p className="text-white text-xs sm:text-base break-all font-medium">
                         {item.value}
                       </p>
                     </div>
@@ -223,8 +223,8 @@ const Contact = () => {
             </div>
           </div>
           {/* Social Links */}
-          <div className="bg-[#13162D] p-3.5 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0">
-            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4">
+          <div className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0 shadow-2xl shadow-black/50">
+            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-white">
               {uiText.contact.connectWithMe}
             </h3>
             <div className="flex flex-wrap gap-2.5 sm:gap-4 w-full">
@@ -237,9 +237,9 @@ const Contact = () => {
                     target="_blank"
                     rel="noopener noreferrer"
                     aria-label={`Visit ${social.name} profile (opens in new tab)`}
-                    className="bg-purple-900/20 hover:bg-purple-900/40 p-2 sm:p-3 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-lg hover:shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950"
+                    className="bg-purple-900/20 hover:bg-purple-900/50 border border-purple-500/20 hover:border-purple-400/40 p-2.5 sm:p-3.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-lg hover:shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
                   >
-                    <IconComponent className="text-purple-300 w-4 h-4 sm:w-6 sm:h-6" aria-hidden="true" />
+                    <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
                   </a>
                 );
               })}
