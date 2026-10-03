@@ -3,7 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
 import { SpeedInsights } from "@vercel/speed-insights/next"
-import { siteConfig, socialMedia, techStack, uiText } from "@/data";
+import { siteConfig, socialMedia, techStack, uiText, personalInfo } from "@/data";
 
 const inter = Inter({
   subsets: ["latin"],
@@ -90,7 +90,11 @@ export default function RootLayout({
               name: siteConfig.creator,
               url: siteConfig.url,
               jobTitle: siteConfig.jobTitle,
-              knowsAbout: techStack.slice(0, 6),
+              alumniOf: {
+                "@type": "EducationalOrganization",
+                name: personalInfo.university,
+              },
+              knowsAbout: techStack.slice(0, 10),
               sameAs: socialMedia.map((s) => s.url),
             }),
           }}

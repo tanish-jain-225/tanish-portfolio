@@ -7,7 +7,7 @@ import RecentProjects from '@/components/RecentProjects';
 import MyWorkExperience from '@/components/MyWorkExperience';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { navItems } from '@/data';
+import { navItems, navigationConfig } from '@/data';
 
 describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
   beforeEach(() => {
@@ -30,12 +30,12 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
       expect(statusBadge).toBeInTheDocument();
     });
 
-    it('renders dual action buttons (CTA + Download CV)', () => {
+    it('renders dual action buttons (CTA + View Resume)', () => {
       render(<Hero />);
-      const downloadCv = screen.getByRole('link', { name: /view resume/i });
-      expect(downloadCv).toBeInTheDocument();
-      expect(downloadCv).toHaveAttribute('href', '/resume.pdf');
-      expect(downloadCv.className).toContain('bg-[#0e1026]');
+      const resumeLink = screen.getByRole('link', { name: /view resume/i });
+      expect(resumeLink).toBeInTheDocument();
+      expect(resumeLink).toHaveAttribute('href', navigationConfig.resumeButton.link);
+      expect(resumeLink.className).toContain('bg-[#0e1026]');
     });
   });
 

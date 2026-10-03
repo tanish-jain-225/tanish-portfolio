@@ -19,7 +19,10 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 
 ### 🎨 **UI/UX & Structural Architecture**
 * **Native & Uncompromising Dark Mode:** Obsidian-toned canvas (`#000319`) with ethereal spotlights, glowing cyan and violet gradients, and zero light-mode color leaks or flash-of-white during page transitions and initial loads.
-* **Interactive Category Filtering:** Real-time filter pills across Featured Projects (*All*, *AI & Autonomous*, *Full-Stack Web*, *Security & Utilities*) allowing engineering leaders and recruiters to rapidly explore specialized project subsets.
+* **100% Dynamic & Centralized:** Every label, badge, counter, project category, link, and accessibility text is driven by [data/index.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/data/index.ts) with zero hardcoded template strings.
+* **Dual Dynamic Resume CTAs:** Both top FloatingNav and Hero secondary CTA bind to the live Google Docs resume via `navigationConfig.resumeButton.link`, opening in a new tab with `rel="noopener noreferrer"`.
+* **Zero Cumulative Layout Shift (CLS):** Pre-allocated aspect ratios (`aspect-square` / `aspectRatio: "1 / 1"` and `17 / 9"`) eliminate 0x0 initial image bounding box layout shifts on lazy-loaded thumbnails and bento cloud graphics.
+* **Interactive Category Filtering:** Real-time filter pills across Featured Projects (*All*, *AI & Autonomous*, *Full-Stack Web*, *Security & Utilities*) allowing engineering leaders and recruiters to rapidly explore specialized project subsets, with a clean empty-state fallback.
 * **Authentic Bento Grid:** Responsive CSS Grid layout (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl`) featuring deliberate 2-column feature spans for engineering profile and stats, alongside a full-width bottom connect banner with instant clipboard copy and animated feedback.
 * **Balanced Card Grids & Baseline Action Alignment:** Projects and Work Experience sections utilize clean CSS Grids with flex-grow descriptions, ensuring all action buttons ("Source Code" and "Live Demo") align on the exact same baseline across every card in each row.
 * **Ultra-Narrow (300px) Responsiveness:** Engineered and verified for viewports from **280px–300px** (e.g., Samsung Galaxy Z Fold outer screen) up to 4K displays. Project action buttons adaptively collapse to vertical stacking below `380px` (`xs`), preventing text truncation.
@@ -100,6 +103,7 @@ tanish-portfolio/
     ├── accessibility.test.tsx  # Semantic Landmarks & a11y Suite
     ├── components.test.tsx     # Hero, Contact, and Footer Component Tests
     ├── contact-api.test.ts     # Contact Form API Handler Tests
+    ├── dark-mode.test.tsx      # Dark Mode Consistency & UI Hierarchy Tests
     ├── mongodb.test.ts         # Database Connection Pool Tests
     └── rateLimit.test.ts       # Rate Limiting Logic Tests
 ```
@@ -184,13 +188,16 @@ npm run build
 All personal data, projects, work experiences, and text nodes are centralized in a single configuration file:
 👉 **[data/index.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/data/index.ts)**
 
-- **`siteConfig`**: Name, bio, SEO keywords, open-graph image, and metadata.
-- **`heroData`**: Headline, subtitle, technology badge pills, and CTA button.
-- **`bentoGridData`**: About section items, academic stats, and collaboration notes.
-- **`projects`**: Project titles, descriptions, live demo links, repository URLs, and tech tags.
-- **`workExperience`**: Roles, organizations, descriptions, and thumbnail graphics.
-- **`socialMedia`**: GitHub, LinkedIn, and Instagram profile links.
-- **`personalInfo`**: Direct email, location, degree, and university details.
+- **`siteConfig`**: Site title, bio, SEO keywords, open-graph metadata, creator name, and theme color.
+- **`navigationConfig`**: Floating navbar resume button text, toggle state, and direct Google Docs document URL.
+- **`heroData`**: Recruiter availability badge, headline, subtitle, engineering highlights metrics, technology badge pills, and CTA buttons.
+- **`uiText`**: Centralized UI strings, category filters (`projectCategories`), button labels, empty state fallbacks, and accessibility `aria-label` constants.
+- **`bentoGridData`**: About section items, academic achievements (VESIT, CGPA 7.43), technical interests, and collaboration notes.
+- **`projects`**: Project titles, descriptions, live demo links, repository URLs, categories, status badges, and tech tags.
+- **`workExperience`**: Timeline entries (Edvanta, Freelance Full-Stack, Hackathon Finalist, Academic Leadership), descriptions, and company thumbnails.
+- **`socialMedia`**: GitHub, LinkedIn, and Instagram profile URLs and iconography.
+- **`personalInfo`**: Direct email, phone, location, degree, and university details.
+- **`images`**: Centralized asset paths for backgrounds, icons, and SVG illustrations.
 
 ---
 

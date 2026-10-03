@@ -18,7 +18,7 @@ export const BentoGrid = ({ className }: { className?: string }) => (
       className
     )}
     role="list"
-    aria-label="About Me Grid"
+    aria-label={uiText.accessibility.aboutMeGrid}
   >
     {bentoGridData.items.map((item) => (
       <BentoGridItem key={item.id} id={item.id} />
@@ -197,7 +197,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                   >
                     <Image
                       src={images.backgrounds.footerGrid}
-                      alt="Background pattern"
+                      alt={uiText.accessibility.backgroundPattern}
                       className="object-cover object-right-bottom"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -231,16 +231,15 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               {/* Collaboration card */}
               {content.type === "collaboration" && (
                 <>
-                  <div className="flex items-center justify-center">
+                  <div className="flex items-center justify-center min-h-[150px] w-full">
                     <Image
                       src={images.backgrounds.cloud}
                       alt={item.description || content.text}
-                      className="object-contain"
+                      className="object-contain aspect-square"
                       width={150}
                       height={150}
-                      style={{ width: "auto", height: "auto" }}
+                      style={{ aspectRatio: "1 / 1" }}
                       sizes="150px"
-                      loading="lazy"
                     />
                   </div>
                   <div className="mt-4 flex flex-col items-center justify-center text-center gap-3 sm:gap-4 relative z-10">
@@ -268,18 +267,27 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               )}
               {/* Tech stack card */}
               {content.type === "techstack" && id === 3 && (
-                <div className="flex flex-col gap-4 sm:gap-6 w-full h-full justify-center items-center">
-                  <div className="w-full flex flex-wrap justify-center gap-2 sm:gap-3 bg-[#10132E]/80 rounded-xl p-2 sm:p-4 border border-white/10 my-2" aria-label="Tech stack list">
-                    {techStack.map((stackItem, i) => (
+                <div className="flex flex-col gap-3 sm:gap-4 w-full h-full justify-center items-center relative z-10 py-2">
+                  <p className="text-[#C1C2D3] text-xs sm:text-sm text-center max-w-md leading-relaxed px-1">
+                    {content.text}
+                  </p>
+                  <div className="w-full flex flex-wrap justify-center gap-1.5 sm:gap-2 bg-[#10132E]/80 rounded-xl p-2.5 sm:p-3 border border-white/10 my-1" aria-label="Tech stack list">
+                    {techStack.slice(0, 10).map((stackItem, i) => (
                       <span
                         key={i}
-                        className="py-1 sm:py-2 px-2 sm:px-3 text-xs sm:text-sm rounded-full text-center bg-[#161A31] transition-all duration-300 shadow-lg text-white flex items-center gap-1 sm:gap-2 border border-white/5"
+                        className="py-1 px-2.5 text-[11px] sm:text-xs rounded-full text-center bg-[#161A31] transition-all duration-300 shadow-sm text-white flex items-center gap-1.5 border border-white/5 hover:border-purple-400/30"
                       >
-                        <div className="w-2 h-2 rounded-full bg-[rgb(198,179,255)]"></div>
+                        <div className="w-1.5 h-1.5 rounded-full bg-[rgb(198,179,255)]"></div>
                         {stackItem}
                       </span>
                     ))}
                   </div>
+                  {content.note && (
+                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-200 text-[11px] sm:text-xs font-medium">
+                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
+                      <span>{content.note}</span>
+                    </div>
+                  )}
                 </div>
               )}
               {/* Engineering card */}
@@ -291,7 +299,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                   >
                     <Image
                       src={images.backgrounds.grid}
-                      alt="Tech background"
+                      alt={uiText.accessibility.techBackground}
                       className="object-cover"
                       fill
                       sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
@@ -331,9 +339,10 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                             <Image
                               src={interest.icon}
                               alt={interest.name}
-                              className="w-4 h-4 mr-1"
+                              className="w-4 h-4 mr-1 aspect-square"
                               width={16}
                               height={16}
+                              style={{ aspectRatio: "1 / 1" }}
                               sizes="16px"
                             />
                             <span className="text-xs text-white">
@@ -388,9 +397,10 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                           <Image
                             src={images.icons.git}
                             alt={uiText.projects.sourceCode}
-                            className="w-4 h-4 mr-2"
+                            className="w-4 h-4 mr-2 aspect-square"
                             width={16}
                             height={16}
+                            style={{ aspectRatio: "1 / 1" }}
                             sizes="16px"
                             onError={(e) => (e.currentTarget.style.display = "none")}
                           />
@@ -435,7 +445,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                         alert(uiText.contact.copyNotSupported);
                       }
                     }}
-                    aria-label={copied ? "Email copied to clipboard" : `Copy email address ${content.email}`}
+                    aria-label={copied ? uiText.contact.emailCopied : `${uiText.contact.copyEmailAddress} ${content.email}`}
                     aria-live="polite"
                     className="px-3.5 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-lg shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500 transition-all focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-xs sm:text-sm md:text-base m-1 sm:m-2 flex items-center gap-2 max-w-full min-w-0 select-none hover:scale-105 active:scale-95"
                     style={{

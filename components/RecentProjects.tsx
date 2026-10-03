@@ -10,9 +10,7 @@ import { PinContainer } from "./ui/Pin";
 const RecentProjects = () => {
   const [selectedCategory, setSelectedCategory] = useState<string>("All");
 
-  const categories = useMemo(() => {
-    return ["All", "AI & Autonomous", "Full-Stack Web", "Security & Utilities"];
-  }, []);
+  const categories = uiText.projects.categories;
 
   const filteredProjects = useMemo(() => {
     const sorted = [...projects].sort(
@@ -63,7 +61,7 @@ const RecentProjects = () => {
         </p>
 
         {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8 px-2" role="tablist" aria-label="Project category filters">
+        <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8 px-2" role="tablist" aria-label={uiText.accessibility.categoryFilters}>
           {categories.map((cat) => (
             <button
               key={cat}
@@ -82,8 +80,13 @@ const RecentProjects = () => {
         </div>
       </div>
 
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
-        {filteredProjects.map((item) => (
+      {filteredProjects.length === 0 ? (
+        <div className="py-16 text-center text-neutral-400 text-sm">
+          {uiText.projects.noProjectsMessage}
+        </div>
+      ) : (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
+          {filteredProjects.map((item) => (
           <div
             className="flex items-center justify-center w-full max-w-[380px] cardContainer"
             style={{ minHeight: '32rem', height: '100%' }}
@@ -96,11 +99,11 @@ const RecentProjects = () => {
             >
               <div 
                 className="relative flex items-center justify-center w-[calc(100vw-3rem)] max-w-[340px] overflow-hidden rounded-xl h-[180px] mb-4"
-                style={{ position: "relative", height: "180px", width: "100%" }}
+                style={{ position: "relative", height: "180px", width: "100%", aspectRatio: "17 / 9" }}
               >
                 <div
                   className="relative w-full h-[180px] overflow-hidden rounded-xl lg:rounded-2xl bg-[#13162D]"
-                  style={{ position: "relative", height: "180px", width: "100%" }}
+                  style={{ position: "relative", height: "180px", width: "100%", aspectRatio: "17 / 9" }}
                 >
                   <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 </div>
@@ -165,7 +168,7 @@ const RecentProjects = () => {
                     ))}
                     {item.techStack.length > 4 && (
                       <span className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-[#BEC1DD]">
-                        +{item.techStack.length - 4} more
+                        +{item.techStack.length - 4} {uiText.projects.more}
                       </span>
                     )}
                   </div>
@@ -213,7 +216,8 @@ const RecentProjects = () => {
             </PinContainer>
           </div>
         ))}
-      </div>
+        </div>
+      )}
     </section>
   );
 };

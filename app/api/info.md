@@ -79,15 +79,14 @@ Content-Type: application/json
   ```json
   {
     "success": false,
-    "message": "Too many requests. Please wait a few minutes before trying again."
+    "message": "Too many messages sent. Please try again in 5 minutes."
   }
   ```
 - **`500 Internal Server Error`** — Database or server connection failure:
   ```json
   {
     "success": false,
-    "message": "Failed to send message. Please try again later.",
-    "error": "Connection timeout"
+    "message": "Failed to send message. Please try again later."
   }
   ```
 
@@ -96,11 +95,11 @@ Content-Type: application/json
 ### 3. CORS Preflight
 **`OPTIONS /api/contact-form`**
 
-Handles browser CORS preflight requests for external integrations.
+Handles browser CORS preflight requests for external integrations with dynamic origin verification.
 
 #### Response Headers:
 ```http
-Access-Control-Allow-Origin: *
+Access-Control-Allow-Origin: https://tanish-portfolio-web.vercel.app (or matching origin / *.vercel.app)
 Access-Control-Allow-Methods: GET, POST, OPTIONS
 Access-Control-Allow-Headers: Content-Type
 ```

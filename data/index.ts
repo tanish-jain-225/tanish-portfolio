@@ -31,10 +31,19 @@ export interface SectionTitle {
   subtitle: string;
 }
 
+export interface HeroHighlight {
+  value: string;
+  label: string;
+  color: "purple" | "cyan" | "emerald" | "blue" | "green";
+}
+
 export interface HeroData {
   subtitle: string;
   title: string;
   description: string;
+  availabilityBadge: string;
+  resumeButtonText: string;
+  highlights: HeroHighlight[];
   ctaButton: {
     text: string;
     link: string;
@@ -261,7 +270,7 @@ export const navItems: NavItem[] = [
 export const navigationConfig: NavigationConfig = {
   resumeButton: {
     text: "Resume",
-    link: "/resume.pdf",
+    link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing",
     enabled: true,
   },
 };
@@ -295,6 +304,8 @@ export const uiText = {
     achievements: "Achievements",
     technologiesUsed: "Technologies Used",
     course: "Course",
+    more: "more",
+    categories: ["All", "AI & Autonomous", "Full-Stack Web", "Security & Utilities"] as const,
     // ProjectsGrid labels
     totalProjects: "Total Projects",
     completed: "Completed",
@@ -323,6 +334,8 @@ export const uiText = {
     allFieldsRequired: "All fields are required.",
     validationErrorsPrefix: "Validation errors:",
     networkError: "Network error. Please check your connection and try again.",
+    emailCopied: "Email copied to clipboard",
+    copyEmailAddress: "Copy email address",
   },
   status: {
     completed: "✓ Completed",
@@ -332,6 +345,11 @@ export const uiText = {
     skipToContent: "Skip to main content",
     scrollToTop: "Scroll to top",
     backToTop: "Back to top",
+    mainNavigation: "Main Navigation",
+    aboutMeGrid: "About Me Grid",
+    backgroundPattern: "Background pattern",
+    techBackground: "Tech background",
+    categoryFilters: "Project category filters",
   },
 };
 
@@ -340,6 +358,13 @@ export const heroData: HeroData = {
   title: "Building Scalable Systems & Autonomous AI Pipelines",
   description:
     "Hi, I'm Tanish Sanghvi — a Software Engineer specializing in scalable web systems, autonomous backend pipelines, and deterministic AI architectures with 500+ automated test gates.",
+  availabilityBadge: "Available for Software Engineering & Full-Stack Roles",
+  resumeButtonText: "View Resume",
+  highlights: [
+    { value: "500+", label: "Automated Tests", color: "purple" },
+    { value: "94+", label: "Board ATS Engine", color: "cyan" },
+    { value: "National Finalist", label: "(Hack Celestial)", color: "emerald" },
+  ],
   ctaButton: {
     text: "View My Projects",
     link: "#projects",
@@ -761,6 +786,12 @@ export const bentoGridData: BentoGridData = {
           { label: "Test Gates", value: "500+" },
           { label: "Finalist", value: "320+ Teams" },
         ],
+        interests: [
+          { name: "Distributed Systems", icon: "/git.svg", color: "purple" },
+          { name: "Deterministic AI", icon: "/cloud.svg", color: "blue" },
+          { name: "Quality & Testing", icon: "/grid.svg", color: "green" },
+        ],
+        currentStudy: "Focused on Resilient Backend Ingestion & Multi-LLM Orchestration",
       },
     },
     {
@@ -856,7 +887,7 @@ export const manifestData = {
   shortName: siteConfig.creator.replace(/\s+/g, "") + "Portfolio",
   description: siteConfig.description,
   themeColor: siteConfig.themeColor,
-  backgroundColor: "#0f172a",
+  backgroundColor: "#000319",
 };
 
 // Centralized Images Configuration

@@ -60,11 +60,10 @@ const MyWorkExperience = () => {
                         src={card.thumbnail}
                         height={140}
                         width={140}
-                        className="max-h-full max-w-full object-contain pointer-events-none select-none"
-                        style={{ width: "auto", height: "auto" }}
+                        className="max-h-full max-w-full object-contain pointer-events-none select-none aspect-square"
+                        style={{ aspectRatio: "1 / 1" }}
                         alt={card.title}
                         sizes="140px"
-                        loading="lazy"
                       />
                     </div>
                   </CardItem>

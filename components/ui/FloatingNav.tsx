@@ -5,7 +5,7 @@ import {
   AnimatePresence,
 } from "framer-motion";
 import { cn } from "@/lib/utils";
-import { navigationConfig } from "@/data";
+import { navigationConfig, uiText } from "@/data";
 
 export const FloatingNav = ({
   navItems,
@@ -23,7 +23,7 @@ export const FloatingNav = ({
   return (
     <nav
       role="navigation"
-      aria-label="Main Navigation"
+      aria-label={uiText.accessibility.mainNavigation}
     >
       <AnimatePresence mode="wait">
         <motion.div

@@ -18,6 +18,8 @@ describe('Frontend Components Suite', () => {
       expect(screen.getByText(heroData.subtitle)).toBeInTheDocument();
       expect(screen.getByText(heroData.description)).toBeInTheDocument();
       expect(screen.getByText(heroData.ctaButton.text)).toBeInTheDocument();
+      expect(screen.getByText(heroData.availabilityBadge)).toBeInTheDocument();
+      expect(screen.getByText(heroData.highlights[0].value)).toBeInTheDocument();
     });
   });
 

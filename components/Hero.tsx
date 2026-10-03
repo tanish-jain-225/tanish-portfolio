@@ -5,7 +5,7 @@ import { Spotlight } from "./ui/Spotlight";
 import { cn } from "@/lib/utils";
 import { TextGenerateEffect } from "./ui/TextGenerateEffect";
 import MagicButton from "./ui/MagicButton";
-import { heroData } from "@/data";
+import { heroData, navigationConfig } from "@/data";
 import { getIcon } from "@/lib/icons";
 
 const Hero = () => {
@@ -82,7 +82,7 @@ const Hero = () => {
               <span className="animate-ping absolute inline-flex h-full w-full rounded-full bg-emerald-400 opacity-75"></span>
               <span className="relative inline-flex rounded-full h-2 w-2 bg-emerald-500"></span>
             </span>
-            <span>Available for Software Engineering & Full-Stack Roles</span>
+            <span>{heroData.availabilityBadge}</span>
           </div>
 
           <p className="uppercase tracking-widest text-[10px] sm:text-xs md:text-sm text-center text-purple-200/90 max-w-[260px] sm:max-w-md md:max-w-lg hero-animate opacity-0 break-words font-semibold">
@@ -138,33 +138,37 @@ const Hero = () => {
             </a>
 
             <a
-              href="/resume.pdf"
+              href={navigationConfig.resumeButton.link}
               target="_blank"
               rel="noopener noreferrer"
-              aria-label="View Resume PDF (opens in new tab)"
+              aria-label={`${heroData.resumeButtonText || navigationConfig.resumeButton.text} (opens in new tab)`}
               className="px-5 py-3 rounded-xl bg-[#0e1026] hover:bg-[#15193b] border border-white/10 hover:border-purple-500/40 text-xs sm:text-sm font-semibold text-white transition-all duration-300 shadow-lg shadow-black/40 hover:shadow-purple-500/10 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black flex items-center gap-2"
             >
-              <span>Download CV</span>
+              <span>{heroData.resumeButtonText || navigationConfig.resumeButton.text}</span>
               <svg className="w-4 h-4 text-purple-400" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 16v1a3 3 0 003 3h10a3 3 0 003-3v-1m-4-4l-4 4m0 0l-4-4m4 4V4" />
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
               </svg>
             </a>
           </div>
 
           {/* Engineering Highlights Strip */}
           <div className="hero-animate opacity-0 mt-6 sm:mt-8 flex flex-wrap items-center justify-center gap-2 sm:gap-4 text-[11px] sm:text-xs text-neutral-300 font-medium max-w-3xl">
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-purple-400" aria-hidden="true" />
-              <span><strong className="text-white">500+</strong> Automated Tests</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-cyan-400" aria-hidden="true" />
-              <span><strong className="text-white">94+</strong> Board ATS Engine</span>
-            </div>
-            <div className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
-              <span className="w-1.5 h-1.5 rounded-full bg-emerald-400" aria-hidden="true" />
-              <span><strong className="text-white">National Finalist</strong> (Hack Celestial)</span>
-            </div>
+            {heroData.highlights.map((highlight, index) => {
+              const colorClasses: Record<string, string> = {
+                purple: "bg-purple-400",
+                cyan: "bg-cyan-400",
+                emerald: "bg-emerald-400",
+                blue: "bg-blue-400",
+                green: "bg-green-400",
+              };
+              const dotColor = colorClasses[highlight.color] || "bg-purple-400";
+              return (
+                <div key={index} className="flex items-center gap-1.5 px-3 py-1 rounded-full bg-[#0a0d24] border border-white/10">
+                  <span className={`w-1.5 h-1.5 rounded-full ${dotColor}`} aria-hidden="true" />
+                  <span><strong className="text-white">{highlight.value}</strong> {highlight.label}</span>
+                </div>
+              );
+            })}
           </div>
 
           {/* Scroll indicator */}
