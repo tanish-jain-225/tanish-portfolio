@@ -30,9 +30,9 @@ describe('Accessibility & Non-Hindering Animation Suite', () => {
       const { container } = render(<Hero />);
       const decorativeContainers = container.querySelectorAll('.pointer-events-none');
       expect(decorativeContainers.length).toBeGreaterThan(0);
-      
-      const scrollIndicator = container.querySelector('.scroll-indicator');
-      expect(scrollIndicator?.className).toContain('pointer-events-none');
+      decorativeContainers.forEach((el) => {
+        expect(el.className).toContain('pointer-events-none');
+      });
     });
   });
 

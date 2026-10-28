@@ -31,9 +31,20 @@ type EngineeringContent = {
   type: "engineering";
   text: string;
   stats?: Array<{ label: string; value: string }>;
-
   interests?: Array<{ name: string; icon: string; color: string }>;
   currentStudy?: string;
+  academics?: {
+    university: string;
+    degree: string;
+    cgpa: string;
+    batch: string;
+    coursework: string[];
+  };
+  engineering?: {
+    focus: string;
+    stats: Array<{ label: string; value: string }>;
+    competencies: string[];
+  };
 };
 type CollaborationContent = {
   type: "collaboration";
@@ -96,16 +107,6 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
     content: BentoContent;
   };
 
-  // Utility for colored borders (used for interests)
-  const getColorClass = (color: string) => {
-    const colorMap: { [key: string]: string } = {
-      purple: "border-purple-500/20",
-      blue: "border-blue-500/20",
-      green: "border-green-500/20",
-    };
-    return colorMap[color] || "border-white/20";
-  };
-
   // Card container
   return (
     <section
@@ -136,16 +137,16 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
           >
             <Image
               src={img}
-              alt={title ? `${title} illustration` : `Grid item ${id}`}
+              alt={title ? `${title} preview` : `Grid item ${id}`}
               className={cn(
                 "object-cover pointer-events-none select-none",
-                id === 1 ? "object-right-bottom opacity-30 sm:opacity-40" : "object-center"
+                id === 4 || id === 5 ? "object-top opacity-20 sm:opacity-25" : "object-center opacity-25"
               )}
               fill
               sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
               priority={id === 4 || id === 5}
             />
-            <div className="absolute inset-0 bg-black/40 z-10 pointer-events-none" />
+            <div className="absolute inset-0 bg-gradient-to-t from-[#04071d] via-[#04071d]/90 to-[#04071d]/70 z-10 pointer-events-none" />
           </div>
         )}
         {/* Animated background for contact card */}
@@ -231,15 +232,15 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               {/* Collaboration card */}
               {content.type === "collaboration" && (
                 <>
-                  <div className="flex items-center justify-center min-h-[150px] w-full">
+                  <div className="flex items-center justify-center min-h-[120px] w-full my-2">
                     <Image
-                      src={images.backgrounds.cloud}
-                      alt={item.description || content.text}
-                      className="object-contain aspect-square"
-                      width={150}
-                      height={150}
-                      style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
-                      sizes="150px"
+                      src="/exp2.svg"
+                      alt={title || "Hackathons & Leadership"}
+                      className="object-contain"
+                      width={90}
+                      height={90}
+                      style={{ width: "auto", height: "auto" }}
+                      sizes="90px"
                     />
                   </div>
                   <div className="mt-4 flex flex-col items-center justify-center text-center gap-3 sm:gap-4 relative z-10">
@@ -292,78 +293,111 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
               )}
               {/* Engineering card */}
               {content.type === "engineering" && (
-                <>
-                  <div
-                    className="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
-                    aria-hidden="true"
-                  >
-                    <Image
-                      src={images.backgrounds.grid}
-                      alt={uiText.accessibility.techBackground}
-                      className="object-cover"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
-                  <div className="mt-4 relative z-10 flex flex-col gap-2 sm:gap-3">
-                    <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed">
-                      {content.text}
-                    </p>
-                    {content.stats && (
-                      <div className="flex flex-wrap gap-2 mt-4" aria-label="Engineering stats">
-                        {content.stats.map((stat, index) => (
-                          <div
-                            key={index}
-                            className="flex-1 min-w-[100px] p-2 sm:p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm flex flex-col items-center"
-                          >
-                            <div className="text-base sm:text-lg lg:text-2xl font-bold text-white">
-                              {stat.value}
-                            </div>
-                            <div className="text-xs sm:text-sm text-[#C1C2D3]">
-                              {stat.label}
-                            </div>
+                <div className="mt-3 sm:mt-4 relative z-10 flex flex-col gap-4">
+                  {/* Summary intro */}
+                  <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed max-w-3xl">
+                    {content.text}
+                  </p>
+
+                  {/* Dual Grid: Academic Pillar & Engineering Pillar */}
+                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 w-full">
+                    {/* Academic Foundation Box */}
+                    <div className="rounded-xl bg-[#0c0f2b]/90 border border-purple-500/20 p-3.5 sm:p-4 flex flex-col justify-between hover:border-purple-400/40 transition-colors">
+                      <div>
+                        <div className="flex items-center gap-2.5 mb-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 flex-shrink-0">
+                            {/* Academic Graduation Cap SVG */}
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
+                              <path d="M6 12v5c3 3 9 3 12 0v-5" />
+                            </svg>
                           </div>
-                        ))}
-                      </div>
-                    )}
-                    {/* Interests and current study */}
-                    {content.interests && (
-                      <div className="mt-2 sm:mt-3 flex flex-wrap gap-1 sm:gap-2" aria-label="Interests">
-                        {content.interests.map((interest, index) => (
-                          <div
-                            key={index}
-                            className={`inline-flex items-center px-1 sm:px-2 py-1 rounded-md bg-[#161A31] border ${getColorClass(
-                              interest.color
-                            )}`}
-                          >
-                            <Image
-                              src={interest.icon}
-                              alt={interest.name}
-                              className="w-4 h-4 mr-1 aspect-square"
-                              width={16}
-                              height={16}
-                              style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
-                              sizes="16px"
-                            />
-                            <span className="text-xs text-white">
-                              {interest.name}
+                          <div>
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-purple-400 block">Academic Foundation</span>
+                            <span className="text-xs sm:text-sm font-bold text-white leading-tight block">VESIT Mumbai</span>
+                          </div>
+                        </div>
+
+                        <p className="text-xs text-neutral-200 font-medium leading-snug">
+                          {content.academics?.degree || "B.E. in Automation & Robotics Engineering"}
+                        </p>
+                        <p className="text-[11px] text-neutral-400 mt-1 mb-3">
+                          {content.academics?.batch || "2023 – 2027 (Expected)"} • <strong className="text-emerald-400 font-semibold">{content.academics?.cgpa || "CGPA: 7.43 / 10"}</strong>
+                        </p>
+
+                        <div className="text-[10px] uppercase font-semibold text-neutral-400 tracking-wider mb-1.5">
+                          Relevant Coursework
+                        </div>
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                          {(content.academics?.coursework || ["Data Structures & Algorithms", "DBMS", "Machine Learning", "Generative AI"]).map((course, i) => (
+                            <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-neutral-300">
+                              {course}
                             </span>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                    {content.currentStudy && (
-                      <div className="mt-2 p-2 rounded-lg bg-gradient-to-r from-[#161A31] to-[#10132E] border border-white/5">
-                        <div className="flex items-center">
-                          <div className="w-2 h-2 rounded-full bg-green-400 animate-pulse mr-2"></div>
-                          <span className="text-xs text-[#C1C2D3]">
-                            {content.currentStudy}
-                          </span>
+                          ))}
                         </div>
                       </div>
-                    )}
+                    </div>
+
+                    {/* Engineering & Systems Box */}
+                    <div className="rounded-xl bg-[#0c0f2b]/90 border border-cyan-500/20 p-3.5 sm:p-4 flex flex-col justify-between hover:border-cyan-400/40 transition-colors">
+                      <div>
+                        <div className="flex items-center gap-2.5 mb-2.5">
+                          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 flex-shrink-0">
+                            {/* Engineering Terminal / Code SVG */}
+                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                              <polyline points="16 18 22 12 16 6" />
+                              <polyline points="8 6 2 12 8 18" />
+                            </svg>
+                          </div>
+                          <div>
+                            <span className="text-[10px] font-semibold uppercase tracking-wider text-cyan-400 block">Engineering Systems</span>
+                            <span className="text-xs sm:text-sm font-bold text-white leading-tight block">Full-Stack & APIs</span>
+                          </div>
+                        </div>
+
+                        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-3">
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
+                            <span className="text-xs sm:text-sm font-bold text-white">20+ Built</span>
+                            <span className="text-[10px] text-neutral-400">Applications</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
+                            <span className="text-xs sm:text-sm font-bold text-cyan-300">220+ Tests</span>
+                            <span className="text-[10px] text-neutral-400">Unit & Playwright</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
+                            <span className="text-xs sm:text-sm font-bold text-purple-300">Hack Celestial</span>
+                            <span className="text-[10px] text-neutral-400">Top Finalist</span>
+                          </div>
+                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
+                            <span className="text-xs sm:text-sm font-bold text-emerald-400">CI/CD & RBAC</span>
+                            <span className="text-[10px] text-neutral-400">Pydantic & JWT</span>
+                          </div>
+                        </div>
+
+                        <div className="text-[10px] uppercase font-semibold text-neutral-400 tracking-wider mb-1.5">
+                          Core Competencies
+                        </div>
+                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
+                          {(content.engineering?.competencies || ["REST APIs & Validation", "Next.js & React", "PostgreSQL & Supabase", "Automated Testing"]).map((comp, i) => (
+                            <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-cyan-200">
+                              {comp}
+                            </span>
+                          ))}
+                        </div>
+                      </div>
+                    </div>
                   </div>
-                </>
+
+                  {/* Current Study status banner */}
+                  {content.currentStudy && (
+                    <div className="p-2.5 rounded-lg bg-gradient-to-r from-[#161A31] to-[#10132E] border border-white/10 flex items-center gap-2">
+                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
+                      <span className="text-xs text-[#C1C2D3]">
+                        {content.currentStudy}
+                      </span>
+                    </div>
+                  )}
+                </div>
               )}
               {/* Project card */}
               {content.type === "project" && (

@@ -170,6 +170,18 @@ export type BentoContentType =
     stats?: BentoStat[];
     interests?: BentoInterest[];
     currentStudy?: string;
+    academics?: {
+      university: string;
+      degree: string;
+      cgpa: string;
+      batch: string;
+      coursework: string[];
+    };
+    engineering?: {
+      focus: string;
+      stats: BentoStat[];
+      competencies: string[];
+    };
   }
   | {
     type: "collaboration";
@@ -759,35 +771,63 @@ export const bentoGridData: BentoGridData = {
   items: [
     {
       id: 1,
-      title: "Academics & Engineering",
-      description: "Building strong computer science foundations and practical software projects",
-      img: "/b1.svg",
+      title: "Academic Background & Engineering Craft",
+      description: "Rigorous computer science foundations at VESIT Mumbai paired with production-grade full-stack engineering",
+      img: "",
       spareImg: "",
       content: {
         type: "engineering",
-        text: "Pursuing B.E. in Automation & Robotics Engineering at VESIT, Mumbai (Expected 2027, CGPA 7.43/10). Grounded in data structures, algorithms, databases, and modern full-stack development, with a strong focus on clean architecture and practical problem solving.",
+        text: "Undergraduate student in Automation & Robotics Engineering at VESIT Mumbai (CGPA: 7.43/10). Grounded in algorithms, databases, and machine learning, with extensive hands-on experience designing full-stack web applications, resilient REST APIs, and automated test suites.",
+        academics: {
+          university: "Vivekanand Education Society's Institute of Technology (VESIT), Mumbai",
+          degree: "B.E. in Automation & Robotics Engineering",
+          cgpa: "7.43 / 10.0",
+          batch: "2023 – 2027 (Expected)",
+          coursework: [
+            "Data Structures & Algorithms",
+            "Database Management Systems",
+            "Machine Learning",
+            "Generative AI",
+          ],
+        },
+        engineering: {
+          focus: "Full-Stack Web Architecture, REST APIs & Automated Testing",
+          stats: [
+            { label: "CGPA", value: "7.43 / 10" },
+            { label: "Projects Built", value: "20+" },
+            { label: "Automated Tests", value: "220+" },
+            { label: "Hackathon", value: "Top Finalist" },
+          ],
+          competencies: [
+            "REST APIs & Validation (Pydantic)",
+            "Next.js & React Architecture",
+            "PostgreSQL, Supabase & MongoDB",
+            "Automated Testing (199 Unit • 27 E2E)",
+          ],
+        },
         stats: [
           { label: "CGPA", value: "7.43 / 10" },
           { label: "Projects", value: "20+ Built" },
+          { label: "Automated Tests", value: "220+" },
           { label: "Hackathons", value: "Top Finalist" },
         ],
         interests: [
           { name: "Full-Stack Dev", icon: "/git.svg", color: "purple" },
           { name: "APIs & Systems", icon: "/cloud.svg", color: "blue" },
-          { name: "Clean Code", icon: "/grid.svg", color: "green" },
+          { name: "Clean Code", icon: "/git.svg", color: "green" },
         ],
-        currentStudy: "Currently exploring scalable backend architectures & TypeScript patterns",
+        currentStudy: "Currently exploring scalable backend architectures, schema validation & TypeScript patterns",
       },
     },
     {
       id: 2,
-      title: "Hackathons & Community",
+      title: "Hackathons & Leadership",
       description: "Competitive building & tech event organizing",
       img: "",
       spareImg: "",
       content: {
         type: "collaboration",
-        text: "National Finalist selected from 320+ competing engineering teams at Hack Celestial 2.0, and Hackathon Co-Organizer leading operations and technical logistics for UniMerge 1.0 (130+ participants).",
+        text: "National Finalist selected from 320+ competing engineering teams at Hack Celestial 2.0 with Edvanta, and Hackathon Co-Organizer coordinating technical operations for UniMerge 1.0 (130+ participants).",
         availability: {
           status: "Available for Software Engineering Roles",
           schedule: "Full-Stack / Frontend / Backend",
@@ -810,7 +850,7 @@ export const bentoGridData: BentoGridData = {
       id: 4,
       title: "Job Hunter",
       description: "Automated Tech Job Aggregator & AI Matcher",
-      img: "/b4.svg",
+      img: "/job-hunter.png",
       spareImg: "",
       content: {
         type: "project",
@@ -823,8 +863,8 @@ export const bentoGridData: BentoGridData = {
       id: 5,
       title: "Department Ledger Portal",
       description: "Academic Record & Document Management",
-      img: "/b5.svg",
-      spareImg: "/grid.svg",
+      img: "/department-ledger-portal.png",
+      spareImg: "",
       content: {
         type: "project",
         text: "Full-stack institutional portal with role-based permissions, automated syllabus extraction, and comprehensive unit/E2E test suites.",

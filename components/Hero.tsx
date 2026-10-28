@@ -24,14 +24,6 @@ const Hero = () => {
       });
     }
     
-    // Optional: Add scroll indicator animation
-    const scrollIndicator = heroRef.current?.querySelector('.scroll-indicator');
-    if (scrollIndicator) {
-      setTimeout(() => {
-        scrollIndicator.classList.add('visible');
-      }, 2000);
-    }
-    
     // Activate spotlight animations with staggered timing
     const spotlights = heroRef.current?.querySelectorAll('.animate-spotlight');
     if (spotlights) {
@@ -169,19 +161,6 @@ const Hero = () => {
                 </div>
               );
             })}
-          </div>
-
-          {/* Scroll indicator */}
-          <div 
-            className="pointer-events-none select-none absolute bottom-4 sm:bottom-8 md:bottom-10 left-1/2 transform -translate-x-1/2 scroll-indicator opacity-0 transition-opacity duration-700"
-            aria-hidden="true"
-          >
-            <div className="flex flex-col items-center gap-2 scroll-indicator-arrow">
-              <span className="text-white/40 text-xs tracking-widest uppercase">{heroData.scrollText}</span>
-              <svg width="20" height="20" viewBox="0 0 20 20" fill="none" className="text-white/40">
-                <path d="M10 4L10 16M10 16L4 10M10 16L16 10" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round"/>
-              </svg>
-            </div>
           </div>
         </div>
       </div>
