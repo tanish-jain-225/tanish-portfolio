@@ -38,7 +38,6 @@ const MyWorkExperience = () => {
                   </div>
 
                   <CardItem
-                    translateZ="25"
                     className="text-base sm:text-xl font-bold text-white mb-2 sm:mb-3"
                   >
                     {card.title}
@@ -46,7 +45,6 @@ const MyWorkExperience = () => {
 
                   <CardItem
                     as="p"
-                    translateZ="20"
                     className="text-[#BEC1DD] text-xs sm:text-sm mb-4 flex-grow line-clamp-4 leading-relaxed"
                   >
                     {card.desc}
@@ -54,14 +52,14 @@ const MyWorkExperience = () => {
                 </div>
 
                 <div className="flex flex-col justify-end flex-shrink-0 mt-2 relative z-30 pointer-events-auto">
-                  <CardItem translateZ="20" className="w-full mb-3">
+                  <CardItem className="w-full mb-3">
                     <div className="flex items-center justify-center h-32 sm:h-40 w-full bg-[#050718] border border-white/5 rounded-xl overflow-hidden relative p-4">
                       <Image
                         src={card.thumbnail}
                         height={140}
                         width={140}
                         className="max-h-full max-w-full object-contain pointer-events-none select-none aspect-square"
-                        style={{ aspectRatio: "1 / 1" }}
+                        style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
                         alt={card.title}
                         sizes="140px"
                       />
@@ -69,7 +67,6 @@ const MyWorkExperience = () => {
                   </CardItem>
                   <CardItem
                     as="a"
-                    translateZ="45"
                     href={card.link || uiText.experience.linkedInProfile}
                     target="_blank"
                     rel="noopener noreferrer"

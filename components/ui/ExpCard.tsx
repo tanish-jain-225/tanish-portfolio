@@ -1,15 +1,7 @@
 "use client";
 
 import { cn } from "@/lib/utils";
-
-import React, {
-  createContext,
-  useState,
-  useContext,
-  useRef,
-  useEffect,
-  useCallback,
-} from "react";
+import React, { createContext, useContext, useState } from "react";
 
 const MouseEnterContext = createContext<
   [boolean, React.Dispatch<React.SetStateAction<boolean>>] | undefined
@@ -24,60 +16,23 @@ export const CardContainer = ({
   className?: string;
   containerClassName?: string;
 }) => {
-  const containerRef = useRef<HTMLDivElement>(null);
   const [isMouseEntered, setIsMouseEntered] = useState(false);
-  const [reducedMotion, setReducedMotion] = useState(false);
 
-  useEffect(() => {
-    if (typeof window === "undefined") return;
-    const mediaQuery = window.matchMedia("(prefers-reduced-motion: reduce)");
-    setReducedMotion(mediaQuery.matches);
-    const listener = (e: MediaQueryListEvent) => setReducedMotion(e.matches);
-    mediaQuery.addEventListener?.("change", listener);
-    return () => mediaQuery.removeEventListener?.("change", listener);
-  }, []);
-
-  const handleMouseMove = (e: React.MouseEvent<HTMLDivElement>) => {
-    if (!containerRef.current || reducedMotion) return;
-    const { left, top, width, height } =
-      containerRef.current.getBoundingClientRect();
-    const x = (e.clientX - left - width / 2) / 35;
-    const y = (e.clientY - top - height / 2) / 35;
-    containerRef.current.style.transform = `rotateY(${x}deg) rotateX(${-y}deg)`;
-  };
-  const handleMouseEnter = () => {
-    setIsMouseEntered(true);
-    if (!containerRef.current || reducedMotion) return;
-  };
-
-  const handleMouseLeave = () => {
-    if (!containerRef.current) return;
-    setIsMouseEntered(false);
-    containerRef.current.style.transform = `rotateY(0deg) rotateX(0deg)`;
-  };
   return (
     <MouseEnterContext.Provider value={[isMouseEntered, setIsMouseEntered]}>
       <div
         className={cn(
-          "py-2 sm:py-4 flex items-center justify-center w-full",
+          "w-full h-full flex items-center justify-center transition-transform duration-300 hover:-translate-y-1",
           containerClassName
         )}
-        style={{
-          perspective: reducedMotion ? "none" : "1000px",
-        }}
+        onMouseEnter={() => setIsMouseEntered(true)}
+        onMouseLeave={() => setIsMouseEntered(false)}
       >
         <div
-          ref={containerRef}
-          onMouseEnter={handleMouseEnter}
-          onMouseMove={handleMouseMove}
-          onMouseLeave={handleMouseLeave}
           className={cn(
-            "flex items-center justify-center relative transition-all duration-200 ease-linear w-full",
+            "w-full h-full flex items-center justify-center relative",
             className
           )}
-          style={{
-            transformStyle: reducedMotion ? "flat" : "preserve-3d",
-          }}
         >
           {children}
         </div>
@@ -96,7 +51,7 @@ export const CardBody = ({
   return (
     <div
       className={cn(
-        "w-full h-auto [transform-style:preserve-3d] [&>*]:[transform-style:preserve-3d]",
+        "w-full h-auto rounded-2xl transition-all duration-300",
         className
       )}
     >
@@ -109,47 +64,18 @@ export const CardItem = React.forwardRef<
   HTMLElement,
   React.AllHTMLAttributes<HTMLElement> & {
     as?: React.ElementType;
-    translateX?: number | string;
-    translateY?: number | string;
-    translateZ?: number | string;
-    rotateX?: number | string;
-    rotateY?: number | string;
-    rotateZ?: number | string;
   }
 >(({ 
   as: Component = "div",
   children,
   className,
-  translateX = 0,
-  translateY = 0,
-  translateZ = 0,
-  rotateX = 0,
-  rotateY = 0,
-  rotateZ = 0,
   ...rest 
 }, ref) => {
-  const [isMouseEntered] = useMouseEnter();
-  const localRef = useRef<HTMLElement>(null);
-  const resolvedRef = (ref || localRef) as React.RefObject<HTMLElement | null>;
-
-  const handleAnimations = useCallback(() => {
-    if (!resolvedRef.current) return;
-    if (isMouseEntered) {
-      resolvedRef.current.style.transform = `translateX(${translateX}px) translateY(${translateY}px) translateZ(${translateZ}px) rotateX(${rotateX}deg) rotateY(${rotateY}deg) rotateZ(${rotateZ}deg)`;
-    } else {
-      resolvedRef.current.style.transform = `translateX(0px) translateY(0px) translateZ(0px) rotateX(0deg) rotateY(0deg) rotateZ(0deg)`;
-    }
-  }, [isMouseEntered, resolvedRef, translateX, translateY, translateZ, rotateX, rotateY, rotateZ]);
-
-  useEffect(() => {
-    handleAnimations();
-  }, [handleAnimations]);
-
   return React.createElement(
     Component,
     {
-      ref: resolvedRef,
-      className: cn("w-fit transition duration-200 ease-linear", className),
+      ref,
+      className: cn("transition-colors duration-200", className),
       ...rest,
     },
     children
@@ -158,11 +84,10 @@ export const CardItem = React.forwardRef<
 
 CardItem.displayName = "CardItem";
 
-// Create a hook to use the context
 export const useMouseEnter = () => {
   const context = useContext(MouseEnterContext);
   if (context === undefined) {
-    throw new Error("useMouseEnter must be used within a MouseEnterProvider");
+    return [false, () => {}] as [boolean, React.Dispatch<React.SetStateAction<boolean>>];
   }
   return context;
 };

@@ -26,6 +26,8 @@ const RecentProjects = () => {
       }
       if (selectedCategory === "Full-Stack Web") {
         return (
+          cat.includes("Full-Stack") ||
+          cat.includes("Web") ||
           cat.includes("Management") ||
           cat.includes("Hospitality") ||
           cat.includes("Health") ||
@@ -35,6 +37,8 @@ const RecentProjects = () => {
       if (selectedCategory === "Security & Utilities") {
         return (
           cat.includes("Security") ||
+          cat.includes("Utility") ||
+          cat.includes("Utilities") ||
           cat.includes("Application") ||
           cat.includes("Privacy") ||
           cat.includes("Image")
@@ -88,8 +92,7 @@ const RecentProjects = () => {
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
           {filteredProjects.map((item) => (
           <div
-            className="flex items-center justify-center w-full max-w-[380px] cardContainer"
-            style={{ minHeight: '32rem', height: '100%' }}
+            className="flex items-stretch justify-center w-full max-w-[380px] h-full cardContainer"
             key={item.id}
           >            
             <PinContainer
@@ -98,30 +101,23 @@ const RecentProjects = () => {
               disableWrapper={true}
             >
               <div 
-                className="relative flex items-center justify-center w-[calc(100vw-3rem)] max-w-[340px] overflow-hidden rounded-xl h-[180px] mb-4"
-                style={{ position: "relative", height: "180px", width: "100%", aspectRatio: "17 / 9" }}
+                className="relative flex items-center justify-center w-full overflow-hidden rounded-xl h-[190px] mb-4 bg-[#13162D]"
               >
-                <div
-                  className="relative w-full h-[180px] overflow-hidden rounded-xl lg:rounded-2xl bg-[#13162D]"
-                  style={{ position: "relative", height: "180px", width: "100%", aspectRatio: "17 / 9" }}
-                >
-                  <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-                </div>
+                <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
                 {item.img ? (
                   <div 
-                    className="z-10 absolute inset-0 w-full h-[180px] overflow-hidden"
-                    style={{ position: "absolute", top: 0, left: 0, right: 0, bottom: 0, height: "180px", width: "100%" }}
+                    className="z-10 absolute inset-0 w-full h-[190px] overflow-hidden"
                   >
                     <Image
                       src={item.img}
                       alt={`${item.title} preview`}
-                      className="w-full h-full object-cover object-top"
+                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/card:scale-105"
                       fill
                       sizes="(max-width: 640px) 85vw, (max-width: 1200px) 384px, 384px"
                     />
                   </div>
                 ) : (
-                  <div className="z-10 absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-950/80 to-indigo-950/80 border border-white/10 rounded-2xl">
+                  <div className="z-10 absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-950/80 to-indigo-950/80 border border-white/10 rounded-xl">
                     <span className="text-4xl font-extrabold text-white/30 tracking-widest select-none">
                       {item.title.split(" ").map(w => w[0]).join("").toUpperCase()}
                     </span>
@@ -129,7 +125,7 @@ const RecentProjects = () => {
                 )}
               </div>
 
-              <div className="w-[calc(100vw-3rem)] max-w-[340px] flex flex-col justify-between flex-1 space-y-3">
+              <div className="w-full flex flex-col justify-between flex-1 space-y-3">
                 <div className="flex flex-col space-y-2.5 flex-1">
                   {/* Category & Status */}
                   <div className="flex items-center justify-between text-xs">

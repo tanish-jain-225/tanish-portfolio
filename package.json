@@ -16,8 +16,8 @@
     "framer-motion": "^12.15.0",
     "mini-svg-data-uri": "^1.4.4",
     "mongodb": "^6.16.0",
-    "next": "^15.3.5",
-    "nodemailer": "^7.0.3",
+    "next": "^15.5.28",
+    "nodemailer": "^10.2.1",
     "react": "^19.0.0",
     "react-dom": "^19.0.0",
     "react-icons": "^5.5.0",
@@ -36,9 +36,20 @@
     "@vitejs/plugin-react": "^4.7.0",
     "eslint": "^9",
     "eslint-config-next": "15.3.2",
-    "happy-dom": "^20.14.5",
+    "happy-dom": "^21.0.4",
     "tailwindcss": "^4",
     "typescript": "^5",
-    "vitest": "^4.1.11"
+    "vitest": "^4.1.12"
+  },
+  "overrides": {
+    "postcss": "^8.5.32",
+    "source-map-js": "^1.2.2",
+    "picomatch": "^4.0.7",
+    "brace-expansion": "^1.1.21",
+    "flatted": "^3.4.4",
+    "js-yaml": "^4.3.2",
+    "sharp": "^0.35.5",
+    "vite": "^6.4.5",
+    "@humanfs/node": "^0.16.8"
   }
 }

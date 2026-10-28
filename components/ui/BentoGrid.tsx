@@ -174,7 +174,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
         {/* Card content */}
         <div
           className={cn(
-            "group-hover/bento:translate-x-1 sm:group-hover/bento:translate-x-2 transition duration-200 relative flex-1 flex flex-col justify-between p-3.5 sm:p-5 md:p-6 lg:p-7 z-20 w-full h-full",
+            "transition duration-200 relative flex-1 flex flex-col justify-between p-3.5 sm:p-5 md:p-6 lg:p-7 z-20 w-full h-full",
             id === 6 ? "items-center text-center justify-center py-6 sm:py-8" : ""
           )}
         >
@@ -238,7 +238,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                       className="object-contain aspect-square"
                       width={150}
                       height={150}
-                      style={{ aspectRatio: "1 / 1" }}
+                      style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
                       sizes="150px"
                     />
                   </div>
@@ -342,7 +342,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                               className="w-4 h-4 mr-1 aspect-square"
                               width={16}
                               height={16}
-                              style={{ aspectRatio: "1 / 1" }}
+                              style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
                               sizes="16px"
                             />
                             <span className="text-xs text-white">
@@ -400,7 +400,7 @@ export const BentoGridItem = ({ id }: BentoGridItemProps) => {
                             className="w-4 h-4 mr-2 aspect-square"
                             width={16}
                             height={16}
-                            style={{ aspectRatio: "1 / 1" }}
+                            style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
                             sizes="16px"
                             onError={(e) => (e.currentTarget.style.display = "none")}
                           />

@@ -6,8 +6,7 @@ import { cn } from "@/lib/utils";
 export const TextGenerateEffect = ({
   words,
   className,
-  filter = true,
-  duration = 0.5,
+  duration = 0.4,
   accentWordIndex = 5,
 }: {
   words: string;
@@ -17,19 +16,21 @@ export const TextGenerateEffect = ({
   accentWordIndex?: number;
 }) => {
   const [scope, animate] = useAnimate();
-  const wordsArray = words.split(" ");  useEffect(() => {
+  const wordsArray = words.split(" ");
+
+  useEffect(() => {
     animate(
       "span",
       {
         opacity: 1,
-        filter: filter ? "blur(0px)" : "none",
+        y: 0,
       },
       {
-        duration: duration ? duration : 1,
-        delay: stagger(0.2),
+        duration: duration || 0.4,
+        delay: stagger(0.06),
       }
     );
-  }, [animate, duration, filter]);
+  }, [animate, duration]);
 
   const renderWords = () => {
     return (
@@ -38,12 +39,10 @@ export const TextGenerateEffect = ({
           return (
             <motion.span
               key={word + idx}
-              className={`${ idx >= accentWordIndex ? "text-purple-500" : "dark:text-white text-black"} opacity-0`}
-              style={{
-                filter: filter ? "blur(10px)" : "none",
-              }}
+              initial={{ opacity: 0, y: 8 }}
+              className={`${idx >= accentWordIndex ? "text-purple" : "text-white"} inline-block mr-2 sm:mr-3`}
             >
-              {word}{" "}
+              {word}
             </motion.span>
           );
         })}
@@ -53,8 +52,8 @@ export const TextGenerateEffect = ({
 
   return (
     <div className={cn("font-bold", className)}>
-      <div className="my-4">
-        <div className=" dark:text-white text-black leading-snug tracking-wide">
+      <div className="my-2 sm:my-3">
+        <div className="text-white leading-tight tracking-tight">
           {renderWords()}
         </div>
       </div>
