@@ -1,56 +1,18 @@
-"use client";
-
-import React, { Suspense, useEffect, useState, useCallback } from "react";
+import React, { Suspense } from "react";
 import Hero from "@/components/Hero";
 import { FloatingNav } from "@/components/ui/FloatingNav";
-import { navItems, uiText } from "@/data";
-import { getIcon, FaArrowUp } from "@/lib/icons";
+import { navItems } from "@/data";
 import Footer from "@/components/Footer";
 import RecentProjects from "@/components/RecentProjects";
-import dynamic from "next/dynamic";
 import MyWorkExperience from "@/components/MyWorkExperience";
-
-// Dynamically import components that might cause hydration issues
-const DynamicGrid = dynamic(() => import("@/components/Grid"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
-const DynamicContact = dynamic(() => import("@/components/Contact"), { ssr: false, loading: () => <div className="content-loader h-96 w-full" /> });
-
-// Scroll-to-top button component
-const ScrollToTop = () => {
-  const [isVisible, setIsVisible] = useState(false);
-
-  const handleScroll = useCallback(() => {
-    setIsVisible(window.scrollY > 400);
-  }, []);
-
-  useEffect(() => {
-    window.addEventListener("scroll", handleScroll, { passive: true });
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, [handleScroll]);
-
-  return (
-    <button
-      type="button"
-      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-purple-900`}
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
-      aria-label={uiText.accessibility.scrollToTop}
-      title={uiText.accessibility.backToTop}
-    >
-      <FaArrowUp size={18} aria-hidden="true" />
-    </button>
-  );
-};
+import ScrollToTop from "@/components/ui/ScrollToTop";
+import { DynamicGrid, DynamicContact } from "@/components/ClientComponents";
 
 export default function Home() {
   return (
     <>
       <header role="banner" className="w-full">
-        <FloatingNav
-          navItems={navItems.map((item) => ({
-            name: item.name,
-            link: item.link,
-            icon: React.createElement(getIcon(item.icon)),
-          }))}
-        />
+        <FloatingNav navItems={navItems} />
       </header>
 
       <main
@@ -60,7 +22,7 @@ export default function Home() {
         className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto w-full"
       >
         <Hero />
-        
+
         <div className="w-full flex flex-col items-center">
           <Suspense fallback={<div className="content-loader h-96 w-full" />}>
             <DynamicGrid />

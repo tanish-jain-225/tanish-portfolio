@@ -10,7 +10,7 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 ![Tailwind CSS](https://img.shields.io/badge/Tailwind-4.0-38B2AC?style=for-the-badge&logo=tailwind-css)
 ![Framer Motion](https://img.shields.io/badge/Framer_Motion-black?style=for-the-badge&logo=framer)
 ![Dark Mode](https://img.shields.io/badge/Theme-Consistent_Dark_Mode-8b5cf6?style=for-the-badge)
-![Tests](https://img.shields.io/badge/Tests-31_Passed_100%25-success?style=for-the-badge&logo=vitest)
+![Tests](https://img.shields.io/badge/Tests-32_Passed_100%25-success?style=for-the-badge&logo=vitest)
 ![MongoDB](https://img.shields.io/badge/MongoDB-Atlas-green?style=for-the-badge&logo=mongodb)
 
 ---
@@ -20,7 +20,7 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 ### 🎨 **UI/UX & Structural Architecture**
 * **Native & Uncompromising Dark Mode:** Obsidian-toned canvas (`#000319`) with ethereal spotlights, glowing cyan and violet gradients, and zero light-mode color leaks or flash-of-white during page transitions and initial loads.
 * **100% Dynamic & Centralized:** Every label, badge, counter, project category, link, and accessibility text is driven by [data/index.ts](file:///d:/_Deployed_Projects_Vercel/tanish-portfolio/data/index.ts) with zero hardcoded template strings.
-* **Dual Dynamic Resume CTAs:** Both top FloatingNav and Hero secondary CTA bind to the live Google Docs resume via `navigationConfig.resumeButton.link`, opening in a new tab with `rel="noopener noreferrer"`.
+* **Dual Dynamic Resume CTAs:** Both top FloatingNav and Hero secondary CTA bind to the local master resume via `navigationConfig.resumeButton.link` (`/resume.pdf`), opening in a new tab with `rel="noopener noreferrer"`.
 * **Zero Cumulative Layout Shift (CLS):** Pre-allocated aspect ratios (`aspect-square` / `aspectRatio: "1 / 1"` and `17 / 9"`) eliminate 0x0 initial image bounding box layout shifts on lazy-loaded thumbnails and bento cloud graphics.
 * **Interactive Category Filtering:** Real-time filter pills across Featured Projects (*All*, *AI & Autonomous*, *Full-Stack Web*, *Security & Utilities*) allowing engineering leaders and recruiters to rapidly explore specialized project subsets, with a clean empty-state fallback.
 * **Authentic Bento Grid:** Responsive CSS Grid layout (`grid-cols-1 md:grid-cols-2 lg:grid-cols-3 max-w-7xl`) featuring deliberate 2-column feature spans for engineering profile and stats, alongside a full-width bottom connect banner with instant clipboard copy and animated feedback.
@@ -29,6 +29,8 @@ Live Portfolio: **[tanish-portfolio-web.vercel.app](https://tanish-portfolio-web
 * **GPU-Accelerated Micro-Animations:** Staggered entry reveals, hover card transforms, smooth text generation triggers, and interactive spotlight effects powered by Framer Motion and optimized CSS transitions.
 
 ### ⚡ **Performance & Optimization**
+* **React Server Component Architecture:** Root `app/page.tsx` renders as a high-speed Server Component, streaming instant static semantic markup while isolating interactive client widgets into leaf components.
+* **Aggressive Asset Compression:** Large image assets are optimized via Sharp (up to 83% file size reduction), drastically improving Largest Contentful Paint (LCP) on mobile connections.
 * **Hydration Safety (Zero SSR Mismatch):** Heavily animated components and client-interactive widgets dynamically load via Next.js `dynamic()` imports with `ssr: false` and lightweight skeleton fallbacks, preventing React 19 hydration mismatches.
 * **Asset Optimization:** Comprehensive Next.js `<Image>` implementations with responsive `sizes` configurations, priority hints for hero assets, dynamic webmanifest, and automated XML sitemap generation.
 * **MongoDB Connection Pooling:** Serverless database client caches `MongoClient` and `Db` instances across function invocations, avoiding cold-start latency and connection exhaustion.

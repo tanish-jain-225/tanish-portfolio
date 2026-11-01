@@ -279,7 +279,7 @@ export const navItems: NavItem[] = [
 export const navigationConfig: NavigationConfig = {
   resumeButton: {
     text: "Resume",
-    link: "https://docs.google.com/document/d/1ImL07uqKaPI9DymZntlTqeBCKGs__lzRX9CXI6WpkvM/edit?usp=sharing",
+    link: "/resume.pdf",
     enabled: true,
   },
 };
@@ -372,7 +372,7 @@ export const heroData: HeroData = {
   highlights: [
     { value: "20+", label: "Projects Built", color: "purple" },
     { value: "Top Finalist", label: "Hack Celestial 2.0 (320+ Teams)", color: "emerald" },
-    { value: "90+", label: "Career Portals Tracked", color: "cyan" },
+    { value: "114+", label: "Career Portals Tracked", color: "cyan" },
   ],
   ctaButton: {
     text: "View My Projects",
@@ -388,6 +388,7 @@ export const heroData: HeroData = {
 export const techStack = [
   "Python",
   "Flask",
+  "Pydantic",
   "React.js",
   "Next.js",
   "Node.js",
@@ -423,7 +424,7 @@ export const projects: Project[] = [
   {
     id: 1,
     title: "Job Hunter – Tech Career Board Aggregator",
-    des: "An automated job scraping and tracking engine that aggregates listings across 90+ tech company career boards, filters out irrelevant roles, and structures requirements with AI parsing.",
+    des: "An automated job scraping and ingestion engine that aggregates listings across 114 company career-page sources across 9 applicant tracking system platforms, featuring configurable filters and AI-assisted profile scoring.",
     img: "/job-hunter.png",
     techStack: [
       "Python",
@@ -439,9 +440,9 @@ export const projects: Project[] = [
     category: "AI & Autonomous",
     duration: "2026",
     features: [
-      "Monitors career portals across 90+ tech companies, automatically aggregating and deduplicating new postings",
-      "Integrated regex filtering and LLM extraction to pull structured skills, requirements, and tech stacks",
-      "Built with Supabase PostgreSQL and Row-Level Security, automated via scheduled GitHub Actions pipelines",
+      "Built a job-ingestion pipeline with modular parsing adapters for 114 company career-page sources across 9 ATS platforms",
+      "Integrated PostgreSQL/Supabase data storage, configurable filters, and AI-assisted profile scoring to store and evaluate job listings",
+      "Implemented error handling and exponential retry backoff with comprehensive tests for data extraction, persistence integrity, and network recovery",
     ],
     course: "Full-Stack Automation & APIs",
     date: "2026-03-30",
@@ -449,7 +450,7 @@ export const projects: Project[] = [
   {
     id: 2,
     title: "Department Ledger Portal – Academic Record System",
-    des: "A full-stack record management portal engineered for VESIT. Streamlines document workflows, academic syllabus parsing, and grading records with role-based permissions.",
+    des: "An academic records portal engineered for VESIT with separate student, faculty, and administrator workflows for record compilation and portfolio management.",
     img: "/department-ledger-portal.png",
     techStack: [
       "Next.js",
@@ -467,9 +468,9 @@ export const projects: Project[] = [
     category: "Full-Stack Web",
     duration: "2025",
     features: [
-      "Role-based access control (RBAC) separating student, faculty, and administrator workflows with Firebase Auth",
-      "Automated syllabus and document parsing with client-side rate limiting to safeguard API quotas",
-      "Validated with comprehensive unit and end-to-end testing suites to ensure reliable data handling",
+      "Built an academic records portal with separate student, faculty, and administrator workflows with role-based access control (RBAC)",
+      "Implemented audit logging, syllabus parsing, and document autofill using parsed data",
+      "Wrote 199 Jest unit tests and 27 Playwright end-to-end tests to validate application logic and user workflows",
     ],
     course: "Web Architecture & Document Systems",
     date: "2025-11-15",
@@ -477,12 +478,13 @@ export const projects: Project[] = [
   {
     id: 3,
     title: "Edvanta – AI-Powered Learning Platform",
-    des: "An intelligent study roadmap and learning platform recognized as a National Finalist at Hack Celestial 2.0 (Top 10 out of 320+ teams). Generates custom roadmaps, quizzes, and concept explanations.",
+    des: "An intelligent learning platform recognized as a National Finalist at Hack Celestial 2.0 (Top 10 out of 320+ teams). Deployed with 33 modular REST endpoints supporting assessment workflows and personalized pathways.",
     img: "/edvanta.png",
     techStack: [
       "Python",
       "Flask",
       "React.js",
+      "Pydantic",
       "Gemini AI API",
       "MongoDB",
       "Firebase",
@@ -493,9 +495,9 @@ export const projects: Project[] = [
     category: "AI & EdTech",
     duration: "2025",
     features: [
-      "National Finalist — Selected among the top 10 from 320+ competing engineering teams at Hack Celestial 2.0",
-      "Engineered 30+ REST API endpoints powering AI tutoring, interactive quizzes, and custom learning paths",
-      "Designed structured JSON schema validation for LLM responses to ensure clean, consistent frontend rendering",
+      "National Finalist — Selected among the top 10 from 320+ competing engineering teams at Hack Celestial 2.0 with Edvanta",
+      "Designed and deployed 33 modular REST endpoints supporting assessment workflows, AI-assisted generation, and personalized learning pathways",
+      "Applied Pydantic request and response validation to enforce API schemas, with Firebase JWT authentication and protected-route middleware",
     ],
     course: "Educational Technology & AI",
     date: "2025-08-20",
@@ -512,9 +514,9 @@ export const projects: Project[] = [
     category: "Full-Stack Web",
     duration: "2024",
     features: [
-      "Built a modular REST API with Node.js and Express for menu cataloging, cart handling, and order processing",
-      "Synchronized client-side cart state with database persistence to prevent order loss on browser refresh",
-      "Structured multi-stage order tracking (Placed -> Preparing -> Ready -> Served) with clear status updates",
+      "Developed a full-stack ordering application with catalog browsing, cart management, checkout, and role-protected administrator dashboards",
+      "Synchronized cart and checkout state with MongoDB to retain order data across client sessions and support order-processing workflows",
+      "Wrote 35 automated tests covering order calculations, order-payload handling, and route protection",
     ],
     course: "Web Architecture & State Management",
     date: "2024-10-15",
@@ -630,7 +632,7 @@ export const workExperience: WorkExperienceItem[] = [
   {
     id: 1,
     title: "Automation & Robotics Engineering — VESIT",
-    desc: "B.E. student in Automation & Robotics Engineering at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai (2023 – Expected 2027, CGPA: 7.43/10). Coursework: Data Structures & Algorithms, Database Management, Machine Learning, and Software Engineering.",
+    desc: "B.E. student in Automation & Robotics Engineering at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai (2023 – Expected 2027, CGPA: 7.43/10). Coursework: Data Structures and Algorithms, Database Management Systems, Machine Learning, Generative AI.",
     thumbnail: "/exp1.svg",
     link: "https://vesit.ves.ac.in",
   },

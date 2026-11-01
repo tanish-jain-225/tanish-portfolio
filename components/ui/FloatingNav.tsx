@@ -6,19 +6,31 @@ import {
 } from "framer-motion";
 import { cn } from "@/lib/utils";
 import { navigationConfig, uiText } from "@/data";
+import { getIcon } from "@/lib/icons";
+
+export interface FloatingNavItem {
+  name: string;
+  link: string;
+  icon?: string | JSX.Element;
+}
 
 export const FloatingNav = ({
   navItems,
   className,
 }: {
-  navItems: {
-    name: string;
-    link: string;
-    icon?: JSX.Element;
-  }[];
+  navItems: FloatingNavItem[];
   className?: string;
 }) => {
   const visible = true;
+
+  const renderIcon = (icon?: string | JSX.Element) => {
+    if (!icon) return null;
+    if (typeof icon === "string") {
+      const IconComponent = getIcon(icon);
+      return <IconComponent />;
+    }
+    return icon;
+  };
 
   return (
     <nav
@@ -43,45 +55,42 @@ export const FloatingNav = ({
             className
           )}
         >
-          {navItems.map(
-            (
-              navItem: { link: string; name: string; icon?: React.JSX.Element }
-            ) => (
-              <a
-                key={navItem.link}
-                href={navItem.link}
-                aria-label={navItem.name}
-                onClick={(e) => {
-                  e.preventDefault();
-                  const sectionId = navItem.link.replace("#", "");
-                  if (sectionId) {
-                    const section = document.getElementById(sectionId);
-                    if (section) {
-                      section.scrollIntoView({
-                        behavior: "smooth",
-                        block: "start",
-                      });
-                      window.history.pushState(null, '', navItem.link);
-                      section.focus({ preventScroll: true });
-                    }
-                  } else {
-                    // If no section ID, scroll to top
-                    window.scrollTo({
-                      top: 0,
+          {navItems.map((navItem) => (
+            <a
+              key={navItem.link}
+              href={navItem.link}
+              aria-label={navItem.name}
+              onClick={(e) => {
+                e.preventDefault();
+                const sectionId = navItem.link.replace("#", "");
+                if (sectionId) {
+                  const section = document.getElementById(sectionId);
+                  if (section) {
+                    section.scrollIntoView({
                       behavior: "smooth",
+                      block: "start",
                     });
-                    window.history.pushState(null, '', '#');
+                    window.history.pushState(null, '', navItem.link);
+                    section.focus({ preventScroll: true });
                   }
-                }}
-                className={cn(
-                  "relative text-neutral-300 hover:text-white hover:bg-white/[0.08] items-center flex space-x-1 cursor-pointer p-1 sm:px-2.5 sm:py-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all text-xs sm:text-sm font-medium"
-                )}
-              >
-                <span className="block sm:hidden text-xs" aria-hidden="true">{navItem.icon}</span>
-                <span className="hidden sm:block text-sm">{navItem.name}</span>
-              </a>
-            )
-          )}
+                } else {
+                  window.scrollTo({
+                    top: 0,
+                    behavior: "smooth",
+                  });
+                  window.history.pushState(null, '', '#');
+                }
+              }}
+              className={cn(
+                "relative text-neutral-300 hover:text-white hover:bg-white/[0.08] items-center flex space-x-1 cursor-pointer p-1 sm:px-2.5 sm:py-1 rounded-full focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black transition-all text-xs sm:text-sm font-medium"
+              )}
+            >
+              <span className="block sm:hidden text-xs" aria-hidden="true">
+                {renderIcon(navItem.icon)}
+              </span>
+              <span className="hidden sm:block text-sm">{navItem.name}</span>
+            </a>
+          ))}
           {navigationConfig.resumeButton.enabled && (
             <a
               href={navigationConfig.resumeButton.link}

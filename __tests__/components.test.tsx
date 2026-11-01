@@ -4,6 +4,7 @@ import React from 'react';
 import Hero from '@/components/Hero';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 import { heroData, footerData } from '@/data';
 
 describe('Frontend Components Suite', () => {
@@ -30,6 +31,15 @@ describe('Frontend Components Suite', () => {
       expect(screen.getByText(footerData.logo.text)).toBeInTheDocument();
       expect(screen.getByText(footerData.description)).toBeInTheDocument();
       expect(screen.getByRole('contentinfo')).toBeInTheDocument();
+    });
+  });
+
+  describe('ScrollToTop Component', () => {
+    it('renders scroll to top button with accessible label and handles click', () => {
+      render(<ScrollToTop />);
+      const btn = screen.getByRole('button', { name: /scroll to top/i });
+      expect(btn).toBeInTheDocument();
+      fireEvent.click(btn);
     });
   });
 
