@@ -526,7 +526,7 @@ export const projects: Project[] = [
     id: 5,
     title: "Battery State Estimator – Battery Analytics Platform",
     des: "A software-based battery simulation and telemetry pipeline generating voltage, current, and temperature data with Echo State Network-based SOC/SOH estimation compared against EKF, Coulomb Counting, and adaptive RLS.",
-    img: "/b5.svg",
+    img: "/battery-estimator.png",
     techStack: [
       "Python",
       "Flask",

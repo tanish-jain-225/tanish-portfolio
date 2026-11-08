@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
-import { SpeedInsights } from "@vercel/speed-insights/next"
+import { SpeedInsights } from "@vercel/speed-insights/next";
 import { siteConfig, socialMedia, techStack, uiText, personalInfo } from "@/data";
 
 const inter = Inter({
@@ -21,6 +21,10 @@ export const metadata: Metadata = {
   authors: [{ name: siteConfig.creator }],
   creator: siteConfig.creator,
   metadataBase: new URL(siteConfig.url),
+
+  verification: {
+    google: "THLu48VYTKSTXfxjjwkyKMP5ab7hb34z2xBFYBLi_L0",
+  },
 
   openGraph: {
     type: "website",
@@ -81,6 +85,7 @@ export default function RootLayout({
       <head>
         <meta name="color-scheme" content="dark" />
         <meta name="theme-color" content="#000319" />
+        <meta name="google-site-verification" content="THLu48VYTKSTXfxjjwkyKMP5ab7hb34z2xBFYBLi_L0" />
         <script
           type="application/ld+json"
           dangerouslySetInnerHTML={{
