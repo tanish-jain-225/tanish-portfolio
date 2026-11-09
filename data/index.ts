@@ -497,7 +497,7 @@ export const projects: Project[] = [
     duration: "2025",
     features: [
       "Designed and deployed 33 modular REST endpoints supporting assessment workflows, AI-assisted assessment generation and personalized learning pathways",
-      "Integrated Gemini API to support AI-powered educational workflows and personalized learning experiences",
+      "Integrated Gemini API to power AI-generated assessments and personalized learning experiences",
       "Implemented Pydantic request validation, Firebase JWT authentication, protected-route middleware and role-based authorization for controlled API access",
     ],
     course: "Educational Technology & AI",
@@ -524,7 +524,7 @@ export const projects: Project[] = [
   },
   {
     id: 5,
-    title: "Battery State Estimator – Battery Analytics Platform",
+    title: "Battery State Estimator – Final-Year Major Project",
     des: "A software-based battery simulation and telemetry pipeline generating voltage, current, and temperature data with Echo State Network-based SOC/SOH estimation compared against EKF, Coulomb Counting, and adaptive RLS.",
     img: "/battery-estimator.png",
     techStack: [
@@ -665,23 +665,23 @@ export const workExperience: WorkExperienceItem[] = [
   },
   {
     id: 2,
+    title: "Team Lead — B.E. Major Project",
+    desc: "Led a 4-member team building a battery analytics platform, defining the system architecture, dividing modules across members and integrating simulation, estimation and visualisation components into one deployed system.",
+    thumbnail: "/exp3.svg",
+    link: "https://battery-visualizer.onrender.com",
+  },
+  {
+    id: 3,
     title: "National Finalist — Hack Celestial 2.0",
     desc: "Recognized as a National Finalist from 320+ competing engineering teams across India for building Edvanta, an AI-powered educational platform featuring structured roadmaps and dynamic quiz generation.",
     thumbnail: "/exp2.svg",
     link: "https://edvanta-web.vercel.app",
   },
   {
-    id: 3,
+    id: 4,
     title: "Hackathon Co-Organizer — UniMerge 1.0",
     desc: "Led operations, technical setup, and participant coordination for UniMerge 1.0, a national hackathon with 130+ participants across India, resolving real-time technical questions and judging logistics.",
     thumbnail: "/exp4.svg",
-    link: "https://linkedin.com/in/tanish-jain-tj02022005",
-  },
-  {
-    id: 4,
-    title: "Full Stack Development Intern — BWS",
-    desc: "Developed responsive web modules and backend REST APIs using Python, Flask, and relational databases. Collaborated on code reviews, database schema design, and feature deployments.",
-    thumbnail: "/exp3.svg",
     link: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
 ];
@@ -715,7 +715,7 @@ export const personalInfo: PersonalInfo = {
   university: "Vivekanand Education Society's Institute of Technology (VESIT), Mumbai",
   degree: "B.E. in Automation & Robotics Engineering (Expected 2027)",
   status: "Software Engineer & Full-Stack Developer",
-  bio: "Full-stack developer and engineering student at VESIT Mumbai. I focus on building responsive web applications, robust backend APIs, and practical AI integrations. Experienced with React, Next.js, Python, Flask, Node.js, PostgreSQL, and MongoDB. Recognized as a national hackathon finalist among 320+ engineering teams.",
+  bio: "Full-stack developer and engineering student at VESIT Mumbai. Experienced in building full-stack web applications, REST APIs, database-backed systems, and automated data pipelines with Python, Flask, React, Next.js, and Node.js. National hackathon finalist who also led a 4-member team on a final-year battery analytics project.",
   experience: "2+ years",
   projectsCompleted: "20+",
   technologiesUsed: "20+",
