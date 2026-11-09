@@ -3,6 +3,7 @@ import { Inter } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
+import { Analytics } from "@vercel/analytics/react";
 import { siteConfig, socialMedia, techStack, uiText, personalInfo } from "@/data";
 
 const inter = Inter({
@@ -111,6 +112,7 @@ export default function RootLayout({
         </a>
         {children}
         <SpeedInsights />
+        <Analytics />
       </body>
     </html>
   );
