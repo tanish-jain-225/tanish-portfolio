@@ -2,10 +2,12 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import { render, screen, fireEvent, waitFor } from '@testing-library/react';
 import React from 'react';
 import Hero from '@/components/Hero';
+import Grid from '@/components/Grid';
+import RecentProjects from '@/components/RecentProjects';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
 import ScrollToTop from '@/components/ui/ScrollToTop';
-import { heroData, footerData } from '@/data';
+import { heroData, footerData, skillCategories, projects, uiText } from '@/data';
 
 describe('Frontend Components Suite', () => {
   beforeEach(() => {
@@ -85,6 +87,40 @@ describe('Frontend Components Suite', () => {
             body: expect.stringContaining('alice@example.com'),
           })
         );
+      });
+    });
+  });
+
+  describe('Grid (About & Stack) Component', () => {
+    it('renders VESIT education details and all categorized technical skill groups', () => {
+      render(<Grid />);
+
+      expect(screen.getByText(/7\.43 \/ 10\.0/)).toBeInTheDocument();
+      skillCategories.forEach((group) => {
+        expect(screen.getByText(group.category)).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('RecentProjects Component', () => {
+    it('defaults to 5 featured resume projects and toggles to all projects on click', () => {
+      render(<RecentProjects />);
+
+      const toggleBtn = screen.getByRole('button', {
+        name: new RegExp(`show all projects \\(${projects.length}\\)`, 'i'),
+      });
+      expect(screen.getAllByRole('article').length).toBe(5);
+
+      fireEvent.click(toggleBtn);
+      expect(screen.getAllByRole('article').length).toBe(projects.length);
+    });
+
+    it('ensures every project maps to a valid filter category', () => {
+      const validCategories = new Set<string>(
+        uiText.projects.categories.filter((c) => c !== 'All')
+      );
+      projects.forEach((project) => {
+        expect(validCategories.has(project.category)).toBe(true);
       });
     });
   });

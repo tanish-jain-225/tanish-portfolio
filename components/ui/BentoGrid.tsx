@@ -1,508 +1,96 @@
-"use client";
-
 import React from "react";
-import Image from "next/image";
-import { useState } from "react";
+import { bentoGridData, personalInfo, skillCategories } from "@/data";
 
-import { cn } from "@/lib/utils";
-import { techStack, images, bentoGridData, uiText } from "@/data";
-import { FaCopy, FaCheck } from "@/lib/icons";
+const DEFAULT_COURSEWORK = [
+  "Data Structures and Algorithms",
+  "Database Management Systems",
+  "Machine Learning",
+  "Generative AI",
+];
 
-import { BackgroundGradientAnimation } from "./GradientBg";
+export const BentoGrid = () => {
+  const academicItem = bentoGridData.items.find((item) => item.id === 1);
+  const academics =
+    academicItem?.content.type === "engineering"
+      ? academicItem.content.academics
+      : undefined;
 
-// Main BentoGrid component: renders a responsive CSS Grid layout with authentic Bento proportions
-export const BentoGrid = ({ className }: { className?: string }) => (
-  <div
-    className={cn(
-      "grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6 mx-auto w-full max-w-7xl py-4 sm:py-6 md:py-8",
-      className
-    )}
-    role="list"
-    aria-label={uiText.accessibility.aboutMeGrid}
-  >
-    {bentoGridData.items.map((item) => (
-      <BentoGridItem key={item.id} id={item.id} />
-    ))}
-  </div>
-);
+  const courseworkList = academics?.coursework ?? DEFAULT_COURSEWORK;
 
-// Type definitions for each content type in the grid
-type EngineeringContent = {
-  type: "engineering";
-  text: string;
-  stats?: Array<{ label: string; value: string }>;
-  interests?: Array<{ name: string; icon: string; color: string }>;
-  currentStudy?: string;
-  academics?: {
-    university: string;
-    degree: string;
-    cgpa: string;
-    batch: string;
-    coursework: string[];
-  };
-  engineering?: {
-    focus: string;
-    stats: Array<{ label: string; value: string }>;
-    competencies: string[];
-  };
-};
-type CollaborationContent = {
-  type: "collaboration";
-  text: string;
-  availability?: { status: string; schedule: string };
-};
-type TechstackContent = {
-  type: "techstack";
-  text: string;
-  note?: string;
-};
-type ProjectContent = {
-  type: "project";
-  text: string;
-  technologies?: string[];
-  repository?: string;
-};
-type ContactContent = {
-  type: "contact";
-  email: string;
-};
-type AcademicContent = {
-  type: "academic";
-  text: string;
-  stats?: Array<{ label: string; value: string }>;
-};
-type BentoContent =
-  | EngineeringContent
-  | CollaborationContent
-  | TechstackContent
-  | ProjectContent
-  | ContactContent
-  | AcademicContent;
-
-interface BentoGridItemProps {
-  id: number;
-}
-
-// Column span helper for authentic Bento visual hierarchy
-const getColSpanClass = (itemId: number) => {
-  switch (itemId) {
-    case 1:
-      return "md:col-span-2 lg:col-span-2";
-    case 6:
-      return "md:col-span-2 lg:col-span-3";
-    default:
-      return "col-span-1";
-  }
-};
-
-// Individual grid item card
-export const BentoGridItem = ({ id }: BentoGridItemProps) => {
-  const [copied, setCopied] = useState(false);
-  const item = bentoGridData.items.find((item) => item.id === id);
-  if (!item) return null;
-  const { title, img, content } = item as {
-    title?: string;
-    img?: string;
-    spareImg?: string;
-    content: BentoContent;
-  };
-
-  // Card container
   return (
-    <section
-      className={cn(
-        "relative overflow-hidden rounded-2xl sm:rounded-3xl border border-white/[0.1] group/bento hover:shadow-2xl transition-all duration-300 shadow-lg flex flex-col justify-between items-stretch hover:border-purple-500/40 hover:scale-[1.01] motion-reduce:hover:scale-100 min-h-[230px] sm:min-h-[260px] bento-item w-full min-w-0 max-w-full card-glow",
-        getColSpanClass(id)
-      )}
-      style={{
-        background:
-          "linear-gradient(90deg, rgba(4,7,29,1) 0%, rgba(12,14,35,1) 100%)",
-      }}
-      aria-label={title || `Bento card ${id}`}
-      role="listitem"
-    >
-      {/* Card background images and overlays */}
-      <div
-        className={cn(
-          "flex-1 flex flex-col h-full w-full relative",
-          id === 6 ? "justify-center items-center" : ""
-        )}
-      >
-        {/* Main image backgrounds for visual cards */}
-        {img && (
-          <div
-            className="absolute inset-0 w-full h-full z-0 pointer-events-none"
-            style={{ position: "absolute", height: "100%" }}
-            aria-hidden="true"
-          >
-            <Image
-              src={img}
-              alt={title ? `${title} preview` : `Grid item ${id}`}
-              className={cn(
-                "object-cover pointer-events-none select-none",
-                id === 4 || id === 5 ? "object-top opacity-20 sm:opacity-25" : "object-center opacity-25"
-              )}
-              fill
-              sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-              priority={id === 4 || id === 5}
-            />
-            <div className="absolute inset-0 bg-gradient-to-t from-[#04071d] via-[#04071d]/90 to-[#04071d]/70 z-10 pointer-events-none" />
+    <div className="space-y-6">
+      <div className="grid grid-cols-1 lg:grid-cols-12 gap-6">
+        <div className="lg:col-span-6 rounded-lg border border-zinc-800 bg-[#111114] p-6 space-y-3">
+          <h3 className="text-sm font-medium text-zinc-100">
+            Background
+          </h3>
+          <p className="text-sm text-zinc-400 leading-relaxed">
+            {personalInfo.bio}
+          </p>
+          <p className="text-sm text-zinc-400 leading-relaxed">
+            Across academic systems, full-stack products, and data pipelines, my focus stays on explicit API schemas, predictable access control, clean database models, and automated tests before shipping.
+          </p>
+        </div>
+
+        <div className="lg:col-span-6 rounded-lg border border-zinc-800 bg-[#111114] p-6 flex flex-col justify-between gap-4">
+          <div className="space-y-2">
+            <div className="flex flex-wrap items-baseline justify-between gap-2">
+              <h3 className="text-sm font-medium text-zinc-100">
+                Education
+              </h3>
+              <span className="font-mono text-xs text-zinc-400">
+                {academics?.batch ?? "2023 – 2027 (Expected)"}
+              </span>
+            </div>
+
+            <p className="text-sm font-medium text-zinc-200 leading-snug">
+              {academics?.university ?? personalInfo.university}
+            </p>
+            <p className="text-sm text-zinc-400">
+              {academics?.degree ?? personalInfo.degree}
+            </p>
+            <p className="font-mono text-xs text-zinc-300 pt-1">
+              CGPA: {academics?.cgpa ?? "7.43 / 10.0"}
+            </p>
           </div>
-        )}
-        {/* Animated background for contact card */}
-        {id === 6 && (
-          <div className="absolute inset-0 pointer-events-none select-none z-0" aria-hidden="true">
-            <BackgroundGradientAnimation>
-              <div className="absolute inset-0 z-10" />
-              <div className="absolute z-20 inset-0 flex items-center justify-center text-white font-bold px-4 pointer-events-none opacity-30"></div>
-            </BackgroundGradientAnimation>
+
+          <div className="pt-4 border-t border-zinc-800/80">
+            <p className="text-xs font-mono text-zinc-400 mb-1">
+              Relevant Coursework
+            </p>
+            <p className="text-sm text-zinc-300 leading-relaxed">
+              {courseworkList.join(" · ")}
+            </p>
           </div>
-        )}
-        {/* Overlay for text readability on certain cards */}
-        {id !== 6 &&
-          ["academic", "engineering", "techstack", "project", "contact"].includes(
-            content?.type || ""
-          ) && (
-            <div
-              className="absolute inset-0 z-10 pointer-events-none"
-              style={{
-                background:
-                  "linear-gradient(180deg, rgba(10,12,30,0.82) 60%, rgba(10,12,30,0.92) 100%)",
-              }}
-              aria-hidden="true"
-            ></div>
-          )}
-        {/* Card content */}
-        <div
-          className={cn(
-            "transition duration-200 relative flex-1 flex flex-col justify-between p-3.5 sm:p-5 md:p-6 lg:p-7 z-20 w-full h-full",
-            id === 6 ? "items-center text-center justify-center py-6 sm:py-8" : ""
-          )}
-        >
-          {/* Card title */}
-          {title && (
-            <h3 className="font-sans text-sm sm:text-lg md:text-2xl lg:text-3xl max-w-full font-bold z-10 text-white tracking-tight break-words" id={`bento-title-${id}`}>
-              {title}
-            </h3>
-          )}
-          {/* Card body by content type */}
-          {content && (
-            <>
-              {/* Academic card */}
-              {content.type === "academic" && (
-                <>
-                  {/* Decorative background */}
-                  <div
-                    className="absolute inset-0 w-full h-full opacity-10 pointer-events-none"
-                    aria-hidden="true"
-                  >
-                    <Image
-                      src={images.backgrounds.footerGrid}
-                      alt={uiText.accessibility.backgroundPattern}
-                      className="object-cover object-right-bottom"
-                      fill
-                      sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
-                    />
-                  </div>
-                  {/* Academic text and stats */}
-                  <div className="mt-4 flex flex-col gap-3 sm:gap-5 relative z-10">
-                    <p className="text-[#C1C2D3] text-xs sm:text-sm md:text-base max-w-full sm:max-w-100 leading-relaxed">
-                      {content.text}
-                    </p>
-                    {content.stats && (
-                      <div className="flex flex-wrap gap-2 mt-4" aria-label="Academic stats">
-                        {content.stats.map((stat, index) => (
-                          <div
-                            key={index}
-                            className="flex-1 min-w-[100px] p-2 sm:p-3 lg:p-4 rounded-lg bg-[#10132E]/80 border border-white/5 backdrop-blur-sm flex flex-col items-center"
-                          >
-                            <div className="text-base sm:text-lg lg:text-2xl font-bold text-white">
-                              {stat.value}
-                            </div>
-                            <div className="text-xs sm:text-sm text-[#C1C2D3]">
-                              {stat.label}
-                            </div>
-                          </div>
-                        ))}
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-              {/* Collaboration card */}
-              {content.type === "collaboration" && (
-                <>
-                  <div className="flex items-center justify-center min-h-[120px] w-full my-2">
-                    <Image
-                      src="/exp2.svg"
-                      alt={title || "Hackathons & Leadership"}
-                      className="object-contain"
-                      width={90}
-                      height={90}
-                      style={{ width: "auto", height: "auto" }}
-                      sizes="90px"
-                    />
-                  </div>
-                  <div className="mt-4 flex flex-col items-center justify-center text-center gap-3 sm:gap-4 relative z-10">
-                    <div className="text-lg sm:text-xl md:text-2xl font-bold text-white flex items-center gap-2">
-                      {title}
-                    </div>
-                    <div className="text-xs sm:text-sm lg:text-base text-[#C1C2D3] max-w-full sm:max-w-72 leading-relaxed">
-                      {content.text}
-                    </div>
-                    <div className="flex flex-col sm:flex-row items-center justify-center gap-2 sm:gap-3 mt-2">
-                      <div className="flex items-center gap-2 bg-green-900/20 px-3 py-1 rounded-full">
-                        <span className="text-green-400 text-xs font-medium">
-                          {content.availability?.status}
-                        </span>
-                      </div>
-                      <div className="hidden sm:block h-3 w-[1px] bg-white/20" aria-hidden="true"></div>
-                      <div className="flex items-center gap-2 bg-blue-900/20 px-3 py-1 rounded-full">
-                        <span className="text-[#C1C2D3] text-xs">
-                          {content.availability?.schedule}
-                        </span>
-                      </div>
-                    </div>
-                  </div>
-                </>
-              )}
-              {/* Tech stack card */}
-              {content.type === "techstack" && id === 3 && (
-                <div className="flex flex-col gap-3 sm:gap-4 w-full h-full justify-center items-center relative z-10 py-2">
-                  <p className="text-[#C1C2D3] text-xs sm:text-sm text-center max-w-md leading-relaxed px-1">
-                    {content.text}
-                  </p>
-                  <div className="w-full flex flex-wrap justify-center gap-1.5 sm:gap-2 bg-[#10132E]/80 rounded-xl p-2.5 sm:p-3 border border-white/10 my-1" aria-label="Tech stack list">
-                    {techStack.slice(0, 10).map((stackItem, i) => (
-                      <span
-                        key={i}
-                        className="py-1 px-2.5 text-[11px] sm:text-xs rounded-full text-center bg-[#161A31] transition-all duration-300 shadow-sm text-white flex items-center gap-1.5 border border-white/5 hover:border-purple-400/30"
-                      >
-                        <div className="w-1.5 h-1.5 rounded-full bg-[rgb(198,179,255)]"></div>
-                        {stackItem}
-                      </span>
-                    ))}
-                  </div>
-                  {content.note && (
-                    <div className="inline-flex items-center gap-2 px-3 py-1 rounded-full bg-purple-950/40 border border-purple-500/30 text-purple-200 text-[11px] sm:text-xs font-medium">
-                      <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" aria-hidden="true" />
-                      <span>{content.note}</span>
-                    </div>
-                  )}
-                </div>
-              )}
-              {/* Engineering card */}
-              {content.type === "engineering" && (
-                <div className="mt-3 sm:mt-4 relative z-10 flex flex-col gap-4">
-                  {/* Summary intro */}
-                  <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed max-w-3xl">
-                    {content.text}
-                  </p>
-
-                  {/* Dual Grid: Academic Pillar & Engineering Pillar */}
-                  <div className="grid grid-cols-1 md:grid-cols-2 gap-3 sm:gap-4 w-full">
-                    {/* Academic Foundation Box */}
-                    <div className="rounded-xl bg-[#0c0f2b]/90 border border-purple-500/20 p-3.5 sm:p-4 flex flex-col justify-between hover:border-purple-400/40 transition-colors">
-                      <div>
-                        <div className="flex items-center gap-2.5 mb-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-purple-500/10 border border-purple-500/30 flex items-center justify-center text-purple-300 flex-shrink-0">
-                            {/* Academic Graduation Cap SVG */}
-                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <path d="M22 10v6M2 10l10-5 10 5-10 5z" />
-                              <path d="M6 12v5c3 3 9 3 12 0v-5" />
-                            </svg>
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-purple-400 block">Academic Foundation</span>
-                            <span className="text-xs sm:text-sm font-bold text-white leading-tight block">VESIT Mumbai</span>
-                          </div>
-                        </div>
-
-                        <p className="text-xs text-neutral-200 font-medium leading-snug">
-                          {content.academics?.degree || "B.E. in Automation & Robotics Engineering"}
-                        </p>
-                        <p className="text-[11px] text-neutral-400 mt-1 mb-3">
-                          {content.academics?.batch || "2023 – 2027 (Expected)"} • <strong className="text-emerald-400 font-semibold">{content.academics?.cgpa || "CGPA: 7.43 / 10"}</strong>
-                        </p>
-
-                        <div className="text-[10px] uppercase font-semibold text-neutral-400 tracking-wider mb-1.5">
-                          Relevant Coursework
-                        </div>
-                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
-                          {(content.academics?.coursework || ["Data Structures & Algorithms", "DBMS", "Machine Learning", "Generative AI"]).map((course, i) => (
-                            <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-neutral-300">
-                              {course}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Engineering & Systems Box */}
-                    <div className="rounded-xl bg-[#0c0f2b]/90 border border-cyan-500/20 p-3.5 sm:p-4 flex flex-col justify-between hover:border-cyan-400/40 transition-colors">
-                      <div>
-                        <div className="flex items-center gap-2.5 mb-2.5">
-                          <div className="w-8 h-8 rounded-lg bg-cyan-500/10 border border-cyan-500/30 flex items-center justify-center text-cyan-300 flex-shrink-0">
-                            {/* Engineering Terminal / Code SVG */}
-                            <svg className="w-4 h-4" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-                              <polyline points="16 18 22 12 16 6" />
-                              <polyline points="8 6 2 12 8 18" />
-                            </svg>
-                          </div>
-                          <div>
-                            <span className="text-[10px] font-semibold uppercase tracking-wider text-cyan-400 block">Engineering Systems</span>
-                            <span className="text-xs sm:text-sm font-bold text-white leading-tight block">Full-Stack & APIs</span>
-                          </div>
-                        </div>
-
-                        <div className="grid grid-cols-2 gap-1.5 sm:gap-2 mb-3">
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
-                            <span className="text-xs sm:text-sm font-bold text-white">20+ Built</span>
-                            <span className="text-[10px] text-neutral-400">Applications</span>
-                          </div>
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
-                            <span className="text-xs sm:text-sm font-bold text-cyan-300">220+ Tests</span>
-                            <span className="text-[10px] text-neutral-400">Unit & Playwright</span>
-                          </div>
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
-                            <span className="text-xs sm:text-sm font-bold text-purple-300">Hack Celestial</span>
-                            <span className="text-[10px] text-neutral-400">Top Finalist</span>
-                          </div>
-                          <div className="p-2 rounded-lg bg-white/5 border border-white/5 flex flex-col">
-                            <span className="text-xs sm:text-sm font-bold text-emerald-400">CI/CD & RBAC</span>
-                            <span className="text-[10px] text-neutral-400">Pydantic & JWT</span>
-                          </div>
-                        </div>
-
-                        <div className="text-[10px] uppercase font-semibold text-neutral-400 tracking-wider mb-1.5">
-                          Core Competencies
-                        </div>
-                        <div className="flex flex-wrap gap-1 sm:gap-1.5">
-                          {(content.engineering?.competencies || ["REST APIs & Validation", "Next.js & React", "PostgreSQL & Supabase", "Automated Testing"]).map((comp, i) => (
-                            <span key={i} className="text-[10px] px-2 py-0.5 rounded-md bg-white/5 border border-white/10 text-cyan-200">
-                              {comp}
-                            </span>
-                          ))}
-                        </div>
-                      </div>
-                    </div>
-                  </div>
-
-                  {/* Current Study status banner */}
-                  {content.currentStudy && (
-                    <div className="p-2.5 rounded-lg bg-gradient-to-r from-[#161A31] to-[#10132E] border border-white/10 flex items-center gap-2">
-                      <div className="w-2 h-2 rounded-full bg-emerald-400 animate-pulse flex-shrink-0" />
-                      <span className="text-xs text-[#C1C2D3]">
-                        {content.currentStudy}
-                      </span>
-                    </div>
-                  )}
-                </div>
-              )}
-              {/* Project card */}
-              {content.type === "project" && (
-                <>
-                  <div className="mt-4 relative z-10">
-                    <p className="text-[#C1C2D3] text-xs sm:text-sm leading-relaxed max-w-full sm:max-w-72 mb-2 sm:mb-3">
-                      {content.text}
-                    </p>
-                    {/* Technologies used */}
-                    {content.technologies && (
-                      <div className="mt-2 sm:mt-4 flex flex-col gap-2 sm:gap-3">
-                        <div className="bg-[#10132E]/80 rounded-lg p-2 sm:p-3 border border-white/5">
-                          <div className="text-xs font-semibold text-white mb-1">
-                            {uiText.projects.technologiesUsed}
-                          </div>
-                          <ul className="text-[10px] sm:text-xs text-[#C1C2D3] space-y-1">
-                            {content.technologies.map((tech, index) => (
-                              <li key={index} className="flex items-center gap-1">
-                                <div className="w-1 h-1 rounded-full bg-green-400"></div>
-                                {tech}
-                              </li>
-                            ))}
-                          </ul>
-                        </div>
-                      </div>
-                    )}
-                    {/* Repository link or label */}
-                    {content.repository && (
-                      <div className="mt-2 sm:mt-4 p-2 rounded-md bg-[#161A31] border border-white/5 flex items-center">
-                        <div className="flex items-center">
-                          <Image
-                            src={images.icons.git}
-                            alt={uiText.projects.sourceCode}
-                            className="w-4 h-4 mr-2 aspect-square"
-                            width={16}
-                            height={16}
-                            style={{ aspectRatio: "1 / 1", width: "auto", height: "auto" }}
-                            sizes="16px"
-                            onError={(e) => (e.currentTarget.style.display = "none")}
-                          />
-                          <span className="text-xs text-[#C1C2D3]">
-                            {content.repository.startsWith("http") ? (
-                              <a
-                                href={content.repository}
-                                target="_blank"
-                                rel="noopener noreferrer"
-                                aria-label={`View repository on GitHub (opens in new tab)`}
-                                className="underline hover:text-purple-400 transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 rounded px-1"
-                              >
-                                {uiText.projects.sourceCode}
-                              </a>
-                            ) : (
-                              content.repository
-                            )}
-                          </span>
-                        </div>
-                      </div>
-                    )}
-                  </div>
-                </>
-              )}
-              {/* Contact card */}
-              {content.type === "contact" && (
-                <div className="flex flex-col items-center justify-center w-full h-full p-2 sm:p-4 m-1 sm:m-2 relative z-30 pointer-events-auto">
-                  <button
-                    type="button"
-                    onClick={async () => {
-                      if (typeof navigator !== 'undefined' && navigator.clipboard && navigator.clipboard.writeText) {
-                        try {
-                          await navigator.clipboard.writeText(content.email);
-                          setCopied(true);
-                          setTimeout(() => setCopied(false), 3000);
-                        } catch {
-                          setCopied(false);
-                          alert(uiText.contact.copyError);
-                        }
-                      } else {
-                        setCopied(false);
-                        alert(uiText.contact.copyNotSupported);
-                      }
-                    }}
-                    aria-label={copied ? uiText.contact.emailCopied : `${uiText.contact.copyEmailAddress} ${content.email}`}
-                    aria-live="polite"
-                    className="px-3.5 sm:px-5 py-2.5 rounded-xl bg-gradient-to-r from-purple-600 to-indigo-600 text-white font-semibold shadow-lg shadow-purple-600/30 hover:from-purple-500 hover:to-indigo-500 transition-all focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-slate-950 cursor-pointer text-xs sm:text-sm md:text-base m-1 sm:m-2 flex items-center gap-2 max-w-full min-w-0 select-none hover:scale-105 active:scale-95"
-                    style={{
-                      wordBreak: 'break-all',
-                      whiteSpace: 'pre-line',
-                      minWidth: 0,
-                    }}
-                  >
-                    {copied ? (
-                      <FaCheck className="w-4 h-4 text-emerald-300 flex-shrink-0" aria-hidden="true" />
-                    ) : (
-                      <FaCopy className="w-4 h-4 text-purple-200 flex-shrink-0" aria-hidden="true" />
-                    )}
-                    <span className="truncate block max-w-[200px] xs:max-w-[240px] sm:max-w-[300px] text-ellipsis overflow-hidden text-center">
-                      {copied ? uiText.contact.copied : `${uiText.contact.copy}: ${content.email}`}
-                    </span>
-                  </button>
-                </div>
-              )}
-            </>
-          )}
         </div>
       </div>
-    </section>
+
+      <div className="rounded-lg border border-zinc-800 bg-[#111114] overflow-hidden">
+        <div className="px-6 py-4 border-b border-zinc-800 flex flex-wrap items-center justify-between gap-2">
+          <h3 className="text-sm font-medium text-zinc-100">
+            Technical Skills
+          </h3>
+          <span className="text-xs font-mono text-zinc-400">
+            Languages, frameworks, databases &amp; testing
+          </span>
+        </div>
+
+        <dl className="divide-y divide-zinc-800/80">
+          {skillCategories.map((group) => (
+            <div
+              key={group.category}
+              className="px-6 py-3.5 grid grid-cols-1 sm:grid-cols-[175px_1fr] gap-1.5 sm:gap-6 items-baseline"
+            >
+              <dt className="text-xs font-mono text-zinc-400">
+                {group.category}
+              </dt>
+              <dd className="text-sm text-zinc-200 leading-relaxed">
+                {group.items.join(", ")}
+              </dd>
+            </div>
+          ))}
+        </dl>
+      </div>
+    </div>
   );
 };

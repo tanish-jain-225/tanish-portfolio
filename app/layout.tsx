@@ -1,5 +1,5 @@
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Inter, JetBrains_Mono } from "next/font/google";
 import "./globals.css";
 import "./utilities.css";
 import { SpeedInsights } from "@vercel/speed-insights/next";
@@ -10,6 +10,12 @@ const inter = Inter({
   subsets: ["latin"],
   display: "swap",
   variable: "--font-inter",
+});
+
+const jetbrainsMono = JetBrains_Mono({
+  subsets: ["latin"],
+  display: "swap",
+  variable: "--font-jetbrains-mono",
 });
 
 export const metadata: Metadata = {
@@ -82,10 +88,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className="dark" style={{ colorScheme: "dark" }} suppressHydrationWarning>
+    <html
+      lang="en"
+      className={`dark ${inter.variable} ${jetbrainsMono.variable}`}
+      style={{ colorScheme: "dark" }}
+      suppressHydrationWarning
+    >
       <head>
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#000319" />
+        <meta name="theme-color" content="#09090b" />
         <meta name="google-site-verification" content="THLu48VYTKSTXfxjjwkyKMP5ab7hb34z2xBFYBLi_L0" />
         <script
           type="application/ld+json"
@@ -95,7 +106,15 @@ export default function RootLayout({
               "@type": "Person",
               name: siteConfig.creator,
               url: siteConfig.url,
+              image: `${siteConfig.url}${siteConfig.ogImage}`,
+              email: `mailto:${personalInfo.email}`,
               jobTitle: siteConfig.jobTitle,
+              address: {
+                "@type": "PostalAddress",
+                addressLocality: "Mumbai",
+                addressRegion: "Maharashtra",
+                addressCountry: "IN",
+              },
               alumniOf: {
                 "@type": "EducationalOrganization",
                 name: personalInfo.university,
@@ -106,7 +125,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-[#000319] text-white antialiased`}>
+      <body className={`${inter.className} bg-[#09090b] text-zinc-100 antialiased`}>
         <a href="#main-content" className="skip-to-content">
           {uiText.accessibility.skipToContent}
         </a>

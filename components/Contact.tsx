@@ -1,12 +1,10 @@
 "use client";
 
 import React, { useState } from "react";
-import { motion } from "framer-motion";
 import { getIcon } from "@/lib/icons";
 import { socialMedia, contactInfo, uiText } from "@/data";
 
 const Contact = () => {
-  // All fields required and initialized
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -15,36 +13,40 @@ const Contact = () => {
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [justSent, setJustSent] = useState(false);
-  const [statusMessage, setStatusMessage] = useState<{ text: string; type: "success" | "error" | null }>({ text: "", type: null });
+  const [statusMessage, setStatusMessage] = useState<{
+    text: string;
+    type: "success" | "error" | null;
+  }>({ text: "", type: null });
 
-  // Handle input changes for all fields
   const handleChange = (
-    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>,
+    e: React.ChangeEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
     setFormData({
       ...formData,
       [e.target.name]: e.target.value,
     });
-    // Clear status message when user types
     if (statusMessage.type) {
       setStatusMessage({ text: "", type: null });
     }
   };
 
-  // Submit handler: all fields are required and sent as JSON
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setIsSubmitting(true);
     setStatusMessage({ text: "", type: null });
 
-    // Client-side required check (defensive, backend also checks)
-    const requiredFields = contactInfo.form.fields.filter((field) => field.required);
+    const requiredFields = contactInfo.form.fields.filter(
+      (field) => field.required
+    );
     const hasMissingFields = requiredFields.some(
-      (field) => !formData[field.name as keyof typeof formData]?.trim(),
+      (field) => !formData[field.name as keyof typeof formData]?.trim()
     );
 
     if (hasMissingFields) {
-      setStatusMessage({ text: uiText.contact.allFieldsRequired, type: "error" });
+      setStatusMessage({
+        text: uiText.contact.allFieldsRequired,
+        type: "error",
+      });
       setIsSubmitting(false);
       return;
     }
@@ -55,34 +57,41 @@ const Contact = () => {
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(formData),
+        body: JSON.stringify({
+          name: formData.name.trim(),
+          email: formData.email.trim(),
+          subject: formData.subject.trim(),
+          message: formData.message.trim(),
+        }),
       });
 
-      const data = await response.json();
+      const data = await response.json().catch(() => null);
 
-      if (data.success) {
-        // Reset form and show sent state temporarily
+      if (response.ok && data?.success) {
         setFormData({ name: "", email: "", subject: "", message: "" });
         setJustSent(true);
-        setStatusMessage({ text: contactInfo.form.successMessage, type: "success" });
+        setStatusMessage({
+          text: contactInfo.form.successMessage,
+          type: "success",
+        });
         setTimeout(() => {
           setJustSent(false);
           setStatusMessage({ text: "", type: null });
         }, 5000);
       } else {
-        // Handle validation errors or other issues
-        console.error("Form submission failed:", data.message);
-        if (data.errors && Array.isArray(data.errors)) {
+        if (data?.errors && Array.isArray(data.errors)) {
           setStatusMessage({
             text: `${uiText.contact.validationErrorsPrefix} ${data.errors.join(", ")}`,
-            type: "error"
+            type: "error",
           });
         } else {
-          setStatusMessage({ text: data.message || contactInfo.form.errorMessage, type: "error" });
+          setStatusMessage({
+            text: data?.message || contactInfo.form.errorMessage,
+            type: "error",
+          });
         }
       }
-    } catch (error) {
-      console.error("Error submitting form:", error);
+    } catch {
       setStatusMessage({ text: uiText.contact.networkError, type: "error" });
     } finally {
       setIsSubmitting(false);
@@ -92,160 +101,176 @@ const Contact = () => {
   return (
     <section
       id="contact"
+      tabIndex={-1}
       aria-labelledby="contact-heading"
-      className="section-container text-white"
+      className="w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 text-zinc-100 scroll-mt-14 focus:outline-none"
     >
-      <div className="text-center w-full">
-        <h2 id="contact-heading" className="heading">
-          {contactInfo.title.split(" ").map((word, i) =>
-            i === 0 ? (
-              <span key={i} className="text-purple">
-                {word}{" "}
-              </span>
-            ) : (
-              <span key={i}>{word} </span>
-            ),
-          )}
-        </h2>
-        <p className="section-subtitle">
-          {contactInfo.subtitle}
-        </p>
-      </div>
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 lg:gap-8 w-full max-w-6xl mx-auto items-stretch">
-        {/* Contact Form */}
-        <motion.div
-          className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 min-w-0 flex flex-col justify-between shadow-2xl shadow-black/50"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
-          viewport={{ once: true }}
-        >
-          <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-center lg:text-left text-white">
-            {contactInfo.form.title}
-          </h3>
-          <form onSubmit={handleSubmit} className="space-y-3 sm:space-y-4 flex-1 flex flex-col justify-between">
-            <div className="space-y-3 sm:space-y-4">
-              {contactInfo.form.fields.map((field) => (
-                <div key={field.name} className="flex flex-col">
-                  <label
-                    htmlFor={field.name}
-                    className="block text-xs sm:text-sm text-[#BEC1DD] mb-1 font-medium"
-                  >
-                    {field.label}
-                  </label>
-                  {field.type === "textarea" ? (
-                    <textarea
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData] || ""}
-                      onChange={handleChange}
-                      required={field.required}
-                      rows={3}
-                      className="w-full bg-[#07091c] border border-white/10 rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-all resize-vertical placeholder-neutral-500"
-                    />
-                  ) : (
-                    <input
-                      type={field.type}
-                      id={field.name}
-                      name={field.name}
-                      value={formData[field.name as keyof typeof formData] || ""}
-                      onChange={handleChange}
-                      required={field.required}
-                      autoComplete={field.name === "name" ? "name" : field.name === "email" ? "email" : "on"}
-                      className="w-full bg-[#07091c] border border-white/10 rounded-xl p-2.5 sm:p-3 text-white text-xs sm:text-sm focus:border-purple-400 focus:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:border-purple-400 transition-all placeholder-neutral-500"
-                    />
-                  )}
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-8 sm:mb-10">
+          <h2
+            id="contact-heading"
+            className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-100"
+          >
+            {contactInfo.title}
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
+            {contactInfo.subtitle}
+          </p>
+        </div>
+
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-6 items-stretch">
+          <div className="lg:col-span-7 bg-[#111114] p-6 sm:p-7 rounded-lg border border-zinc-800 min-w-0 flex flex-col justify-between">
+            <h3 className="text-sm font-medium mb-5 text-zinc-100">
+              {contactInfo.form.title}
+            </h3>
+
+            <form
+              onSubmit={handleSubmit}
+              aria-busy={isSubmitting}
+              className="space-y-4 flex-1 flex flex-col justify-between"
+            >
+              <div className="space-y-4">
+                {contactInfo.form.fields.map((field) => (
+                  <div key={field.name} className="flex flex-col">
+                    <label
+                      htmlFor={field.name}
+                      className="block text-xs font-mono text-zinc-300 mb-1.5"
+                    >
+                      {field.label}
+                      {field.required && (
+                        <span className="text-zinc-400 ml-1" aria-hidden="true">
+                          *
+                        </span>
+                      )}
+                    </label>
+                    {field.type === "textarea" ? (
+                      <textarea
+                        id={field.name}
+                        name={field.name}
+                        value={
+                          formData[field.name as keyof typeof formData] || ""
+                        }
+                        onChange={handleChange}
+                        required={field.required}
+                        rows={4}
+                        className="w-full bg-[#0c0c0f] border border-zinc-800 rounded-md px-3.5 py-2.5 text-zinc-100 text-sm focus:border-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 transition-colors resize-y placeholder-zinc-500"
+                      />
+                    ) : (
+                      <input
+                        type={field.type}
+                        id={field.name}
+                        name={field.name}
+                        value={
+                          formData[field.name as keyof typeof formData] || ""
+                        }
+                        onChange={handleChange}
+                        required={field.required}
+                        autoComplete={
+                          field.name === "name"
+                            ? "name"
+                            : field.name === "email"
+                              ? "email"
+                              : "on"
+                        }
+                        className="w-full bg-[#0c0c0f] border border-zinc-800 rounded-md px-3.5 py-2.5 text-zinc-100 text-sm focus:border-zinc-500 focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 transition-colors placeholder-zinc-500"
+                      />
+                    )}
+                  </div>
+                ))}
+              </div>
+
+              {statusMessage.type && (
+                <div
+                  role={statusMessage.type === "error" ? "alert" : "status"}
+                  aria-live="polite"
+                  className={`p-3 rounded-md text-xs sm:text-sm border ${
+                    statusMessage.type === "success"
+                      ? "bg-emerald-950/40 text-emerald-300 border-emerald-500/30"
+                      : "bg-red-950/40 text-red-300 border-red-500/30"
+                  }`}
+                >
+                  {statusMessage.text}
                 </div>
-              ))}
-            </div>
-            {statusMessage.type && (
-              <div 
-                role={statusMessage.type === "error" ? "alert" : "status"}
+              )}
+
+              <button
+                type="submit"
+                disabled={isSubmitting}
+                aria-busy={isSubmitting}
                 aria-live="polite"
-                className={`p-3 rounded-xl text-xs sm:text-sm border transition-all duration-300 my-2 ${
-                  statusMessage.type === "success" 
-                    ? "bg-emerald-950/40 text-emerald-300 border-emerald-500/30" 
-                    : "bg-red-950/40 text-red-300 border-red-500/30"
+                className={`w-full font-medium py-2.5 px-5 rounded-md transition-colors disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-sm focus:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#111114] flex items-center justify-center gap-2 ${
+                  justSent
+                    ? "bg-emerald-600 hover:bg-emerald-700 text-white"
+                    : "bg-zinc-100 text-zinc-950 hover:bg-white"
                 }`}
               >
-                {statusMessage.text}
+                {isSubmitting
+                  ? uiText.contact.sending
+                  : justSent
+                    ? uiText.contact.messageSent
+                    : contactInfo.form.submitButton}
+              </button>
+            </form>
+          </div>
+
+          <div className="lg:col-span-5 flex flex-col gap-6 min-w-0 justify-between">
+            <div className="bg-[#111114] p-6 sm:p-7 rounded-lg border border-zinc-800 flex-1 flex flex-col justify-between gap-6">
+              <div>
+                <h3 className="text-sm font-medium mb-5 text-zinc-100">
+                  {contactInfo.details.title}
+                </h3>
+
+                <div className="space-y-4">
+                  {contactInfo.details.items.map((item, index) => {
+                    const IconComponent = getIcon(item.icon);
+                    return (
+                      <div key={index} className="flex items-start gap-3">
+                        <div className="mt-0.5 rounded-md border border-zinc-800 bg-[#0c0c0f] p-2 flex items-center justify-center shrink-0">
+                          <IconComponent
+                            className="text-zinc-400 w-4 h-4"
+                            aria-hidden="true"
+                          />
+                        </div>
+                        <div className="min-w-0">
+                          <p className="text-xs font-mono text-zinc-400">
+                            {item.label}
+                          </p>
+                          <p className="text-sm text-zinc-200 break-all mt-0.5">
+                            {item.value}
+                          </p>
+                        </div>
+                      </div>
+                    );
+                  })}
+                </div>
               </div>
-            )}
-            <button
-              type="submit"
-              disabled={isSubmitting}
-              aria-live="polite"
-              className={`w-full font-semibold py-3 px-6 rounded-xl transition-all duration-300 disabled:opacity-50 disabled:cursor-not-allowed cursor-pointer text-xs sm:text-sm md:text-base focus:outline-none focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black mt-2 flex items-center justify-center gap-2 ${
-                justSent
-                  ? "bg-emerald-600 hover:bg-emerald-700 text-white shadow-lg shadow-emerald-500/30 scale-[1.01]"
-                  : "bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 text-white shadow-lg shadow-purple-600/30 hover:scale-[1.01] motion-reduce:hover:scale-100"
-              }`}
-            >
-              {isSubmitting
-                ? uiText.contact.sending
-                : justSent
-                  ? uiText.contact.messageSent
-                  : contactInfo.form.submitButton}
-            </button>
-          </form>
-        </motion.div>
-        {/* Contact Info & Socials */}
-        <motion.div
-          className="flex flex-col gap-6 min-w-0 h-full justify-between"
-          initial={{ opacity: 0, y: 20 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5, delay: 0.2 }}
-          viewport={{ once: true }}
-        >
-          <div className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 mb-0 flex-1 flex flex-col min-w-0 justify-center shadow-2xl shadow-black/50">
-            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 lg:text-left text-white">
-              {contactInfo.details.title}
-            </h3>
-            <div className="flex flex-col gap-3.5 sm:gap-6 p-0.5 sm:p-2 flex-1 justify-center">
-              {contactInfo.details.items.map((item, index) => {
-                const IconComponent = getIcon(item.icon);
-                return (
-                  <div key={index} className="flex items-center gap-3 sm:gap-4 p-2 rounded-xl hover:bg-white/[0.03] transition-colors">
-                    <div className="bg-purple-900/30 border border-purple-500/20 p-2.5 sm:p-3 rounded-xl flex items-center justify-center flex-shrink-0">
-                      <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" />
-                    </div>
-                    <div className="flex flex-col min-w-0">
-                      <p className="text-[#BEC1DD] text-[11px] sm:text-sm">
-                        {item.label}
-                      </p>
-                      <p className="text-white text-xs sm:text-base break-all font-medium">
-                        {item.value}
-                      </p>
-                    </div>
-                  </div>
-                );
-              })}
+
+              <div className="pt-5 border-t border-zinc-800/80">
+                <p className="text-xs font-mono text-zinc-400 mb-3">
+                  {uiText.contact.connectWithMe}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {socialMedia.map((social) => {
+                    const IconComponent = getIcon(social.icon);
+                    return (
+                      <a
+                        key={social.id}
+                        href={social.url}
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        aria-label={`Visit ${social.name} profile (opens in new tab)`}
+                        className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-[#0c0c0f] px-3 py-2 text-xs font-medium text-zinc-300 hover:border-zinc-700 hover:text-white transition-colors focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200"
+                      >
+                        <IconComponent className="w-3.5 h-3.5 text-zinc-400" aria-hidden="true" />
+                        <span>{social.name}</span>
+                      </a>
+                    );
+                  })}
+                </div>
+              </div>
             </div>
           </div>
-          {/* Social Links */}
-          <div className="bg-[#0b0d24] p-4 sm:p-6 md:p-8 rounded-2xl border border-white/10 flex flex-col min-w-0 shadow-2xl shadow-black/50">
-            <h3 className="text-base sm:text-xl font-bold mb-3 sm:mb-4 text-white">
-              {uiText.contact.connectWithMe}
-            </h3>
-            <div className="flex flex-wrap gap-2.5 sm:gap-4 w-full">
-              {socialMedia.map((social) => {
-                const IconComponent = getIcon(social.icon);
-                return (
-                  <a
-                    key={social.id}
-                    href={social.url}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    aria-label={`Visit ${social.name} profile (opens in new tab)`}
-                    className="bg-purple-900/20 hover:bg-purple-900/50 border border-purple-500/20 hover:border-purple-400/40 p-2.5 sm:p-3.5 rounded-full transition-all duration-300 flex items-center justify-center hover:scale-110 motion-reduce:hover:scale-100 hover:shadow-lg hover:shadow-purple-500/20 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                  >
-                    <IconComponent className="text-purple-300 w-4 h-4 sm:w-5 sm:h-5" aria-hidden="true" />
-                  </a>
-                );
-              })}
-            </div>
-          </div>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

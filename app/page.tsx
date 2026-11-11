@@ -1,12 +1,13 @@
-import React, { Suspense } from "react";
+import React from "react";
 import Hero from "@/components/Hero";
-import { FloatingNav } from "@/components/ui/FloatingNav";
-import { navItems } from "@/data";
-import Footer from "@/components/Footer";
+import Grid from "@/components/Grid";
 import RecentProjects from "@/components/RecentProjects";
 import MyWorkExperience from "@/components/MyWorkExperience";
+import Contact from "@/components/Contact";
+import Footer from "@/components/Footer";
+import { FloatingNav } from "@/components/ui/FloatingNav";
 import ScrollToTop from "@/components/ui/ScrollToTop";
-import { DynamicGrid, DynamicContact } from "@/components/ClientComponents";
+import { navItems } from "@/data";
 
 export default function Home() {
   return (
@@ -19,20 +20,13 @@ export default function Home() {
         id="main-content"
         tabIndex={-1}
         role="main"
-        className="bg-black relative flex justify-center items-center flex-col overflow-hidden mx-auto w-full"
+        className="bg-[#09090b] relative flex flex-col items-center overflow-x-clip mx-auto w-full"
       >
         <Hero />
-
-        <div className="w-full flex flex-col items-center">
-          <Suspense fallback={<div className="content-loader h-96 w-full" />}>
-            <DynamicGrid />
-          </Suspense>
-          <RecentProjects />
-          <MyWorkExperience />
-          <Suspense fallback={<div className="content-loader h-96 w-full" />}>
-            <DynamicContact />
-          </Suspense>
-        </div>
+        <Grid />
+        <RecentProjects />
+        <MyWorkExperience />
+        <Contact />
       </main>
 
       <Footer />

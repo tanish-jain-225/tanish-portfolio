@@ -1,219 +1,210 @@
 "use client";
 
-import React, { useState, useMemo } from "react";
+import React, { useMemo, useState } from "react";
 import Image from "next/image";
-import { FaLocationArrow, FaGithub } from "react-icons/fa6";
-import { MdCategory } from "react-icons/md";
-import { projects, sectionTitles, uiText, images } from "@/data";
-import { PinContainer } from "./ui/Pin";
+import { FaExternalLinkAlt, FaGithub } from "react-icons/fa";
+import { projects, sectionTitles, uiText } from "@/data";
 
-const RecentProjects = () => {
-  const [selectedCategory, setSelectedCategory] = useState<string>("All");
+type CategoryType = (typeof uiText.projects.categories)[number];
 
-  const categories = uiText.projects.categories;
+const FEATURED_PROJECT_IDS = new Set([1, 2, 3, 4, 5]);
 
-  const filteredProjects = useMemo(() => {
-    const sorted = [...projects].sort(
-      (a, b) => new Date(b.date).getTime() - new Date(a.date).getTime()
-    );
+export const RecentProjects = () => {
+  const [selectedCategory, setSelectedCategory] = useState<CategoryType>("All");
+  const [showAllProjects, setShowAllProjects] = useState(false);
+  const [imgErrors, setImgErrors] = useState<Record<number, boolean>>({});
 
-    if (selectedCategory === "All") return sorted;
+  const visibleProjects = useMemo(() => {
+    if (selectedCategory !== "All") {
+      return projects.filter((p) => p.category === selectedCategory);
+    }
+    return showAllProjects
+      ? projects
+      : projects.filter((p) => FEATURED_PROJECT_IDS.has(p.id));
+  }, [selectedCategory, showAllProjects]);
 
-    return sorted.filter((item) => {
-      const cat = item.category || "";
-      if (selectedCategory === "AI & Autonomous") {
-        return cat.includes("AI") || cat.includes("Autonomous") || cat.includes("EdTech");
-      }
-      if (selectedCategory === "Full-Stack Web") {
-        return (
-          cat.includes("Full-Stack") ||
-          cat.includes("Web") ||
-          cat.includes("Management") ||
-          cat.includes("Hospitality") ||
-          cat.includes("Health") ||
-          cat.includes("Fitness")
-        );
-      }
-      if (selectedCategory === "Security & Utilities") {
-        return (
-          cat.includes("Security") ||
-          cat.includes("Utility") ||
-          cat.includes("Utilities") ||
-          cat.includes("Application") ||
-          cat.includes("Privacy") ||
-          cat.includes("Image")
-        );
-      }
-      return true;
-    });
-  }, [selectedCategory]);
+  const hiddenCount = projects.length - FEATURED_PROJECT_IDS.size;
+
+  const handleImageError = (id: number) => {
+    setImgErrors((prev) => ({ ...prev, [id]: true }));
+  };
 
   return (
-    <section id="projects" aria-labelledby="projects-heading" className="section-container">
-      <div className="text-center w-full">
-        <h2 id="projects-heading" className="heading text-white">
-          {sectionTitles.projects.title.split(" ").map((word, i) =>
-            i === 0 ? (
-              <span key={i} className="text-purple">{word} </span>
-            ) : (
-              <span key={i}>{word} </span>
-            )
-          )}
-        </h2>
-        <p className="section-subtitle">
-          {sectionTitles.projects.subtitle}
-        </p>
-
-        {/* Category Filter Pills */}
-        <div className="flex flex-wrap items-center justify-center gap-2 mb-6 sm:mb-8 px-2" role="tablist" aria-label={uiText.accessibility.categoryFilters}>
-          {categories.map((cat) => (
-            <button
-              key={cat}
-              role="tab"
-              aria-selected={selectedCategory === cat}
-              onClick={() => setSelectedCategory(cat)}
-              className={`px-3.5 py-1.5 rounded-full text-xs sm:text-sm font-medium transition-all duration-300 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black ${
-                selectedCategory === cat
-                  ? "bg-gradient-to-r from-purple-600 to-indigo-600 text-white shadow-lg shadow-purple-600/30 scale-105"
-                  : "bg-[#0b0e24] text-neutral-400 border border-white/10 hover:border-purple-500/40 hover:text-white"
-              }`}
-            >
-              {cat}
-            </button>
-          ))}
+    <section
+      id="projects"
+      tabIndex={-1}
+      aria-label={sectionTitles.projects.title}
+      className="w-full py-16 sm:py-20 px-4 sm:px-6 lg:px-8 border-b border-zinc-800/80 scroll-mt-14 focus:outline-none"
+    >
+      <div className="max-w-5xl mx-auto">
+        <div className="mb-8">
+          <h2 className="text-xl sm:text-2xl font-semibold tracking-tight text-zinc-100">
+            {sectionTitles.projects.title}
+          </h2>
+          <p className="mt-2 text-sm sm:text-base text-zinc-400 max-w-2xl leading-relaxed">
+            {sectionTitles.projects.subtitle}
+          </p>
         </div>
-      </div>
 
-      {filteredProjects.length === 0 ? (
-        <div className="py-16 text-center text-neutral-400 text-sm">
-          {uiText.projects.noProjectsMessage}
-        </div>
-      ) : (
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-8 lg:gap-10 w-full max-w-7xl justify-items-center py-4 px-1 sm:px-4">
-          {filteredProjects.map((item) => (
+        <div className="flex flex-wrap items-center justify-between gap-3 pb-5 mb-8 border-b border-zinc-800/80">
           <div
-            className="flex items-stretch justify-center w-full max-w-[380px] h-full cardContainer"
-            key={item.id}
-          >            
-            <PinContainer
-              title={item.title}
-              href={item.demoLink}
-              disableWrapper={true}
+            className="flex flex-wrap gap-1.5"
+            role="tablist"
+            aria-label="Filter projects by category"
+          >
+            {uiText.projects.categories.map((category) => {
+              const active = selectedCategory === category;
+              return (
+                <button
+                  key={category}
+                  type="button"
+                  role="tab"
+                  aria-selected={active}
+                  onClick={() => setSelectedCategory(category)}
+                  className={`px-3 py-1.5 rounded-md text-xs sm:text-sm transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 ${
+                    active
+                      ? "bg-zinc-800 text-zinc-100 border border-zinc-700 font-medium"
+                      : "bg-transparent text-zinc-400 border border-transparent hover:text-zinc-200 hover:bg-zinc-900"
+                  }`}
+                >
+                  {category}
+                </button>
+              );
+            })}
+          </div>
+
+          {selectedCategory === "All" && hiddenCount > 0 && (
+            <button
+              type="button"
+              onClick={() => setShowAllProjects((prev) => !prev)}
+              aria-pressed={showAllProjects}
+              className="text-xs font-mono text-zinc-400 hover:text-zinc-100 border border-zinc-800 hover:border-zinc-700 rounded-md px-3 py-1.5 transition-colors cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200"
             >
-              <div 
-                className="relative flex items-center justify-center w-full overflow-hidden rounded-xl h-[190px] mb-4 bg-[#13162D]"
-              >
-                <Image src={images.backgrounds.projectsBackground} alt="bgimg" className="w-full h-full object-cover" fill sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw" />
-                {item.img ? (
-                  <div 
-                    className="z-10 absolute inset-0 w-full h-[190px] overflow-hidden"
+              {showAllProjects
+                ? "Show selected (5)"
+                : `Show all projects (${projects.length})`}
+            </button>
+          )}
+        </div>
+
+        {visibleProjects.length === 0 ? (
+          <div className="rounded-lg border border-zinc-800 bg-[#111114] p-10 text-center text-sm text-zinc-400">
+            {uiText.projects.noProjectsMessage}
+          </div>
+        ) : (
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
+            {visibleProjects.map((item, idx) => {
+              const isLeadCard =
+                selectedCategory === "All" && !showAllProjects && idx === 0;
+              const engineeringHighlight =
+                item.features?.[item.features.length - 1];
+
+              return (
+                <article
+                  key={item.id}
+                  className={`cardContainer rounded-lg border border-zinc-800 bg-[#111114] overflow-hidden transition-colors hover:border-zinc-700 flex flex-col ${
+                    isLeadCard
+                      ? "md:col-span-2 lg:grid lg:grid-cols-[1.08fr_1fr]"
+                      : ""
+                  }`}
+                >
+                  <div
+                    className={`relative bg-[#0c0c0f] border-b border-zinc-800/80 overflow-hidden ${
+                      isLeadCard
+                        ? "lg:border-b-0 lg:border-r aspect-[16/10] lg:aspect-auto lg:min-h-[280px]"
+                        : "aspect-[16/10]"
+                    }`}
                   >
-                    <Image
-                      src={item.img}
-                      alt={`${item.title} preview`}
-                      className="w-full h-full object-cover object-top transition-transform duration-500 group-hover/card:scale-105"
-                      fill
-                      sizes="(max-width: 640px) 85vw, (max-width: 1200px) 384px, 384px"
-                    />
-                  </div>
-                ) : (
-                  <div className="z-10 absolute inset-0 flex items-center justify-center bg-gradient-to-br from-purple-950/80 to-indigo-950/80 border border-white/10 rounded-xl">
-                    <span className="text-4xl font-extrabold text-white/30 tracking-widest select-none">
-                      {item.title.split(" ").map(w => w[0]).join("").toUpperCase()}
-                    </span>
-                  </div>
-                )}
-              </div>
-
-              <div className="w-full flex flex-col justify-between flex-1 space-y-3">
-                <div className="flex flex-col space-y-2.5 flex-1">
-                  {/* Category & Status */}
-                  <div className="flex items-center justify-between text-xs">
-                    <div className="flex items-center gap-1 text-purple-300">
-                      <MdCategory className="w-3 h-3" />
-                      <span>{item.category}</span>
-                    </div>
-                    <span className={`px-2 py-0.5 rounded-full text-[10px] font-medium ${
-                      item.status === 'completed' 
-                        ? 'bg-green-900/30 text-green-400 border border-green-500/20' 
-                        : 'bg-yellow-900/30 text-yellow-400 border border-yellow-500/20'
-                    }`}>
-                      {item.status === 'completed' ? uiText.status.completed : uiText.status.inProgress}
-                    </span>
-                  </div>
-
-                  {/* Title */}
-                  <h2 className="font-bold lg:text-xl md:text-lg text-base line-clamp-1 text-white">
-                    {item.title}
-                  </h2>
-
-                  {/* Description */}
-                  <p
-                    className="lg:text-sm md:text-sm text-xs leading-relaxed line-clamp-3"
-                    style={{ color: "#BEC1DD" }}
-                  >
-                    {item.des}
-                  </p>
-
-                  {/* Tech Stack Tags */}
-                  <div className="flex flex-wrap gap-1.5 pt-1">
-                    {item.techStack.slice(0, 4).map((tech, i) => (
-                      <span key={i} className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-purple-300">
-                        {tech}
-                      </span>
-                    ))}
-                    {item.techStack.length > 4 && (
-                      <span className="px-2 py-0.5 text-[10px] rounded-full bg-[#10132E] border border-white/5 text-[#BEC1DD]">
-                        +{item.techStack.length - 4} {uiText.projects.more}
-                      </span>
+                    {!imgErrors[item.id] ? (
+                      <Image
+                        src={item.img}
+                        alt={`${item.title} application preview`}
+                        fill
+                        sizes={
+                          isLeadCard
+                            ? "(max-width: 1024px) 100vw, 560px"
+                            : "(max-width: 768px) 100vw, 480px"
+                        }
+                        onError={() => handleImageError(item.id)}
+                        className="object-cover object-top"
+                      />
+                    ) : (
+                      <div className="w-full h-full flex items-center justify-center p-6 text-center">
+                        <span className="font-mono text-xs text-zinc-400">
+                          {item.title}
+                        </span>
+                      </div>
                     )}
                   </div>
-                </div>
 
-                {/* Action Buttons */}
-                <div className="flex flex-col xs:flex-row items-stretch xs:items-center justify-between mt-auto pt-3 border-t border-white/10 gap-2 xs:gap-3 relative z-20">
-                  {item.sourceLink ? (
-                    <a 
-                      href={item.sourceLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`View source code for ${item.title} on GitHub (opens in new tab)`}
-                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-[#0c0e24] hover:bg-[#16193d] border border-white/10 hover:border-white/20 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black"
-                    >
-                      <FaGithub className="w-3.5 h-3.5 flex-shrink-0" aria-hidden="true" />
-                      <span className="truncate">{uiText.projects.sourceCode}</span>
-                    </a>
-                  ) : (
-                    <div className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-black/20 border border-white/5 rounded-lg text-[11px] sm:text-xs text-white/30 cursor-not-allowed select-none" aria-hidden="true">
-                      <FaGithub className="w-3.5 h-3.5 flex-shrink-0" />
-                      <span className="truncate">{uiText.projects.sourceCode}</span>
+                  <div className="p-6 flex flex-col justify-between gap-5 flex-1">
+                    <div className="space-y-3">
+                      <div className="flex flex-wrap items-center justify-between gap-2 text-xs font-mono text-zinc-400">
+                        <span>{item.category}</span>
+                        <span>
+                          {item.duration || item.date}
+                        </span>
+                      </div>
+
+                      <h3 className="text-lg font-semibold tracking-tight text-zinc-100 leading-snug">
+                        {item.title}
+                      </h3>
+
+                      <p className="text-sm text-zinc-400 leading-relaxed">
+                        {item.des}
+                      </p>
+
+                      {engineeringHighlight && (
+                        <p className="text-xs text-zinc-300 leading-relaxed border-l-2 border-zinc-700 pl-3 py-0.5">
+                          {engineeringHighlight}
+                        </p>
+                      )}
+
+                      <p className="font-mono text-xs text-zinc-400 pt-1 leading-relaxed">
+                        {(item.techStack ?? []).join(" · ")}
+                      </p>
                     </div>
-                  )}
-                  
-                  {item.demoLink ? (
-                    <a
-                      href={item.demoLink}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      aria-label={`Visit live demo for ${item.title} (opens in new tab)`}
-                      className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-gradient-to-r from-purple-600 to-indigo-600 hover:from-purple-500 hover:to-indigo-500 border border-purple-500/30 hover:border-purple-400/50 rounded-lg text-[11px] sm:text-xs text-white transition-all duration-200 hover:scale-105 motion-reduce:hover:scale-100 cursor-pointer focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-purple-400 focus-visible:ring-offset-2 focus-visible:ring-offset-black shadow-md shadow-purple-600/20"
-                    >
-                      <span className="truncate">{uiText.projects.liveProject}</span>
-                      <FaLocationArrow className="w-3 h-3 flex-shrink-0" aria-hidden="true" />
-                    </a>
-                  ) : (
-                    <div className="flex items-center justify-center gap-1.5 xs:gap-2 flex-1 py-2 px-2.5 sm:px-3 bg-purple-900/10 border border-purple-500/10 rounded-lg text-[11px] sm:text-xs text-purple-300/30 cursor-not-allowed select-none" aria-hidden="true">
-                      <span className="truncate">{uiText.projects.liveProject}</span>
-                      <FaLocationArrow className="w-3 h-3 flex-shrink-0" />
+
+                    <div className="flex flex-wrap items-center gap-3 pt-4 border-t border-zinc-800/80">
+                      {item.sourceLink && (
+                        <a
+                          href={item.sourceLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Source code for ${item.title} on GitHub`}
+                          className="inline-flex items-center gap-2 rounded-md border border-zinc-800 bg-zinc-900 px-3.5 py-2 text-xs font-medium text-zinc-200 transition-colors hover:border-zinc-700 hover:bg-zinc-800 hover:text-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200"
+                        >
+                          <FaGithub
+                            className="h-3.5 w-3.5 text-zinc-400"
+                            aria-hidden="true"
+                          />
+                          <span>{uiText.projects.sourceCode}</span>
+                        </a>
+                      )}
+
+                      {item.demoLink && (
+                        <a
+                          href={item.demoLink}
+                          target="_blank"
+                          rel="noopener noreferrer"
+                          aria-label={`Live demo of ${item.title}`}
+                          className="inline-flex items-center gap-2 rounded-md bg-zinc-100 px-3.5 py-2 text-xs font-medium text-zinc-950 transition-colors hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200"
+                        >
+                          <span>{uiText.projects.liveProject}</span>
+                          <FaExternalLinkAlt
+                            className="h-3 w-3"
+                            aria-hidden="true"
+                          />
+                        </a>
+                      )}
                     </div>
-                  )}
-                </div>
-              </div>
-            </PinContainer>
+                  </div>
+                </article>
+              );
+            })}
           </div>
-        ))}
-        </div>
-      )}
+        )}
+      </div>
     </section>
   );
 };

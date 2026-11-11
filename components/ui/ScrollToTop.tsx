@@ -3,6 +3,7 @@
 import React, { useEffect, useState, useCallback } from "react";
 import { FaArrowUp } from "@/lib/icons";
 import { uiText } from "@/data";
+import { getPreferredScrollBehavior } from "@/lib/utils";
 
 export default function ScrollToTop() {
   const [isVisible, setIsVisible] = useState(false);
@@ -19,8 +20,10 @@ export default function ScrollToTop() {
   return (
     <button
       type="button"
-      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-purple-900`}
-      onClick={() => window.scrollTo({ top: 0, behavior: "smooth" })}
+      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]`}
+      onClick={() =>
+        window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() })
+      }
       aria-label={uiText.accessibility.scrollToTop}
       title={uiText.accessibility.backToTop}
     >

@@ -1,13 +1,16 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
-import { render, screen } from '@testing-library/react';
+import { render, screen, fireEvent } from '@testing-library/react';
 import React from 'react';
 import Hero from '@/components/Hero';
+import Grid from '@/components/Grid';
 import { FloatingNav } from '@/components/ui/FloatingNav';
+import ScrollToTop from '@/components/ui/ScrollToTop';
 import RecentProjects from '@/components/RecentProjects';
 import MyWorkExperience from '@/components/MyWorkExperience';
 import Contact from '@/components/Contact';
 import Footer from '@/components/Footer';
-import { navItems, heroData } from '@/data';
+import { navItems, heroData, uiText } from '@/data';
+import { scrollToSection } from '@/lib/utils';
 
 describe('Accessibility & Non-Hindering Animation Suite', () => {
   beforeEach(() => {
@@ -26,12 +29,14 @@ describe('Accessibility & Non-Hindering Animation Suite', () => {
       expect(ctaLink.className).toContain('focus-visible:ring-2');
     });
 
-    it('ensures background animation and spotlight containers are non-blocking', () => {
-      const { container } = render(<Hero />);
-      const decorativeContainers = container.querySelectorAll('.pointer-events-none');
-      expect(decorativeContainers.length).toBeGreaterThan(0);
-      decorativeContainers.forEach((el) => {
-        expect(el.className).toContain('pointer-events-none');
+    it('ensures all hero action and profile links are accessible and focusable', () => {
+      render(<Hero />);
+      const links = screen.getAllByRole('link');
+      expect(links.length).toBeGreaterThanOrEqual(4);
+      links.forEach((link) => {
+        expect(link.getAttribute('href')).toBeTruthy();
+        expect(link.getAttribute('aria-label') || link.textContent?.trim()).toBeTruthy();
+        expect(link.className).toContain('focus-visible:ring-2');
       });
     });
   });
@@ -152,6 +157,74 @@ describe('Accessibility & Non-Hindering Animation Suite', () => {
         expect(link.getAttribute('aria-label') || link.textContent).toBeTruthy();
         expect(link.className).toContain('focus-visible:ring-2');
       });
+    });
+  });
+
+  describe('Landmark Focus & Reduced Motion Scroll Accessibility', () => {
+    it('sets tabIndex={-1} on primary section landmarks for skip and anchor focus management', () => {
+      const { container } = render(
+        <>
+          <Hero />
+          <Grid />
+          <RecentProjects />
+          <MyWorkExperience />
+          <Contact />
+        </>
+      );
+
+      for (const id of ['home', 'about', 'projects', 'experience', 'contact']) {
+        const section = container.querySelector(`#${id}`);
+        expect(section).not.toBeNull();
+        expect(section).toHaveAttribute('tabindex', '-1');
+      }
+    });
+
+    it('honors prefers-reduced-motion: reduce in ScrollToTop and scrollToSection', () => {
+      const target = document.createElement('section');
+      target.id = 'about';
+      target.tabIndex = -1;
+      target.scrollIntoView = vi.fn();
+      target.focus = vi.fn();
+      document.body.appendChild(target);
+
+      const originalMatchMedia = window.matchMedia;
+      try {
+        window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+          matches: query === '(prefers-reduced-motion: reduce)',
+          media: query,
+          onchange: null,
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+        }));
+
+        render(<ScrollToTop />);
+        fireEvent.click(screen.getByRole('button', { name: uiText.accessibility.scrollToTop }));
+        expect(window.scrollTo).toHaveBeenCalledWith({ top: 0, behavior: 'auto' });
+
+        scrollToSection('#about', true);
+        expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'auto', block: 'start' });
+        expect(target.focus).toHaveBeenCalledWith({ preventScroll: true });
+
+        window.matchMedia = vi.fn().mockImplementation((query: string) => ({
+          matches: false,
+          media: query,
+          onchange: null,
+          addListener: vi.fn(),
+          removeListener: vi.fn(),
+          addEventListener: vi.fn(),
+          removeEventListener: vi.fn(),
+          dispatchEvent: vi.fn(),
+        }));
+
+        scrollToSection('#about');
+        expect(target.scrollIntoView).toHaveBeenCalledWith({ behavior: 'smooth', block: 'start' });
+      } finally {
+        window.matchMedia = originalMatchMedia;
+        target.remove();
+      }
     });
   });
 });

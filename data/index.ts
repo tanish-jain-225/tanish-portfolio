@@ -34,7 +34,7 @@ export interface SectionTitle {
 export interface HeroHighlight {
   value: string;
   label: string;
-  color: "purple" | "cyan" | "emerald" | "blue" | "green";
+  color: "zinc" | "purple" | "cyan" | "emerald" | "blue" | "green";
 }
 
 export interface HeroData {
@@ -263,8 +263,8 @@ export const siteConfig: SiteConfig = {
     "System Design",
     "Web Development",
   ],
-  ogImage: "/logo.png",
-  themeColor: "#8b5cf6",
+  ogImage: "/og-image.png",
+  themeColor: "#09090b",
   jobTitle: "Software Engineer & Full-Stack Developer",
 };
 
@@ -288,12 +288,12 @@ export const sectionTitles = {
   experience: {
     title: "Experience & Leadership",
     subtitle:
-      "My journey through engineering education, national hackathons, and real-world software development.",
+      "Final-year engineering leadership, national hackathon coordination, and competitive prototyping.",
   },
   projects: {
-    title: "Featured Projects",
+    title: "Selected Projects",
     subtitle:
-      "A showcase of web applications, developer tools, and AI-driven products I've engineered.",
+      "Full-stack web systems, REST APIs, data pipelines, and automated test suites built from scratch.",
   },
 };
 
@@ -347,8 +347,8 @@ export const uiText = {
     copyEmailAddress: "Copy email address",
   },
   status: {
-    completed: "✓ Completed",
-    inProgress: "⏳ In Progress",
+    completed: "Completed",
+    inProgress: "Active",
   },
   accessibility: {
     skipToContent: "Skip to main content",
@@ -363,19 +363,20 @@ export const uiText = {
 };
 
 export const heroData: HeroData = {
-  subtitle: "Full-Stack Developer & Software Engineer",
-  title: "Building Reliable Web Apps & Smart Tools",
+  subtitle: "Software Engineer · VESIT Mumbai (B.E. '27)",
+  title: "Building tested full-stack web apps, REST APIs, and data pipelines.",
   description:
-    "Hi, I'm Tanish Sanghvi — an engineering student at VESIT Mumbai passionate about building responsive web applications, robust backends, and practical AI integrations.",
+    "Final-year Automation and Robotics Engineering student building database-backed software across Python, TypeScript, React, Next.js, Flask, and Node.js—with practical focus on role-based access control, automated testing, and AI integration.",
   availabilityBadge: "Available for Software Engineering & Full-Stack Roles",
   resumeButtonText: "View Resume",
   highlights: [
-    { value: "20+", label: "Projects Built", color: "purple" },
-    { value: "Top Finalist", label: "Hack Celestial 2.0 (320+ Teams)", color: "emerald" },
-    { value: "114+", label: "Career Portals Tracked", color: "cyan" },
+    { value: "114", label: "Career portals parsed across 9 ATS platforms", color: "zinc" },
+    { value: "226+", label: "Jest & Playwright tests in Ledger Portal", color: "zinc" },
+    { value: "33", label: "REST endpoints shipped in Edvanta", color: "zinc" },
+    { value: "Finalist", label: "Hack Celestial 2.0 (320+ teams)", color: "zinc" },
   ],
   ctaButton: {
-    text: "View My Projects",
+    text: "View Projects",
     link: "#projects",
     icon: "FaLocationArrow",
     position: "right",
@@ -493,7 +494,7 @@ export const projects: Project[] = [
     demoLink: "https://edvanta-web.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/edvanta",
     status: "completed",
-    category: "AI & EdTech",
+    category: "AI & Autonomous",
     duration: "2025",
     features: [
       "Designed and deployed 33 modular REST endpoints supporting assessment workflows, AI-assisted assessment generation and personalized learning pathways",
@@ -557,7 +558,7 @@ export const projects: Project[] = [
     demoLink: "https://mind-sphere-web.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/MindSphere",
     status: "completed",
-    category: "Health & Wellness",
+    category: "AI & Autonomous",
     duration: "1.5 months",
     features: [
       "Clinical PHQ-9 wellness self-assessments with visual score tracking over time",
@@ -605,7 +606,7 @@ export const projects: Project[] = [
     demoLink: "https://exercise-simulator-app-frontend.vercel.app",
     sourceLink: "https://github.com/tanish-jain-225/exercise-simulator-app",
     status: "completed",
-    category: "Fitness & Web",
+    category: "Full-Stack Web",
     duration: "1 month",
     features: [
       "Interactive 3D model guides demonstrating proper lifting form and target muscle engagement",
@@ -658,30 +659,23 @@ export const projects: Project[] = [
 export const workExperience: WorkExperienceItem[] = [
   {
     id: 1,
-    title: "Automation & Robotics Engineering — VESIT",
-    desc: "B.E. student in Automation & Robotics Engineering at Vivekanand Education Society's Institute of Technology (VESIT), Mumbai (2023 – Expected 2027, CGPA: 7.43/10). Coursework: Data Structures and Algorithms, Database Management Systems, Machine Learning, Generative AI.",
-    thumbnail: "/exp1.svg",
-    link: "https://vesit.ves.ac.in",
-  },
-  {
-    id: 2,
     title: "Team Lead — B.E. Major Project",
-    desc: "Led a 4-member team building a battery analytics platform, defining the system architecture, dividing modules across members and integrating simulation, estimation and visualisation components into one deployed system.",
-    thumbnail: "/exp3.svg",
+    desc: "Led a 4-member team building a battery analytics platform, defining system architecture, splitting modules across members, and integrating simulation, estimation, and Flask visualisation outputs with MongoDB into one deployed system.",
+    thumbnail: "",
     link: "https://battery-visualizer.onrender.com",
   },
   {
-    id: 3,
+    id: 2,
     title: "National Finalist — Hack Celestial 2.0",
-    desc: "Recognized as a National Finalist from 320+ competing engineering teams across India for building Edvanta, an AI-powered educational platform featuring structured roadmaps and dynamic quiz generation.",
-    thumbnail: "/exp2.svg",
+    desc: "Reached the national finals out of 320+ participating teams with Edvanta, shipping 33 modular REST endpoints with Pydantic validation, Firebase JWT authentication, and Gemini-powered assessment generation.",
+    thumbnail: "",
     link: "https://edvanta-web.vercel.app",
   },
   {
-    id: 4,
-    title: "Hackathon Co-Organizer — UniMerge 1.0",
-    desc: "Led operations, technical setup, and participant coordination for UniMerge 1.0, a national hackathon with 130+ participants across India, resolving real-time technical questions and judging logistics.",
-    thumbnail: "/exp4.svg",
+    id: 3,
+    title: "Co-Organizer — UniMerge 1.0",
+    desc: "Coordinated technical operations, submission validation, judging logistics, and live developer support for a national hackathon hosting 130+ participants.",
+    thumbnail: "",
     link: "https://linkedin.com/in/tanish-jain-tj02022005",
   },
 ];
@@ -723,9 +717,9 @@ export const personalInfo: PersonalInfo = {
 
 // Contact Information
 export const contactInfo: ContactInfo = {
-  title: "Let's Connect",
+  title: "Get in Touch",
   subtitle:
-    "Have a project in mind or want to collaborate? I'd love to hear from you. Let's build something great together!",
+    "Reach out for software engineering internships, full-stack roles, or technical collaborations.",
   email: "tanishjain020205@gmail.com",
   phone: "+91-7021341948",
   location: "Dombivli, Maharashtra, India",
@@ -774,10 +768,10 @@ export const contactInfo: ContactInfo = {
 export const footerData: FooterData = {
   logo: {
     text: "Tanish Sanghvi",
-    accent: "purple",
+    accent: "zinc",
   },
   description:
-    "Building fast, reliable web applications, modern backends, and practical AI tools.",
+    "Full-stack software engineer and final-year engineering student at VESIT Mumbai.",
   sections: [
     {
       title: "Quick Links",
@@ -788,15 +782,55 @@ export const footerData: FooterData = {
     text: "Built by Tanish Sanghvi",
     year: new Date().getFullYear(),
   },
-  builtWith: "Built with Next.js, Tailwind CSS & Framer Motion",
+  builtWith: "Dombivli / Mumbai · Next.js & TypeScript",
   socialLinks: socialMedia,
 };
 
 // Bento Grid Data - About Me Section
+export interface SkillCategory {
+  category: string;
+  items: string[];
+}
+
+export const skillCategories: SkillCategory[] = [
+  {
+    category: "Languages",
+    items: ["Python", "JavaScript (ES6+)", "TypeScript", "C++", "SQL"],
+  },
+  {
+    category: "Frontend",
+    items: ["React.js", "Next.js", "HTML5", "CSS3", "Tailwind CSS"],
+  },
+  {
+    category: "Backend & APIs",
+    items: ["Node.js", "Express.js", "Flask", "REST API Design", "Pydantic Validation"],
+  },
+  {
+    category: "Databases",
+    items: ["PostgreSQL", "MongoDB", "Firebase Firestore", "Supabase"],
+  },
+  {
+    category: "AI & Data",
+    items: ["Gemini API Integration", "NumPy", "Data Pipelines", "Data Visualisation"],
+  },
+  {
+    category: "Testing & QA",
+    items: ["Pytest", "Jest", "Playwright", "Unit, Integration & E2E Testing", "Debugging"],
+  },
+  {
+    category: "Security",
+    items: ["JWT Authentication", "Role-Based Access Control", "API Validation", "Error Handling"],
+  },
+  {
+    category: "Tools & Deployment",
+    items: ["Git", "GitHub", "GitHub Actions (CI)", "Postman", "Vercel", "Render"],
+  },
+];
+
 export const bentoGridData: BentoGridData = {
-  title: "About Me",
+  title: "About & Stack",
   subtitle:
-    "Engineering student at VESIT Mumbai passionate about full-stack web development, clean system design, and practical AI integrations.",
+    "Final-year Automation and Robotics Engineering student at VESIT Mumbai focused on full-stack architectures, database-backed systems, and automated testing.",
   items: [
     {
       id: 1,
@@ -883,7 +917,7 @@ export const bentoGridData: BentoGridData = {
       spareImg: "",
       content: {
         type: "project",
-        text: "Monitors career portals across 90+ tech companies, automatically aggregating and deduplicating new openings with AI requirements parsing.",
+        text: "Monitors 114 company career-page sources across 9 applicant tracking system platforms, persisting structured openings in PostgreSQL/Supabase with exponential retry backoff and AI scoring.",
         technologies: ["Python", "Flask", "Supabase", "Next.js", "Gemini AI"],
         repository: "https://github.com/tanish-jain-225/job-hunter",
       },
@@ -940,8 +974,8 @@ export const manifestData = {
   name: siteConfig.name,
   shortName: siteConfig.creator.replace(/\s+/g, "") + "Portfolio",
   description: siteConfig.description,
-  themeColor: siteConfig.themeColor,
-  backgroundColor: "#000319",
+  themeColor: "#09090b",
+  backgroundColor: "#09090b",
 };
 
 // Centralized Images Configuration
