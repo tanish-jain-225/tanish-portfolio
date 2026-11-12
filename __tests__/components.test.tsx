@@ -15,7 +15,7 @@ describe('Frontend Components Suite', () => {
   });
 
   describe('Hero Component', () => {
-    it('renders hero title, subtitle, and CTA button', () => {
+    it('renders hero title, subtitle, CTA button, and speaking portrait', () => {
       render(<Hero />);
 
       expect(screen.getByText(heroData.subtitle)).toBeInTheDocument();
@@ -23,6 +23,10 @@ describe('Frontend Components Suite', () => {
       expect(screen.getByText(heroData.ctaButton.text)).toBeInTheDocument();
       expect(screen.getByText(heroData.availabilityBadge)).toBeInTheDocument();
       expect(screen.getByText(heroData.highlights[0].value)).toBeInTheDocument();
+
+      const portrait = screen.getByRole('img', { name: heroData.portrait.alt });
+      expect(portrait).toBeInTheDocument();
+      expect(portrait).toHaveAttribute('src', heroData.portrait.src);
     });
   });
 

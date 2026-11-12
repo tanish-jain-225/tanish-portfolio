@@ -20,7 +20,7 @@ export default function ScrollToTop() {
   return (
     <button
       type="button"
-      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]`}
+      className={`scroll-to-top ${isVisible ? "visible" : ""} focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070c]`}
       onClick={() =>
         window.scrollTo({ top: 0, behavior: getPreferredScrollBehavior() })
       }

@@ -96,7 +96,7 @@ export default function RootLayout({
     >
       <head>
         <meta name="color-scheme" content="dark" />
-        <meta name="theme-color" content="#09090b" />
+        <meta name="theme-color" content="#05070c" />
         <meta name="google-site-verification" content="THLu48VYTKSTXfxjjwkyKMP5ab7hb34z2xBFYBLi_L0" />
         <script
           type="application/ld+json"
@@ -125,7 +125,7 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body className={`${inter.className} bg-[#09090b] text-zinc-100 antialiased`}>
+      <body className={`${inter.className} bg-[#05070c] text-slate-100 antialiased`}>
         <a href="#main-content" className="skip-to-content">
           {uiText.accessibility.skipToContent}
         </a>

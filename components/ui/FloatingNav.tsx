@@ -41,7 +41,7 @@ export const FloatingNav = ({
     <nav
       role="navigation"
       aria-label={uiText.accessibility.mainNavigation}
-      className="fixed top-0 inset-x-0 z-[5000] border-b border-zinc-800/80 bg-[#09090b]/85 backdrop-blur-md"
+      className="fixed top-0 inset-x-0 z-[5000] border-b border-[#172136] bg-[#05070c]/85 backdrop-blur-md"
     >
       <div
         className={cn(
@@ -53,7 +53,7 @@ export const FloatingNav = ({
           href="#home"
           aria-label={`${personalInfo.name} — Back to top`}
           onClick={(e) => handleNavClick(e, "#home")}
-          className="text-sm font-semibold tracking-tight text-zinc-100 hover:text-white rounded px-1.5 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 transition-colors shrink-0"
+          className="text-sm font-semibold tracking-tight text-slate-100 hover:text-blue-400 rounded px-1.5 py-1 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors shrink-0"
         >
           <span className="sm:hidden">TS</span>
           <span className="hidden sm:inline">{personalInfo.name}</span>
@@ -66,7 +66,7 @@ export const FloatingNav = ({
               href={navItem.link}
               aria-label={navItem.name}
               onClick={(e) => handleNavClick(e, navItem.link)}
-              className="text-zinc-400 hover:text-zinc-100 hover:bg-zinc-900 flex items-center cursor-pointer p-2 sm:px-3 sm:py-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 transition-colors text-xs sm:text-sm"
+              className="text-slate-400 hover:text-blue-300 hover:bg-[#0d1426] flex items-center cursor-pointer p-2 sm:px-3 sm:py-1.5 rounded-md focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 transition-colors text-xs sm:text-sm"
             >
               <span className="block sm:hidden text-xs" aria-hidden="true">
                 {renderIcon(navItem.icon)}
@@ -81,7 +81,7 @@ export const FloatingNav = ({
               target="_blank"
               rel="noopener noreferrer"
               aria-label={`${navigationConfig.resumeButton.text} (opens in new tab)`}
-              className="ml-1.5 text-xs sm:text-sm font-medium bg-zinc-100 text-zinc-950 px-3 py-1.5 rounded-md hover:bg-white focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-zinc-200 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b] transition-colors whitespace-nowrap"
+              className="ml-1.5 text-xs sm:text-sm font-medium bg-blue-600 text-white px-3 py-1.5 rounded-md hover:bg-blue-500 focus-visible:outline-none focus-visible:ring-2 focus-visible:ring-blue-400 focus-visible:ring-offset-2 focus-visible:ring-offset-[#05070c] transition-colors whitespace-nowrap"
             >
               {navigationConfig.resumeButton.text}
             </a>

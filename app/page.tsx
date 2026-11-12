@@ -20,7 +20,7 @@ export default function Home() {
         id="main-content"
         tabIndex={-1}
         role="main"
-        className="bg-[#09090b] relative flex flex-col items-center overflow-x-clip mx-auto w-full"
+        className="bg-[#05070c] relative flex flex-col items-center overflow-x-clip mx-auto w-full"
       >
         <Hero />
         <Grid />

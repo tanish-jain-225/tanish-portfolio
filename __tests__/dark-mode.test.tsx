@@ -15,11 +15,11 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
   });
 
   describe('Hero Dark Mode Consistency', () => {
-    it('renders with dark background and without light-mode fallback classes', () => {
+    it('renders with dark black-blue background and without light-mode fallback classes', () => {
       const { container } = render(<Hero />);
       const hero = container.querySelector('#home');
       expect(hero).toBeInTheDocument();
-      expect(hero?.className).toContain('bg-[#09090b]');
+      expect(hero?.className).toContain('bg-[#05070c]');
 
       const whiteGrids = container.querySelectorAll('.bg-white:not(span)');
       expect(whiteGrids.length).toBe(0);
@@ -30,10 +30,13 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
 
     it('renders dual action buttons (CTA + View Resume)', () => {
       render(<Hero />);
+      const ctaLink = screen.getByRole('link', { name: /view projects/i });
+      expect(ctaLink.className).toContain('bg-blue-600');
+
       const resumeLink = screen.getByRole('link', { name: /view resume/i });
       expect(resumeLink).toBeInTheDocument();
       expect(resumeLink).toHaveAttribute('href', navigationConfig.resumeButton.link);
-      expect(resumeLink.className).toContain('bg-zinc-900');
+      expect(resumeLink.className).toContain('bg-[#0a0f1c]');
     });
   });
 
@@ -51,9 +54,9 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
 
       const navBar = container.querySelector('nav');
       expect(navBar).toBeInTheDocument();
-      expect(navBar?.className).toContain('bg-[#09090b]/85');
+      expect(navBar?.className).toContain('bg-[#05070c]/85');
       expect(navBar?.className).toContain('backdrop-blur-md');
-      expect(navBar?.className).toContain('border-zinc-800/80');
+      expect(navBar?.className).toContain('border-[#172136]');
 
       expect(navBar?.className).not.toContain('bg-white/80');
       expect(navBar?.className).not.toContain('border-neutral-200');
@@ -72,11 +75,11 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
 
       fireEvent.click(aiTab);
       expect(aiTab).toHaveAttribute('aria-selected', 'true');
-      expect(aiTab.className).toContain('bg-zinc-800');
+      expect(aiTab.className).toContain('bg-blue-600/15');
 
       fireEvent.click(allTab);
       expect(allTab).toHaveAttribute('aria-selected', 'true');
-      expect(allTab.className).toContain('bg-zinc-800');
+      expect(allTab.className).toContain('bg-blue-600/15');
     });
 
     it('ensures project cards maintain dark backgrounds and no white containers', () => {
@@ -90,13 +93,13 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
   });
 
   describe('MyWorkExperience Dark Mode Consistency', () => {
-    it('renders experience rows in dark obsidian styling without bg-gray-50 or border-black', () => {
+    it('renders experience rows in dark midnight styling without bg-gray-50 or border-black', () => {
       const { container } = render(<MyWorkExperience />);
 
       const legacyLightCards = container.querySelectorAll('.bg-gray-50, .border-black');
       expect(legacyLightCards.length).toBe(0);
 
-      const darkSurface = container.querySelectorAll('.bg-\\[\\#111114\\]');
+      const darkSurface = container.querySelectorAll('.bg-\\[\\#0a0f1c\\]');
       expect(darkSurface.length).toBeGreaterThan(0);
     });
   });
@@ -105,7 +108,7 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
     it('renders contact section with deep dark inputs and containers', () => {
       const { container } = render(<Contact />);
 
-      const darkInputs = container.querySelectorAll('.bg-\\[\\#0c0c0f\\]');
+      const darkInputs = container.querySelectorAll('.bg-\\[\\#060913\\]');
       expect(darkInputs.length).toBeGreaterThan(0);
     });
 
@@ -114,7 +117,7 @@ describe('Dark Mode Consistency & Visual Hierarchy Suite', () => {
       const footer = container.querySelector('footer');
       expect(footer).toBeInTheDocument();
       expect(footer?.className).toContain('bg-gradient-to-b');
-      expect(footer?.className).toContain('to-[#050507]');
+      expect(footer?.className).toContain('to-[#020308]');
     });
   });
 });

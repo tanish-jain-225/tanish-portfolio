@@ -4,9 +4,9 @@
   top: -40px;
   left: 0;
   padding: 8px 16px;
-  background-color: #18181b;
-  border: 1px solid rgba(255, 255, 255, 0.2);
-  color: #ffffff;
+  background-color: #0a0f1c;
+  border: 1px solid rgba(59, 130, 246, 0.45);
+  color: #f8fafc;
   z-index: 100;
   transition: top 0.2s ease;
 }
@@ -18,7 +18,7 @@
 
 /* Custom selection color */
 ::selection {
-  background: rgba(255, 255, 255, 0.18);
+  background: rgba(37, 99, 235, 0.35);
   color: #ffffff;
 }
 

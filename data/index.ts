@@ -37,12 +37,20 @@ export interface HeroHighlight {
   color: "zinc" | "purple" | "cyan" | "emerald" | "blue" | "green";
 }
 
+export interface HeroPortrait {
+  src: string;
+  alt: string;
+  width: number;
+  height: number;
+}
+
 export interface HeroData {
   subtitle: string;
   title: string;
   description: string;
   availabilityBadge: string;
   resumeButtonText: string;
+  portrait: HeroPortrait;
   highlights: HeroHighlight[];
   ctaButton: {
     text: string;
@@ -264,7 +272,7 @@ export const siteConfig: SiteConfig = {
     "Web Development",
   ],
   ogImage: "/og-image.png",
-  themeColor: "#09090b",
+  themeColor: "#05070c",
   jobTitle: "Software Engineer & Full-Stack Developer",
 };
 
@@ -369,6 +377,12 @@ export const heroData: HeroData = {
     "Final-year Automation and Robotics Engineering student building database-backed software across Python, TypeScript, React, Next.js, Flask, and Node.js—with practical focus on role-based access control, automated testing, and AI integration.",
   availabilityBadge: "Available for Software Engineering & Full-Stack Roles",
   resumeButtonText: "View Resume",
+  portrait: {
+    src: "/hero-portrait.webp",
+    alt: "Tanish Sanghvi speaking at a podium during a technical presentation",
+    width: 584,
+    height: 668,
+  },
   highlights: [
     { value: "114", label: "Career portals parsed across 9 ATS platforms", color: "zinc" },
     { value: "226+", label: "Jest & Playwright tests in Ledger Portal", color: "zinc" },
@@ -974,8 +988,8 @@ export const manifestData = {
   name: siteConfig.name,
   shortName: siteConfig.creator.replace(/\s+/g, "") + "Portfolio",
   description: siteConfig.description,
-  themeColor: "#09090b",
-  backgroundColor: "#09090b",
+  themeColor: "#2563eb",
+  backgroundColor: "#05070c",
 };
 
 // Centralized Images Configuration
