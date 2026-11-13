@@ -30,6 +30,11 @@ const MyWorkExperience = () => {
               className="p-6 grid grid-cols-1 md:grid-cols-[260px_1fr] gap-3 md:gap-8 items-start transition-colors hover:bg-[#0d1426]/60"
             >
               <div className="space-y-2">
+                {item.duration && (
+                  <span className="font-mono text-xs text-blue-400 block">
+                    {item.duration}
+                  </span>
+                )}
                 <h3 className="text-base font-semibold tracking-tight text-slate-100 leading-snug">
                   {item.title}
                 </h3>
